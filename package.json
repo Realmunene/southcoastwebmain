@@ -2,6 +2,7 @@
   "name": "southcoastwebmain",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Realmunene.github.io/southcoastwebmain",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy":"gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,7 +47,5 @@
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "tailwindcss": "^3.4.18"
-  },
-  "homepage": "https://Realmunene.github.io/southcoastwebmain/"
-
+  }
 }
