@@ -36,8 +36,8 @@ const Gallery = () => {
     <div className="w-full bg-gray-50 py-12 px-4">
       {/* Header */}
       <div className="max-w-5xl mx-auto text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-cyan-800 mb-3 text-left ">Our Gallery</h1>
-        <p className="text-gray-600 text-sm md:text-base">
+        <h1 className="text-3xl md:text-4xl font-bold text-black mb-3 text-left ">Our Gallery</h1>
+        <p className="text-black text-sm md:text-base">
           Explore our collection of stunning images from around the world
         </p>
       </div>

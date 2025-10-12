@@ -7,66 +7,66 @@ export default function BookingSearch() {
     <div className= "my-background py-4">
 
       {/* Booking Bar Container */}
-      <div className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap items-center bg-white shadow-md">
-        
-        {/* Guest Nationality */}
-        <div className="flex-1 min-w-[180px] border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Guest Nationality
-          </label>
-          <select className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600">
-            <option>Kenya</option>
-            <option>Tanzania</option>
-            <option>Uganda</option>
-            <option>Other</option>
-          </select>
-        </div>
+        <div className="max-w-7xl mx-auto border border-gray-400 flex flex-col md:flex-row flex-wrap items-stretch bg-white shadow-md">
+  {/* Guest Nationality */}
+  <div className="flex-1 min-w-full md:min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+    <label className="block text-sm font-semibold text-gray-700 mb-1">
+      Guest Nationality
+    </label>
+    <select className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600">
+      <option>Kenya</option>
+      <option>Tanzania</option>
+      <option>Uganda</option>
+      <option>Other</option>
+    </select>
+  </div>
 
-        {/* Room Type */}
-        <div className="flex-1 min-w-[220px] border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Room Type
-          </label>
-          <select className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600">
-            <option>Select Room Type</option>
-            <option>Executive Room, Ensuite ($75)</option>
-            <option>2 Connected Rooms, 1 Ensuite ($110)</option>
-            <option>Apartment – 2BR, 1 Ensuite ($110)</option>
-            <option>Apartment – Kitchen, 2BR, 2 Ensuite ($125)</option>
-            <option>Larger Apartment – Kitchen, Balcony, Living, 2 Ensuite ($140)</option>
-          </select>
-        </div>
+  {/* Room Type */}
+  <div className="flex-1 min-w-full md:min-w-[220px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+    <label className="block text-sm font-semibold text-gray-700 mb-1">
+      Room Type
+    </label>
+    <select className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600">
+      <option>Select Room Type</option>
+      <option>Executive Room, Ensuite ($75)</option>
+      <option>2 Connected Rooms, 1 Ensuite ($110)</option>
+      <option>Apartment – 2BR, 1 Ensuite ($110)</option>
+      <option>Apartment – Kitchen, 2BR, 2 Ensuite ($125)</option>
+      <option>Larger Apartment – Kitchen, Balcony, Living, 2 Ensuite ($140)</option>
+    </select>
+  </div>
 
-        {/* Dates */}
-        <div className="flex-1 min-w-[200px] border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Dates
-          </label>
-          <input
-            type="text"
-            placeholder="Check-in → Check-out"
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-          />
-        </div>
+  {/* Dates */}
+  <div className="flex-1 min-w-full md:min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+    <label className="block text-sm font-semibold text-gray-700 mb-1">
+      Dates
+    </label>
+    <input
+      type="text"
+      placeholder="Check-in → Check-out"
+      className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+    />
+  </div>
 
-        {/* Guests */}
-        <div className="flex-1 min-w-[160px] border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Guests
-          </label>
-          <input
-            type="text"
-            defaultValue="1 Adult"
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-          />
-        </div>
+  {/* Guests */}
+  <div className="flex-1 min-w-full md:min-w-[160px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+    <label className="block text-sm font-semibold text-gray-700 mb-1">
+      Guests
+    </label>
+    <input
+      type="text"
+      defaultValue="1 Adult"
+      className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+    />
+  </div>
 
-        {/* Search Button */}
-        
-<div className="min-w-[40px] flex items-center justify-center cursor-pointer text-gray-700 hover:text-red-600 transition px-10">
-          <FontAwesomeIcon icon={faSearch} className="text-lg" />
-        </div>
-      </div>
+  {/* Search Button */}
+  <div className="min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer text-gray-700 hover:text-red-600 transition p-3 md:px-10 bg-cyan-500">
+    <FontAwesomeIcon icon={faSearch} className="text-lg" />
+  </div>
+</div>
+
+
       <div className="py-20 text-4xl md:text-7xl font-extrabold text-center text-white text-shadow-lg/30">
          <h1 className="py-3">
              YOUR JOURNEY

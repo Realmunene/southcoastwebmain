@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRef } from "react";
+import './Footer.css';
 const packages = [
   { title: "Executive Room, Ensuite", price: "$75" },
   { title: "2 Connected Room, 1 Ensuite", price: "$110" },
@@ -28,49 +29,69 @@ const Package = () => {
   };
   return (
    <section className="w-full bg-cyan-50 py-12 px-4 relative">
-      <div className="max-w-7xl mx-auto text-center mb-8">
-        <h2 className="text-3xl font-bold text-cyan-500 mb-2 text-left">Rates & Availability</h2>
-        <p className="text-cyan-600">Seasonally Adjusted Packages</p>
-      </div>
+  {/* Section Header */}
+  <div className="max-w-7xl mx-auto text-center mb-8">
+    <h2 className="text-3xl font-bold text-black mb-2 text-left">
+      Rates & Availability
+    </h2>
+    <p className="text-black">Seasonally Adjusted Packages</p>
+  </div>
 
-      {/* Left Arrow */}
-      <button
-        onClick={scrollLeft}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-2 rounded-full hover:bg-cyan-700 shadow-md z-10"
-      >
-        &#8249;
-      </button>
+  {/* Left Arrow */}
+  <button
+    onClick={scrollLeft}
+    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-2 rounded-full hover:bg-cyan-700 shadow-md z-10"
+  >
+    &#8249;
+  </button>
 
-      {/* Scrollable Container */}
+  {/* Cards Container */}
+  <div
+    ref={scrollRef}
+    className="
+      // max-w-7xl mx-auto 
+      // grid
+      // grid-cols-1 
+      // sm:grid-cols-2 
+      // lg:grid-cols-4
+      // grid-rows-2
+      // gap-6
+      // overflow-x-auto
+      // scroll-smooth
+      // snap-x
+    "
+    style={{ scrollBehavior: "smooth" }}
+  >
+    {packages.map((pkg, index) => (
       <div
-        ref={scrollRef}
-        className="flex flex-wrap gap-6 max-w-7xl mx-auto overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory"
-        style={{ scrollBehavior: "smooth" }}
+        key={index}
+        className="my-package relative rounded-xl shadow-md flex flex-col justify-center hover:shadow-lg transition w-full h-64 snap-center overflow-hidden"
       >
-        {packages.map((pkg, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition w-[280px] flex-shrink-0 snap-center"
-          >
-            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQbpmvNCbJvJNhCUlFEIhnP9BB-VVrH2-eg&s'/>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">{pkg.title}</h3>
-            <div className="flex justify-between items-center">
-              <span className="text-xl font-bold text-cyan-600">{pkg.price}</span>
-              <button className="bg-cyan-600 text-white text-sm px-4 py-2 rounded-full hover:bg-cyan-700 transition">
-                Book Now
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+        {/* Top Title Overlay */}
+        <div className="absolute top-0 left-0 bg-black/50 text-white px-3 py-2 rounded-br-lg backdrop-blur-sm">
+          <h3 className="text-lg font-semibold">{pkg.title}</h3>
+        </div>
 
-      {/* Right Arrow */}
-      <button
-        onClick={scrollRight}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-2 rounded-full hover:bg-cyan-700 shadow-md z-10"
-      >
-      </button>
-    </section>
+        {/* Bottom Price & Button Overlay */}
+        <div className="absolute bottom-0 left-0 w-full bg-black/50 text-white px-4 py-3 flex justify-between items-center backdrop-blur-sm">
+          <span className="text-lg font-bold text-cyan-400">{pkg.price}</span>
+          <button className="bg-cyan-600 text-white text-sm px-4 py-2 rounded-full hover:bg-cyan-700 transition">
+            Book Now
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* Right Arrow */}
+  <button
+    onClick={scrollRight}
+    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-2 rounded-full hover:bg-cyan-700 shadow-md z-10"
+  >
+    &#8250;
+  </button>
+</section>
+
   )
 }
 
