@@ -1,87 +1,88 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from "react";
+
+// 🧩 Components
 import Footer from './Components/Footer';
 import Home from './Components/Home';
 import Gallery from './Components/Gallery';
 import Package from './Components/Package';
-import React, { useState } from "react";
 import Navbar from './Components/Navbar';
 import Topcon from './Components/Topcon';
 import MapComponent from './Components/MapComponent';
 import ContactSection from './Components/ContactSection';
 import PartnerRegistrationForm from './Components/PartnerRegistrationForm';
 import LoginPopup from './Components/LoginPopup';
-
-
+import AboutSouthcoast from './Components/Aboutus';
+import FaqSouthcoast from "./Components/FAQSouthcoast";
+import PolicySouthcoast from "./Components/PolicySouthcoast";
+import TermsSouthcoast from "./Components/TermsSouthcoast";
+import ScrollToTop from './Components/ScrollToTop';
 
 const App = () => {
-  // ✅ Function to smoothly scroll to section by ID
-  const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-    setShowMenu(false);
-  };
-  const [showMenu, setShowMenu] = useState(false);
-  const [showPartnerForm, setShowPartnerForm] = useState(false);
-const [showContact, setShowContact] = useState(false);
-const handleContactClick = () => {
-  setShowContact(true);
-  window.scrollTo({top:0,behavior:"smooth"});
-};
-const [activeSection, setActiveSection] = useState("home");
-const [showLogin, setShowLogin] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [showLogin, setShowLogin] = useState(false);
+
   return (
     <Router>
-      <div className="App">
+      <ScrollToTop />
+      <div className="App flex flex-col min-h-screen">
+        {/* 🔝 Top Bar & Navigation */}
+        <Topcon />
+        <Navbar
+          onLoginClick={() => setShowLogin(true)}
+          onPartnerClick={() => setActiveSection("partner")}
+          setActiveSection={setActiveSection}
+        />
 
-        {/* 🟢 TOP CONTACT & SOCIAL BAR */}
-                <Topcon />
-                <Navbar 
-                onLoginClick={()=> setShowLogin(true)}
-               onPartnerClick = { ()=> setActiveSection("partner")} 
-               setActiveSection={setActiveSection}
-              />
-                  
-        {/* 🏡 CONTENT SECTIONS WITH IDS */}
-        
-       <div>
-          {activeSection === "home" && (
-        <>
-          <div id="home">
-            <Home />
-          </div>
-          <div id="package">
-            <Package />
-          </div>
-          <div id="gallery">
-            <Gallery />
-          </div>
-          <MapComponent />
-        </>
-      )}
+        {/* 🏡 Main Content */}
+        <main className="flex-grow">
+          <Routes>
+            {/* 🏠 Default Home Route */}
+            <Route
+              path="/"
+              element={
+                <>
+                  {activeSection === "home" && (
+                    <>
+                      <div id="home">
+                        <Home />
+                      </div>
+                      <div id="package">
+                        <Package />
+                      </div>
+                      <div id="gallery">
+                        <Gallery />
+                      </div>
+                      <MapComponent />
+                    </>
+                  )}
 
-      {activeSection === "contact" && <ContactSection />}
-      {activeSection === "partner" && <PartnerRegistrationForm />}
-      {activeSection === "package" && <Package />}
-      {showLogin && <LoginPopup onClose={() => setShowLogin (false)}/>}
-       
-      <Footer setActiveSection={setActiveSection} />
-       </div>
-       
+                  {activeSection === "partner" && <PartnerRegistrationForm />}
+                  {activeSection === "contact" && <ContactSection />}
+                </>
+              }
+            />
+
+            {/* 🧭 Other Pages */}
+            <Route path="/about" element={<AboutSouthcoast />} />
+            <Route path="/faqs" element={<FaqSouthcoast />} />
+            <Route path="/policy" element={<PolicySouthcoast />} />
+            <Route path="/terms" element={<TermsSouthcoast />} />
+            <Route path="/package" element={<Package />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/partnership" element = {<PartnerRegistrationForm/>}/>
+          </Routes>
+
+          {/* 🪟 Login Popup */}
+          {showLogin && <LoginPopup onClose={() => setShowLogin(false)} />}
+        </main>
+
+        {/* 🦶 Footer */}
+        <Footer setActiveSection={setActiveSection} />
       </div>
-
-      <main className="main-content">
-        <Routes>
-         
-          <Route path="/package"  element={<Package />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Routes>
-      </main>
     </Router>
-    
   );
-}
+};
 
 export default App;

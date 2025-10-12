@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import logo from "./images/IMG-20251008-WA0008logo0.png";
+import{Link} from "react-router-dom";
 const Footer = ({setActiveSection}) => {
   const navigate = useNavigate();
   return (
@@ -53,16 +54,12 @@ const Footer = ({setActiveSection}) => {
         <div>
           <ul className="space-y-2 text-justify">
             <li>
-              <a href="#" 
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveSection("package");
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
-              className="hover:text-cyan-500">Accommodation</a>
+              <Link to="/package" 
+              className="hover:text-cyan-500">Accommodation</Link>
             </li>
             <li>
-              <a href="#" className="hover:text-cyan-500">Holidays</a>
+              <Link to="/gallery" 
+              className="hover:text-cyan-500">Holidays</Link>
             </li>
           </ul>
         </div>
@@ -74,16 +71,16 @@ const Footer = ({setActiveSection}) => {
               <a href="https://www.tripadvisor.com/" className="hover:text-cyan-500">Review</a>
             </li>
             <li>
-              <a href="#" className="hover:text-cyan-500">About Us</a>
+              <Link to="/about" className="hover:text-cyan-500">About Us</Link>
             </li>
             <li>
-              <a href="#" className="hover:text-cyan-500">FAQs</a>
+              <Link to="/faqs" className="hover:text-cyan-500">FAQs</Link>
             </li>
             <li>
-              <a href="#" className="hover:text-cyan-500">Privacy Policy</a>
+              <Link to="/policy" className="hover:text-cyan-500">Privacy Policy</Link>
             </li>
             <li>
-              <a href="#" className="hover:text-cyan-500">Terms & Conditions</a>
+              <Link to="terms" className="hover:text-cyan-500">Terms & Conditions</Link>
             </li>
           </ul>
         </div>
