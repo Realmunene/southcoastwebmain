@@ -27,7 +27,7 @@ const Topcon = () => {
                     {/* RIGHT: SOCIAL ICONS */}
                     <div className="flex items-center text-white space-x-4 mt-2 sm:mt-0">
                       <a
-                        href="https://facebook.com"
+                        href="https://web.facebook.com/profile.php?id=61580444043634&name=xhp_nt__fb__action__open_user&_rdc=1&_rdr#"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-red-400 transition"

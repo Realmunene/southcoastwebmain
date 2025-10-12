@@ -26,7 +26,7 @@ const Footer = ({setActiveSection}) => {
       </button>
           </div>
           <div className="flex space-x-4 mb-4 text-xl">
-  <a href="#" aria-label="Facebook" className="hover:text-cyan-500 transition">
+  <a href="https://web.facebook.com/profile.php?id=61580444043634&name=xhp_nt__fb__action__open_user&_rdc=1&_rdr#" aria-label="Facebook" className="hover:text-cyan-500 transition">
     <FontAwesomeIcon icon={faFacebookF} className="h-5 w-5" />
   </a>
   <a href="#" aria-label="Twitter" className="hover:text-cyan-500 transition">
