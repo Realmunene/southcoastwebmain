@@ -14,7 +14,7 @@ const Aboutus = () => {
             A Legacy of Comfort and Coastal Charm
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            Welcome to <strong>Southcoast Airbnb</strong>, your home away from
+            Welcome to <strong>Southcoast Outdoors</strong>, your home away from
             home on the serene side of Diani. Nestled along the scenic Diani
             Beach Road, our property is just{" "}
             <strong>300 meters from the award-winning Diani Beach and the Indian Ocean</strong>,

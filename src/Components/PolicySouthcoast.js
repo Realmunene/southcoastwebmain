@@ -66,7 +66,7 @@ const PolicySouthcoast = () => {
       <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-lg shadow-sm p-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Company Policy</h1>
         <h2 className="text-cyan-800 font-bold uppercase text-sm mb-6">
-          Southcoast Airbnb Policies
+          Southcoast Outdoors Policies
         </h2>
 
         <div className="divide-y divide-gray-200">

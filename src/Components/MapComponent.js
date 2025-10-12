@@ -1,49 +1,63 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
+import L from "leaflet";
 
-const containerStyle = {
-  width: "100%",
-  height: "80vh", // full width and large height
+// 🧭 Custom marker icon fix for Leaflet in React
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
+
+// 🌍 Fallback location (e.g., Nairobi)
+const fallbackCenter = {
+  lat: -4.267817,
+  lng: 39.595320,
 };
 
 const MapComponent = () => {
-  const [currentPosition, setCurrentPosition] = useState(null);
+  const [position, setPosition] = useState(fallbackCenter);
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCurrentPosition({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
+        (pos) => {
+          setPosition({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
           });
         },
-        (error) => {
-          console.error("Error getting location:", error);
+        (err) => {
+          console.warn("Geolocation error, using fallback:", err);
+          setPosition(fallbackCenter);
         }
       );
+    } else {
+      setPosition(fallbackCenter);
     }
   }, []);
 
   return (
-    <div className="w-full">
-      <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-        {currentPosition && (
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={currentPosition}
-            zoom={15}
-            options={{
-              zoomControl: true,
-              streetViewControl: false,
-              mapTypeControl: false,
-              fullscreenControl: false,
-            }}
-          >
-            <Marker position={currentPosition} />
-          </GoogleMap>
-        )}
-      </LoadScript>
+    <div className="w-full h-[80vh]">
+      <MapContainer
+        center={position}
+        zoom={13}
+        scrollWheelZoom={true}
+        className="h-full w-full rounded-lg shadow-md"
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={position}>
+          <Popup>
+            {`Latitude: ${position.lat.toFixed(4)}, Longitude: ${position.lng.toFixed(4)}`}
+          </Popup>
+        </Marker>
+      </MapContainer>
     </div>
   );
 };
