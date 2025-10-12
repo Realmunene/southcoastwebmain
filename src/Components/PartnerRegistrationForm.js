@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import logo from "./images/IMG-20251008-WA0008logo0.png";
 export default function PartnerRegistrationForm({onClose}) {
   const [form, setForm] = useState({
     supplierType: "",
@@ -48,11 +48,11 @@ export default function PartnerRegistrationForm({onClose}) {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-cyan-600 to-cyan-800 p-4">
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-cyan-400 to-cyan-800 p-4">
         <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8">
           {/* Header */}
           <div className="text-center mb-6">
-            <img src="/logo.png" alt="Southcoast logo" className="mx-auto mb-2 w-40" />
+            <img src={logo} alt="Southcoast logo" className="mx-auto mb-2 w-40" />
             <p className="text-gray-700 font-semibold">Free Sign Up</p>
             <h2 className="text-2xl font-bold mb-1">Partner Registration</h2>
             <p className="text-red-500 text-sm">This section is for service providers only</p>

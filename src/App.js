@@ -18,6 +18,7 @@ import FaqSouthcoast from "./Components/FAQSouthcoast";
 import PolicySouthcoast from "./Components/PolicySouthcoast";
 import TermsSouthcoast from "./Components/TermsSouthcoast";
 import ScrollToTop from './Components/ScrollToTop';
+import LoginForm from './Components/LoginForm';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -72,6 +73,8 @@ const App = () => {
             <Route path="/package" element={<Package />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/partnership" element = {<PartnerRegistrationForm/>}/>
+            <Route path="/contact" element = {<ContactSection/>}/>
+            <Route path='/loginform' element={<LoginForm/>}/>
           </Routes>
 
           {/* 🪟 Login Popup */}

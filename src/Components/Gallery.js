@@ -1,80 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 
 const Gallery = () => {
-  const images = [
-    {
-      id: 1,
-      src: '/images/IMG-20251008-WA0005.jpg',
-      alt: 'Kitchen',
-      title: 'Front view',
-      description: 'All in one kitchen'
-    },
-    {
-      id: 2,
-      src: '/images/IMG-20251008-WA0006.jpg',
-      alt: 'Wash rooms',
-      title: 'Our Wash rooms',
-      description: 'Always Clean'
-    },
-    {
-      id: 3,
-      src: '/images/IMG-20251008-WA0007.jpg',
-      alt: 'Outside view',
-      title: 'Outside view',
-      description: 'Serene view of our Hotel'
-    },
-    {
-      id: 4,
-      src: '/images/IMG-20251008-WA0009.jpg',
-      alt: 'Forest Path',
-      title: 'Forest Trail',
-      description: 'Serene forest path through dense trees'
-    },
-  ];
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(
+          "https://api.pexels.com/v1/search?query=travel&per_page=8",
+          {
+            headers: {
+              Authorization: "a0Obt8PFa18GfMvCnd4fDnUgS8YVEPJkkFDbM8a06QYXlQU42W6cjpZM",
+            },
+          }
+        );
+
+        const data = await response.json();
+        setImages(data.photos);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   return (
-    <div className="w-full bg-gray-50 py-12 px-4">
-      {/* Header */}
-      <div className="max-w-5xl mx-auto text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-black mb-3 text-left ">Our Gallery</h1>
-        <p className="text-black text-sm md:text-base">
-          Explore our collection of stunning images from around the world
-        </p>
-      </div>
-
-      {/* Grid layout */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {images.map((image) => (
+<div>
+        <h1 className="text-left m-4 p-4 text-xl font-bold">
+        Our Gallery
+      </h1>
+    <div className="flex justify-center px-4 py-8">
+      
+      <div
+        className="
+          grid gap-4 
+          lg:grid-cols-4 lg:grid-rows-2
+          md:grid-cols-2 md:grid-rows-3 
+          sm:grid-cols-1 sm:grid-rows-auto
+          max-w-6xl w-full
+        "
+      >
+        {images.map((img, index) => (
           <div
-            key={image.id}
-            className="relative overflow-hidden rounded-xl shadow-md hover:shadow-lg transition group"
+            key={img.id}
+            className={`
+              overflow-hidden rounded-lg
+              ${index === 0 ? "lg:row-span-1 lg:col-span-1" : ""}
+              ${index === 1 ? "lg:row-span-2 lg:col-span-1" : ""}
+              ${index === 2 ? "lg:row-span-1 lg:col-span-1" : ""}
+              ${index === 3 ? "lg:row-span-2 lg:col-span-1" : ""}
+              ${index === 4 ? "lg:row-span-1 lg:col-span-1" : ""}
+              ${index === 5 ? "lg:row-span-1 lg:col-span-1" : ""}
+              ${index === 6 ? "lg:row-span-1 lg:col-span-1" : ""}
+              ${index === 7 ? "lg:row-span-1 lg:col-span-1" : ""}
+            `}
           >
-            {/* Image */}
             <img
-              src={image.src}
-              alt={image.alt}
-              loading="lazy"
-              className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500"
+              src={img.src.large}
+              alt={img.photographer}
+              className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
             />
-
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-              <button className="bg-white text-gray-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-100">
-                View
-              </button>
-            </div>
-
-            {/* Info section */}
-            <div className="p-4 bg-white">
-              <h3 className="text-lg font-semibold text-gray-800">{image.title}</h3>
-              <p className="text-gray-600 text-sm">{image.description}</p>
-            </div>
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };
 
 export default Gallery;
-

@@ -30,8 +30,8 @@ export default function Navbar({ onLoginClick, onPartnerClick, setActiveSection 
         {/* LEFT SECTION */}
         <div className="flex items-center space-x-4">
           {/* ✅ Logo Link to Home */}
-          <button
-            onClick={handleHomeClick}
+          <Link
+          to='/'
             className="flex items-center space-x-1 focus:outline-none"
           >
             <img
@@ -42,7 +42,7 @@ export default function Navbar({ onLoginClick, onPartnerClick, setActiveSection 
             <span className="text-xl font-bold text-gray-800">
               SouthCoast
             </span>
-          </button>
+          </Link>
         </div>
 
         {/* RIGHT SECTION - DESKTOP */}

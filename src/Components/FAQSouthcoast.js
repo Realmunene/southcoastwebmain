@@ -65,7 +65,7 @@ const FAQSouthcoast = () => {
     <div className="bg-gray-50 py-12 px-6 md:px-16">
       <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-lg shadow-sm p-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">FAQs</h1>
-        <h2 className="text-red-600 font-semibold uppercase text-sm mb-6">
+        <h2 className="text-cyan-800 font-bold uppercase text-sm mb-6">
           Frequently Asked Questions (FAQs)
         </h2>
 

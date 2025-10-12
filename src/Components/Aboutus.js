@@ -4,7 +4,7 @@ const Aboutus = () => {
   return (
    <div className="bg-gray-50 min-h-screen py-10 px-6 md:px-16">
       <div className="max-w-5xl mx-auto bg-white shadow-sm rounded-lg p-8 md:p-12 border border-gray-200">
-        <h1 className="text-3xl md:text-4xl font-bold text-red-600 text-center mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-cyan-600 text-center mb-8">
           Southcoast Airbnb: Your Coastal Escape, Our Passion
         </h1>
 
@@ -193,7 +193,7 @@ const Aboutus = () => {
             the ocean just steps away, we invite you to relax, explore, and feel
             at home in Diani.
           </p>
-          <h3 className="text-red-600 font-semibold mt-6 text-lg">
+          <h3 className="text-cyan-600 font-semibold mt-6 text-lg">
             Choose Southcoast Airbnb — where every stay feels like home by the
             sea.
           </h3>
