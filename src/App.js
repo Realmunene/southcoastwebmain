@@ -40,7 +40,7 @@ const [showLogin, setShowLogin] = useState(false);
                 <Topcon />
                 <Navbar 
                 onLoginClick={()=> setShowLogin(true)}
-               onPartnerClick = { ()=> setShowPartnerForm(true)} 
+               onPartnerClick = { ()=> setActiveSection("partner")} 
                setActiveSection={setActiveSection}
               />
                   
@@ -66,7 +66,7 @@ const [showLogin, setShowLogin] = useState(false);
       {activeSection === "partner" && <PartnerRegistrationForm />}
       {activeSection === "package" && <Package />}
       {showLogin && <LoginPopup onClose={() => setShowLogin (false)}/>}
-        {showPartnerForm && <PartnerRegistrationForm onClose={()=> setShowPartnerForm(false)}/>}
+       
       <Footer setActiveSection={setActiveSection} />
        </div>
        

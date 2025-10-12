@@ -39,7 +39,12 @@ const [showModal, setShowModal] = useState(false);
               className="h-8 w-auto object-contain"
             />
             <span className="text-xl font-bold text-gray-800">SouthCoast</span>
-          </Link> <span className="text-gray-300 text-xl">|</span>
+          </Link> 
+        </div>
+
+        {/* RIGHT SECTION - DESKTOP */}
+        <div className="hidden md:flex items-center space-x-4">
+          <span className="text-gray-300 text-xl">|</span>
            {/* Book a Stay */}
           <button
             onClick={() => scrollToSection("package")}
@@ -59,12 +64,7 @@ const [showModal, setShowModal] = useState(false);
             <FontAwesomeIcon icon={faUmbrellaBeach} className="text-lg" />
             <span className="text-sm font-medium">Experiences</span>
           </button>
-
-        </div>
-
-        {/* RIGHT SECTION - DESKTOP */}
-        <div className="hidden md:flex items-center space-x-4">
-        {/* Currency */}
+                  {/* Currency */}
           <button className="flex items-center space-x-1 text-gray-700 hover:text-coral-500 transition">
             <FontAwesomeIcon icon={faGlobe} className="text-lg" />
             <span className="text-sm font-medium">USD</span>
