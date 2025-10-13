@@ -11,7 +11,8 @@ export default function BookingSearch() {
   // State for user selections
   const [selectedNationality, setSelectedNationality] = useState("");
   const [selectedRoomType, setSelectedRoomType] = useState("");
-  const [dates, setDates] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("1 Adult");
 
   // Fetch dropdown data
@@ -47,7 +48,8 @@ export default function BookingSearch() {
     const bookingData = {
       nationality: selectedNationality,
       room_type: selectedRoomType,
-      dates,
+      check_in: checkIn,
+      check_out: checkOut,
       guests,
     };
 
@@ -72,10 +74,10 @@ export default function BookingSearch() {
   return (
     <div className="my-background py-4">
       {/* Booking Bar Container */}
-      <div className="max-w-7xl mx-auto border border-gray-400 flex flex-col md:flex-row flex-wrap items-stretch bg-white shadow-md">
+      <div className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
 
         {/* Guest Nationality */}
-        <div className="flex-1 min-w-full md:min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+        <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
           <label className="block text-sm font-semibold text-gray-700 mb-1">
             Guest Nationality
           </label>
@@ -94,7 +96,7 @@ export default function BookingSearch() {
         </div>
 
         {/* Room Type */}
-        <div className="flex-1 min-w-full md:min-w-[220px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+        <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
           <label className="block text-sm font-semibold text-gray-700 mb-1">
             Room Type
           </label>
@@ -112,22 +114,38 @@ export default function BookingSearch() {
           </select>
         </div>
 
-        {/* Dates */}
-        <div className="flex-1 min-w-full md:min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Dates
-          </label>
-          <input
-            type="text"
-            placeholder="Check-in → Check-out"
-            value={dates}
-            onChange={(e) => setDates(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-          />
+        {/* Dates - Check-in & Check-out */}
+        <div className="flex-1 min-w-[280px] border-b md:border-b-0 md:border-r border-gray-300 p-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+          {/* Check-in */}
+          <div className="w-full sm:w-1/2">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Check-in
+            </label>
+            <input
+              type="date"
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
+          </div>
+
+          {/* Check-out */}
+          <div className="w-full sm:w-1/2">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              Check-out
+            </label>
+            <input
+              type="date"
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
+              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
+          </div>
         </div>
 
         {/* Guests */}
-        <div className="flex-1 min-w-full md:min-w-[160px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+        <div className="flex-1 min-w-[160px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
           <label className="block text-sm font-semibold text-gray-700 mb-1">
             Guests
           </label>
@@ -142,7 +160,7 @@ export default function BookingSearch() {
         {/* Search Button */}
         <div
           onClick={handleSearch}
-          className="min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer text-gray-700 hover:text-red-600 transition p-3 md:px-10 bg-cyan-500"
+          className="min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition p-3 md:px-10 bg-cyan-500 hover:bg-cyan-600"
         >
           <FontAwesomeIcon icon={faSearch} className="text-lg text-white" />
         </div>

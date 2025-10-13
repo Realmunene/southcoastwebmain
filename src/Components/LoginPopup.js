@@ -36,7 +36,7 @@ const LoginPopup = ({ onClose }) => {
                 <img
                             src={logo}
                               alt="SCoast Logo"
-                              className="h-15 w-auto object-contain"
+                              className="h-8 w-auto object-contain"
                             />
                 <h2 className="text-3xl font-bold mb-2">New Here?</h2>
                 <p className="mb-6 text-center">
