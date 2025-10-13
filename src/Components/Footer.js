@@ -17,7 +17,7 @@ const Footer = () => {
         <div>
           <div className="grid grid-cols-2 md:grid-cols-2 gap-5">
             <Link
-            to='/'
+            to='/southcoastwebmain'
             >
             <img
               src={logo}

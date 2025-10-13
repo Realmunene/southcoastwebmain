@@ -20,7 +20,7 @@ export default function Navbar({ onLoginClick, onPartnerClick, setActiveSection 
     // Reset active section and go to home
     setActiveSection("home");
     setShowMenu(false);
-    navigate("/");
+    navigate("/southcoastwebmain");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -31,7 +31,7 @@ export default function Navbar({ onLoginClick, onPartnerClick, setActiveSection 
         <div className="flex items-center space-x-4">
           {/* ✅ Logo Link to Home */}
           <Link
-          to='/'
+          to='/southcoastwebmain'
             className="flex items-center space-x-1 focus:outline-none"
           >
             <img

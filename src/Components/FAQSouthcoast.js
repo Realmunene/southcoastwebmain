@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Where is Southcoast Airbnb located?",
+    question: "Where is Southcoast Outdoors located?",
     answer:
       "We are located along the quieter side of Diani, on the scenic Diani Beach Road—just 300 meters from the award-winning Diani Beach and the Indian Ocean.",
   },
@@ -48,7 +48,7 @@ const faqs = [
       "Yes, airport transfers and transport arrangements can be organized upon request for your convenience.",
   },
   {
-    question: "How can I contact Southcoast Airbnb?",
+    question: "How can I contact Southcoast Outdoors?",
     answer:
       "You can reach us via email at southcoastoutdoors25@gmail.com or call us at +254 729 491 343. Direct booking links are also available on our website.",
   },
