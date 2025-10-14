@@ -50,7 +50,7 @@ const faqs = [
   {
     question: "How can I contact Southcoast Outdoors?",
     answer:
-      "You can reach us via email at southcoastoutdoors25@gmail.com, <a href='https://www.facebook.com/southcoastoutdoors' target='_blank' class='text-blue-600 underline hover:text-blue-800'>Facebook</a> or call us at +254 729 491 343. Direct booking links are also available on our website.",
+      "You can reach us via email at <a href='mailto:southcoastoutdoors25@gmail.com' target='_blank' class='text-blue-600 underline hover:text-blue-800'>southcoastoutdoors25@gmail.com</a>, <a href='https://www.facebook.com/southcoastoutdoors' target='_blank' class='text-blue-600 underline hover:text-blue-800'>Facebook</a> or call us at <a href='tel:+254729491343' target='_blank' class='text-blue-600 underline hover:text-blue-800'>+254 729 491 343</a>. Direct booking links are also available on our website.",
   },
 ];
 
