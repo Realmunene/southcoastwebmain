@@ -27,11 +27,10 @@ const Gallery = () => {
 
   return (
 <div>
-        <h1 className="text-left m-4 p-4 text-xl font-bold">
+        <h1 className="text-4xl font-bold text-center w-full max-w-5xl px-5 mx-auto ">
         Our Gallery
       </h1>
     <div className="flex justify-center px-4 py-8">
-      
       <div
         className="
           grid gap-4 

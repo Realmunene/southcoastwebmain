@@ -5,7 +5,7 @@ const Aboutus = () => {
    <div className="bg-gray-50 min-h-screen py-10 px-6 md:px-16">
       <div className="max-w-5xl mx-auto bg-white shadow-sm rounded-lg p-8 md:p-12 border border-gray-200">
         <h1 className="text-3xl md:text-4xl font-bold text-cyan-600 text-center mb-8">
-          Southcoast Airbnb: Your Coastal Escape, Our Passion
+          Southcoast Outdoors: Your Coastal Escape, Our Passion
         </h1>
 
         {/* A Legacy of Comfort */}
@@ -38,7 +38,7 @@ const Aboutus = () => {
             Our Commitment to Excellence
           </h2>
           <p className="text-gray-700 leading-relaxed">
-            At Southcoast Airbnb, we pride ourselves on offering personalized
+            At Southcoast Outdoors, we pride ourselves on offering personalized
             hospitality where every guest feels valued. From the moment you
             arrive, our friendly and professional team is dedicated to making
             your stay as effortless and enjoyable as possible. Whether it’s
@@ -188,13 +188,13 @@ const Aboutus = () => {
         {/* Ending */}
         <section className="text-center mt-10">
           <p className="text-gray-700 leading-relaxed">
-            At <strong>Southcoast Airbnb</strong>, every sunrise brings new
+            At <strong>Southcoast Outdoors</strong>, every sunrise brings new
             experiences and every sunset marks memories worth cherishing. With
             the ocean just steps away, we invite you to relax, explore, and feel
             at home in Diani.
           </p>
           <h3 className="text-cyan-600 font-semibold mt-6 text-lg">
-            Choose Southcoast Airbnb — where every stay feels like home by the
+            Choose Southcoast Outdoors — where every stay feels like home by the
             sea.
           </h3>
         </section>

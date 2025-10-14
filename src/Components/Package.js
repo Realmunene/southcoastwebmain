@@ -36,7 +36,9 @@ const Package = () => {
     </h2>
     <p className="text-black">Seasonally Adjusted Packages</p>
   </div>
-
+<div>  
+  
+</div>
   {/* Left Arrow */}
   <button
     onClick={scrollLeft}
@@ -49,37 +51,43 @@ const Package = () => {
   <div
     ref={scrollRef}
     className="
-      // max-w-7xl mx-auto 
-      // grid
-      // grid-cols-1 
-      // sm:grid-cols-2 
-      // lg:grid-cols-4
-      // grid-rows-2
-      // gap-6
-      // overflow-x-auto
-      // scroll-smooth
-      // snap-x
+      max-w-7xl mx-auto 
+      grid
+      grid-cols-1 
+      sm:grid-cols-2 
+      lg:grid-cols-4
+      grid-rows-2
+      gap-6
+      overflow-x-auto
+      scroll-smooth
+      snap-x
     "
     style={{ scrollBehavior: "smooth" }}
   >
     {packages.map((pkg, index) => (
       <div
-        key={index}
-        className="my-package relative rounded-xl shadow-md flex flex-col justify-center hover:shadow-lg transition w-full h-64 snap-center overflow-hidden"
-      >
-        {/* Top Title Overlay */}
-        <div className="absolute top-0 left-0 bg-black/50 text-white px-3 py-2 rounded-br-lg backdrop-blur-sm">
-          <h3 className="text-lg font-semibold">{pkg.title}</h3>
-        </div>
+  key={index}
+  className="my-package relative rounded-xl shadow-md grid place-items-center hover:shadow-lg transition w-full h-64 snap-center overflow-hidden"
+>
+  {/* Top Title Overlay */}
+  <div className="absolute top-0 left-0 bg-black/50 text-white px-3 py-2 rounded-br-lg backdrop-blur-sm">
+    <h3 className="text-lg font-semibold">{pkg.title}</h3>
+  </div>
 
-        {/* Bottom Price & Button Overlay */}
-        <div className="absolute bottom-0 left-0 w-full bg-black/50 text-white px-4 py-3 flex justify-between items-center backdrop-blur-sm">
-          <span className="text-lg font-bold text-cyan-400">{pkg.price}</span>
-          <button className="bg-cyan-600 text-white text-sm px-4 py-2 rounded-full hover:bg-cyan-700 transition">
-            Book Now
-          </button>
-        </div>
-      </div>
+  {/* Center Content (optional if you want something in the middle) */}
+  <div className="text-center">
+    <h1 className="text-2xl font-bold text-white">{pkg.centerText}</h1>
+  </div>
+
+  {/* Bottom Price & Button Overlay */}
+  <div className="absolute bottom-0 left-0 w-full bg-black/50 text-white px-4 py-3 flex justify-between items-center backdrop-blur-sm">
+    <span className="text-lg font-bold text-cyan-400">{pkg.price}</span>
+    <button className="bg-cyan-600 text-white text-sm px-4 py-2 rounded-full hover:bg-cyan-700 transition">
+      Book Now
+    </button>
+  </div>
+</div>
+
     ))}
   </div>
 

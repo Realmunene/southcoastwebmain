@@ -20,7 +20,7 @@ const faqs = [
   {
     question: "What amenities are available on-site?",
     answer:
-      "We provide a swimming pool, free parking, five kitchens (including private and shared options), and arrangements for activities like snorkeling, scuba diving, dhow cruises, and organized safaris.",
+      "We provide a swimming pool, free parking, five kitchens (including private and shared options), Wifi, Booking referrals activities: snorkeling, scuba diving, dhow cruises, and organized safaris.",
   },
   {
     question: "Can I cook my own meals or hire a private chef?",
@@ -45,12 +45,12 @@ const faqs = [
   {
     question: "Do you provide airport transfers or transport services?",
     answer:
-      "Yes, airport transfers and transport arrangements can be organized upon request for your convenience.",
+      "Yes, airport transfers, transport arrangements and booking separately.",
   },
   {
     question: "How can I contact Southcoast Outdoors?",
     answer:
-      "You can reach us via email at southcoastoutdoors25@gmail.com or call us at +254 729 491 343. Direct booking links are also available on our website.",
+      "You can reach us via email at southcoastoutdoors25@gmail.com, <a href='https://www.facebook.com/southcoastoutdoors' target='_blank' class='text-blue-600 underline hover:text-blue-800'>Facebook</a> or call us at +254 729 491 343. Direct booking links are also available on our website.",
   },
 ];
 
@@ -87,9 +87,9 @@ const FAQSouthcoast = () => {
               </button>
 
               {openIndex === index && (
-                <p className="mt-3 text-gray-700 leading-relaxed">
-                  {faq.answer}
-                </p>
+                <p className="mt-3 text-gray-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: faq.answer }}
+                />
               )}
             </div>
           ))}

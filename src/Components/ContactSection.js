@@ -17,7 +17,7 @@ const ContactSection = () => {
           {/* Talk to Sales */}
           <div className="bg-white text-gray-800 p-8 rounded-2xl shadow-lg flex flex-col justify-between hover:shadow-2xl transition duration-300">
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-[#0d1b2a] text-white p-3 rounded-full text-xl">
+              <div className="bg-cyan-500 text-white p-3 rounded-full text-xl">
                 <i className="fas fa-phone-alt"></i>
               </div>
               <h3 className="text-xl font-semibold">Talk to Sales</h3>
@@ -42,7 +42,7 @@ const ContactSection = () => {
           {/* Contact Customer Support */}
           <div className="bg-white text-gray-800 p-8 rounded-2xl shadow-lg flex flex-col justify-between hover:shadow-2xl transition duration-300">
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-[#0d1b2a] text-white p-3 rounded-full text-xl">
+              <div className="bg-cyan-500 text-white p-3 rounded-full text-xl">
                 <i className="fas fa-headset"></i>
               </div>
               <h3 className="text-xl font-semibold">Contact Customer Support</h3>
@@ -50,7 +50,7 @@ const ContactSection = () => {
             <p className="text-gray-600 mb-6">
               Not a customer yet? No worries. Our friendly team is here to help answer your questions.
             </p>
-            <button className="bg-[#e63946] hover:bg-[#c72e3c] text-white font-semibold px-6 py-3 rounded-lg w-fit">
+            <button className="bg-cyan-500 hover:bg-cyan-700 text-white font-semibold px-6 py-3 rounded-lg w-fit">
               Contact Support
             </button>
           </div>
