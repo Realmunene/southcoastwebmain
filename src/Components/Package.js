@@ -1,106 +1,121 @@
-import React from 'react';
-import { useRef } from "react";
-import './Footer.css';
-const packages = [
-  { title: "Executive Room, Ensuite", price: "$75" },
-  { title: "2 Connected Room, 1 Ensuite", price: "$110" },
-  { title: "Apartment - 2BR + Living + 1 Ensuite", price: "$110" },
-  { title: "Apartment - Kitchen 2BR, 2 Ensuites", price: "$125" },
-  { title: "Executive Room - Ensuite", price: "$75" },
-  { title: "2 Connected Room - 1 Ensuite", price: "$110" },
-  { title: "Apartment - Kitchen 2BR - 1 Ensuite", price: "$125" },
-  { title: "Larger Apartment - Kitchen, Balcony, Living, 2 Ensuites", price: "$140" },
+// RoomCarousel.jsx
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import room1 from "./images/Photos2/image1.jpg";
+import room2 from "./images/Photos/image2.jpg";
+import room3 from "./images/Photos/image3.jpg";
+import room4 from "./images/Photos/image4.jpg";
+import room5 from "./images/Photos/image5.jpg";
+import room6 from "./images/Photos/image6.jpg";
+import room7 from "./images/Photos/image7.jpg";
+import room8 from "./images/Photos/image8.jpg";
+
+import house1 from "./images/ensuite.jpg";
+import house2 from "./images/2 coneected.jpg";
+import house3 from "./images/Apartment.jpg";
+import house4 from "./images/2BA.jpg";
+import house5 from "./images/Larger A.jpg";
+
+const initialRooms = [
+  { title: "Executive Room, Ensuite", price: "$75", image: [room1, house1] },
+  { title: "2 Connected Room, 1 Ensuite", price: "$110", image: [room2, house2] },
+  { title: "Apartment - 2BR + Living + 1 Ensuite", price: "$110", image: [room3, house3] },
+  { title: "Apartment - Kitchen 2BR, 2 Ensuites", price: "$125", image: [room4, house4] },
+  { title: "Executive Room - Ensuite", price: "$75", image: [room5, house1] },
+  { title: "2 Connected Room - 1 Ensuite", price: "$110", image: [room6, house2] },
+  { title: "Apartment - Kitchen 2BR - 1 Ensuite", price: "$125", image: [room7, house4] },
+  { title: "Larger Apartment - Kitchen, Balcony, Living, 2 Ensuites", price: "$140", image: [room8, house5] },
 ];
-const Package = () => {
-  const scrollRef = useRef(null);
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({
-      left: -300,
-      behavior: "smooth",
+export default function Package() {
+  const [rooms, setRooms] = useState(initialRooms);
+  const navigate = useNavigate();
+
+  const handleNext = () => {
+    setRooms((prev) => {
+      const copy = [...prev];
+      const first = copy.shift();
+      copy.push(first);
+      return copy;
     });
   };
 
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({
-      left: 300,
-      behavior: "smooth",
+  const handlePrev = () => {
+    setRooms((prev) => {
+      const copy = [...prev];
+      const last = copy.pop();
+      copy.unshift(last);
+      return copy;
     });
   };
+
+  const visibleRooms = rooms.slice(0, 4);
+
+  const handleBookNow = (room) => {
+    navigate(`/packagepage/${encodeURIComponent(room.title)}`, {
+      state: { room },
+    });
+  };
+
   return (
-   <section className="w-full bg-cyan-50 py-12 px-4 relative">
-  {/* Section Header */}
-  <div className="max-w-7xl mx-auto text-center mb-8">
-    <h2 className="text-3xl font-bold text-black mb-2 text-left">
-      Rates & Availability
-    </h2>
-    <p className="text-black">Seasonally Adjusted Packages</p>
-  </div>
-<div>  
-  
-</div>
-  {/* Left Arrow */}
-  <button
-    onClick={scrollLeft}
-    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-2 rounded-full hover:bg-cyan-700 shadow-md z-10"
-  >
-    &#8249;
-  </button>
+    <div className="bg-gray-50 py-10 px-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Available Rooms</h2>
 
-  {/* Cards Container */}
-  <div
-    ref={scrollRef}
-    className="
-      max-w-7xl mx-auto 
-      grid
-      grid-cols-1 
-      sm:grid-cols-2 
-      lg:grid-cols-4
-      grid-rows-2
-      gap-6
-      overflow-x-auto
-      scroll-smooth
-      snap-x
-    "
-    style={{ scrollBehavior: "smooth" }}
-  >
-    {packages.map((pkg, index) => (
-      <div
-  key={index}
-  className="my-package relative rounded-xl shadow-md grid place-items-center hover:shadow-lg transition w-full h-64 snap-center overflow-hidden"
->
-  {/* Top Title Overlay */}
-  <div className="absolute top-0 left-0 bg-black/50 text-white px-3 py-2 rounded-br-lg backdrop-blur-sm">
-    <h3 className="text-lg font-semibold">{pkg.title}</h3>
-  </div>
+      <div className="relative max-w-7xl mx-auto">
+        {/* Left arrow */}
+        <button
+          onClick={handlePrev}
+          className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/60 hover:bg-black text-white p-2 rounded-full shadow"
+          aria-label="Previous"
+        >
+          <ChevronLeft size={20} />
+        </button>
 
-  {/* Center Content (optional if you want something in the middle) */}
-  <div className="text-center">
-    <h1 className="text-2xl font-bold text-white">{pkg.centerText}</h1>
-  </div>
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {visibleRooms.map((room, idx) => (
+            <div
+              key={`${room.title}-${idx}`}
+              className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition flex flex-col"
+            >
+              <div className="h-44 md:h-48 w-full">
+                <img
+                  src={room.image[0]}  // ✅ FIX: use the first image
+                  alt={room.title}
+                  className="w-full h-full object-cover"
+                  draggable={false}
+                />
+              </div>
 
-  {/* Bottom Price & Button Overlay */}
-  <div className="absolute bottom-0 left-0 w-full bg-black/50 text-white px-4 py-3 flex justify-between items-center backdrop-blur-sm">
-    <span className="text-lg font-bold text-cyan-400">{pkg.price}</span>
-    <button className="bg-cyan-600 text-white text-sm px-4 py-2 rounded-full hover:bg-cyan-700 transition">
-      Book Now
-    </button>
-  </div>
-</div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900">{room.title}</h3>
+                </div>
 
-    ))}
-  </div>
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-gray-700 font-medium">{room.price}</span>
+                  <button
+                    onClick={() => handleBookNow(room)}
+                    className="bg-cyan-500 hover:bg-cyan-700 text-white px-3 py-1.5 rounded text-sm font-semibold"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
-  {/* Right Arrow */}
-  <button
-    onClick={scrollRight}
-    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-cyan-600 text-white p-2 rounded-full hover:bg-cyan-700 shadow-md z-10"
-  >
-    &#8250;
-  </button>
-</section>
-
-  )
+        {/* Right arrow */}
+        <button
+          onClick={handleNext}
+          className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/60 hover:bg-black text-white p-2 rounded-full shadow"
+          aria-label="Next"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </div>
+    </div>
+  );
 }
-
-export default Package

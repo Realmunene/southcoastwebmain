@@ -1,11 +1,13 @@
 import React from 'react';
 import BookingSearch from './BookingSearch';
 import WhatsAppChat from './WhatsAppChat';
-const Home = () => {
+const Home = ({user, onRequireLogin}) => {
   return (
     <div>
-        <BookingSearch />
-     <WhatsAppChat />
+    <BookingSearch 
+    user={user} 
+    onLoginClick={onRequireLogin}/>
+    <WhatsAppChat />
     </div>
   )
 }

@@ -1,95 +1,207 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import { jwtDecode } from "jwt-decode";
 
-export default function BookingSearch() {
-  // State for dropdown data
+export default function BookingSearch({ onLoginClick }) {
   const [nationalities, setNationalities] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
+  const [user, setUser] = useState(null);
 
-  // State for user selections
   const [selectedNationality, setSelectedNationality] = useState("");
   const [selectedRoomType, setSelectedRoomType] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState("1 Adult");
+  const [guests, setGuests] = useState("");
 
-  // Fetch dropdown data
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const pendingBookingRef = useRef(false);
+
+  // ✅ Initialize user on mount
   useEffect(() => {
-    const fetchNationalities = async () => {
+    const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+    if (storedUser?.token) {
       try {
-        const response = await fetch("http://127.0.0.1:3000/api/v1/nationalities");
-        if (!response.ok) throw new Error("Failed to fetch nationalities");
-        const data = await response.json();
-        setNationalities(data);
-      } catch (error) {
-        console.error("Error fetching nationalities:", error);
+        const decoded = jwtDecode(storedUser.token);
+        setUser({ id: decoded.user_id, token: storedUser.token });
+      } catch (err) {
+        console.error("Failed to decode token:", err);
       }
-    };
-
-    const fetchRoomTypes = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/v1/room_types");
-        if (!response.ok) throw new Error("Failed to fetch room types");
-        const data = await response.json();
-        setRoomTypes(data);
-      } catch (error) {
-        console.error("Error fetching room types:", error);
-      }
-    };
-
-    fetchNationalities();
-    fetchRoomTypes();
+    }
   }, []);
 
-  // Handle form submission
-  const handleSearch = async () => {
-    const bookingData = {
-      nationality: selectedNationality,
-      room_type: selectedRoomType,
-      check_in: checkIn,
-      check_out: checkOut,
-      guests,
+  // ✅ Listen for login in other tabs
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+      if (storedUser?.token && !user) {
+        try {
+          const decoded = jwtDecode(storedUser.token);
+          setUser({ id: decoded.user_id, token: storedUser.token });
+        } catch (err) {
+          console.error("Failed to decode token:", err);
+        }
+      }
     };
 
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [user]);
+
+  // ✅ Handle pending booking after login
+  useEffect(() => {
+    if (user && pendingBookingRef.current) {
+      pendingBookingRef.current = false;
+      executeBooking(user.token, user.id);
+    }
+  }, [user]);
+
+  // Fetch nationalities and room types
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [natRes, roomRes] = await Promise.all([
+          fetch("http://localhost:3000/api/v1/nationalities"),
+          fetch("http://localhost:3000/api/v1/room_types"),
+        ]);
+
+        if (!natRes.ok) throw new Error("Failed to fetch nationalities");
+        if (!roomRes.ok) throw new Error("Failed to fetch room types");
+
+        const natData = await natRes.json();
+        const roomData = await roomRes.json();
+
+        setNationalities(natData.map((item) => ({ ...item, __key: item.id ?? uuidv4() })));
+        setRoomTypes(roomData.map((item) => ({ ...item, __key: item.id ?? uuidv4() })));
+      } catch (err) {
+        console.error(err);
+        setNationalities([]);
+        setRoomTypes([]);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const getTodayDate = () => new Date().toISOString().split("T")[0];
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!selectedNationality) newErrors.selectedNationality = "Nationality is required";
+    if (!selectedRoomType) newErrors.selectedRoomType = "Room type is required";
+    if (!checkIn) newErrors.checkIn = "Check-in date is required";
+    if (!checkOut) newErrors.checkOut = "Check-out date is required";
+    if (!guests) newErrors.guests = "Number of guests is required";
+
+    if (checkIn && checkOut) {
+      const checkInDate = new Date(checkIn);
+      const checkOutDate = new Date(checkOut);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (checkInDate < today) newErrors.checkIn = "Check-in date cannot be in the past";
+      if (checkOutDate <= checkInDate) newErrors.checkOut = "Check-out date must be after check-in date";
+    }
+
+    if (guests && (isNaN(guests) || guests < 1 || guests > 20)) {
+      newErrors.guests = "Guests must be between 1 and 20";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const executeBooking = async (token, userId) => {
+    if (!validateForm()) {
+      alert("Please fix the form errors before submitting.");
+      return;
+    }
+
+    setLoading(true);
+
     try {
+      const bookingData = {
+        booking: {
+          user_id: userId,
+          nationality: selectedNationality,
+          room_type: selectedRoomType,
+          check_in: checkIn,
+          check_out: checkOut,
+          guests: parseInt(guests, 10),
+        },
+      };
+
       const response = await fetch("http://localhost:3000/api/v1/bookings", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(bookingData),
       });
 
-      if (!response.ok) throw new Error("Failed to submit booking data");
-
       const result = await response.json();
-      alert("Booking search submitted successfully!");
-      console.log("Booking response:", result);
-    } catch (error) {
-      console.error("Error submitting booking data:", error);
-      alert("Failed to submit booking. Please try again.");
+
+      if (response.ok) {
+        alert(`✅ ${result.message || "Booking successful!"}`);
+        setSelectedNationality("");
+        setSelectedRoomType("");
+        setCheckIn("");
+        setCheckOut("");
+        setGuests("");
+        setErrors({});
+      } else {
+        console.error("Booking error:", result);
+        alert(`Booking failed: ${result.error || result.errors?.join(", ") || "Unknown error"}`);
+      }
+    } catch (err) {
+      console.error("Booking error:", err);
+      alert("Booking failed due to network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
+  // ✅ Simplified booking handler
+  const handleBooking = () => {
+    if (!user?.token || !user?.id) {
+      pendingBookingRef.current = true;
+      if (typeof onLoginClick === "function") onLoginClick();
+      else alert("Please log in to make a booking");
+      return;
+    }
+    executeBooking(user.token, user.id);
+  };
+
+  const getInputClass = (field) =>
+    errors[field]
+      ? "w-full border border-red-500 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+      : "w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-600";
+
   return (
     <div className="my-background py-4">
-      {/* Booking Bar Container */}
       <div className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
-
-        {/* Guest Nationality */}
+        {/* Nationality */}
         <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Guest Nationality
-          </label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Guest Nationality</label>
           <select
             value={selectedNationality}
-            onChange={(e) => setSelectedNationality(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+            onChange={(e) => {
+              setSelectedNationality(e.target.value);
+              setErrors((prev) => ({ ...prev, selectedNationality: "" }));
+            }}
+            className={getInputClass("selectedNationality")}
           >
             <option value="">Select Nationality</option>
-            {nationalities.map((nat, index) => (
-              <option key={index} value={nat.name || nat}>
-                {nat.name || nat}
+            {nationalities.map((nat) => (
+              <option key={nat.__key} value={nat.name}>
+                {nat.name}
               </option>
             ))}
           </select>
@@ -97,105 +209,114 @@ export default function BookingSearch() {
 
         {/* Room Type */}
         <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Room Type
-          </label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Room Type</label>
           <select
             value={selectedRoomType}
-            onChange={(e) => setSelectedRoomType(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+            onChange={(e) => {
+              setSelectedRoomType(e.target.value);
+              setErrors((prev) => ({ ...prev, selectedRoomType: "" }));
+            }}
+            className={getInputClass("selectedRoomType")}
           >
             <option value="">Select Room Type</option>
-            {roomTypes.map((room, index) => (
-              <option key={index} value={room.name || room}>
-                {room.name || room}
+            {roomTypes.map((room) => (
+              <option key={room.__key} value={room.name}>
+                {room.name}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Dates - Check-in & Check-out */}
+        {/* Dates */}
         <div className="flex-1 min-w-[280px] border-b md:border-b-0 md:border-r border-gray-300 p-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-
-          {/* Check-in */}
           <div className="w-full sm:w-1/2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Check-in
-            </label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Check-in</label>
             <input
               type="date"
               value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+              min={getTodayDate()}
+              onChange={(e) => {
+                setCheckIn(e.target.value);
+                setErrors((prev) => ({ ...prev, checkIn: "" }));
+              }}
+              className={getInputClass("checkIn")}
             />
           </div>
-
-          {/* Check-out */}
           <div className="w-full sm:w-1/2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Check-out
-            </label>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Check-out</label>
             <input
               type="date"
               value={checkOut}
-              onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+              min={checkIn || getTodayDate()}
+              onChange={(e) => {
+                setCheckOut(e.target.value);
+                setErrors((prev) => ({ ...prev, checkOut: "" }));
+              }}
+              className={getInputClass("checkOut")}
             />
           </div>
         </div>
 
         {/* Guests */}
         <div className="flex-1 min-w-[160px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">
-            Guests
-          </label>
+          <label className="block text-sm font-semibold text-gray-700 mb-1">Guests</label>
           <input
-            type="text"
+            type="number"
+            min="1"
+            max="20"
             value={guests}
-            onChange={(e) => setGuests(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+            onChange={(e) => {
+              const value = e.target.value.replace(/\D/, "");
+              setGuests(value);
+              setErrors((prev) => ({ ...prev, guests: "" }));
+            }}
+            className={getInputClass("guests")}
+            placeholder="Number of guests"
           />
         </div>
 
-        {/* Search Button */}
-        <div
-          onClick={handleSearch}
-          className="min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition p-3 md:px-10 bg-cyan-500 hover:bg-cyan-600"
+        {/* Button */}
+        <button
+          type="button"
+          onClick={handleBooking}
+          disabled={loading}
+          className={`min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition p-3 md:px-10 ${
+            loading ? "bg-gray-400" : "bg-cyan-500 hover:bg-cyan-600"
+          }`}
         >
-          <FontAwesomeIcon icon={faSearch} className="text-lg text-white" />
-        </div>
+          <FontAwesomeIcon icon={faSearch} className={`text-lg ${loading ? "text-gray-200" : "text-white"}`} />
+          {loading && <span className="ml-2 text-white">Booking...</span>}
+        </button>
       </div>
 
-      {/* Hero Text Section */}
+      {/* Hero Section */}
       <div className="py-20 text-4xl md:text-7xl font-extrabold text-center text-white text-shadow-lg/30">
         <h1 className="py-3">YOUR JOURNEY</h1>
         <h1 className="py-2">BEGINS WITH A STAY</h1>
-
         <div className="relative flex flex-col items-center justify-center text-white text-center py-6">
-          {/* Content */}
           <div className="relative max-w-2xl">
             <p className="text-base md:text-lg font-normal font-sans mb-6 leading-relaxed">
-              Just 300 meters from the beach, we offer the perfect escape with a
-              refreshing pool, free parking, and 5 kitchens for self-cooking or
-              a private chef. Enjoy thrilling adventures like kite surfing,
-              snorkeling, scuba diving, dhow cruises, and safaris to national
-              parks. Your unforgettable getaway starts here.
+              Just 300 meters from the beach, we offer the perfect escape with a refreshing pool,
+              free parking, and 5 kitchens for self-cooking or a private chef. Enjoy thrilling
+              adventures like kite surfing, snorkeling, scuba diving, dhow cruises, and safaris to
+              national parks. Your unforgettable getaway starts here.
             </p>
-
-            {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="#learn-more"
+              <Link
+                to="/about"
                 className="bg-cyan-500 hover:bg-blue-700 text-white text-sm font-medium py-2 px-6 rounded-full transition"
               >
                 LEARN MORE
-              </a>
-              <a
-                href="#book-now"
-                className="border-2 border-white hover:bg-white hover:text-black text-white text-sm font-medium py-2 px-6 rounded-full transition"
+              </Link>
+              <button
+                onClick={handleBooking}
+                disabled={loading}
+                className={`border-2 border-white text-sm font-medium py-2 px-6 rounded-full transition ${
+                  loading ? "bg-gray-400 text-gray-200 border-gray-400" : "hover:bg-white hover:text-black text-white"
+                }`}
               >
-                BOOK NOW
-              </a>
+                {loading ? "BOOKING..." : "BOOK NOW"}
+              </button>
             </div>
           </div>
         </div>

@@ -1,6 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
+import InstantMessage from "./InstantMessage";
 
 const ContactSection = () => {
+const [showPopup, setShowPopup] =useState(false);
+  const handleOpen = () => setShowPopup(true);
+  const handleClose = () => setShowPopup(false);
   return (
     <section className="bg-cyan-500 text-white py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -50,9 +54,12 @@ const ContactSection = () => {
             <p className="text-gray-600 mb-6">
               Not a customer yet? No worries. Our friendly team is here to help answer your questions.
             </p>
-            <button className="bg-cyan-500 hover:bg-cyan-700 text-white font-semibold px-6 py-3 rounded-lg w-fit">
+            <button 
+            onClick={handleOpen}
+            className="bg-cyan-500 hover:bg-cyan-700 text-white font-semibold px-6 py-3 rounded-lg w-fit">
               Contact Support
             </button>
+            {showPopup && <InstantMessage onClose={handleClose}/>}
           </div>
         </div>
       </div>

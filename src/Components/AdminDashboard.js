@@ -1,0 +1,1002 @@
+import React, { useState, useEffect } from "react";
+
+export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState("bookings");
+  const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    totalBookings: 0,
+    activeBookings: 0,
+    totalMessages: 0,
+  });
+
+  useEffect(() => {
+    fetchDashboardStats();
+    // Remove fetchBookings() from here - BookingsManagement handles its own data
+  }, []);
+
+  const fetchDashboardStats = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        console.error("No admin token found");
+        return;
+      }
+
+      const response = await fetch("http://localhost:3000/api/v1/admin/stats", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      const data = await response.json();
+      setStats(data);
+    } catch (error) {
+      console.error("Failed to fetch stats:", error);
+    }
+  };
+
+  // Remove the fetchBookings function from here entirely
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600">
+                Welcome, {localStorage.getItem("adminName") || "Admin"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats Overview */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <StatCard
+            title="Total Users"
+            value={stats.totalUsers}
+            icon="👥"
+            color="blue"
+          />
+          <StatCard
+            title="Total Bookings"
+            value={stats.totalBookings}
+            icon="📅"
+            color="green"
+          />
+          <StatCard
+            title="Active Bookings"
+            value={stats.activeBookings}
+            icon="🏨"
+            color="purple"
+          />
+          <StatCard
+            title="Messages"
+            value={stats.totalMessages}
+            icon="💬"
+            color="yellow"
+          />
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              {[
+                { id: "bookings", name: "Bookings Management" },
+                { id: "users", name: "Users Management" },
+                { id: "admins", name: "Admin Management" },
+                { id: "messages", name: "Messages" },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`py-4 px-6 text-sm font-medium border-b-2 transition ${
+                    activeTab === tab.id
+                      ? "border-cyan-500 text-cyan-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                  }`}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-6">
+            {activeTab === "bookings" && <BookingsManagement />}
+            {activeTab === "users" && <UsersManagement />}
+            {activeTab === "admins" && <AdminManagement />}
+            {activeTab === "messages" && <MessagesManagement />}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Stat Card Component (unchanged)
+const StatCard = ({ title, value, icon, color }) => {
+  const colorClasses = {
+    blue: "bg-blue-50 text-blue-600",
+    green: "bg-green-50 text-green-600",
+    purple: "bg-purple-50 text-purple-600",
+    yellow: "bg-yellow-50 text-yellow-600",
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="flex items-center">
+        <div className={`p-3 rounded-full ${colorClasses[color]} mr-4`}>
+          <span className="text-2xl">{icon}</span>
+        </div>
+        <div>
+          <p className="text-sm font-medium text-gray-600">{title}</p>
+          <p className="text-2xl font-bold text-gray-900">{value}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Updated BookingsManagement Component
+const BookingsManagement = () => {
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [editingBooking, setEditingBooking] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const fetchBookings = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("http://localhost:3000/api/v1/admin/bookings", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setBookings(data);
+      } else {
+        console.error("Failed to fetch bookings:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = (booking) => {
+    setEditingBooking(booking);
+    setShowForm(true);
+  };
+
+  const handleDelete = async (bookingId) => {
+    if (!window.confirm("Are you sure you want to delete this booking?")) return;
+
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`http://localhost:3000/api/v1/admin/bookings/${bookingId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Booking deleted successfully!");
+        fetchBookings();
+      } else {
+        alert("Failed to delete booking");
+      }
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+      alert("Failed to delete booking");
+    }
+  };
+
+  const handleSubmit = async (formData) => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const url = editingBooking
+        ? `http://localhost:3000/api/v1/admin/bookings/${editingBooking.id}`
+        : "http://localhost:3000/api/v1/admin/bookings";
+
+      const response = await fetch(url, {
+        method: editingBooking ? "PUT" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ booking: formData }),
+      });
+
+      if (response.ok) {
+        alert(`Booking ${editingBooking ? 'updated' : 'created'} successfully!`);
+        setShowForm(false);
+        setEditingBooking(null);
+        fetchBookings();
+      } else {
+        alert("Failed to save booking");
+      }
+    } catch (error) {
+      console.error("Error saving booking:", error);
+      alert("Failed to save booking");
+    }
+  };
+
+  if (loading) return <div className="text-center py-8">Loading bookings...</div>;
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">All Bookings</h2>
+        <button
+          onClick={() => setShowForm(true)}
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+        >
+          Create New Booking
+        </button>
+      </div>
+
+      {showForm && (
+        <BookingForm
+          booking={editingBooking}
+          onSubmit={handleSubmit}
+          onCancel={() => {
+            setShowForm(false);
+            setEditingBooking(null);
+          }}
+        />
+      )}
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Booking ID
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                User
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Room Type
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Dates
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {bookings.map((booking) => (
+              <tr key={booking.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  #{booking.id}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {booking.user?.email || "N/A"}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {booking.room_type}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {new Date(booking.check_in).toLocaleDateString()} - {new Date(booking.check_out).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                    booking.status === 'confirmed' ? 'bg-green-100 text-green-800' :
+                    booking.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-red-100 text-red-800'
+                  }`}>
+                    {booking.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                  <button
+                    onClick={() => handleEdit(booking)}
+                    className="text-cyan-600 hover:text-cyan-900"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(booking.id)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// Booking Form Component (unchanged)
+const BookingForm = ({ booking, onSubmit, onCancel }) => {
+  const [formData, setFormData] = useState({
+    user_id: booking?.user_id || "",
+    room_type: booking?.room_type || "",
+    check_in: booking?.check_in || "",
+    check_out: booking?.check_out || "",
+    guests: booking?.guests || 1,
+    nationality: booking?.nationality || "",
+    status: booking?.status || "confirmed",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-md w-full p-6">
+        <h3 className="text-lg font-semibold mb-4">
+          {booking ? 'Edit Booking' : 'Create New Booking'}
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">User ID</label>
+            <input
+              type="number"
+              name="user_id"
+              value={formData.user_id}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Room Type</label>
+            <select
+              name="room_type"
+              value={formData.room_type}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+            >
+              <option value="">Select Room Type</option>
+              <option value="Single">Single</option>
+              <option value="Double">Double</option>
+              <option value="Suite">Suite</option>
+              <option value="Deluxe">Deluxe</option>
+            </select>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Check-in</label>
+              <input
+                type="date"
+                name="check_in"
+                value={formData.check_in}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Check-out</label>
+              <input
+                type="date"
+                name="check_out"
+                value={formData.check_out}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                required
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Guests</label>
+              <input
+                type="number"
+                name="guests"
+                value={formData.guests}
+                onChange={handleChange}
+                min="1"
+                max="20"
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Status</label>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              >
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Nationality</label>
+            <input
+              type="text"
+              name="nationality"
+              value={formData.nationality}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+            />
+          </div>
+          <div className="flex justify-end space-x-3 pt-4">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 rounded-md transition"
+            >
+              {booking ? 'Update' : 'Create'} Booking
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+// Updated UsersManagement Component
+const UsersManagement = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("http://localhost:3000/api/v1/admin/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setUsers(data);
+      } else {
+        console.error("Failed to fetch users:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const response = await fetch(`http://localhost:3000/api/v1/admin/users/${userId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("User deleted successfully!");
+        fetchUsers();
+      } else {
+        alert("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user");
+    }
+  };
+
+  if (loading) return <div className="text-center py-8">Loading users...</div>;
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">Users Management</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                User ID
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Role
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Created At
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  #{user.id}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {user.email}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                    user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-gray-100 text-gray-800'
+                  }`}>
+                    {user.role}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {new Date(user.created_at).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => handleDeleteUser(user.id)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// Updated AdminManagement Component
+const AdminManagement = () => {
+  const [admins, setAdmins] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAdmins();
+  }, []);
+
+  const fetchAdmins = async () => {
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("http://localhost:3000/api/v1/admin/admins", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setAdmins(data);
+      } else {
+        console.error("Failed to fetch admins:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching admins:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateAdmin = async (formData) => {
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const response = await fetch("http://localhost:3000/api/v1/admin/admins", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ admin: formData }), // Changed from { user: formData } to { admin: formData }
+      });
+
+      if (response.ok) {
+        alert("Admin created successfully!");
+        setShowForm(false);
+        fetchAdmins();
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to create admin: ${errorData.errors?.join(', ') || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error("Error creating admin:", error);
+      alert("Failed to create admin");
+    }
+  };
+
+  const handleDeleteAdmin = async (adminId) => {
+    if (!window.confirm("Are you sure you want to delete this admin?")) return;
+
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const response = await fetch(`http://localhost:3000/api/v1/admin/admins/${adminId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Admin deleted successfully!");
+        fetchAdmins();
+      } else {
+        alert("Failed to delete admin");
+      }
+    } catch (error) {
+      console.error("Error deleting admin:", error);
+      alert("Failed to delete admin");
+    }
+  };
+
+  if (loading) return <div className="text-center py-8">Loading admins...</div>;
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
+        <button
+          onClick={() => setShowForm(true)}
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+        >
+          Add New Admin
+        </button>
+      </div>
+
+      {showForm && (
+        <AdminForm
+          onSubmit={handleCreateAdmin}
+          onCancel={() => setShowForm(false)}
+        />
+      )}
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Admin ID
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Role
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Created At
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {admins.map((admin) => (
+              <tr key={admin.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  #{admin.id}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {admin.email}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
+                    {admin.role}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {new Date(admin.created_at).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => handleDeleteAdmin(admin.id)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// Updated AdminForm Component
+const AdminForm = ({ onSubmit, onCancel }) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    password_confirmation: "", // Added password confirmation
+    role: "admin",
+    name: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Basic validation
+    if (formData.password !== formData.password_confirmation) {
+      alert("Passwords do not match!");
+      return;
+    }
+    
+    if (formData.password.length < 6) {
+      alert("Password must be at least 6 characters long!");
+      return;
+    }
+    
+    onSubmit(formData);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-md w-full p-6">
+        <h3 className="text-lg font-semibold mb-4">Create New Admin</h3>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+              minLength="6"
+              placeholder="At least 6 characters with uppercase, lowercase, number, and special character"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input
+              type="password"
+              name="password_confirmation"
+              value={formData.password_confirmation}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              required
+              minLength="6"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Role</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+            >
+              <option value="admin">Admin</option>
+              <option value="super_admin">Super Admin</option>
+            </select>
+          </div>
+          <div className="flex justify-end space-x-3 pt-4">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 rounded-md transition"
+            >
+              Create Admin
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+// Updated MessagesManagement Component
+const MessagesManagement = () => {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const fetchMessages = async () => {
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("http://localhost:3000/api/v1/admin/messages", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setMessages(data);
+      } else {
+        console.error("Failed to fetch messages:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteMessage = async (messageId) => {
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
+
+    try {
+      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const response = await fetch(`http://localhost:3000/api/v1/admin/messages/${messageId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Message deleted successfully!");
+        fetchMessages();
+      } else {
+        alert("Failed to delete message");
+      }
+    } catch (error) {
+      console.error("Error deleting message:", error);
+      alert("Failed to delete message");
+    }
+  };
+
+  if (loading) return <div className="text-center py-8">Loading messages...</div>;
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
+      <div className="space-y-4">
+        {messages.map((message) => (
+          <div key={message.id} className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <h3 className="text-sm font-medium text-gray-900">{message.name}</h3>
+                <p className="text-sm text-gray-500">{message.email}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-gray-400">
+                  {new Date(message.created_at).toLocaleDateString()} at{" "}
+                  {new Date(message.created_at).toLocaleTimeString()}
+                </p>
+                <span className={`inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full ${
+                  message.status === 'new' ? 'bg-blue-100 text-blue-800' :
+                  message.status === 'read' ? 'bg-gray-100 text-gray-800' :
+                  'bg-green-100 text-green-800'
+                }`}>
+                  {message.status}
+                </span>
+              </div>
+            </div>
+            <p className="text-gray-700 mb-4">{message.message}</p>
+            <div className="flex justify-between items-center">
+              <div className="flex space-x-2">
+                <button className="text-sm text-cyan-600 hover:text-cyan-800">
+                  Mark as {message.status === 'read' ? 'Unread' : 'Read'}
+                </button>
+                <button className="text-sm text-green-600 hover:text-green-800">
+                  Reply
+                </button>
+              </div>
+              <button
+                onClick={() => handleDeleteMessage(message.id)}
+                className="text-sm text-red-600 hover:text-red-800"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
