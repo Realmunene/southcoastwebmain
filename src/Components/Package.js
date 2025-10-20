@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import room1 from "./images/Photos2/image1.jpg";
+import room1 from "./images/Photos/image1.jpg";
 import room2 from "./images/Photos/image2.jpg";
 import room3 from "./images/Photos/image3.jpg";
 import room4 from "./images/Photos/image4.jpg";
@@ -15,17 +15,20 @@ import house1 from "./images/ensuite.jpg";
 import house2 from "./images/2 coneected.jpg";
 import house3 from "./images/Apartment.jpg";
 import house4 from "./images/2BA.jpg";
-import house5 from "./images/Larger A.jpg";
+import house5 from "./images/Executive 2.jpg";
+import house6 from "./images/2 connected room.jpg";
+import house7 from "./images/2BA.jpg";
+import house8 from "./images/LargerApartment.jpg";
 
 const initialRooms = [
   { title: "Executive Room, Ensuite", price: "$75", image: [room1, house1] },
   { title: "2 Connected Room, 1 Ensuite", price: "$110", image: [room2, house2] },
   { title: "Apartment - 2BR + Living + 1 Ensuite", price: "$110", image: [room3, house3] },
   { title: "Apartment - Kitchen 2BR, 2 Ensuites", price: "$125", image: [room4, house4] },
-  { title: "Executive Room - Ensuite", price: "$75", image: [room5, house1] },
-  { title: "2 Connected Room - 1 Ensuite", price: "$110", image: [room6, house2] },
-  { title: "Apartment - Kitchen 2BR - 1 Ensuite", price: "$125", image: [room7, house4] },
-  { title: "Larger Apartment - Kitchen, Balcony, Living, 2 Ensuites", price: "$140", image: [room8, house5] },
+  { title: "Executive Room - Ensuite", price: "$75", image: [room5, house5] },
+  { title: "2 Connected Room - 1 Ensuite", price: "$110", image: [room6, house6] },
+  { title: "Apartment - Kitchen 2BR - 1 Ensuite", price: "$125", image: [room7, house7] },
+  { title: "Larger Apartment - Kitchen, Balcony, Living, 2 Ensuites", price: "$140", image: [room8, house8] },
 ];
 
 export default function Package() {

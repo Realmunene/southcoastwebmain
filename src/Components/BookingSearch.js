@@ -11,47 +11,85 @@ export default function BookingSearch({ onLoginClick }) {
   const [roomTypes, setRoomTypes] = useState([]);
   const [user, setUser] = useState(null);
 
+  // Get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    return new Date().toISOString().split('T')[0];
+  };
+
+  // Get tomorrow's date in YYYY-MM-DD format
+  const getTomorrowDate = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
+  };
+
   const [selectedNationality, setSelectedNationality] = useState("");
   const [selectedRoomType, setSelectedRoomType] = useState("");
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState("");
+  const [checkIn, setCheckIn] = useState(getTodayDate());
+  const [checkOut, setCheckOut] = useState(getTomorrowDate());
+  const [guests, setGuests] = useState("1");
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const pendingBookingRef = useRef(false);
+  const loginPopupRef = useRef(null);
 
-  // ✅ Initialize user on mount
-  useEffect(() => {
+  // ✅ Enhanced user initialization with polling for popup login
+  const checkUserAuth = () => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
     if (storedUser?.token) {
       try {
         const decoded = jwtDecode(storedUser.token);
-        setUser({ id: decoded.user_id, token: storedUser.token });
+        // Check if token is expired
+        if (decoded.exp * 1000 > Date.now()) {
+          setUser({ id: decoded.user_id, token: storedUser.token });
+          return true;
+        } else {
+          // Token expired, remove it
+          localStorage.removeItem("user");
+          setUser(null);
+          return false;
+        }
       } catch (err) {
         console.error("Failed to decode token:", err);
+        setUser(null);
+        return false;
       }
+    } else {
+      setUser(null);
+      return false;
     }
+  };
+
+  // ✅ Initialize user on mount
+  useEffect(() => {
+    checkUserAuth();
   }, []);
 
-  // ✅ Listen for login in other tabs
+  // ✅ Enhanced storage event listener
   useEffect(() => {
-    const handleStorageChange = () => {
-      const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
-      if (storedUser?.token && !user) {
-        try {
-          const decoded = jwtDecode(storedUser.token);
-          setUser({ id: decoded.user_id, token: storedUser.token });
-        } catch (err) {
-          console.error("Failed to decode token:", err);
-        }
+    const handleStorageChange = (e) => {
+      if (e.key === "user") {
+        checkUserAuth();
       }
     };
 
+    const handleUserLogin = () => {
+      checkUserAuth();
+    };
+
+    // Listen for storage changes (cross-tab)
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, [user]);
+    
+    // Listen for custom login event (same-tab)
+    window.addEventListener("userLoggedIn", handleUserLogin);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("userLoggedIn", handleUserLogin);
+    };
+  }, []);
 
   // ✅ Handle pending booking after login
   useEffect(() => {
@@ -60,6 +98,57 @@ export default function BookingSearch({ onLoginClick }) {
       executeBooking(user.token, user.id);
     }
   }, [user]);
+
+  // ✅ Poll for authentication changes when popup might be active
+  useEffect(() => {
+    let pollInterval;
+    
+    if (pendingBookingRef.current && !user) {
+      // Check every 500ms for auth changes when we're waiting for login
+      pollInterval = setInterval(() => {
+        checkUserAuth();
+      }, 500);
+    }
+
+    return () => {
+      if (pollInterval) clearInterval(pollInterval);
+    };
+  }, [pendingBookingRef.current, user]);
+
+  // Enhanced login handler that sets up proper detection
+  const handleLoginClick = () => {
+    pendingBookingRef.current = true;
+    
+    // Set up a one-time storage listener for immediate feedback
+    const handleImmediateStorageChange = (e) => {
+      if (e.key === "user") {
+        checkUserAuth();
+        window.removeEventListener("storage", handleImmediateStorageChange);
+      }
+    };
+    
+    window.addEventListener("storage", handleImmediateStorageChange);
+    
+    // Start polling as backup
+    const pollInterval = setInterval(() => {
+      if (checkUserAuth() && user) {
+        clearInterval(pollInterval);
+      }
+    }, 500);
+    
+    // Clear polling after 30 seconds max
+    setTimeout(() => {
+      clearInterval(pollInterval);
+      window.removeEventListener("storage", handleImmediateStorageChange);
+    }, 30000);
+
+    // Trigger the actual login popup
+    if (typeof onLoginClick === "function") {
+      onLoginClick();
+    } else {
+      alert("Please log in to make a booking");
+    }
+  };
 
   // Fetch nationalities and room types
   useEffect(() => {
@@ -88,10 +177,9 @@ export default function BookingSearch({ onLoginClick }) {
     fetchData();
   }, []);
 
-  const getTodayDate = () => new Date().toISOString().split("T")[0];
-
   const validateForm = () => {
     const newErrors = {};
+    const today = getTodayDate();
 
     if (!selectedNationality) newErrors.selectedNationality = "Nationality is required";
     if (!selectedRoomType) newErrors.selectedRoomType = "Room type is required";
@@ -99,14 +187,32 @@ export default function BookingSearch({ onLoginClick }) {
     if (!checkOut) newErrors.checkOut = "Check-out date is required";
     if (!guests) newErrors.guests = "Number of guests is required";
 
+    // Date validations
     if (checkIn && checkOut) {
       const checkInDate = new Date(checkIn);
       const checkOutDate = new Date(checkOut);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+      const todayDate = new Date(today);
 
-      if (checkInDate < today) newErrors.checkIn = "Check-in date cannot be in the past";
-      if (checkOutDate <= checkInDate) newErrors.checkOut = "Check-out date must be after check-in date";
+      // Check if check-in is today or in the future
+      if (checkInDate < todayDate) {
+        newErrors.checkIn = "Check-in date cannot be in the past";
+      }
+
+      // Check if check-out is today or in the future
+      if (checkOutDate < todayDate) {
+        newErrors.checkOut = "Check-out date cannot be in the past";
+      }
+
+      // Check if check-out is after check-in
+      if (checkOutDate <= checkInDate) {
+        newErrors.checkOut = "Check-out date must be after check-in date";
+      }
+
+      // Optional: Maximum stay duration (30 days)
+      const stayDuration = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+      if (stayDuration > 30) {
+        newErrors.checkOut = "Maximum stay duration is 30 days";
+      }
     }
 
     if (guests && (isNaN(guests) || guests < 1 || guests > 20)) {
@@ -152,9 +258,9 @@ export default function BookingSearch({ onLoginClick }) {
         alert(`✅ ${result.message || "Booking successful!"}`);
         setSelectedNationality("");
         setSelectedRoomType("");
-        setCheckIn("");
-        setCheckOut("");
-        setGuests("");
+        setCheckIn(getTodayDate());
+        setCheckOut(getTomorrowDate());
+        setGuests("1");
         setErrors({});
       } else {
         console.error("Booking error:", result);
@@ -168,15 +274,41 @@ export default function BookingSearch({ onLoginClick }) {
     }
   };
 
-  // ✅ Simplified booking handler
+  // Handle check-in date change
+  const handleCheckInChange = (e) => {
+    const newCheckIn = e.target.value;
+    
+    let newCheckOut = checkOut;
+    if (newCheckIn && checkOut && newCheckIn >= checkOut) {
+      const nextDay = new Date(newCheckIn);
+      nextDay.setDate(nextDay.getDate() + 1);
+      newCheckOut = nextDay.toISOString().split('T')[0];
+    }
+    
+    setCheckIn(newCheckIn);
+    setCheckOut(newCheckOut);
+    setErrors((prev) => ({ ...prev, checkIn: "", checkOut: "" }));
+  };
+
+  // Handle check-out date change
+  const handleCheckOutChange = (e) => {
+    const newCheckOut = e.target.value;
+    setCheckOut(newCheckOut);
+    setErrors((prev) => ({ ...prev, checkOut: "" }));
+  };
+
+  // ✅ Enhanced booking handler with better login detection
   const handleBooking = () => {
-    if (!user?.token || !user?.id) {
-      pendingBookingRef.current = true;
-      if (typeof onLoginClick === "function") onLoginClick();
-      else alert("Please log in to make a booking");
+    if (!user) {
+      handleLoginClick();
       return;
     }
     executeBooking(user.token, user.id);
+  };
+
+  // Force refresh authentication (manual trigger)
+  const refreshAuth = () => {
+    checkUserAuth();
   };
 
   const getInputClass = (field) =>
@@ -186,6 +318,23 @@ export default function BookingSearch({ onLoginClick }) {
 
   return (
     <div className="my-background py-4">
+      {/* Auth Status Indicator */}
+      <div className="max-w-7xl mx-auto mb-4 flex justify-between items-center">
+        <div className="text-sm text-white">
+          {user ? (
+            <span>✅ Logged in as user #{user.id}</span>
+          ) : (
+            <span>🔒 Please log in to book</span>
+          )}
+        </div>
+        <button
+          onClick={refreshAuth}
+          className="text-xs bg-white bg-opacity-20 text-white px-2 py-1 rounded"
+        >
+          Refresh Auth
+        </button>
+      </div>
+
       <div className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
         {/* Nationality */}
         <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
@@ -205,6 +354,9 @@ export default function BookingSearch({ onLoginClick }) {
               </option>
             ))}
           </select>
+          {errors.selectedNationality && (
+            <p className="text-red-500 text-xs mt-1">{errors.selectedNationality}</p>
+          )}
         </div>
 
         {/* Room Type */}
@@ -225,6 +377,9 @@ export default function BookingSearch({ onLoginClick }) {
               </option>
             ))}
           </select>
+          {errors.selectedRoomType && (
+            <p className="text-red-500 text-xs mt-1">{errors.selectedRoomType}</p>
+          )}
         </div>
 
         {/* Dates */}
@@ -235,12 +390,15 @@ export default function BookingSearch({ onLoginClick }) {
               type="date"
               value={checkIn}
               min={getTodayDate()}
-              onChange={(e) => {
-                setCheckIn(e.target.value);
-                setErrors((prev) => ({ ...prev, checkIn: "" }));
-              }}
+              onChange={handleCheckInChange}
               className={getInputClass("checkIn")}
             />
+            {errors.checkIn && (
+              <p className="text-red-500 text-xs mt-1">{errors.checkIn}</p>
+            )}
+            {!errors.checkIn && (
+              <p className="text-gray-500 text-xs mt-1">Today or later</p>
+            )}
           </div>
           <div className="w-full sm:w-1/2">
             <label className="block text-sm font-semibold text-gray-700 mb-1">Check-out</label>
@@ -248,12 +406,15 @@ export default function BookingSearch({ onLoginClick }) {
               type="date"
               value={checkOut}
               min={checkIn || getTodayDate()}
-              onChange={(e) => {
-                setCheckOut(e.target.value);
-                setErrors((prev) => ({ ...prev, checkOut: "" }));
-              }}
+              onChange={handleCheckOutChange}
               className={getInputClass("checkOut")}
             />
+            {errors.checkOut && (
+              <p className="text-red-500 text-xs mt-1">{errors.checkOut}</p>
+            )}
+            {!errors.checkOut && (
+              <p className="text-gray-500 text-xs mt-1">After check-in</p>
+            )}
           </div>
         </div>
 
@@ -273,6 +434,12 @@ export default function BookingSearch({ onLoginClick }) {
             className={getInputClass("guests")}
             placeholder="Number of guests"
           />
+          {errors.guests && (
+            <p className="text-red-500 text-xs mt-1">{errors.guests}</p>
+          )}
+          {!errors.guests && (
+            <p className="text-gray-500 text-xs mt-1">1-20 guests</p>
+          )}
         </div>
 
         {/* Button */}
@@ -281,13 +448,44 @@ export default function BookingSearch({ onLoginClick }) {
           onClick={handleBooking}
           disabled={loading}
           className={`min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition p-3 md:px-10 ${
-            loading ? "bg-gray-400" : "bg-cyan-500 hover:bg-cyan-600"
-          }`}
+            loading 
+              ? "bg-gray-400" 
+              : "bg-cyan-500 hover:bg-cyan-600"
+          } text-white rounded-2xl hover:rounded-full`}
         >
-          <FontAwesomeIcon icon={faSearch} className={`text-lg ${loading ? "text-gray-200" : "text-white"}`} />
-          {loading && <span className="ml-2 text-white">Booking...</span>}
+          <FontAwesomeIcon 
+            icon={faSearch} 
+            className={`text-lg ${loading ? "text-gray-200" : "text-white"}`} 
+          />
+          {loading && <span className="ml-2">Booking...</span>}
+          {!loading && <span className="ml-2">{user ? "Book Now" : "Login to Book"}</span>}
         </button>
       </div>
+
+      {/* Error summary */}
+      {Object.keys(errors).length > 0 && (
+        <div className="max-w-7xl mx-auto mt-4 p-4 bg-red-100 text-red-700 rounded-md">
+          <p className="font-semibold">Please fix the following errors:</p>
+          <ul className="list-disc list-inside mt-2">
+            {Object.values(errors).map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Login prompt */}
+      {!user && (
+        <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
+          <p>You need to be logged in to make a booking. </p>
+          <button 
+            onClick={handleLoginClick}
+            className="text-cyan-600 hover:underline font-semibold mt-2"
+          >
+            Click here to login
+          </button>
+        </div>
+      )}
 
       {/* Hero Section */}
       <div className="py-20 text-4xl md:text-7xl font-extrabold text-center text-white text-shadow-lg/30">
@@ -311,11 +509,13 @@ export default function BookingSearch({ onLoginClick }) {
               <button
                 onClick={handleBooking}
                 disabled={loading}
-                className={`border-2 border-white text-sm font-medium py-2 px-6 rounded-full transition ${
-                  loading ? "bg-gray-400 text-gray-200 border-gray-400" : "hover:bg-white hover:text-black text-white"
+                className={`border-2 text-sm font-medium py-2 px-6 rounded-full transition ${
+                  loading
+                    ? "bg-gray-400 text-gray-200 border-gray-400 cursor-not-allowed"
+                    : "border-white hover:bg-white hover:text-black text-white"
                 }`}
               >
-                {loading ? "BOOKING..." : "BOOK NOW"}
+                {loading ? "BOOKING..." : user ? "BOOK NOW" : "LOGIN TO BOOK"}
               </button>
             </div>
           </div>

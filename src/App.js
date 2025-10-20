@@ -189,7 +189,6 @@ const handleAdminLogout = () => {
             <Route path='/packagepage/:roomTitle' element={<PackagePage/>}/>
             <Route path='/firstlogin' element={<LoginPopup/>}/>
             <Route path='/admin/dashboard' element ={<AdminDashboard/>}/>
-            
             {/* ✅ MyBookings Route with user prop */}
             <Route 
               path="/mybookings" 

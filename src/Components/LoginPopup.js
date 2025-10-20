@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "./images/IMG-20251008-WA0008logo0.png";
 import { Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const LoginPopup = ({ onClose, onLoginSuccess }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -47,23 +48,50 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
       console.log("User login response:", data);
 
       if (response.ok && data.token) {
-        // ✅ Save token to localStorage for persistence
-        localStorage.setItem("userToken", data.token);
-        localStorage.setItem("userEmail", data.email);
+        // ✅ Decode the token to get user information
+        let decodedToken;
+        try {
+          decodedToken = jwtDecode(data.token);
+          console.log("Decoded token:", decodedToken);
+        } catch (decodeError) {
+          console.error("Error decoding token:", decodeError);
+        }
 
-        // ✅ Create user object from response data
-        // Try different possible response structures
-        const userData = data.user || {
-          email: data.email,
-          name: data.name,
-          first_name: data.first_name,
-          // Include any other user data that might be in the response
-          ...data
+        // ✅ Save user data to localStorage in the format expected by BookingSearch
+        const userData = {
+          token: data.token,
+          email: data.email || loginData.email,
+          name: data.name || data.first_name || registerData.name,
+          id: data.user_id || data.id || decodedToken?.user_id || decodedToken?.id,
+          ...data // Include any other data from response
         };
+
+        // Store in localStorage (format that BookingSearch expects)
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("authToken", data.token); // Backup for compatibility
 
         // ✅ Update app state and close popup
         onLoginSuccess(userData);
+
+        // ✅ CRITICAL: Dispatch custom event to notify all components
+        window.dispatchEvent(new CustomEvent('userLoggedIn', { 
+          detail: userData 
+        }));
+
+        // ✅ Also trigger storage event for cross-tab compatibility
+        window.dispatchEvent(new StorageEvent('storage', {
+          key: 'user',
+          newValue: JSON.stringify(userData)
+        }));
+
+        console.log("Login successful, user data stored:", userData);
         alert("✅ Login successful!");
+        
+        // Close popup after successful login
+        setTimeout(() => {
+          if (onClose) onClose();
+        }, 1000);
+        
       } else {
         alert(`❌ ${data.error || data.message || "Invalid email or password"}`);
       }
@@ -101,6 +129,12 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           phone: "",
           password: "",
         });
+        
+        // Auto-fill login form with registered email
+        setLoginData(prev => ({
+          ...prev,
+          email: registerData.email
+        }));
       } else {
         alert(`❌ ${data.errors?.join(", ") || "Registration failed"}`);
       }
@@ -164,7 +198,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                     placeholder="Email"
                     value={loginData.email}
                     onChange={handleLoginChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
                     required
                   />
                   <input
@@ -173,7 +207,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                     placeholder="Password"
                     value={loginData.password}
                     onChange={handleLoginChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
                     required
                   />
                   <button
@@ -187,6 +221,16 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                   >
                     {loading ? "Logging in..." : "LOGIN"}
                   </button>
+                  
+                  {/* Forgot password link */}
+                  <div className="text-center mt-4">
+                    <button 
+                      type="button" 
+                      className="text-cyan-600 hover:text-cyan-800 text-sm"
+                    >
+                      Forgot your password?
+                    </button>
+                  </div>
                 </form>
               </div>
             </motion.div>
@@ -211,28 +255,28 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Full Name"
                     value={registerData.name}
                     onChange={handleRegisterChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
                     required
                   />
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="Email Address"
                     value={registerData.email}
                     onChange={handleRegisterChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
                     required
                   />
                   <input
                     type="text"
                     name="phone"
-                    placeholder="Phone"
+                    placeholder="Phone Number"
                     value={registerData.phone}
                     onChange={handleRegisterChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
                     required
                   />
                   <input
@@ -241,7 +285,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                     placeholder="Password"
                     value={registerData.password}
                     onChange={handleRegisterChange}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-600"
                     required
                   />
                   <button
@@ -253,7 +297,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                         : "bg-cyan-600 hover:bg-cyan-700"
                     }`}
                   >
-                    {loading ? "Registering..." : "REGISTER"}
+                    {loading ? "Registering..." : "CREATE ACCOUNT"}
                   </button>
                 </form>
               </div>

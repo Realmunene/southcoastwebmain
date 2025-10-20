@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "./images/IMG-20251008-WA0008logo0.png";
-export default function PartnerRegistrationForm({onClose}) {
+
+export default function PartnerRegistrationForm({ onClose }) {
   const [form, setForm] = useState({
     supplierType: "",
     supplierName: "",
@@ -15,42 +16,90 @@ export default function PartnerRegistrationForm({onClose}) {
     agree: false,
   });
 
-  const [loginForm, setLoginForm] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [showLogin, setShowLogin] = useState(false);
 
-  // Handle Registration Form
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm({ ...form, [name]: type === "checkbox" ? checked : value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registration Data:", form);
+
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    // Map camelCase → snake_case for Rails backend
+    const payload = {
+      supplier_type: form.supplierType,
+      supplier_name: form.supplierName,
+      mobile: form.mobile,
+      email: form.email,
+      contact_person: form.contactPerson,
+      password: form.password,
+      description: form.description,
+      city: form.city,
+      address: form.address,
+    };
+
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/partners/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ partner: payload }),
+      });
+
+      const data = await res.json();
+      console.log("Registration response:", data);
+
+      if (data.status === "success") {
+        localStorage.setItem("token", data.token);
+        alert("Registration successful!");
+        onClose();
+      } else {
+        alert(data.errors ? data.errors.join(", ") : data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
-  // Handle Login Form
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
     setLoginForm({ ...loginForm, [name]: value });
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login Data:", loginForm);
-    // close modal after login
-    setShowLogin(false);
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/partners/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginForm),
+      });
+
+      const data = await res.json();
+      if (data.status === "success") {
+        localStorage.setItem("token", data.token);
+        alert("Login successful!");
+        setShowLogin(false);
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-cyan-400 to-cyan-800 p-4">
         <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8">
-          {/* Header */}
           <div className="text-center mb-6">
             <img src={logo} alt="Southcoast logo" className="mx-auto mb-2 w-40" />
             <p className="text-gray-700 font-semibold">Free Sign Up</p>
@@ -58,7 +107,6 @@ export default function PartnerRegistrationForm({onClose}) {
             <p className="text-red-500 text-sm">This section is for service providers only</p>
           </div>
 
-          {/* Registration Form */}
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">Supplier Type</label>
@@ -139,17 +187,6 @@ export default function PartnerRegistrationForm({onClose}) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">Description</label>
-              <input
-                name="description"
-                placeholder="Describe your business"
-                value={form.description}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-            </div>
-
-            <div>
               <label className="block text-sm font-medium mb-1">Confirm Password</label>
               <input
                 name="confirmPassword"
@@ -159,6 +196,17 @@ export default function PartnerRegistrationForm({onClose}) {
                 onChange={handleChange}
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
                 required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">Description</label>
+              <input
+                name="description"
+                placeholder="Describe your business"
+                value={form.description}
+                onChange={handleChange}
+                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
               />
             </div>
 
@@ -209,6 +257,7 @@ export default function PartnerRegistrationForm({onClose}) {
               >
                 Sign Up
               </button>
+
               <p className="mt-3 text-sm">
                 Already have an account?{" "}
                 <button
@@ -228,7 +277,6 @@ export default function PartnerRegistrationForm({onClose}) {
       {showLogin && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-            {/* Close Button */}
             <button
               onClick={() => setShowLogin(false)}
               className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-xl"

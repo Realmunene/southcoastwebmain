@@ -4,7 +4,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./Footer.css";
 
 export default function InstantMessage({ onClose }) {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +18,6 @@ export default function InstantMessage({ onClose }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           contact_message: {
-            name,
             email,
             message,
           },
@@ -36,7 +34,6 @@ export default function InstantMessage({ onClose }) {
 
       if (response.ok) {
         alert("✅ Message sent successfully!");
-        setName("");
         setEmail("");
         setMessage("");
         onClose();
@@ -64,14 +61,6 @@ export default function InstantMessage({ onClose }) {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
-        />
         <input
           type="email"
           placeholder="Your email"

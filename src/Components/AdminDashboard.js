@@ -2,42 +2,131 @@ import React, { useState, useEffect } from "react";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("bookings");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalBookings: 0,
     activeBookings: 0,
     totalMessages: 0,
+    totalPartners: 0,
   });
 
   useEffect(() => {
     fetchDashboardStats();
-    // Remove fetchBookings() from here - BookingsManagement handles its own data
   }, []);
 
   const fetchDashboardStats = async () => {
     try {
+      setLoading(true);
       const token = localStorage.getItem("adminToken");
       if (!token) {
         console.error("No admin token found");
+        setLoading(false);
         return;
       }
 
       const response = await fetch("http://localhost:3000/api/v1/admin/stats", {
+        method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
       });
-      
-      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const data = await response.json();
-      setStats(data);
+      console.log("Dashboard stats response:", data);
+      
+      // Check if data is nested in a property
+      let statsData = data;
+      
+      // If data has a 'data' property, use that
+      if (data.data) {
+        statsData = data.data;
+        console.log("Using nested data property:", statsData);
+      }
+      
+      // If data has a 'stats' property, use that  
+      if (data.stats) {
+        statsData = data.stats;
+        console.log("Using stats property:", statsData);
+      }
+
+      // Ensure we have the expected structure
+      const formattedStats = {
+        totalUsers: statsData.totalUsers || statsData.users || statsData.total_users || 0,
+        totalBookings: statsData.totalBookings || statsData.bookings || statsData.total_bookings || 0,
+        activeBookings: statsData.activeBookings || statsData.active_bookings || 0,
+        totalMessages: statsData.totalMessages || statsData.messages || statsData.total_messages || 0,
+        totalPartners: statsData.totalPartners || statsData.partners || statsData.total_partners || 0,
+      };
+
+      console.log("Formatted stats for state:", formattedStats);
+      setStats(formattedStats);
     } catch (error) {
       console.error("Failed to fetch stats:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Remove the fetchBookings function from here entirely
+  // Debug: log current stats state
+  useEffect(() => {
+    console.log("Current stats state:", stats);
+  }, [stats]);
+
+  // Loading state remains the same as previous fix...
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <div className="bg-white shadow-sm border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-4">
+              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  Welcome, {localStorage.getItem("adminName") || "Admin"}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Loading State for Stats */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {[...Array(5)].map((_, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse">
+                <div className="flex items-center">
+                  <div className="bg-gray-200 p-3 rounded-full mr-4">
+                    <div className="w-6 h-6 bg-gray-300 rounded"></div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Loading for content area */}
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="animate-pulse">
+              <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -50,6 +139,13 @@ export default function AdminDashboard() {
               <span className="text-sm text-gray-600">
                 Welcome, {localStorage.getItem("adminName") || "Admin"}
               </span>
+              {/* Add refresh button for debugging */}
+              <button 
+                onClick={fetchDashboardStats}
+                className="text-sm bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-1 rounded"
+              >
+                Refresh Stats
+              </button>
             </div>
           </div>
         </div>
@@ -82,9 +178,15 @@ export default function AdminDashboard() {
             icon="💬"
             color="yellow"
           />
+          <StatCard
+            title="Total Partners"
+            value={stats.totalPartners}
+            icon="🤝"
+            color="indigo"
+          />
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Rest of your component remains the same */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
@@ -93,6 +195,7 @@ export default function AdminDashboard() {
                 { id: "users", name: "Users Management" },
                 { id: "admins", name: "Admin Management" },
                 { id: "messages", name: "Messages" },
+                { id: "partners", name: "Partners Management" },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -115,6 +218,7 @@ export default function AdminDashboard() {
             {activeTab === "users" && <UsersManagement />}
             {activeTab === "admins" && <AdminManagement />}
             {activeTab === "messages" && <MessagesManagement />}
+            {activeTab === "partners" && <PartnersManagement />}
           </div>
         </div>
       </div>
@@ -122,13 +226,14 @@ export default function AdminDashboard() {
   );
 }
 
-// Stat Card Component (unchanged)
+// StatCard component remains the same
 const StatCard = ({ title, value, icon, color }) => {
   const colorClasses = {
     blue: "bg-blue-50 text-blue-600",
     green: "bg-green-50 text-green-600",
     purple: "bg-purple-50 text-purple-600",
     yellow: "bg-yellow-50 text-yellow-600",
+    indigo: "bg-indigo-50 text-indigo-600",
   };
 
   return (
@@ -141,6 +246,584 @@ const StatCard = ({ title, value, icon, color }) => {
           <p className="text-sm font-medium text-gray-600">{title}</p>
           <p className="text-2xl font-bold text-gray-900">{value}</p>
         </div>
+      </div>
+    </div>
+  );
+};
+
+
+// Updated Partners Management Component with supplier fields
+const PartnersManagement = () => {
+  const [partners, setPartners] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [editingPartner, setEditingPartner] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    fetchPartners();
+  }, []);
+
+  const fetchPartners = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("http://localhost:3000/api/v1/admin/partners", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setPartners(data);
+      } else {
+        console.error("Failed to fetch partners:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching partners:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = (partner) => {
+    setEditingPartner(partner);
+    setShowForm(true);
+  };
+
+  const handleDelete = async (partnerId) => {
+    if (!window.confirm("Are you sure you want to delete this partner?")) return;
+
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`http://localhost:3000/api/v1/admin/partners/${partnerId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Partner deleted successfully!");
+        fetchPartners();
+      } else {
+        alert("Failed to delete partner");
+      }
+    } catch (error) {
+      console.error("Error deleting partner:", error);
+      alert("Failed to delete partner");
+    }
+  };
+
+  const handleSubmit = async (formData) => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const url = editingPartner
+        ? `http://localhost:3000/api/v1/admin/partners/${editingPartner.id}`
+        : "http://localhost:3000/api/v1/admin/partners";
+
+      const method = editingPartner ? "PUT" : "POST";
+      
+      // Remove password fields if editing and passwords are empty
+      const submitData = { ...formData };
+      if (editingPartner) {
+        if (!submitData.password) {
+          delete submitData.password;
+          delete submitData.password_confirmation;
+        }
+      }
+
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ partner: submitData }),
+      });
+
+      if (response.ok) {
+        alert(`Partner ${editingPartner ? 'updated' : 'created'} successfully!`);
+        setShowForm(false);
+        setEditingPartner(null);
+        fetchPartners();
+      } else {
+        const errorData = await response.json();
+        alert(`Failed to save partner: ${errorData.errors?.join(', ') || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error("Error saving partner:", error);
+      alert("Failed to save partner");
+    }
+  };
+
+  const togglePartnerStatus = async (partnerId, currentStatus) => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`http://localhost:3000/api/v1/admin/partners/${partnerId}/toggle_status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Partner status updated successfully!");
+        fetchPartners();
+      } else {
+        alert("Failed to update partner status");
+      }
+    } catch (error) {
+      console.error("Error updating partner status:", error);
+      alert("Failed to update partner status");
+    }
+  };
+
+  if (loading) return <div className="text-center py-8">Loading partners...</div>;
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">Partners Management</h2>
+        <button
+          onClick={() => setShowForm(true)}
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+        >
+          Add New Partner
+        </button>
+      </div>
+
+      {showForm && (
+        <PartnerForm
+          partner={editingPartner}
+          onSubmit={handleSubmit}
+          onCancel={() => {
+            setShowForm(false);
+            setEditingPartner(null);
+          }}
+        />
+      )}
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                ID
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Supplier Name
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Type
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Contact Person
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Mobile
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                City
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Created At
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {partners.map((partner) => (
+              <tr key={partner.id}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  #{partner.id}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
+                  {partner.supplier_name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                    {partner.supplier_type}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {partner.contact_person}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {partner.email}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {partner.mobile}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {partner.city}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                    partner.status === 'active' ? 'bg-green-100 text-green-800' : 
+                    partner.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
+                  }`}>
+                    {partner.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {new Date(partner.created_at).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                  <button
+                    onClick={() => handleEdit(partner)}
+                    className="text-cyan-600 hover:text-cyan-900"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => togglePartnerStatus(partner.id, partner.status)}
+                    className={`${
+                      partner.status === 'active' ? 'text-orange-600 hover:text-orange-900' : 'text-green-600 hover:text-green-900'
+                    }`}
+                  >
+                    {partner.status === 'active' ? 'Deactivate' : 'Activate'}
+                  </button>
+                  <button
+                    onClick={() => handleDelete(partner.id)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// Updated Partner Form Component with supplier registration fields
+const PartnerForm = ({ partner, onSubmit, onCancel }) => {
+  const [formData, setFormData] = useState({
+    supplier_type: partner?.supplier_type || "",
+    supplier_name: partner?.supplier_name || "",
+    mobile: partner?.mobile || "",
+    email: partner?.email || "",
+    contact_person: partner?.contact_person || "",
+    password: "",
+    password_confirmation: "",
+    description: partner?.description || "",
+    city: partner?.city || "",
+    address: partner?.address || "",
+    status: partner?.status || "pending",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.supplier_type) newErrors.supplier_type = 'Supplier type is required';
+    if (!formData.supplier_name) newErrors.supplier_name = 'Supplier name is required';
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.contact_person) newErrors.contact_person = 'Contact person is required';
+    if (!formData.mobile) newErrors.mobile = 'Mobile number is required';
+    if (!formData.city) newErrors.city = 'City is required';
+    if (!formData.address) newErrors.address = 'Address is required';
+
+    // Password validation for new partners
+    if (!partner) {
+      if (!formData.password) newErrors.password = 'Password is required';
+      if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+      if (formData.password !== formData.password_confirmation) {
+        newErrors.password_confirmation = 'Passwords do not match';
+      }
+    } else {
+      // For editing, validate password only if provided
+      if (formData.password && formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters';
+      }
+      if (formData.password && formData.password !== formData.password_confirmation) {
+        newErrors.password_confirmation = 'Passwords do not match';
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      onSubmit(formData);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+        <h3 className="text-lg font-semibold mb-4">
+          {partner ? 'Edit Partner' : 'Add New Partner'}
+        </h3>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Supplier Type */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Supplier Type *</label>
+            <select
+              name="supplier_type"
+              value={formData.supplier_type}
+              onChange={handleChange}
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.supplier_type ? 'border-red-300' : 'border-gray-300'
+              }`}
+              required
+            >
+              <option value="">Select supplier type</option>
+              <option value="hotel">Hotel</option>
+              <option value="restaurant">Restaurant</option>
+              <option value="tour_operator">Tour Operator</option>
+              <option value="transport">Transport Service</option>
+              <option value="activity">Activity Provider</option>
+              <option value="travel_agency">Travel Agency</option>
+              <option value="other">Other</option>
+            </select>
+            {errors.supplier_type && (
+              <p className="mt-1 text-sm text-red-600">{errors.supplier_type}</p>
+            )}
+          </div>
+
+          {/* Supplier Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Supplier Name *</label>
+            <input
+              type="text"
+              name="supplier_name"
+              value={formData.supplier_name}
+              onChange={handleChange}
+              placeholder="Enter your business name"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.supplier_name ? 'border-red-300' : 'border-gray-300'
+              }`}
+              required
+            />
+            {errors.supplier_name && (
+              <p className="mt-1 text-sm text-red-600">{errors.supplier_name}</p>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Mobile */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Mobile *</label>
+              <input
+                type="tel"
+                name="mobile"
+                value={formData.mobile}
+                onChange={handleChange}
+                placeholder="+254712345678"
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.mobile ? 'border-red-300' : 'border-gray-300'
+                }`}
+                required
+              />
+              {errors.mobile && (
+                <p className="mt-1 text-sm text-red-600">{errors.mobile}</p>
+              )}
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email Address *</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.email ? 'border-red-300' : 'border-gray-300'
+                }`}
+                required
+              />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Contact Person */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Contact Person *</label>
+            <input
+              type="text"
+              name="contact_person"
+              value={formData.contact_person}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.contact_person ? 'border-red-300' : 'border-gray-300'
+              }`}
+              required
+            />
+            {errors.contact_person && (
+              <p className="mt-1 text-sm text-red-600">{errors.contact_person}</p>
+            )}
+          </div>
+
+          {/* Password Fields - Only show for new partners or when editing with password change */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Password {!partner && '*'}
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder={partner ? "Leave blank to keep current password" : "Enter your password"}
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.password ? 'border-red-300' : 'border-gray-300'
+                }`}
+                required={!partner}
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Confirm Password {!partner && '*'}
+              </label>
+              <input
+                type="password"
+                name="password_confirmation"
+                value={formData.password_confirmation}
+                onChange={handleChange}
+                placeholder="Repeat your password"
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.password_confirmation ? 'border-red-300' : 'border-gray-300'
+                }`}
+                required={!partner}
+              />
+              {errors.password_confirmation && (
+                <p className="mt-1 text-sm text-red-600">{errors.password_confirmation}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              placeholder="Describe your business"
+              rows="3"
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* City */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">City *</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                placeholder="Enter your city"
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.city ? 'border-red-300' : 'border-gray-300'
+                }`}
+                required
+              />
+              {errors.city && (
+                <p className="mt-1 text-sm text-red-600">{errors.city}</p>
+              )}
+            </div>
+
+            {/* Status - Only for admin */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Status</label>
+              <select
+                name="status"
+                value={formData.status}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              >
+                <option value="pending">Pending</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Address */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Address *</label>
+            <textarea
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              placeholder="Enter your address"
+              rows="2"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.address ? 'border-red-300' : 'border-gray-300'
+              }`}
+              required
+            />
+            {errors.address && (
+              <p className="mt-1 text-sm text-red-600">{errors.address}</p>
+            )}
+          </div>
+
+          <div className="flex justify-end space-x-3 pt-4">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 rounded-md transition"
+            >
+              {partner ? 'Update' : 'Create'} Partner
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
@@ -627,6 +1310,7 @@ const AdminManagement = () => {
 
       const response = await fetch("http://localhost:3000/api/v1/admin/admins", {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
