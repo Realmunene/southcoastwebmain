@@ -1,32 +1,34 @@
 {
   "files": {
-    "main.css": "/southcoastwebmain/static/css/main.1127bb72.css",
-    "main.js": "/southcoastwebmain/static/js/main.5274038d.js",
+    "main.css": "/southcoastwebmain/static/css/main.2519bf5e.css",
+    "main.js": "/southcoastwebmain/static/js/main.b750b114.js",
     "static/js/453.1f735320.chunk.js": "/southcoastwebmain/static/js/453.1f735320.chunk.js",
     "static/media/background.jpg": "/southcoastwebmain/static/media/background.9ab2861bd6e17cdb6731.jpg",
     "static/media/ensuite.jpg": "/southcoastwebmain/static/media/ensuite.ed996c8648221acc2fdc.jpg",
     "static/media/image6.jpg": "/southcoastwebmain/static/media/image6.4e58cd905bc8f06ad2de.jpg",
     "static/media/image8.jpg": "/southcoastwebmain/static/media/image8.24533055fcc0dea34faf.jpg",
-    "static/media/image4.jpg": "/southcoastwebmain/static/media/image4.ee9797470dd54a88e20a.jpg",
     "static/media/2BA.jpg": "/southcoastwebmain/static/media/2BA.49ce5ee78ed2b30fd544.jpg",
     "static/media/image2.jpg": "/southcoastwebmain/static/media/image2.4a3d51721398622de790.jpg",
     "static/media/IMG-20251011-WA0000.jpg": "/southcoastwebmain/static/media/IMG-20251011-WA0000.4dfaa25397b97cef670b.jpg",
+    "static/media/LargerApartment.jpg": "/southcoastwebmain/static/media/LargerApartment.838e6eb6c1d2eabdd3af.jpg",
+    "static/media/image4.jpg": "/southcoastwebmain/static/media/image4.838e6eb6c1d2eabdd3af.jpg",
+    "static/media/2 connected room.jpg": "/southcoastwebmain/static/media/2 connected room.cb0316b6f6777646e776.jpg",
     "static/media/Apartment.jpg": "/southcoastwebmain/static/media/Apartment.69740d79b9a34e1bc857.jpg",
     "static/media/image3.jpg": "/southcoastwebmain/static/media/image3.ad8cefc9018d4145d8b2.jpg",
-    "static/media/image1.jpg": "/southcoastwebmain/static/media/image1.af45ace9f6210342c3d2.jpg",
+    "static/media/image1.jpg": "/southcoastwebmain/static/media/image1.71f565916a47f13f3747.jpg",
     "static/media/image5.jpg": "/southcoastwebmain/static/media/image5.0f5f08b3b1bc765339e1.jpg",
+    "static/media/Executive 2.jpg": "/southcoastwebmain/static/media/Executive 2.b5e3a5fe3a2694d43319.jpg",
     "static/media/image7.jpg": "/southcoastwebmain/static/media/image7.af45ace9f6210342c3d2.jpg",
     "static/media/image9.jpg": "/southcoastwebmain/static/media/image9.201715c5aef52ed28cba.jpg",
     "static/media/2 coneected.jpg": "/southcoastwebmain/static/media/2 coneected.e4d1cf6dd6057d966dd8.jpg",
-    "static/media/Larger A.jpg": "/southcoastwebmain/static/media/Larger A.86b049d882c98e03012f.jpg",
     "static/media/IMG-20251008-WA0008logo0.png": "/southcoastwebmain/static/media/IMG-20251008-WA0008logo0.2a749e18f6dd5fef7b5d.png",
     "index.html": "/southcoastwebmain/index.html",
-    "main.1127bb72.css.map": "/southcoastwebmain/static/css/main.1127bb72.css.map",
-    "main.5274038d.js.map": "/southcoastwebmain/static/js/main.5274038d.js.map",
+    "main.2519bf5e.css.map": "/southcoastwebmain/static/css/main.2519bf5e.css.map",
+    "main.b750b114.js.map": "/southcoastwebmain/static/js/main.b750b114.js.map",
     "453.1f735320.chunk.js.map": "/southcoastwebmain/static/js/453.1f735320.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1127bb72.css",
-    "static/js/main.5274038d.js"
+    "static/css/main.2519bf5e.css",
+    "static/js/main.b750b114.js"
   ]
 }
