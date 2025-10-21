@@ -148,7 +148,7 @@ export default function Navbar({
         {/* RIGHT SECTION - DESKTOP */}
         <div className="hidden md:flex items-center space-x-4">
           <Link
-            to='/admin'
+            to='/package'
             className="flex items-center space-x-1 text-gray-700 hover:text-coral-500 transition"
           >
             <FontAwesomeIcon icon={faHouse} className="text-lg" />

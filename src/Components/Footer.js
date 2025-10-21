@@ -75,7 +75,7 @@ const Footer = () => {
             </li>
             <li>
               <Link to="/gallery" className="hover:text-cyan-500">
-                Holidays
+                Gallery
               </Link>
             </li>
           </ul>

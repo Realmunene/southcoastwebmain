@@ -27,7 +27,7 @@ const [showPopup, setShowPopup] =useState(false);
               <h3 className="text-xl font-semibold">Talk to Sales</h3>
             </div>
             <p className="text-gray-600 mb-6">
-              Interested in HubSpot's software? Just pick up the phone to chat with a member of our sales team.
+              Interested our comprehensive accommodation options? Just pick up the phone to chat with a member of our sales team.
             </p>
             <a
               href="tel:+254729491343"
