@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "./images/IMG-20251008-WA0008logo0.png";
-import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const LoginPopup = ({ onClose, onLoginSuccess }) => {

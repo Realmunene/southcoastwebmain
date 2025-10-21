@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faInstagram, faXTwitter, faTiktok } from "@fortawesome/free-brands-svg-icons";
-import { faHouse, faUmbrellaBeach, faGlobe, faHandshake, faUser, faPhone, faEnvelope, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {  faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 const Topcon = () => {
   return (
     <div className="w-full bg-cyan-500 py-2 px-4 flex flex-wrap items-center justify-between shadow-md z-50">
