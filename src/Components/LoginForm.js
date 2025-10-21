@@ -17,13 +17,24 @@ const LoginForm = ({ onAdminLogin }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/v1/admin/login", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      // First, get the response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        // Try to parse the response as JSON
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText);
+        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+      }
 
       if (response.ok) {
         // Extract admin object and token
@@ -64,7 +75,15 @@ const LoginForm = ({ onAdminLogin }) => {
       }
     } catch (err) {
       console.error("Login failed:", err);
-      alert("Server connection failed. Please check your backend.");
+      
+      // More specific error messages
+      if (err.message.includes("Failed to fetch")) {
+        alert("Cannot connect to server. Please check your internet connection and ensure the backend is running.");
+      } else if (err.message.includes("Server returned an invalid response")) {
+        alert("Server error: The backend is not responding properly. Please try again later.");
+      } else {
+        alert("Login failed: " + err.message);
+      }
     } finally {
       setLoading(false);
     }

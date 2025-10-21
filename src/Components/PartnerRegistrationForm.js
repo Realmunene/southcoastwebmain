@@ -18,6 +18,8 @@ export default function PartnerRegistrationForm({ onClose }) {
 
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [showLogin, setShowLogin] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -32,39 +34,68 @@ export default function PartnerRegistrationForm({ onClose }) {
       return;
     }
 
-    // Map camelCase → snake_case for Rails backend
-    const payload = {
-      supplier_type: form.supplierType,
-      supplier_name: form.supplierName,
-      mobile: form.mobile,
-      email: form.email,
-      contact_person: form.contactPerson,
-      password: form.password,
-      description: form.description,
-      city: form.city,
-      address: form.address,
-    };
+    if (!form.agree) {
+      alert("Please accept the Terms and Conditions");
+      return;
+    }
+
+    setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/partners/register", {
+      // Map camelCase → snake_case for Rails backend
+      const payload = {
+        supplier_type: form.supplierType,
+        supplier_name: form.supplierName,
+        mobile: form.mobile,
+        email: form.email,
+        contact_person: form.contactPerson,
+        password: form.password,
+        description: form.description,
+        city: form.city,
+        address: form.address,
+      };
+
+      const res = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/partners/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ partner: payload }),
       });
 
-      const data = await res.json();
+      // First get response as text to check if it's valid JSON
+      const responseText = await res.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+      }
+
       console.log("Registration response:", data);
 
-      if (data.status === "success") {
-        localStorage.setItem("token", data.token);
+      if (data.status === "success" || res.ok) {
+        if (data.token) {
+          localStorage.setItem("partnerToken", data.token);
+        }
         alert("Registration successful!");
         onClose();
       } else {
-        alert(data.errors ? data.errors.join(", ") : data.message);
+        alert(data.errors ? data.errors.join(", ") : data.message || "Registration failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong. Please try again.");
+      
+      if (err.message.includes("Failed to fetch")) {
+        alert("Cannot connect to server. Please check your internet connection.");
+      } else if (err.message.includes("Server returned an invalid response")) {
+        alert("Server error: The backend is not responding properly. Please try again later.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,24 +106,49 @@ export default function PartnerRegistrationForm({ onClose }) {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setLoginLoading(true);
+
     try {
-      const res = await fetch("http://localhost:3000/api/v1/partners/login", {
+      const res = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/partners/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginForm),
       });
 
-      const data = await res.json();
-      if (data.status === "success") {
-        localStorage.setItem("token", data.token);
+      // First get response as text to check if it's valid JSON
+      const responseText = await res.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+      }
+
+      if (data.status === "success" || res.ok) {
+        if (data.token) {
+          localStorage.setItem("partnerToken", data.token);
+        }
         alert("Login successful!");
         setShowLogin(false);
+        onClose();
       } else {
-        alert(data.message);
+        alert(data.message || "Login failed");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong. Please try again.");
+      
+      if (err.message.includes("Failed to fetch")) {
+        alert("Cannot connect to server. Please check your internet connection.");
+      } else if (err.message.includes("Server returned an invalid response")) {
+        alert("Server error: The backend is not responding properly. Please try again later.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } finally {
+      setLoginLoading(false);
     }
   };
 
@@ -183,6 +239,7 @@ export default function PartnerRegistrationForm({ onClose }) {
                 onChange={handleChange}
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
                 required
+                minLength="6"
               />
             </div>
 
@@ -196,6 +253,7 @@ export default function PartnerRegistrationForm({ onClose }) {
                 onChange={handleChange}
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
                 required
+                minLength="6"
               />
             </div>
 
@@ -253,9 +311,14 @@ export default function PartnerRegistrationForm({ onClose }) {
             <div className="md:col-span-2 text-center mt-4">
               <button
                 type="submit"
-                className="w-32 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 rounded-lg"
+                disabled={loading}
+                className={`w-32 font-semibold py-2 rounded-lg ${
+                  loading 
+                    ? "bg-gray-400 cursor-not-allowed text-white" 
+                    : "bg-cyan-600 hover:bg-cyan-700 text-white"
+                }`}
               >
-                Sign Up
+                {loading ? "Signing Up..." : "Sign Up"}
               </button>
 
               <p className="mt-3 text-sm">
@@ -315,9 +378,14 @@ export default function PartnerRegistrationForm({ onClose }) {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg"
+                disabled={loginLoading}
+                className={`w-full font-semibold py-2 rounded-lg ${
+                  loginLoading 
+                    ? "bg-gray-400 cursor-not-allowed text-white" 
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
               >
-                Log In
+                {loginLoading ? "Logging In..." : "Log In"}
               </button>
             </form>
 

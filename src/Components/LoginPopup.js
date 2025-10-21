@@ -25,25 +25,34 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
+  const performLogin = async (email, password) => {
     if (!onLoginSuccess) {
       console.error("onLoginSuccess function is not provided to LoginPopup!");
-      return;
+      return false;
     }
 
-    setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/v1/user/login", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: loginData.email,
-          password: loginData.password,
+          email: email,
+          password: password,
         }),
       });
 
-      const data = await response.json();
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+      }
+
       console.log("User login response:", data);
 
       if (response.ok && data.token) {
@@ -59,7 +68,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         // ✅ Save user data to localStorage in the format expected by BookingSearch
         const userData = {
           token: data.token,
-          email: data.email || loginData.email,
+          email: data.email || email,
           name: data.name || data.first_name || registerData.name,
           id: data.user_id || data.id || decodedToken?.user_id || decodedToken?.id,
           ...data // Include any other data from response
@@ -91,12 +100,31 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           if (onClose) onClose();
         }, 1000);
         
+        return true;
       } else {
-        alert(`❌ ${data.error || data.message || "Invalid email or password"}`);
+        throw new Error(data.error || data.message || "Invalid email or password");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("❌ Unable to login. Please try again later.");
+      throw error;
+    }
+  };
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      await performLogin(loginData.email, loginData.password);
+    } catch (error) {
+      // More specific error messages
+      if (error.message.includes("Failed to fetch")) {
+        alert("❌ Cannot connect to server. Please check your internet connection.");
+      } else if (error.message.includes("Server returned an invalid response")) {
+        alert("❌ Server error: The backend is not responding properly. Please try again later.");
+      } else {
+        alert("❌ Login failed: " + error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -110,17 +138,41 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/api/v1/users", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: registerData }),
       });
 
-      const data = await response.json();
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response during registration.");
+      }
 
       if (response.ok) {
-        alert("✅ Account created successfully! Please log in.");
-        setIsLogin(true);
+        alert("✅ Account created successfully! Logging you in...");
+        
+        // ✅ AUTO-LOGIN: Automatically log the user in after successful registration
+        try {
+          await performLogin(registerData.email, registerData.password);
+        } catch (loginError) {
+          // If auto-login fails, just show success message and switch to login
+          alert("✅ Account created! Please log in with your credentials.");
+          setIsLogin(true);
+          // Auto-fill login form with registered email
+          setLoginData(prev => ({
+            ...prev,
+            email: registerData.email
+          }));
+        }
+        
         // Clear register form
         setRegisterData({
           name: "",
@@ -128,18 +180,19 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           phone: "",
           password: "",
         });
-        
-        // Auto-fill login form with registered email
-        setLoginData(prev => ({
-          ...prev,
-          email: registerData.email
-        }));
       } else {
-        alert(`❌ ${data.errors?.join(", ") || "Registration failed"}`);
+        alert(`❌ ${data.errors?.join(", ") || data.error || "Registration failed"}`);
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("❌ Something went wrong during registration.");
+      
+      if (error.message.includes("Failed to fetch")) {
+        alert("❌ Cannot connect to server. Please check your internet connection.");
+      } else if (error.message.includes("Server returned an invalid response")) {
+        alert("❌ Server error: The backend is not responding properly. Please try again later.");
+      } else {
+        alert("❌ Registration failed: " + error.message);
+      }
     } finally {
       setLoading(false);
     }

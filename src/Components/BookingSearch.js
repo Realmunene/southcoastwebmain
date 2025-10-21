@@ -155,8 +155,8 @@ export default function BookingSearch({ onLoginClick }) {
     const fetchData = async () => {
       try {
         const [natRes, roomRes] = await Promise.all([
-          fetch("http://localhost:3000/api/v1/nationalities"),
-          fetch("http://localhost:3000/api/v1/room_types"),
+          fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/nationalities"),
+          fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/room_types"),
         ]);
 
         if (!natRes.ok) throw new Error("Failed to fetch nationalities");
@@ -243,7 +243,7 @@ export default function BookingSearch({ onLoginClick }) {
         },
       };
 
-      const response = await fetch("http://localhost:3000/api/v1/bookings", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -11,6 +11,9 @@ export default function AdminDashboard() {
     totalPartners: 0,
   });
 
+  // Get current admin role from localStorage
+  const currentAdminRole = localStorage.getItem("adminRole") || "admin";
+
   useEffect(() => {
     fetchDashboardStats();
   }, []);
@@ -25,7 +28,7 @@ export default function AdminDashboard() {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/admin/stats", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/stats", {
         method: "GET",
         headers: {
           "Accept": "application/json",
@@ -34,41 +37,61 @@ export default function AdminDashboard() {
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
       }
 
-      const data = await response.json();
       console.log("Dashboard stats response:", data);
       
-      // Check if data is nested in a property
-      let statsData = data;
-      
-      // If data has a 'data' property, use that
-      if (data.data) {
-        statsData = data.data;
-        console.log("Using nested data property:", statsData);
-      }
-      
-      // If data has a 'stats' property, use that  
-      if (data.stats) {
-        statsData = data.stats;
-        console.log("Using stats property:", statsData);
-      }
+      if (response.ok) {
+        // Check if data is nested in a property
+        let statsData = data;
+        
+        // If data has a 'data' property, use that
+        if (data.data) {
+          statsData = data.data;
+          console.log("Using nested data property:", statsData);
+        }
+        
+        // If data has a 'stats' property, use that  
+        if (data.stats) {
+          statsData = data.stats;
+          console.log("Using stats property:", statsData);
+        }
 
-      // Ensure we have the expected structure
-      const formattedStats = {
-        totalUsers: statsData.totalUsers || statsData.users || statsData.total_users || 0,
-        totalBookings: statsData.totalBookings || statsData.bookings || statsData.total_bookings || 0,
-        activeBookings: statsData.activeBookings || statsData.active_bookings || 0,
-        totalMessages: statsData.totalMessages || statsData.messages || statsData.total_messages || 0,
-        totalPartners: statsData.totalPartners || statsData.partners || statsData.total_partners || 0,
-      };
+        // Ensure we have the expected structure
+        const formattedStats = {
+          totalUsers: statsData.totalUsers || statsData.users || statsData.total_users || 0,
+          totalBookings: statsData.totalBookings || statsData.bookings || statsData.total_bookings || 0,
+          activeBookings: statsData.activeBookings || statsData.active_bookings || 0,
+          totalMessages: statsData.totalMessages || statsData.messages || statsData.total_messages || 0,
+          totalPartners: statsData.totalPartners || statsData.partners || statsData.total_partners || 0,
+        };
 
-      console.log("Formatted stats for state:", formattedStats);
-      setStats(formattedStats);
+        console.log("Formatted stats for state:", formattedStats);
+        setStats(formattedStats);
+      } else {
+        throw new Error(data.error || data.message || `HTTP error! Status: ${response.status}`);
+      }
     } catch (error) {
       console.error("Failed to fetch stats:", error);
+      
+      // Set default stats to prevent UI breaking
+      setStats({
+        totalUsers: 0,
+        totalBookings: 0,
+        activeBookings: 0,
+        totalMessages: 0,
+        totalPartners: 0,
+      });
     } finally {
       setLoading(false);
     }
@@ -90,7 +113,7 @@ export default function AdminDashboard() {
               <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
               <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-600">
-                  Welcome, {localStorage.getItem("adminName") || "Admin"}
+                  Welcome, {localStorage.getItem("adminName") || "Admin"} ({currentAdminRole})
                 </span>
               </div>
             </div>
@@ -137,7 +160,7 @@ export default function AdminDashboard() {
             <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Welcome, {localStorage.getItem("adminName") || "Admin"}
+                Welcome, {localStorage.getItem("adminName") || "Admin"} ({currentAdminRole})
               </span>
               {/* Add refresh button for debugging */}
               <button 
@@ -216,7 +239,7 @@ export default function AdminDashboard() {
           <div className="p-6">
             {activeTab === "bookings" && <BookingsManagement />}
             {activeTab === "users" && <UsersManagement />}
-            {activeTab === "admins" && <AdminManagement />}
+            {activeTab === "admins" && <AdminManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "messages" && <MessagesManagement />}
             {activeTab === "partners" && <PartnersManagement />}
           </div>
@@ -251,8 +274,7 @@ const StatCard = ({ title, value, icon, color }) => {
   );
 };
 
-
-// Updated Partners Management Component with supplier fields
+// Updated Partners Management Component with proper error handling
 const PartnersManagement = () => {
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -272,14 +294,26 @@ const PartnersManagement = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/admin/partners", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/partners", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        setLoading(false);
+        return;
+      }
       
       if (response.ok) {
-        const data = await response.json();
         setPartners(data);
       } else {
         console.error("Failed to fetch partners:", response.status);
@@ -301,10 +335,10 @@ const PartnersManagement = () => {
 
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:3000/api/v1/admin/partners/${partnerId}`, {
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/partners/${partnerId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
 
@@ -324,8 +358,8 @@ const PartnersManagement = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const url = editingPartner
-        ? `http://localhost:3000/api/v1/admin/partners/${editingPartner.id}`
-        : "http://localhost:3000/api/v1/admin/partners";
+        ? `https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/partners/${editingPartner.id}`
+        : "https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/partners";
 
       const method = editingPartner ? "PUT" : "POST";
       
@@ -342,10 +376,22 @@ const PartnersManagement = () => {
         method: method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({ partner: submitData }),
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let result;
+
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response.");
+      }
 
       if (response.ok) {
         alert(`Partner ${editingPartner ? 'updated' : 'created'} successfully!`);
@@ -353,23 +399,22 @@ const PartnersManagement = () => {
         setEditingPartner(null);
         fetchPartners();
       } else {
-        const errorData = await response.json();
-        alert(`Failed to save partner: ${errorData.errors?.join(', ') || 'Unknown error'}`);
+        throw new Error(result.errors?.join(', ') || result.error || 'Failed to save partner');
       }
     } catch (error) {
       console.error("Error saving partner:", error);
-      alert("Failed to save partner");
+      alert(`Failed to save partner: ${error.message}`);
     }
   };
 
   const togglePartnerStatus = async (partnerId, currentStatus) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:3000/api/v1/admin/partners/${partnerId}/toggle_status`, {
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/partners/${partnerId}/toggle_status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
 
@@ -447,7 +492,7 @@ const PartnersManagement = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {partners.map((partner) => (
+            {partners.length > 0 ? partners.map((partner) => (
               <tr key={partner.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   #{partner.id}
@@ -506,7 +551,13 @@ const PartnersManagement = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )) : (
+              <tr>
+                <td colSpan="10" className="px-6 py-4 text-center text-sm text-gray-500">
+                  No partners found or unable to load partners.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -514,7 +565,7 @@ const PartnersManagement = () => {
   );
 };
 
-// Updated Partner Form Component with supplier registration fields
+// Partner Form Component (unchanged from your previous version)
 const PartnerForm = ({ partner, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     supplier_type: partner?.supplier_type || "",
@@ -829,15 +880,19 @@ const PartnerForm = ({ partner, onSubmit, onCancel }) => {
   );
 };
 
-// Updated BookingsManagement Component
+// Updated BookingsManagement Component with dynamic nationalities and room types
 const BookingsManagement = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingBooking, setEditingBooking] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [nationalities, setNationalities] = useState([]);
+  const [roomTypes, setRoomTypes] = useState([]);
 
   useEffect(() => {
     fetchBookings();
+    fetchNationalities();
+    fetchRoomTypes();
   }, []);
 
   const fetchBookings = async () => {
@@ -849,14 +904,26 @@ const BookingsManagement = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/admin/bookings", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        setLoading(false);
+        return;
+      }
       
       if (response.ok) {
-        const data = await response.json();
         setBookings(data);
       } else {
         console.error("Failed to fetch bookings:", response.status);
@@ -865,6 +932,123 @@ const BookingsManagement = () => {
       console.error("Error fetching bookings:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchNationalities = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/nationalities", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        // Fallback nationalities
+        setNationalities([
+          { id: 1, name: "Kenyan" },
+          { id: 2, name: "American" },
+          { id: 3, name: "British" },
+          { id: 4, name: "Canadian" },
+          { id: 5, name: "German" },
+          { id: 6, name: "French" },
+          { id: 7, name: "Chinese" },
+          { id: 8, name: "Indian" },
+        ]);
+        return;
+      }
+      
+      if (response.ok) {
+        setNationalities(data);
+      } else {
+        // Fallback nationalities
+        setNationalities([
+          { id: 1, name: "Kenyan" },
+          { id: 2, name: "American" },
+          { id: 3, name: "British" },
+          { id: 4, name: "Canadian" },
+          { id: 5, name: "German" },
+          { id: 6, name: "French" },
+          { id: 7, name: "Chinese" },
+          { id: 8, name: "Indian" },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error fetching nationalities:", error);
+      // Fallback nationalities
+      setNationalities([
+        { id: 1, name: "Kenyan" },
+        { id: 2, name: "American" },
+        { id: 3, name: "British" },
+        { id: 4, name: "Canadian" },
+        { id: 5, name: "German" },
+        { id: 6, name: "French" },
+        { id: 7, name: "Chinese" },
+        { id: 8, name: "Indian" },
+      ]);
+    }
+  };
+
+  const fetchRoomTypes = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/room_types", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        // Fallback room types
+        setRoomTypes([
+          { id: 1, name: "Single Room" },
+          { id: 2, name: "Double Room" },
+          { id: 3, name: "Deluxe Room" },
+          { id: 4, name: "Suite" },
+          { id: 5, name: "Executive Suite" },
+        ]);
+        return;
+      }
+      
+      if (response.ok) {
+        setRoomTypes(data);
+      } else {
+        // Fallback room types
+        setRoomTypes([
+          { id: 1, name: "Single Room" },
+          { id: 2, name: "Double Room" },
+          { id: 3, name: "Deluxe Room" },
+          { id: 4, name: "Suite" },
+          { id: 5, name: "Executive Suite" },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error fetching room types:", error);
+      // Fallback room types
+      setRoomTypes([
+        { id: 1, name: "Single Room" },
+        { id: 2, name: "Double Room" },
+        { id: 3, name: "Deluxe Room" },
+        { id: 4, name: "Suite" },
+        { id: 5, name: "Executive Suite" },
+      ]);
     }
   };
 
@@ -878,10 +1062,10 @@ const BookingsManagement = () => {
 
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`http://localhost:3000/api/v1/admin/bookings/${bookingId}`, {
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings/${bookingId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
 
@@ -901,17 +1085,29 @@ const BookingsManagement = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const url = editingBooking
-        ? `http://localhost:3000/api/v1/admin/bookings/${editingBooking.id}`
-        : "http://localhost:3000/api/v1/admin/bookings";
+        ? `https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings/${editingBooking.id}`
+        : "https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings";
 
       const response = await fetch(url, {
         method: editingBooking ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({ booking: formData }),
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let result;
+
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response.");
+      }
 
       if (response.ok) {
         alert(`Booking ${editingBooking ? 'updated' : 'created'} successfully!`);
@@ -919,11 +1115,11 @@ const BookingsManagement = () => {
         setEditingBooking(null);
         fetchBookings();
       } else {
-        alert("Failed to save booking");
+        throw new Error(result.error || result.errors?.join(', ') || 'Failed to save booking');
       }
     } catch (error) {
       console.error("Error saving booking:", error);
-      alert("Failed to save booking");
+      alert(`Failed to save booking: ${error.message}`);
     }
   };
 
@@ -949,6 +1145,8 @@ const BookingsManagement = () => {
             setShowForm(false);
             setEditingBooking(null);
           }}
+          nationalities={nationalities}
+          roomTypes={roomTypes}
         />
       )}
 
@@ -977,7 +1175,7 @@ const BookingsManagement = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {bookings.map((booking) => (
+            {bookings.length > 0 ? bookings.map((booking) => (
               <tr key={booking.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   #{booking.id}
@@ -1015,7 +1213,13 @@ const BookingsManagement = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )) : (
+              <tr>
+                <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
+                  No bookings found or unable to load bookings.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -1023,8 +1227,8 @@ const BookingsManagement = () => {
   );
 };
 
-// Booking Form Component (unchanged)
-const BookingForm = ({ booking, onSubmit, onCancel }) => {
+// Updated Booking Form Component with dynamic nationalities and room types
+const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) => {
   const [formData, setFormData] = useState({
     user_id: booking?.user_id || "",
     room_type: booking?.room_type || "",
@@ -1065,6 +1269,7 @@ const BookingForm = ({ booking, onSubmit, onCancel }) => {
               required
             />
           </div>
+          
           <div>
             <label className="block text-sm font-medium text-gray-700">Room Type</label>
             <select
@@ -1075,12 +1280,14 @@ const BookingForm = ({ booking, onSubmit, onCancel }) => {
               required
             >
               <option value="">Select Room Type</option>
-              <option value="Single">Single</option>
-              <option value="Double">Double</option>
-              <option value="Suite">Suite</option>
-              <option value="Deluxe">Deluxe</option>
+              {roomTypes.map((roomType) => (
+                <option key={roomType.id} value={roomType.name}>
+                  {roomType.name}
+                </option>
+              ))}
             </select>
           </div>
+          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Check-in</label>
@@ -1105,6 +1312,7 @@ const BookingForm = ({ booking, onSubmit, onCancel }) => {
               />
             </div>
           </div>
+          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Guests</label>
@@ -1134,17 +1342,25 @@ const BookingForm = ({ booking, onSubmit, onCancel }) => {
               </select>
             </div>
           </div>
+          
           <div>
             <label className="block text-sm font-medium text-gray-700">Nationality</label>
-            <input
-              type="text"
+            <select
               name="nationality"
               value={formData.nationality}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
               required
-            />
+            >
+              <option value="">Select Nationality</option>
+              {nationalities.map((nationality) => (
+                <option key={nationality.id} value={nationality.name}>
+                  {nationality.name}
+                </option>
+              ))}
+            </select>
           </div>
+          
           <div className="flex justify-end space-x-3 pt-4">
             <button
               type="button"
@@ -1166,7 +1382,7 @@ const BookingForm = ({ booking, onSubmit, onCancel }) => {
   );
 };
 
-// Updated UsersManagement Component
+// Updated UsersManagement Component with proper error handling
 const UsersManagement = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1177,21 +1393,33 @@ const UsersManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const token = localStorage.getItem("adminToken");
       if (!token) {
         console.error("No admin token found");
         setLoading(false);
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/admin/users", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/users", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        setLoading(false);
+        return;
+      }
       
       if (response.ok) {
-        const data = await response.json();
         setUsers(data);
       } else {
         console.error("Failed to fetch users:", response.status);
@@ -1207,11 +1435,11 @@ const UsersManagement = () => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
-      const response = await fetch(`http://localhost:3000/api/v1/admin/users/${userId}`, {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/users/${userId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
 
@@ -1254,7 +1482,7 @@ const UsersManagement = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {users.map((user) => (
+            {users.length > 0 ? users.map((user) => (
               <tr key={user.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   #{user.id}
@@ -1281,7 +1509,13 @@ const UsersManagement = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            )) : (
+              <tr>
+                <td colSpan="5" className="px-6 py-4 text-center text-sm text-gray-500">
+                  No users found or unable to load users.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -1289,8 +1523,8 @@ const UsersManagement = () => {
   );
 };
 
-// Updated AdminManagement Component
-const AdminManagement = () => {
+// Updated AdminManagement Component with role-based permissions
+const AdminManagement = ({ currentAdminRole }) => {
   const [admins, setAdmins] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -1301,22 +1535,34 @@ const AdminManagement = () => {
 
   const fetchAdmins = async () => {
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const token = localStorage.getItem("adminToken");
       if (!token) {
         console.error("No admin token found");
         setLoading(false);
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/admin/admins", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/admins", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        setLoading(false);
+        return;
+      }
       
       if (response.ok) {
-        const data = await response.json();
         setAdmins(data);
       } else {
         console.error("Failed to fetch admins:", response.status);
@@ -1330,27 +1576,38 @@ const AdminManagement = () => {
 
   const handleCreateAdmin = async (formData) => {
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
-      const response = await fetch("http://localhost:3000/api/v1/admin/admins", {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/admins", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ admin: formData }), // Changed from { user: formData } to { admin: formData }
+        body: JSON.stringify({ admin: formData }),
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let result;
+
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response.");
+      }
 
       if (response.ok) {
         alert("Admin created successfully!");
         setShowForm(false);
         fetchAdmins();
       } else {
-        const errorData = await response.json();
-        alert(`Failed to create admin: ${errorData.errors?.join(', ') || 'Unknown error'}`);
+        throw new Error(result.errors?.join(', ') || result.error || 'Failed to create admin');
       }
     } catch (error) {
       console.error("Error creating admin:", error);
-      alert("Failed to create admin");
+      alert(`Failed to create admin: ${error.message}`);
     }
   };
 
@@ -1358,11 +1615,11 @@ const AdminManagement = () => {
     if (!window.confirm("Are you sure you want to delete this admin?")) return;
 
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
-      const response = await fetch(`http://localhost:3000/api/v1/admin/admins/${adminId}`, {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/admins/${adminId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
 
@@ -1384,12 +1641,14 @@ const AdminManagement = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
-        <button
-          onClick={() => setShowForm(true)}
-          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
-        >
-          Add New Admin
-        </button>
+        {currentAdminRole === 'super_admin' && (
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            Add New Admin
+          </button>
+        )}
       </div>
 
       {showForm && (
@@ -1415,13 +1674,15 @@ const AdminManagement = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              {currentAdminRole === 'super_admin' && (
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {admins.map((admin) => (
+            {admins.length > 0 ? admins.map((admin) => (
               <tr key={admin.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   #{admin.id}
@@ -1437,16 +1698,24 @@ const AdminManagement = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(admin.created_at).toLocaleDateString()}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button
-                    onClick={() => handleDeleteAdmin(admin.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
+                {currentAdminRole === 'super_admin' && (
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button
+                      onClick={() => handleDeleteAdmin(admin.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan={currentAdminRole === 'super_admin' ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
+                  No admins found or unable to load admins.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -1454,12 +1723,12 @@ const AdminManagement = () => {
   );
 };
 
-// Updated AdminForm Component
+// AdminForm Component (unchanged)
 const AdminForm = ({ onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    password_confirmation: "", // Added password confirmation
+    password_confirmation: "",
     role: "admin",
     name: "",
   });
@@ -1573,7 +1842,7 @@ const AdminForm = ({ onSubmit, onCancel }) => {
   );
 };
 
-// Updated MessagesManagement Component
+// Updated MessagesManagement Component with proper error handling
 const MessagesManagement = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1584,21 +1853,33 @@ const MessagesManagement = () => {
 
   const fetchMessages = async () => {
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
+      const token = localStorage.getItem("adminToken");
       if (!token) {
         console.error("No admin token found");
         setLoading(false);
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/v1/admin/messages", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
+
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        setLoading(false);
+        return;
+      }
       
       if (response.ok) {
-        const data = await response.json();
         setMessages(data);
       } else {
         console.error("Failed to fetch messages:", response.status);
@@ -1614,11 +1895,11 @@ const MessagesManagement = () => {
     if (!window.confirm("Are you sure you want to delete this message?")) return;
 
     try {
-      const token = localStorage.getItem("adminToken"); // Changed from "user" to "adminToken"
-      const response = await fetch(`http://localhost:3000/api/v1/admin/messages/${messageId}`, {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages/${messageId}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
 
@@ -1640,7 +1921,7 @@ const MessagesManagement = () => {
     <div>
       <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
       <div className="space-y-4">
-        {messages.map((message) => (
+        {messages.length > 0 ? messages.map((message) => (
           <div key={message.id} className="bg-white border border-gray-200 rounded-lg p-6">
             <div className="flex justify-between items-start mb-3">
               <div>
@@ -1679,7 +1960,11 @@ const MessagesManagement = () => {
               </button>
             </div>
           </div>
-        ))}
+        )) : (
+          <div className="text-center py-8 text-gray-500">
+            No messages found or unable to load messages.
+          </div>
+        )}
       </div>
     </div>
   );

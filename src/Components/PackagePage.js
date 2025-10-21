@@ -106,9 +106,21 @@ export default function PackagePage({ onLoginClick }) {
   useEffect(() => {
     const fetchNationalities = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/v1/nationalities');
+        const response = await fetch('https://backend-southcoastwebmain-1.onrender.com/api/v1/nationalities');
+        
+        // First get response as text to check if it's valid JSON
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          console.log("Server Response:", responseText.substring(0, 200));
+          throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+        }
+
         if (response.ok) {
-          const data = await response.json();
           setNationalities(data);
         } else {
           throw new Error('Failed to fetch nationalities');
@@ -126,6 +138,13 @@ export default function PackagePage({ onLoginClick }) {
           { id: 6, name: "French" },
           { id: 7, name: "Chinese" },
           { id: 8, name: "Indian" },
+          { id: 9, name: "Australian" },
+          { id: 10, name: "Japanese" },
+          { id: 11, name: "South African" },
+          { id: 12, name: "Ugandan" },
+          { id: 13, name: "Tanzanian" },
+          { id: 14, name: "Rwandan" },
+          { id: 15, name: "Ethiopian" },
         ]);
       } finally {
         setIsLoadingNationalities(false);
@@ -277,7 +296,7 @@ export default function PackagePage({ onLoginClick }) {
         }
       };
 
-      const response = await fetch('http://localhost:3000/api/v1/bookings', {
+      const response = await fetch('https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -286,7 +305,17 @@ export default function PackagePage({ onLoginClick }) {
         body: JSON.stringify(bookingPayload),
       });
 
-      const result = await response.json();
+      // First get response as text to check if it's valid JSON
+      const responseText = await response.text();
+      let result;
+
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+      }
 
       if (response.ok) {
         setMessage("✅ Booking submitted successfully!");

@@ -84,36 +84,61 @@ export default function Navbar({
   // --- Logout handler for regular users ---
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/v1/logout", {
+      const token = localStorage.getItem("authToken") || (user && user.token);
+      
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/user/logout", {
         method: "DELETE",
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": token ? `Bearer ${token}` : "",
+        },
+        // Removed credentials: "include" to fix CORS issue
       });
 
-      if (response.ok) {
-        if (typeof onLogout === "function") {
-          onLogout();
-        }
-        setShowUserMenu(false);
-        setShowMenu(false);
-        alert("✅ Logged out successfully!");
-        navigate("/southcoastwebmain");
-      } else {
-        console.error("Logout Failed", response);
-        alert("❌ Failed to log out");
+      // Clear local storage regardless of server response
+      localStorage.removeItem("user");
+      localStorage.removeItem("authToken");
+      
+      // Dispatch logout event to update all components
+      window.dispatchEvent(new CustomEvent('userLoggedOut'));
+      
+      if (typeof onLogout === "function") {
+        onLogout();
       }
+      
+      setShowUserMenu(false);
+      setShowMenu(false);
+      
+      console.log("Logout successful");
+      alert("✅ Logged out successfully!");
+      navigate("/southcoastwebmain");
+
     } catch (error) {
       console.error("Logout error:", error);
-      // Still call onLogout even if API call fails to clear local state
+      // Even if server logout fails, clear local data
+      localStorage.removeItem("user");
+      localStorage.removeItem("authToken");
+      window.dispatchEvent(new CustomEvent('userLoggedOut'));
+      
       if (typeof onLogout === "function") {
         onLogout();
       }
       setShowUserMenu(false);
       setShowMenu(false);
+      
+      alert("✅ Logged out successfully!");
+      navigate("/southcoastwebmain");
     }
   };
 
   // --- Admin logout handler ---
   const handleAdminLogout = () => {
+    // Clear admin data from localStorage
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminEmail");
+    localStorage.removeItem("adminRole");
+    localStorage.removeItem("adminName");
+    
     if (typeof onAdminLogout === "function") {
       onAdminLogout();
     }
