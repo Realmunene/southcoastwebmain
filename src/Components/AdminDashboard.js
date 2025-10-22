@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("bookings");
   const [loading, setLoading] = useState(true);
+  const [currentAdminRole, setCurrentAdminRole] = useState("admin"); // Default to admin
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalBookings: 0,
@@ -11,12 +12,62 @@ export default function AdminDashboard() {
     totalPartners: 0,
   });
 
-  // Get current admin role from localStorage
-  const currentAdminRole = localStorage.getItem("adminRole") || "admin";
-
   useEffect(() => {
+    fetchAdminProfile();
     fetchDashboardStats();
   }, []);
+
+  // Fetch admin profile to get the actual role
+  const fetchAdminProfile = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/profile", {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      const responseText = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        console.log("Server Response:", responseText.substring(0, 200));
+        // Fallback to localStorage role
+        const storedRole = localStorage.getItem("adminRole") || "admin";
+        setCurrentAdminRole(storedRole);
+        return;
+      }
+
+      if (response.ok) {
+        // Update role from server response
+        const adminRole = data.role || data.data?.role || "admin";
+        setCurrentAdminRole(adminRole);
+        // Also update localStorage
+        localStorage.setItem("adminRole", adminRole);
+      } else {
+        // Fallback to localStorage role
+        const storedRole = localStorage.getItem("adminRole") || "admin";
+        setCurrentAdminRole(storedRole);
+      }
+    } catch (error) {
+      console.error("Failed to fetch admin profile:", error);
+      // Fallback to localStorage role
+      const storedRole = localStorage.getItem("adminRole") || "admin";
+      setCurrentAdminRole(storedRole);
+    }
+  };
 
   const fetchDashboardStats = async () => {
     try {
@@ -37,7 +88,6 @@ export default function AdminDashboard() {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -52,22 +102,18 @@ export default function AdminDashboard() {
       console.log("Dashboard stats response:", data);
       
       if (response.ok) {
-        // Check if data is nested in a property
         let statsData = data;
         
-        // If data has a 'data' property, use that
         if (data.data) {
           statsData = data.data;
           console.log("Using nested data property:", statsData);
         }
         
-        // If data has a 'stats' property, use that  
         if (data.stats) {
           statsData = data.stats;
           console.log("Using stats property:", statsData);
         }
 
-        // Ensure we have the expected structure
         const formattedStats = {
           totalUsers: statsData.totalUsers || statsData.users || statsData.total_users || 0,
           totalBookings: statsData.totalBookings || statsData.bookings || statsData.total_bookings || 0,
@@ -83,8 +129,6 @@ export default function AdminDashboard() {
       }
     } catch (error) {
       console.error("Failed to fetch stats:", error);
-      
-      // Set default stats to prevent UI breaking
       setStats({
         totalUsers: 0,
         totalBookings: 0,
@@ -95,6 +139,23 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Define tabs based on admin role
+  const getTabs = () => {
+    const baseTabs = [
+      { id: "bookings", name: "Bookings Management" },
+      { id: "users", name: "Users Management" },
+      { id: "messages", name: "Messages" },
+      { id: "partners", name: "Partners Management" },
+    ];
+
+    // Only super_admin can see and access Admin Management
+    if (currentAdminRole === "super_admin") {
+      baseTabs.splice(2, 0, { id: "admins", name: "Admin Management" });
+    }
+
+    return baseTabs;
   };
 
   // Debug: log current stats state
@@ -160,7 +221,14 @@ export default function AdminDashboard() {
             <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Welcome, {localStorage.getItem("adminName") || "Admin"} ({currentAdminRole})
+                Welcome, {localStorage.getItem("adminName") || "Admin"} 
+                <span className={`ml-1 px-2 py-1 text-xs font-semibold rounded-full ${
+                  currentAdminRole === 'super_admin' 
+                    ? 'bg-purple-100 text-purple-800' 
+                    : 'bg-blue-100 text-blue-800'
+                }`}>
+                  ({currentAdminRole})
+                </span>
               </span>
               {/* Add refresh button for debugging */}
               <button 
@@ -213,13 +281,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
-              {[
-                { id: "bookings", name: "Bookings Management" },
-                { id: "users", name: "Users Management" },
-                { id: "admins", name: "Admin Management" },
-                { id: "messages", name: "Messages" },
-                { id: "partners", name: "Partners Management" },
-              ].map((tab) => (
+              {getTabs().map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
@@ -237,11 +299,11 @@ export default function AdminDashboard() {
 
           {/* Tab Content */}
           <div className="p-6">
-            {activeTab === "bookings" && <BookingsManagement />}
-            {activeTab === "users" && <UsersManagement />}
-            {activeTab === "admins" && <AdminManagement currentAdminRole={currentAdminRole} />}
-            {activeTab === "messages" && <MessagesManagement />}
-            {activeTab === "partners" && <PartnersManagement />}
+            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "admins" && currentAdminRole === "super_admin" && <AdminManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} />}
           </div>
         </div>
       </div>
@@ -274,8 +336,8 @@ const StatCard = ({ title, value, icon, color }) => {
   );
 };
 
-// Updated Partners Management Component with proper error handling
-const PartnersManagement = () => {
+// Updated Partners Management Component with role-based permissions
+const PartnersManagement = ({ currentAdminRole }) => {
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingPartner, setEditingPartner] = useState(null);
@@ -300,7 +362,6 @@ const PartnersManagement = () => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -326,11 +387,21 @@ const PartnersManagement = () => {
   };
 
   const handleEdit = (partner) => {
-    setEditingPartner(partner);
-    setShowForm(true);
+    // Only allow editing if super_admin or if the partner is not active
+    if (currentAdminRole === "super_admin" || partner.status !== "active") {
+      setEditingPartner(partner);
+      setShowForm(true);
+    } else {
+      alert("You don't have permission to edit active partners. Only Super Admin can edit active partners.");
+    }
   };
 
   const handleDelete = async (partnerId) => {
+    if (currentAdminRole !== "super_admin") {
+      alert("Only Super Admin can delete partners.");
+      return;
+    }
+
     if (!window.confirm("Are you sure you want to delete this partner?")) return;
 
     try {
@@ -381,7 +452,6 @@ const PartnersManagement = () => {
         body: JSON.stringify({ partner: submitData }),
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let result;
 
@@ -408,6 +478,11 @@ const PartnersManagement = () => {
   };
 
   const togglePartnerStatus = async (partnerId, currentStatus) => {
+    if (currentAdminRole !== "super_admin") {
+      alert("Only Super Admin can change partner status.");
+      return;
+    }
+
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/partners/${partnerId}/toggle_status`, {
@@ -452,6 +527,7 @@ const PartnersManagement = () => {
             setShowForm(false);
             setEditingPartner(null);
           }}
+          currentAdminRole={currentAdminRole}
         />
       )}
 
@@ -532,23 +608,28 @@ const PartnersManagement = () => {
                   <button
                     onClick={() => handleEdit(partner)}
                     className="text-cyan-600 hover:text-cyan-900"
+                    disabled={currentAdminRole !== "super_admin" && partner.status === "active"}
                   >
                     Edit
                   </button>
-                  <button
-                    onClick={() => togglePartnerStatus(partner.id, partner.status)}
-                    className={`${
-                      partner.status === 'active' ? 'text-orange-600 hover:text-orange-900' : 'text-green-600 hover:text-green-900'
-                    }`}
-                  >
-                    {partner.status === 'active' ? 'Deactivate' : 'Activate'}
-                  </button>
-                  <button
-                    onClick={() => handleDelete(partner.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
+                  {currentAdminRole === "super_admin" && (
+                    <>
+                      <button
+                        onClick={() => togglePartnerStatus(partner.id, partner.status)}
+                        className={`${
+                          partner.status === 'active' ? 'text-orange-600 hover:text-orange-900' : 'text-green-600 hover:text-green-900'
+                        }`}
+                      >
+                        {partner.status === 'active' ? 'Deactivate' : 'Activate'}
+                      </button>
+                      <button
+                        onClick={() => handleDelete(partner.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
                 </td>
               </tr>
             )) : (
@@ -565,8 +646,8 @@ const PartnersManagement = () => {
   );
 };
 
-// Partner Form Component (unchanged from your previous version)
-const PartnerForm = ({ partner, onSubmit, onCancel }) => {
+// Partner Form Component with role-based restrictions
+const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
   const [formData, setFormData] = useState({
     supplier_type: partner?.supplier_type || "",
     supplier_name: partner?.supplier_name || "",
@@ -824,7 +905,7 @@ const PartnerForm = ({ partner, onSubmit, onCancel }) => {
               )}
             </div>
 
-            {/* Status - Only for admin */}
+            {/* Status - Only for super_admin */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Status</label>
               <select
@@ -832,11 +913,15 @@ const PartnerForm = ({ partner, onSubmit, onCancel }) => {
                 value={formData.status}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                disabled={currentAdminRole !== "super_admin"}
               >
                 <option value="pending">Pending</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>
+              {currentAdminRole !== "super_admin" && (
+                <p className="mt-1 text-xs text-gray-500">Only Super Admin can change status</p>
+              )}
             </div>
           </div>
 
@@ -880,8 +965,8 @@ const PartnerForm = ({ partner, onSubmit, onCancel }) => {
   );
 };
 
-// Updated BookingsManagement Component with dynamic nationalities and room types
-const BookingsManagement = () => {
+// Updated BookingsManagement Component with role-based permissions
+const BookingsManagement = ({ currentAdminRole }) => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingBooking, setEditingBooking] = useState(null);
@@ -910,7 +995,6 @@ const BookingsManagement = () => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -944,7 +1028,6 @@ const BookingsManagement = () => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -953,7 +1036,6 @@ const BookingsManagement = () => {
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
         console.log("Server Response:", responseText.substring(0, 200));
-        // Fallback nationalities
         setNationalities([
           { id: 1, name: "Kenyan" },
           { id: 2, name: "American" },
@@ -970,7 +1052,6 @@ const BookingsManagement = () => {
       if (response.ok) {
         setNationalities(data);
       } else {
-        // Fallback nationalities
         setNationalities([
           { id: 1, name: "Kenyan" },
           { id: 2, name: "American" },
@@ -984,7 +1065,6 @@ const BookingsManagement = () => {
       }
     } catch (error) {
       console.error("Error fetching nationalities:", error);
-      // Fallback nationalities
       setNationalities([
         { id: 1, name: "Kenyan" },
         { id: 2, name: "American" },
@@ -1007,7 +1087,6 @@ const BookingsManagement = () => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -1016,7 +1095,6 @@ const BookingsManagement = () => {
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
         console.log("Server Response:", responseText.substring(0, 200));
-        // Fallback room types
         setRoomTypes([
           { id: 1, name: "Single Room" },
           { id: 2, name: "Double Room" },
@@ -1030,7 +1108,6 @@ const BookingsManagement = () => {
       if (response.ok) {
         setRoomTypes(data);
       } else {
-        // Fallback room types
         setRoomTypes([
           { id: 1, name: "Single Room" },
           { id: 2, name: "Double Room" },
@@ -1041,7 +1118,6 @@ const BookingsManagement = () => {
       }
     } catch (error) {
       console.error("Error fetching room types:", error);
-      // Fallback room types
       setRoomTypes([
         { id: 1, name: "Single Room" },
         { id: 2, name: "Double Room" },
@@ -1058,6 +1134,11 @@ const BookingsManagement = () => {
   };
 
   const handleDelete = async (bookingId) => {
+    if (currentAdminRole !== "super_admin") {
+      alert("Only Super Admin can delete bookings.");
+      return;
+    }
+
     if (!window.confirm("Are you sure you want to delete this booking?")) return;
 
     try {
@@ -1097,7 +1178,6 @@ const BookingsManagement = () => {
         body: JSON.stringify({ booking: formData }),
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let result;
 
@@ -1205,12 +1285,14 @@ const BookingsManagement = () => {
                   >
                     Edit
                   </button>
-                  <button
-                    onClick={() => handleDelete(booking.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
+                  {currentAdminRole === "super_admin" && (
+                    <button
+                      onClick={() => handleDelete(booking.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  )}
                 </td>
               </tr>
             )) : (
@@ -1227,7 +1309,7 @@ const BookingsManagement = () => {
   );
 };
 
-// Updated Booking Form Component with dynamic nationalities and room types
+// Booking Form Component (unchanged)
 const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) => {
   const [formData, setFormData] = useState({
     user_id: booking?.user_id || "",
@@ -1382,8 +1464,8 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
   );
 };
 
-// Updated UsersManagement Component with proper error handling
-const UsersManagement = () => {
+// Updated UsersManagement Component with role-based permissions
+const UsersManagement = ({ currentAdminRole }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -1406,7 +1488,6 @@ const UsersManagement = () => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -1432,6 +1513,11 @@ const UsersManagement = () => {
   };
 
   const handleDeleteUser = async (userId) => {
+    if (currentAdminRole !== "super_admin") {
+      alert("Only Super Admin can delete users.");
+      return;
+    }
+
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
@@ -1476,9 +1562,11 @@ const UsersManagement = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              {currentAdminRole === "super_admin" && (
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -1500,18 +1588,20 @@ const UsersManagement = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(user.created_at).toLocaleDateString()}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button
-                    onClick={() => handleDeleteUser(user.id)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Delete
-                  </button>
-                </td>
+                {currentAdminRole === "super_admin" && (
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button
+                      onClick={() => handleDeleteUser(user.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
               </tr>
             )) : (
               <tr>
-                <td colSpan="5" className="px-6 py-4 text-center text-sm text-gray-500">
+                <td colSpan={currentAdminRole === "super_admin" ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
                   No users found or unable to load users.
                 </td>
               </tr>
@@ -1523,7 +1613,7 @@ const UsersManagement = () => {
   );
 };
 
-// Updated AdminManagement Component with role-based permissions
+// Updated AdminManagement Component - Only accessible to super_admin
 const AdminManagement = ({ currentAdminRole }) => {
   const [admins, setAdmins] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -1549,7 +1639,6 @@ const AdminManagement = ({ currentAdminRole }) => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -1586,7 +1675,6 @@ const AdminManagement = ({ currentAdminRole }) => {
         body: JSON.stringify({ admin: formData }),
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let result;
 
@@ -1842,8 +1930,8 @@ const AdminForm = ({ onSubmit, onCancel }) => {
   );
 };
 
-// Updated MessagesManagement Component with proper error handling
-const MessagesManagement = () => {
+// Updated MessagesManagement Component with role-based permissions
+const MessagesManagement = ({ currentAdminRole }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -1866,7 +1954,6 @@ const MessagesManagement = () => {
         },
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
@@ -1892,6 +1979,11 @@ const MessagesManagement = () => {
   };
 
   const handleDeleteMessage = async (messageId) => {
+    if (currentAdminRole !== "super_admin") {
+      alert("Only Super Admin can delete messages.");
+      return;
+    }
+
     if (!window.confirm("Are you sure you want to delete this message?")) return;
 
     try {
@@ -1952,12 +2044,14 @@ const MessagesManagement = () => {
                   Reply
                 </button>
               </div>
-              <button
-                onClick={() => handleDeleteMessage(message.id)}
-                className="text-sm text-red-600 hover:text-red-800"
-              >
-                Delete
-              </button>
+              {currentAdminRole === "super_admin" && (
+                <button
+                  onClick={() => handleDeleteMessage(message.id)}
+                  className="text-sm text-red-600 hover:text-red-800"
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         )) : (

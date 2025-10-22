@@ -9,7 +9,7 @@ export default function OurPartners() {
   useEffect(() => {
     const fetchPartners = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/v1/partners", {
+        const res = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/partners", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,

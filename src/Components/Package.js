@@ -23,11 +23,11 @@ import house8 from "./images/LargerApartment.jpg";
 const initialRooms = [
   { title: "Executive Room, Ensuite", price: "$75", image: [room1, house1] },
   { title: "2 Connected Room, 1 Ensuite", price: "$110", image: [room2, house2] },
-  { title: "Apartment - 2BR + Living + 1 Ensuite", price: "$110", image: [room3, house3] },
-  { title: "Apartment - Kitchen 2BR, 2 Ensuites", price: "$125", image: [room4, house4] },
+  { title: "2 Bedroom Apartment - Living + Kitchen + 1 Ensuite", price: "$110", image: [room3, house3] },
+  { title: "3 Bedroom Apartment - Kitchen, 2 Ensuites", price: "$125", image: [room4, house4] },
   { title: "Executive Room - Ensuite", price: "$75", image: [room5, house5] },
   { title: "2 Connected Room - 1 Ensuite", price: "$110", image: [room6, house6] },
-  { title: "Apartment - Kitchen 2BR - 1 Ensuite", price: "$125", image: [room7, house7] },
+  { title: "2 Bedroom Apartment - Kitchen - 1 Ensuite", price: "$125", image: [room7, house7] },
   { title: "Larger Apartment - Kitchen, Balcony, Living, 2 Ensuites", price: "$140", image: [room8, house8] },
 ];
 
