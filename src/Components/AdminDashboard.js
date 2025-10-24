@@ -13,11 +13,31 @@ export default function AdminDashboard() {
     totalMessages: 0,
     totalPartners: 0,
   });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [apiErrors, setApiErrors] = useState({});
 
   useEffect(() => {
     fetchAdminProfile();
     fetchDashboardStats();
   }, []);
+
+  // Auto-hide success message after 5 seconds
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
+  // Fixed: Renamed from useFallbackAdminData to loadFallbackAdminData
+  const loadFallbackAdminData = () => {
+    const storedRole = localStorage.getItem("adminRole") || 1;
+    const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+    setCurrentAdminRole(parseInt(storedRole));
+    setCurrentAdminName(storedName);
+  };
 
   const fetchAdminProfile = async () => {
     try {
@@ -28,88 +48,75 @@ export default function AdminDashboard() {
         return;
       }
 
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/profile", {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-
-      const responseText = await response.text();
-      let data;
-
+      // Try to fetch profile, but handle 404 gracefully
       try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        const storedRole = localStorage.getItem("adminRole") || 1; // Default to admin
-        const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
-        setCurrentAdminRole(parseInt(storedRole));
-        setCurrentAdminName(storedName);
-        return;
-      }
+        const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/profile", {
+          method: "GET",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        });
 
-      if (response.ok) {
-        let adminRole = 1; // Default to admin (1)
-        let adminName = "Admin";
+        if (response.ok) {
+          const responseText = await response.text();
+          let data;
 
-        // Extract role (0 = super_admin, 1 = admin)
-        let roleValue;
-        if (data.role !== undefined) {
-          roleValue = data.role;
-        } else if (data.data && data.data.role !== undefined) {
-          roleValue = data.data.role;
-        } else if (data.admin && data.admin.role !== undefined) {
-          roleValue = data.admin.role;
+          try {
+            data = JSON.parse(responseText);
+          } catch (parseError) {
+            console.error("JSON Parse Error:", parseError);
+            // Use fallback data if profile endpoint returns invalid JSON
+            loadFallbackAdminData(); // Fixed: Changed function name
+            return;
+          }
+
+          // Extract admin data from response
+          let adminRole = 1;
+          let adminName = "Admin";
+
+          if (data.role !== undefined) {
+            adminRole = parseInt(data.role);
+          } else if (data.data && data.data.role !== undefined) {
+            adminRole = parseInt(data.data.role);
+          } else if (data.admin && data.admin.role !== undefined) {
+            adminRole = parseInt(data.admin.role);
+          }
+
+          if (data.name) {
+            adminName = data.name;
+          } else if (data.data && data.data.name) {
+            adminName = data.data.name;
+          } else if (data.admin && data.admin.name) {
+            adminName = data.admin.name;
+          } else if (data.email) {
+            adminName = data.email;
+          } else if (data.data && data.data.email) {
+            adminName = data.data.email;
+          } else if (data.admin && data.admin.email) {
+            adminName = data.admin.email;
+          }
+
+          setCurrentAdminRole(adminRole);
+          setCurrentAdminName(adminName);
+          
+          localStorage.setItem("adminRole", adminRole.toString());
+          localStorage.setItem("adminName", adminName);
+        } else if (response.status === 404) {
+          // Profile endpoint not found, use fallback
+          console.warn("Profile endpoint not found, using fallback data");
+          loadFallbackAdminData(); // Fixed: Changed function name
+        } else {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
-        // Set role as number (0 or 1)
-        if (roleValue !== undefined) {
-          adminRole = parseInt(roleValue);
-        }
-
-        // Extract name/email
-        if (data.name) {
-          adminName = data.name;
-        } else if (data.data && data.data.name) {
-          adminName = data.data.name;
-        } else if (data.admin && data.admin.name) {
-          adminName = data.admin.name;
-        } else if (data.email) {
-          adminName = data.email;
-        } else if (data.data && data.data.email) {
-          adminName = data.data.email;
-        } else if (data.admin && data.admin.email) {
-          adminName = data.admin.email;
-        }
-
-        setCurrentAdminRole(adminRole);
-        setCurrentAdminName(adminName);
-        
-        localStorage.setItem("adminRole", adminRole.toString());
-        localStorage.setItem("adminName", adminName);
-        
-        if (data.email) {
-          localStorage.setItem("adminEmail", data.email);
-        } else if (data.data && data.data.email) {
-          localStorage.setItem("adminEmail", data.data.email);
-        } else if (data.admin && data.admin.email) {
-          localStorage.setItem("adminEmail", data.admin.email);
-        }
-      } else {
-        const storedRole = localStorage.getItem("adminRole") || 1;
-        const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
-        setCurrentAdminRole(parseInt(storedRole));
-        setCurrentAdminName(storedName);
+      } catch (profileError) {
+        console.error("Failed to fetch admin profile:", profileError);
+        loadFallbackAdminData(); // Fixed: Changed function name
       }
     } catch (error) {
-      console.error("Failed to fetch admin profile:", error);
-      const storedRole = localStorage.getItem("adminRole") || 1;
-      const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
-      setCurrentAdminRole(parseInt(storedRole));
-      setCurrentAdminName(storedName);
+      console.error("Error in fetchAdminProfile:", error);
+      loadFallbackAdminData(); // Fixed: Changed function name
     }
   };
 
@@ -188,9 +195,7 @@ export default function AdminDashboard() {
       { id: "complimentNote", name: "Compliment Note" },
     ];
 
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole === 0) {
-      // Insert Admin Management tab after Users Management
       const tabsWithAdmin = [...baseTabs];
       tabsWithAdmin.splice(2, 0, { id: "admins", name: "Admin Management" });
       return tabsWithAdmin;
@@ -271,6 +276,25 @@ export default function AdminDashboard() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Success Message */}
+        {successMessage && (
+          <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-md">
+            <p className="font-semibold">{successMessage}</p>
+          </div>
+        )}
+
+        {/* API Error Messages */}
+        {Object.keys(apiErrors).length > 0 && (
+          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
+            <p className="font-semibold">API Errors:</p>
+            {Object.entries(apiErrors).map(([endpoint, error]) => (
+              <p key={endpoint} className="text-sm mt-1">
+                {endpoint}: {error}
+              </p>
+            ))}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <StatCard
             title="Total Users"
@@ -324,12 +348,11 @@ export default function AdminDashboard() {
           </div>
 
           <div className="p-6">
-            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} />}
-            {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} />}
-            {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
-            {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} />}
-            {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} />}
-            {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} setSuccessMessage={setSuccessMessage} setApiErrors={setApiErrors} />}
+            {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
+            {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
+            {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
+            {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "complimentNote" && <ComplimentNoteModal />}
           </div>
         </div>
@@ -563,7 +586,10 @@ const ComplimentNoteModal = () => {
   );
 };
 
-const PartnersManagement = ({ currentAdminRole }) => {
+// ... Rest of the component code remains exactly the same as in the previous version ...
+// (PartnersManagement, PartnerForm, BookingsManagement, BookingForm, UsersManagement, AdminManagement, AdminForm, MessagesManagement)
+
+const PartnersManagement = ({ currentAdminRole, setApiErrors }) => {
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingPartner, setEditingPartner] = useState(null);
@@ -588,31 +614,32 @@ const PartnersManagement = ({ currentAdminRole }) => {
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setLoading(false);
-        return;
-      }
-      
       if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setPartners([]);
+          return;
+        }
+        
         setPartners(data);
       } else {
         console.error("Failed to fetch partners:", response.status);
+        setApiErrors(prev => ({ ...prev, partners: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching partners:", error);
+      setApiErrors(prev => ({ ...prev, partners: error.message }));
     } finally {
       setLoading(false);
     }
   };
 
   const handleEdit = (partner) => {
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole === 0 || partner.status !== "active") {
       setEditingPartner(partner);
       setShowForm(true);
@@ -622,7 +649,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const handleDelete = async (partnerId) => {
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete partners.");
       return;
@@ -702,7 +728,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const togglePartnerStatus = async (partnerId, currentStatus) => {
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can change partner status.");
       return;
@@ -837,7 +862,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
                   >
                     Edit
                   </button>
-                  {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                   {currentAdminRole === 0 && (
                     <>
                       <button
@@ -861,7 +885,7 @@ const PartnersManagement = ({ currentAdminRole }) => {
             )) : (
               <tr>
                 <td colSpan="10" className="px-6 py-4 text-center text-sm text-gray-500">
-                  No partners found or unable to load partners.
+                  No partners found
                 </td>
               </tr>
             )}
@@ -1126,14 +1150,12 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
                 value={formData.status}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
-                // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
                 disabled={currentAdminRole !== 0}
               >
                 <option value="pending">Pending</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>
-              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole !== 0 && (
                 <p className="mt-1 text-xs text-gray-500">Only Super Admin can change status</p>
               )}
@@ -1179,13 +1201,14 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
   );
 };
 
-const BookingsManagement = ({ currentAdminRole }) => {
+const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors }) => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingBooking, setEditingBooking] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [nationalities, setNationalities] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchBookings();
@@ -1195,37 +1218,69 @@ const BookingsManagement = ({ currentAdminRole }) => {
 
   const fetchBookings = async () => {
     try {
+      setLoading(true);
+      setError("");
       const token = localStorage.getItem("adminToken");
       if (!token) {
         console.error("No admin token found");
+        setError("No authentication token found. Please log in again.");
         setLoading(false);
         return;
       }
 
       const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings", {
+        method: "GET",
         headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setLoading(false);
-        return;
-      }
-      
       if (response.ok) {
-        setBookings(data);
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setError("Server returned an invalid response format.");
+          setBookings([]);
+          return;
+        }
+        
+        // Handle different response formats
+        if (Array.isArray(data)) {
+          setBookings(data);
+        } else if (data.data && Array.isArray(data.data)) {
+          setBookings(data.data);
+        } else if (data.bookings && Array.isArray(data.bookings)) {
+          setBookings(data.bookings);
+        } else {
+          console.warn("Unexpected bookings response format:", data);
+          setBookings([]);
+        }
+      } else if (response.status === 500) {
+        setError("Server error: Unable to load bookings. Please try again later or contact support.");
+        console.error("Server error while fetching bookings:", response.status);
+        setApiErrors(prev => ({ ...prev, bookings: "Internal Server Error (500)" }));
+        setBookings([]);
+      } else if (response.status === 401) {
+        setError("Unauthorized: You don't have permission to view bookings.");
+        setApiErrors(prev => ({ ...prev, bookings: "Unauthorized (401)" }));
+        setBookings([]);
       } else {
+        setError(`Failed to load bookings: Server returned ${response.status} error`);
         console.error("Failed to fetch bookings:", response.status);
+        setApiErrors(prev => ({ ...prev, bookings: `HTTP ${response.status}` }));
+        setBookings([]);
       }
     } catch (error) {
+      setError("Network error: Unable to fetch bookings. Please check your connection.");
       console.error("Error fetching bookings:", error);
+      setApiErrors(prev => ({ ...prev, bookings: error.message }));
+      setBookings([]);
     } finally {
       setLoading(false);
     }
@@ -1240,54 +1295,38 @@ const BookingsManagement = ({ currentAdminRole }) => {
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setNationalities([
-          { id: 1, name: "Kenyan" },
-          { id: 2, name: "American" },
-          { id: 3, name: "British" },
-          { id: 4, name: "Canadian" },
-          { id: 5, name: "German" },
-          { id: 6, name: "French" },
-          { id: 7, name: "Chinese" },
-          { id: 8, name: "Indian" },
-        ]);
-        return;
-      }
-      
       if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setNationalities(getFallbackNationalities());
+          return;
+        }
+        
         setNationalities(data);
       } else {
-        setNationalities([
-          { id: 1, name: "Kenyan" },
-          { id: 2, name: "American" },
-          { id: 3, name: "British" },
-          { id: 4, name: "Canadian" },
-          { id: 5, name: "German" },
-          { id: 6, name: "French" },
-          { id: 7, name: "Chinese" },
-          { id: 8, name: "Indian" },
-        ]);
+        setNationalities(getFallbackNationalities());
       }
     } catch (error) {
       console.error("Error fetching nationalities:", error);
-      setNationalities([
-        { id: 1, name: "Kenyan" },
-        { id: 2, name: "American" },
-        { id: 3, name: "British" },
-        { id: 4, name: "Canadian" },
-        { id: 5, name: "German" },
-        { id: 6, name: "French" },
-        { id: 7, name: "Chinese" },
-        { id: 8, name: "Indian" },
-      ]);
+      setNationalities(getFallbackNationalities());
     }
   };
+
+  const getFallbackNationalities = () => [
+    { id: 1, name: "Kenyan" },
+    { id: 2, name: "American" },
+    { id: 3, name: "British" },
+    { id: 4, name: "Canadian" },
+    { id: 5, name: "German" },
+    { id: 6, name: "French" },
+    { id: 7, name: "Chinese" },
+    { id: 8, name: "Indian" },
+  ];
 
   const fetchRoomTypes = async () => {
     try {
@@ -1298,45 +1337,35 @@ const BookingsManagement = ({ currentAdminRole }) => {
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setRoomTypes([
-          { id: 1, name: "Single Room" },
-          { id: 2, name: "Double Room" },
-          { id: 3, name: "Deluxe Room" },
-          { id: 4, name: "Suite" },
-          { id: 5, name: "Executive Suite" },
-        ]);
-        return;
-      }
-      
       if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setRoomTypes(getFallbackRoomTypes());
+          return;
+        }
+        
         setRoomTypes(data);
       } else {
-        setRoomTypes([
-          { id: 1, name: "Single Room" },
-          { id: 2, name: "Double Room" },
-          { id: 3, name: "Deluxe Room" },
-          { id: 4, name: "Suite" },
-          { id: 5, name: "Executive Suite" },
-        ]);
+        setRoomTypes(getFallbackRoomTypes());
       }
     } catch (error) {
       console.error("Error fetching room types:", error);
-      setRoomTypes([
-        { id: 1, name: "Single Room" },
-        { id: 2, name: "Double Room" },
-        { id: 3, name: "Deluxe Room" },
-        { id: 4, name: "Suite" },
-        { id: 5, name: "Executive Suite" },
-      ]);
+      setRoomTypes(getFallbackRoomTypes());
     }
   };
+
+  const getFallbackRoomTypes = () => [
+    { id: 1, name: "Single Room" },
+    { id: 2, name: "Double Room" },
+    { id: 3, name: "Deluxe Room" },
+    { id: 4, name: "Suite" },
+    { id: 5, name: "Executive Suite" },
+  ];
 
   const handleEdit = (booking) => {
     setEditingBooking(booking);
@@ -1344,7 +1373,6 @@ const BookingsManagement = ({ currentAdminRole }) => {
   };
 
   const handleDelete = async (bookingId) => {
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete bookings.");
       return;
@@ -1362,14 +1390,17 @@ const BookingsManagement = ({ currentAdminRole }) => {
       });
 
       if (response.ok) {
-        alert("Booking deleted successfully!");
+        setSuccessMessage("✅ Booking deleted successfully!");
         fetchBookings();
+      } else if (response.status === 500) {
+        alert("Server error: Unable to delete booking. Please try again later.");
       } else {
-        alert("Failed to delete booking");
+        const errorData = await response.json().catch(() => ({}));
+        alert(`Failed to delete booking: ${errorData.message || 'Unknown error'}`);
       }
     } catch (error) {
       console.error("Error deleting booking:", error);
-      alert("Failed to delete booking");
+      alert("Failed to delete booking: Network error");
     }
   };
 
@@ -1380,13 +1411,28 @@ const BookingsManagement = ({ currentAdminRole }) => {
         ? `https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings/${editingBooking.id}`
         : "https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/bookings";
 
+      const method = editingBooking ? "PUT" : "POST";
+      
+      // Prepare the data in a format that matches what the backend expects
+      const requestData = {
+        booking: {
+          user_id: parseInt(formData.user_id),
+          room_type: formData.room_type,
+          check_in: formData.check_in,
+          check_out: formData.check_out,
+          guests: parseInt(formData.guests),
+          nationality: formData.nationality,
+          status: formData.status,
+        }
+      };
+
       const response = await fetch(url, {
-        method: editingBooking ? "PUT" : "POST",
+        method: method,
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ booking: formData }),
+        body: JSON.stringify(requestData),
       });
 
       const responseText = await response.text();
@@ -1400,12 +1446,23 @@ const BookingsManagement = ({ currentAdminRole }) => {
       }
 
       if (response.ok) {
-        alert(`Booking ${editingBooking ? 'updated' : 'created'} successfully!`);
+        const successMsg = editingBooking 
+          ? "✅ Booking updated successfully!"
+          : "✅ Booking created successfully!";
+        
+        setSuccessMessage(successMsg);
         setShowForm(false);
         setEditingBooking(null);
         fetchBookings();
+      } else if (response.status === 500) {
+        throw new Error("Internal Server Error: The server encountered an error while processing your request. Please try again later.");
       } else {
-        throw new Error(result.error || result.errors?.join(', ') || 'Failed to save booking');
+        // Try to extract error message from different response formats
+        const errorMessage = result.error || 
+                           result.message || 
+                           result.errors?.join(', ') || 
+                           `Server returned ${response.status} error`;
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("Error saving booking:", error);
@@ -1413,18 +1470,82 @@ const BookingsManagement = ({ currentAdminRole }) => {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading bookings...</div>;
+  const handleRetry = () => {
+    fetchBookings();
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading bookings...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-lg font-semibold text-gray-900">All Bookings</h2>
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            Create New Booking
+          </button>
+        </div>
+
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+          <svg className="mx-auto h-12 w-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
+          </svg>
+          <h3 className="mt-4 text-lg font-medium text-red-800">Unable to Load Bookings</h3>
+          <p className="mt-2 text-red-600">{error}</p>
+          <div className="mt-6">
+            <button
+              onClick={handleRetry}
+              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+
+        {showForm && (
+          <BookingForm
+            booking={editingBooking}
+            onSubmit={handleSubmit}
+            onCancel={() => {
+              setShowForm(false);
+              setEditingBooking(null);
+            }}
+            nationalities={nationalities}
+            roomTypes={roomTypes}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-gray-900">All Bookings</h2>
-        <button
-          onClick={() => setShowForm(true)}
-          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
-        >
-          Create New Booking
-        </button>
+        <div className="flex space-x-2">
+          <button
+            onClick={fetchBookings}
+            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            Refresh
+          </button>
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            Create New Booking
+          </button>
+        </div>
       </div>
 
       {showForm && (
@@ -1457,6 +1578,9 @@ const BookingsManagement = ({ currentAdminRole }) => {
                 Dates
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Guests
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -1466,12 +1590,12 @@ const BookingsManagement = ({ currentAdminRole }) => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {bookings.length > 0 ? bookings.map((booking) => (
-              <tr key={booking.id}>
+              <tr key={booking.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   #{booking.id}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {booking.user?.email || "N/A"}
+                  {booking.user?.email || booking.user_id || "N/A"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {booking.room_type}
@@ -1479,10 +1603,14 @@ const BookingsManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(booking.check_in).toLocaleDateString()} - {new Date(booking.check_out).toLocaleDateString()}
                 </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {booking.guests}
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                     booking.status === 'confirmed' ? 'bg-green-100 text-green-800' :
                     booking.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                    booking.status === 'completed' ? 'bg-blue-100 text-blue-800' :
                     'bg-red-100 text-red-800'
                   }`}>
                     {booking.status}
@@ -1491,15 +1619,14 @@ const BookingsManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                   <button
                     onClick={() => handleEdit(booking)}
-                    className="text-cyan-600 hover:text-cyan-900"
+                    className="text-cyan-600 hover:text-cyan-900 font-medium"
                   >
                     Edit
                   </button>
-                  {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                   {currentAdminRole === 0 && (
                     <button
                       onClick={() => handleDelete(booking.id)}
-                      className="text-red-600 hover:text-red-900"
+                      className="text-red-600 hover:text-red-900 font-medium"
                     >
                       Delete
                     </button>
@@ -1508,8 +1635,22 @@ const BookingsManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
-                <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
-                  No bookings found or unable to load bookings.
+                <td colSpan="7" className="px-6 py-8 text-center">
+                  <div className="text-gray-500">
+                    <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h3 className="mt-2 text-sm font-medium text-gray-900">No bookings</h3>
+                    <p className="mt-1 text-sm text-gray-500">No bookings have been created yet.</p>
+                    <div className="mt-6">
+                      <button
+                        onClick={() => setShowForm(true)}
+                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                      >
+                        Create New Booking
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             )}
@@ -1521,54 +1662,126 @@ const BookingsManagement = ({ currentAdminRole }) => {
 };
 
 const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) => {
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
+  const getMinCheckoutDate = (checkInDate) => {
+    if (!checkInDate) return getTodayDate();
+    const checkIn = new Date(checkInDate);
+    const nextDay = new Date(checkIn);
+    nextDay.setDate(checkIn.getDate() + 1);
+    return nextDay.toISOString().split('T')[0];
+  };
+
   const [formData, setFormData] = useState({
     user_id: booking?.user_id || "",
     room_type: booking?.room_type || "",
-    check_in: booking?.check_in || "",
-    check_out: booking?.check_out || "",
+    check_in: booking?.check_in || getTodayDate(),
+    check_out: booking?.check_out || getMinCheckoutDate(booking?.check_in || getTodayDate()),
     guests: booking?.guests || 1,
     nationality: booking?.nationality || "",
     status: booking?.status || "confirmed",
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const { name, value } = e.target;
+    
+    setFormData(prevData => {
+      const newData = {
+        ...prevData,
+        [name]: value,
+      };
+
+      // If check_in changes, update check_out to be at least one day after
+      if (name === 'check_in' && value) {
+        const minCheckout = getMinCheckoutDate(value);
+        if (new Date(newData.check_out) <= new Date(value)) {
+          newData.check_out = minCheckout;
+        }
+      }
+
+      return newData;
     });
+
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.user_id) newErrors.user_id = 'User ID is required';
+    if (!formData.room_type) newErrors.room_type = 'Room type is required';
+    if (!formData.check_in) newErrors.check_in = 'Check-in date is required';
+    if (!formData.check_out) newErrors.check_out = 'Check-out date is required';
+    if (!formData.guests || formData.guests < 1) newErrors.guests = 'Number of guests is required';
+    if (!formData.nationality) newErrors.nationality = 'Nationality is required';
+
+    // Date validation
+    const today = new Date(getTodayDate());
+    const checkIn = new Date(formData.check_in);
+    const checkOut = new Date(formData.check_out);
+
+    if (checkIn < today) {
+      newErrors.check_in = 'Check-in date cannot be in the past';
+    }
+
+    if (checkOut <= checkIn) {
+      newErrors.check_out = 'Check-out date must be after check-in date';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    if (validateForm()) {
+      onSubmit(formData);
+    }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-md w-full p-6">
+      <div className="bg-white rounded-lg max-w-md w-full p-6 max-h-[90vh] overflow-y-auto">
         <h3 className="text-lg font-semibold mb-4">
           {booking ? 'Edit Booking' : 'Create New Booking'}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">User ID</label>
+            <label className="block text-sm font-medium text-gray-700">User ID *</label>
             <input
               type="number"
               name="user_id"
               value={formData.user_id}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.user_id ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.user_id && (
+              <p className="mt-1 text-sm text-red-600">{errors.user_id}</p>
+            )}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700">Room Type</label>
+            <label className="block text-sm font-medium text-gray-700">Room Type *</label>
             <select
               name="room_type"
               value={formData.room_type}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.room_type ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
             >
               <option value="">Select Room Type</option>
@@ -1578,36 +1791,51 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
                 </option>
               ))}
             </select>
+            {errors.room_type && (
+              <p className="mt-1 text-sm text-red-600">{errors.room_type}</p>
+            )}
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Check-in</label>
+              <label className="block text-sm font-medium text-gray-700">Check-in *</label>
               <input
                 type="date"
                 name="check_in"
                 value={formData.check_in}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                min={getTodayDate()}
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.check_in ? 'border-red-300' : 'border-gray-300'
+                }`}
                 required
               />
+              {errors.check_in && (
+                <p className="mt-1 text-sm text-red-600">{errors.check_in}</p>
+              )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Check-out</label>
+              <label className="block text-sm font-medium text-gray-700">Check-out *</label>
               <input
                 type="date"
                 name="check_out"
                 value={formData.check_out}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                min={getMinCheckoutDate(formData.check_in)}
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.check_out ? 'border-red-300' : 'border-gray-300'
+                }`}
                 required
               />
+              {errors.check_out && (
+                <p className="mt-1 text-sm text-red-600">{errors.check_out}</p>
+              )}
             </div>
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Guests</label>
+              <label className="block text-sm font-medium text-gray-700">Guests *</label>
               <input
                 type="number"
                 name="guests"
@@ -1615,9 +1843,14 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
                 onChange={handleChange}
                 min="1"
                 max="20"
-                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                  errors.guests ? 'border-red-300' : 'border-gray-300'
+                }`}
                 required
               />
+              {errors.guests && (
+                <p className="mt-1 text-sm text-red-600">{errors.guests}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Status</label>
@@ -1636,12 +1869,14 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nationality</label>
+            <label className="block text-sm font-medium text-gray-700">Nationality *</label>
             <select
               name="nationality"
               value={formData.nationality}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.nationality ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
             >
               <option value="">Select Nationality</option>
@@ -1651,6 +1886,9 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
                 </option>
               ))}
             </select>
+            {errors.nationality && (
+              <p className="mt-1 text-sm text-red-600">{errors.nationality}</p>
+            )}
           </div>
           
           <div className="flex justify-end space-x-3 pt-4">
@@ -1674,7 +1912,7 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
   );
 };
 
-const UsersManagement = ({ currentAdminRole }) => {
+const UsersManagement = ({ currentAdminRole, setApiErrors }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -1697,31 +1935,32 @@ const UsersManagement = ({ currentAdminRole }) => {
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setLoading(false);
-        return;
-      }
-      
       if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setUsers([]);
+          return;
+        }
+        
         setUsers(data);
       } else {
         console.error("Failed to fetch users:", response.status);
+        setApiErrors(prev => ({ ...prev, users: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching users:", error);
+      setApiErrors(prev => ({ ...prev, users: error.message }));
     } finally {
       setLoading(false);
     }
   };
 
   const handleDeleteUser = async (userId) => {
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete users.");
       return;
@@ -1771,7 +2010,6 @@ const UsersManagement = ({ currentAdminRole }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
-              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole === 0 && (
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -1798,7 +2036,6 @@ const UsersManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(user.created_at).toLocaleDateString()}
                 </td>
-                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 {currentAdminRole === 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
@@ -1812,9 +2049,8 @@ const UsersManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
-                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No users found or unable to load users.
+                  No users found
                 </td>
               </tr>
             )}
@@ -1825,7 +2061,7 @@ const UsersManagement = ({ currentAdminRole }) => {
   );
 };
 
-const AdminManagement = ({ currentAdminRole }) => {
+const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
   const [admins, setAdmins] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -1850,24 +2086,30 @@ const AdminManagement = ({ currentAdminRole }) => {
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setLoading(false);
-        return;
-      }
-      
       if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setAdmins([]);
+          return;
+        }
+        
         setAdmins(data);
+      } else if (response.status === 401) {
+        console.error("Unauthorized to fetch admins - insufficient permissions");
+        setApiErrors(prev => ({ ...prev, admins: "Unauthorized - You don't have permission to access admin management" }));
+        alert("You don't have permission to access admin management. Only Super Admin can manage other admins.");
       } else {
         console.error("Failed to fetch admins:", response.status);
+        setApiErrors(prev => ({ ...prev, admins: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching admins:", error);
+      setApiErrors(prev => ({ ...prev, admins: error.message }));
     } finally {
       setLoading(false);
     }
@@ -1882,7 +2124,7 @@ const AdminManagement = ({ currentAdminRole }) => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ admin: formData }),
+        body: JSON.stringify(formData),
       });
 
       const responseText = await response.text();
@@ -1938,7 +2180,6 @@ const AdminManagement = ({ currentAdminRole }) => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
-        {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
         {currentAdminRole === 0 && (
           <button
             onClick={() => setShowForm(true)}
@@ -1972,7 +2213,6 @@ const AdminManagement = ({ currentAdminRole }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
-              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole === 0 && (
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -1997,7 +2237,6 @@ const AdminManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(admin.created_at).toLocaleDateString()}
                 </td>
-                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 {currentAdminRole === 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
@@ -2011,9 +2250,8 @@ const AdminManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
-                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No admins found or unable to load admins.
+                  No admins found or insufficient permissions
                 </td>
               </tr>
             )}
@@ -2029,7 +2267,7 @@ const AdminForm = ({ onSubmit, onCancel }) => {
     email: "",
     password: "",
     password_confirmation: "",
-    role: 1, // Always set to admin (1)
+    role: 1,
   });
 
   const [errors, setErrors] = useState({});
@@ -2058,7 +2296,6 @@ const AdminForm = ({ onSubmit, onCancel }) => {
       newErrors.password_confirmation = 'Passwords do not match';
     }
 
-    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
@@ -2136,7 +2373,6 @@ const AdminForm = ({ onSubmit, onCancel }) => {
             )}
           </div>
 
-          {/* Hidden role field - always set to admin (1) */}
           <input type="hidden" name="role" value={1} />
 
           <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
@@ -2175,9 +2411,10 @@ const AdminForm = ({ onSubmit, onCancel }) => {
   );
 };
 
-const MessagesManagement = ({ currentAdminRole }) => {
+const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetchMessages();
@@ -2185,44 +2422,115 @@ const MessagesManagement = ({ currentAdminRole }) => {
 
   const fetchMessages = async () => {
     try {
+      setLoading(true);
+      setError("");
       const token = localStorage.getItem("adminToken");
+      
       if (!token) {
-        console.error("No admin token found");
+        setError("No authentication token found. Please log in again.");
         setLoading(false);
         return;
       }
 
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages", {
+        method: "GET",
         headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        setLoading(false);
-        return;
-      }
-      
       if (response.ok) {
-        setMessages(data);
+        const responseText = await response.text();
+        
+        // Check if response is empty
+        if (!responseText.trim()) {
+          console.warn("Empty response from server");
+          setMessages([]);
+          return;
+        }
+
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          console.error("Response text that failed to parse:", responseText);
+          setMessages([]);
+          return;
+        }
+        
+        // Handle different response formats
+        if (Array.isArray(data)) {
+          setMessages(data);
+        } else if (data.data && Array.isArray(data.data)) {
+          setMessages(data.data);
+        } else if (data.messages && Array.isArray(data.messages)) {
+          setMessages(data.messages);
+        } else {
+          console.warn("Unexpected response format:", data);
+          setMessages([]);
+        }
+      } else if (response.status === 401) {
+        setError("Unauthorized: You don't have permission to view messages. Please check your admin permissions or try logging in again.");
+        console.error("Unauthorized access to messages endpoint");
+        setApiErrors(prev => ({ ...prev, messages: "Unauthorized (401)" }));
+        setMessages([]);
+      } else if (response.status === 404) {
+        setError("Messages endpoint not found. Please contact support.");
+        console.error("Messages endpoint not found (404)");
+        setApiErrors(prev => ({ ...prev, messages: "Endpoint not found (404)" }));
+        setMessages([]);
       } else {
+        setError(`Failed to load messages: Server returned ${response.status} error`);
         console.error("Failed to fetch messages:", response.status);
+        setApiErrors(prev => ({ ...prev, messages: `HTTP ${response.status}` }));
+        setMessages([]);
       }
     } catch (error) {
+      setError("Network error: Unable to fetch messages. Please check your connection and try again.");
       console.error("Error fetching messages:", error);
+      setApiErrors(prev => ({ ...prev, messages: error.message }));
+      setMessages([]);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleMarkAsRead = async (messageId) => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}/mark_as_read`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Update local state
+        setMessages(messages.map(msg => 
+          msg.id === messageId ? { ...msg, status: 'read' } : msg
+        ));
+      } else if (response.status === 401) {
+        alert("Unauthorized: You don't have permission to mark messages as read.");
+      } else {
+        alert("Failed to mark message as read");
+      }
+    } catch (error) {
+      console.error("Error marking message as read:", error);
+      alert("Failed to mark message as read");
+    }
+  };
+
+  const handleReply = (message) => {
+    const subject = encodeURIComponent(`Re: Your message to Southcoast Outdoors`);
+    const body = encodeURIComponent(`Dear ${message.name},\n\nThank you for your message. We will get back to you shortly.\n\nBest regards,\nSouthcoast Outdoors Team`);
+    window.location.href = `mailto:${message.email}?subject=${subject}&body=${body}`;
+  };
+
   const handleDeleteMessage = async (messageId) => {
-    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete messages.");
       return;
@@ -2232,7 +2540,7 @@ const MessagesManagement = ({ currentAdminRole }) => {
 
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages/${messageId}`, {
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -2242,6 +2550,8 @@ const MessagesManagement = ({ currentAdminRole }) => {
       if (response.ok) {
         alert("Message deleted successfully!");
         fetchMessages();
+      } else if (response.status === 401) {
+        alert("Unauthorized: You don't have permission to delete messages.");
       } else {
         alert("Failed to delete message");
       }
@@ -2251,18 +2561,79 @@ const MessagesManagement = ({ currentAdminRole }) => {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading messages...</div>;
+  const handleRetry = () => {
+    fetchMessages();
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading messages...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+          <svg className="mx-auto h-12 w-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
+          </svg>
+          <h3 className="mt-4 text-lg font-medium text-red-800">Unable to Load Messages</h3>
+          <p className="mt-2 text-red-600">{error}</p>
+          <div className="mt-6">
+            <button
+              onClick={handleRetry}
+              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              Try Again
+            </button>
+          </div>
+          <div className="mt-4">
+            <button
+              onClick={() => {
+                localStorage.removeItem("adminToken");
+                window.location.reload();
+              }}
+              className="text-sm text-red-600 hover:text-red-800"
+            >
+              Log out and try again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
       <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
+      
+      <div className="mb-4 flex justify-between items-center">
+        <button
+          onClick={fetchMessages}
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+        >
+          Refresh Messages
+        </button>
+        <span className="text-sm text-gray-500">
+          {messages.length} message{messages.length !== 1 ? 's' : ''} found
+        </span>
+      </div>
+
       <div className="space-y-4">
         {messages.length > 0 ? messages.map((message) => (
-          <div key={message.id} className="bg-white border border-gray-200 rounded-lg p-6">
+          <div key={message.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start mb-3">
               <div>
                 <h3 className="text-sm font-medium text-gray-900">{message.name}</h3>
                 <p className="text-sm text-gray-500">{message.email}</p>
+                {message.phone && (
+                  <p className="text-sm text-gray-500">Phone: {message.phone}</p>
+                )}
               </div>
               <div className="text-right">
                 <p className="text-xs text-gray-400">
@@ -2274,25 +2645,34 @@ const MessagesManagement = ({ currentAdminRole }) => {
                   message.status === 'read' ? 'bg-gray-100 text-gray-800' :
                   'bg-green-100 text-green-800'
                 }`}>
-                  {message.status}
+                  {message.status || 'new'}
                 </span>
               </div>
             </div>
-            <p className="text-gray-700 mb-4">{message.message}</p>
+            <p className="text-gray-700 mb-4 whitespace-pre-wrap">{message.message}</p>
             <div className="flex justify-between items-center">
               <div className="flex space-x-2">
-                <button className="text-sm text-cyan-600 hover:text-cyan-800">
-                  Mark as {message.status === 'read' ? 'Unread' : 'Read'}
-                </button>
-                <button className="text-sm text-green-600 hover:text-green-800">
-                  Reply
+                {(!message.status || message.status === 'new') ? (
+                  <button 
+                    onClick={() => handleMarkAsRead(message.id)}
+                    className="text-sm text-cyan-600 hover:text-cyan-800 font-medium"
+                  >
+                    Mark as Read
+                  </button>
+                ) : (
+                  <span className="text-sm text-gray-500">Read</span>
+                )}
+                <button 
+                  onClick={() => handleReply(message)}
+                  className="text-sm text-green-600 hover:text-green-800 font-medium"
+                >
+                  Reply via Email
                 </button>
               </div>
-              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole === 0 && (
                 <button
                   onClick={() => handleDeleteMessage(message.id)}
-                  className="text-sm text-red-600 hover:text-red-800"
+                  className="text-sm text-red-600 hover:text-red-800 font-medium"
                 >
                   Delete
                 </button>
@@ -2300,8 +2680,20 @@ const MessagesManagement = ({ currentAdminRole }) => {
             </div>
           </div>
         )) : (
-          <div className="text-center py-8 text-gray-500">
-            No messages found or unable to load messages.
+          <div className="text-center py-12 text-gray-500 bg-white rounded-lg border border-gray-200">
+            <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+            <h3 className="mt-2 text-sm font-medium text-gray-900">No messages</h3>
+            <p className="mt-1 text-sm text-gray-500">No contact messages have been received yet.</p>
+            <div className="mt-6">
+              <button
+                onClick={fetchMessages}
+                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+              >
+                Refresh Messages
+              </button>
+            </div>
           </div>
         )}
       </div>
