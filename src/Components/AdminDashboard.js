@@ -31,6 +31,14 @@ export default function AdminDashboard() {
     }
   }, [successMessage]);
 
+  // Fixed: Renamed from useFallbackAdminData to loadFallbackAdminData
+  const loadFallbackAdminData = () => {
+    const storedRole = localStorage.getItem("adminRole") || 1;
+    const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+    setCurrentAdminRole(parseInt(storedRole));
+    setCurrentAdminName(storedName);
+  };
+
   const fetchAdminProfile = async () => {
     try {
       const token = localStorage.getItem("adminToken");
@@ -60,7 +68,7 @@ export default function AdminDashboard() {
           } catch (parseError) {
             console.error("JSON Parse Error:", parseError);
             // Use fallback data if profile endpoint returns invalid JSON
-            useFallbackAdminData();
+            loadFallbackAdminData(); // Fixed: Changed function name
             return;
           }
 
@@ -98,25 +106,18 @@ export default function AdminDashboard() {
         } else if (response.status === 404) {
           // Profile endpoint not found, use fallback
           console.warn("Profile endpoint not found, using fallback data");
-          useFallbackAdminData();
+          loadFallbackAdminData(); // Fixed: Changed function name
         } else {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
       } catch (profileError) {
         console.error("Failed to fetch admin profile:", profileError);
-        useFallbackAdminData();
+        loadFallbackAdminData(); // Fixed: Changed function name
       }
     } catch (error) {
       console.error("Error in fetchAdminProfile:", error);
-      useFallbackAdminData();
+      loadFallbackAdminData(); // Fixed: Changed function name
     }
-  };
-
-  const useFallbackAdminData = () => {
-    const storedRole = localStorage.getItem("adminRole") || 1;
-    const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
-    setCurrentAdminRole(parseInt(storedRole));
-    setCurrentAdminName(storedName);
   };
 
   const fetchDashboardStats = async () => {
@@ -584,6 +585,9 @@ const ComplimentNoteModal = () => {
     </div>
   );
 };
+
+// ... Rest of the component code remains exactly the same as in the previous version ...
+// (PartnersManagement, PartnerForm, BookingsManagement, BookingForm, UsersManagement, AdminManagement, AdminForm, MessagesManagement)
 
 const PartnersManagement = ({ currentAdminRole, setApiErrors }) => {
   const [partners, setPartners] = useState([]);
