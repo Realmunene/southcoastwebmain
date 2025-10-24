@@ -31,9 +31,7 @@ export default function BookingSearch({ onLoginClick }) {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
-  const pendingBookingRef = useRef(false);
-  const loginPopupRef = useRef(null);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   // ✅ Enhanced user initialization with polling for popup login
   const checkUserAuth = () => {
@@ -90,65 +88,6 @@ export default function BookingSearch({ onLoginClick }) {
       window.removeEventListener("userLoggedIn", handleUserLogin);
     };
   }, []);
-
-  // ✅ Handle pending booking after login
-  useEffect(() => {
-    if (user && pendingBookingRef.current) {
-      pendingBookingRef.current = false;
-      executeBooking(user.token, user.id);
-    }
-  }, [user]);
-
-  // ✅ Poll for authentication changes when popup might be active
-  useEffect(() => {
-    let pollInterval;
-    
-    if (pendingBookingRef.current && !user) {
-      // Check every 500ms for auth changes when we're waiting for login
-      pollInterval = setInterval(() => {
-        checkUserAuth();
-      }, 500);
-    }
-
-    return () => {
-      if (pollInterval) clearInterval(pollInterval);
-    };
-  }, [pendingBookingRef.current, user]);
-
-  // Enhanced login handler that sets up proper detection
-  const handleLoginClick = () => {
-    pendingBookingRef.current = true;
-    
-    // Set up a one-time storage listener for immediate feedback
-    const handleImmediateStorageChange = (e) => {
-      if (e.key === "user") {
-        checkUserAuth();
-        window.removeEventListener("storage", handleImmediateStorageChange);
-      }
-    };
-    
-    window.addEventListener("storage", handleImmediateStorageChange);
-    
-    // Start polling as backup
-    const pollInterval = setInterval(() => {
-      if (checkUserAuth() && user) {
-        clearInterval(pollInterval);
-      }
-    }, 500);
-    
-    // Clear polling after 30 seconds max
-    setTimeout(() => {
-      clearInterval(pollInterval);
-      window.removeEventListener("storage", handleImmediateStorageChange);
-    }, 30000);
-
-    // Trigger the actual login popup
-    if (typeof onLoginClick === "function") {
-      onLoginClick();
-    } else {
-      alert("Please log in to make a booking");
-    }
-  };
 
   // Fetch nationalities and room types
   useEffect(() => {
@@ -297,19 +236,24 @@ export default function BookingSearch({ onLoginClick }) {
     setErrors((prev) => ({ ...prev, checkOut: "" }));
   };
 
-  // ✅ Enhanced booking handler with better login detection
+  // ✅ Enhanced booking handler with login alert
   const handleBooking = () => {
     if (!user) {
-      handleLoginClick();
+      setShowLoginAlert(true);
       return;
     }
     executeBooking(user.token, user.id);
   };
 
-  // Force refresh authentication (manual trigger)
-  const refreshAuth = () => {
-    checkUserAuth();
-  };
+  // Auto-hide login alert after 5 seconds
+  useEffect(() => {
+    if (showLoginAlert) {
+      const timer = setTimeout(() => {
+        setShowLoginAlert(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showLoginAlert]);
 
   const getInputClass = (field) =>
     errors[field]
@@ -318,23 +262,6 @@ export default function BookingSearch({ onLoginClick }) {
 
   return (
     <div className="my-background py-4">
-      {/* Auth Status Indicator */}
-      <div className="max-w-7xl mx-auto mb-4 flex justify-between items-center">
-        <div className="text-sm text-white">
-          {user ? (
-            <span>✅ Logged in as user #{user.id}</span>
-          ) : (
-            <span>🔒 Please log in to book</span>
-          )}
-        </div>
-        <button
-          onClick={refreshAuth}
-          className="text-xs bg-white bg-opacity-20 text-white px-2 py-1 rounded"
-        >
-          Refresh Auth
-        </button>
-      </div>
-
       <div className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
         {/* Nationality */}
         <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
@@ -462,6 +389,13 @@ export default function BookingSearch({ onLoginClick }) {
         </button>
       </div>
 
+      {/* Login Alert - Only shows when booking is attempted without login */}
+      {showLoginAlert && (
+        <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
+          <p>You need to be logged in to make a booking.</p>
+        </div>
+      )}
+
       {/* Error summary */}
       {Object.keys(errors).length > 0 && (
         <div className="max-w-7xl mx-auto mt-4 p-4 bg-red-100 text-red-700 rounded-md">
@@ -471,19 +405,6 @@ export default function BookingSearch({ onLoginClick }) {
               <li key={index}>{error}</li>
             ))}
           </ul>
-        </div>
-      )}
-
-      {/* Login prompt */}
-      {!user && (
-        <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
-          <p>You need to be logged in to make a booking. </p>
-          <button 
-            onClick={handleLoginClick}
-            className="text-cyan-600 hover:underline font-semibold mt-2"
-          >
-            Click here to login
-          </button>
         </div>
       )}
 
