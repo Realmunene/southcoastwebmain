@@ -2610,21 +2610,6 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
         return;
       }
 
-      // Verify token is valid before making request
-      try {
-        // Simple token validation - check if it's a JWT format
-        const tokenParts = token.split('.');
-        if (tokenParts.length !== 3) {
-          setError("Invalid authentication token. Please log in again.");
-          setLoading(false);
-          return;
-        }
-      } catch (tokenError) {
-        setError("Invalid authentication token. Please log in again.");
-        setLoading(false);
-        return;
-      }
-
       const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages", {
         method: "GET",
         headers: {
@@ -2637,9 +2622,7 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
       if (response.ok) {
         const responseText = await response.text();
         
-        // Check if response is empty
         if (!responseText.trim()) {
-          console.warn("Empty response from server");
           setMessages([]);
           return;
         }
@@ -2649,48 +2632,33 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
           data = JSON.parse(responseText);
         } catch (parseError) {
           console.error("JSON Parse Error:", parseError);
-          console.error("Response text that failed to parse:", responseText);
+          setError("Server returned an invalid response format.");
           setMessages([]);
           return;
         }
         
-        // Handle different response formats
         if (Array.isArray(data)) {
           setMessages(data);
         } else if (data.data && Array.isArray(data.data)) {
           setMessages(data.data);
         } else if (data.messages && Array.isArray(data.messages)) {
           setMessages(data.messages);
+        } else if (data.contact_messages && Array.isArray(data.contact_messages)) {
+          setMessages(data.contact_messages);
         } else {
-          console.warn("Unexpected response format:", data);
           setMessages([]);
         }
       } else if (response.status === 401) {
-        const errorMessage = "Unauthorized: You don't have permission to access messages. This could be because:\n\n• Your session has expired\n• You don't have the required admin permissions\n• Your authentication token is invalid\n\nPlease try logging out and logging in again.";
-        setError(errorMessage);
-        console.error("Unauthorized access to messages endpoint (401)");
+        setError("Authentication failed. Please ensure you're logged in as an admin.");
         setApiErrors(prev => ({ ...prev, messages: "Unauthorized (401)" }));
         setMessages([]);
-      } else if (response.status === 403) {
-        setError("Forbidden: You don't have the necessary permissions to view messages. Please contact your administrator.");
-        setApiErrors(prev => ({ ...prev, messages: "Forbidden (403)" }));
-        setMessages([]);
-      } else if (response.status === 404) {
-        setError("Messages endpoint not found. The server might be undergoing maintenance. Please try again later.");
-        setApiErrors(prev => ({ ...prev, messages: "Endpoint not found (404)" }));
-        setMessages([]);
-      } else if (response.status >= 500) {
-        setError("Server error: Unable to load messages due to a server issue. Please try again later.");
-        setApiErrors(prev => ({ ...prev, messages: `Server Error (${response.status})` }));
-        setMessages([]);
       } else {
-        setError(`Failed to load messages: Server returned ${response.status} error`);
+        setError(`Unable to load messages: Server returned ${response.status} error`);
         setApiErrors(prev => ({ ...prev, messages: `HTTP ${response.status}` }));
         setMessages([]);
       }
     } catch (error) {
-      setError("Network error: Unable to fetch messages. Please check your internet connection and try again.");
-      console.error("Error fetching messages:", error);
+      setError("Network error: Unable to fetch messages. Please check your connection.");
       setApiErrors(prev => ({ ...prev, messages: error.message }));
       setMessages([]);
     } finally {
@@ -2709,18 +2677,12 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
       });
 
       if (response.ok) {
-        // Update local state
         setMessages(messages.map(msg => 
           msg.id === messageId ? { ...msg, status: 'read' } : msg
         ));
-      } else if (response.status === 401) {
-        alert("Unauthorized: Your session may have expired. Please refresh the page and try again.");
-      } else {
-        alert("Failed to mark message as read. Please try again.");
       }
     } catch (error) {
       console.error("Error marking message as read:", error);
-      alert("Failed to mark message as read due to a network error.");
     }
   };
 
@@ -2748,33 +2710,15 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
       });
 
       if (response.ok) {
-        alert("Message deleted successfully!");
-        fetchMessages();
-      } else if (response.status === 401) {
-        alert("Unauthorized: You don't have permission to delete messages.");
-      } else {
-        alert("Failed to delete message. Please try again.");
+        setMessages(messages.filter(msg => msg.id !== messageId));
       }
     } catch (error) {
       console.error("Error deleting message:", error);
-      alert("Failed to delete message due to a network error.");
     }
   };
 
   const handleRetry = () => {
     fetchMessages();
-  };
-
-  const handleLogoutAndRetry = () => {
-    localStorage.removeItem("adminToken");
-    localStorage.removeItem("adminRole");
-    localStorage.removeItem("adminName");
-    window.location.reload();
-  };
-
-  const handleRefreshToken = () => {
-    // Try to refresh the page which might trigger a re-authentication
-    window.location.reload();
   };
 
   if (loading) {
@@ -2798,37 +2742,19 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
               </svg>
             </div>
             <div className="ml-4">
-              <h3 className="text-lg font-medium text-yellow-800">Authentication Required</h3>
+              <h3 className="text-lg font-medium text-yellow-800">Unable to Load Messages</h3>
               <div className="mt-2 text-yellow-700">
-                <p className="whitespace-pre-line">{error}</p>
+                <p>{error}</p>
+                <p className="mt-2 text-sm">
+                  <strong>Backend Issue:</strong> The messages endpoint is currently checking for User admin permissions instead of Admin model authentication.
+                </p>
               </div>
-              <div className="mt-6 flex space-x-4">
+              <div className="mt-6">
                 <button
                   onClick={handleRetry}
                   className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                 >
-                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
                   Try Again
-                </button>
-                <button
-                  onClick={handleRefreshToken}
-                  className="inline-flex items-center px-4 py-2 border border-yellow-300 shadow-sm text-sm font-medium rounded-md text-yellow-700 bg-white hover:bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                >
-                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-3a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                  Refresh Session
-                </button>
-                <button
-                  onClick={handleLogoutAndRetry}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                >
-                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                  </svg>
-                  Log Out & Retry
                 </button>
               </div>
             </div>
@@ -2845,11 +2771,8 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
       <div className="mb-4 flex justify-between items-center">
         <button
           onClick={fetchMessages}
-          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm flex items-center"
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
         >
-          <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-          </svg>
           Refresh Messages
         </button>
         <span className="text-sm text-gray-500">
@@ -2888,39 +2811,25 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
                 {(!message.status || message.status === 'new') ? (
                   <button 
                     onClick={() => handleMarkAsRead(message.id)}
-                    className="text-sm text-cyan-600 hover:text-cyan-800 font-medium flex items-center"
+                    className="text-sm text-cyan-600 hover:text-cyan-800 font-medium"
                   >
-                    <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
                     Mark as Read
                   </button>
                 ) : (
-                  <span className="text-sm text-gray-500 flex items-center">
-                    <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Read
-                  </span>
+                  <span className="text-sm text-gray-500">Read</span>
                 )}
                 <button 
                   onClick={() => handleReply(message)}
-                  className="text-sm text-green-600 hover:text-green-800 font-medium flex items-center"
+                  className="text-sm text-green-600 hover:text-green-800 font-medium"
                 >
-                  <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
                   Reply via Email
                 </button>
               </div>
               {currentAdminRole === 0 && (
                 <button
                   onClick={() => handleDeleteMessage(message.id)}
-                  className="text-sm text-red-600 hover:text-red-800 font-medium flex items-center"
+                  className="text-sm text-red-600 hover:text-red-800 font-medium"
                 >
-                  <svg className="mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
                   Delete
                 </button>
               )}
@@ -2933,17 +2842,6 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
             </svg>
             <h3 className="mt-2 text-sm font-medium text-gray-900">No messages</h3>
             <p className="mt-1 text-sm text-gray-500">No contact messages have been received yet.</p>
-            <div className="mt-6">
-              <button
-                onClick={fetchMessages}
-                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
-              >
-                <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                Refresh Messages
-              </button>
-            </div>
           </div>
         )}
       </div>
