@@ -188,7 +188,9 @@ export default function AdminDashboard() {
       { id: "complimentNote", name: "Compliment Note" },
     ];
 
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole === 0) {
+      // Insert Admin Management tab after Users Management
       const tabsWithAdmin = [...baseTabs];
       tabsWithAdmin.splice(2, 0, { id: "admins", name: "Admin Management" });
       return tabsWithAdmin;
@@ -324,6 +326,7 @@ export default function AdminDashboard() {
           <div className="p-6">
             {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} />}
+            {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
             {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} />}
@@ -609,6 +612,7 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const handleEdit = (partner) => {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole === 0 || partner.status !== "active") {
       setEditingPartner(partner);
       setShowForm(true);
@@ -618,6 +622,7 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const handleDelete = async (partnerId) => {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete partners.");
       return;
@@ -697,6 +702,7 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const togglePartnerStatus = async (partnerId, currentStatus) => {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can change partner status.");
       return;
@@ -831,6 +837,7 @@ const PartnersManagement = ({ currentAdminRole }) => {
                   >
                     Edit
                   </button>
+                  {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                   {currentAdminRole === 0 && (
                     <>
                       <button
@@ -1119,12 +1126,14 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
                 value={formData.status}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+                // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
                 disabled={currentAdminRole !== 0}
               >
                 <option value="pending">Pending</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole !== 0 && (
                 <p className="mt-1 text-xs text-gray-500">Only Super Admin can change status</p>
               )}
@@ -1335,6 +1344,7 @@ const BookingsManagement = ({ currentAdminRole }) => {
   };
 
   const handleDelete = async (bookingId) => {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete bookings.");
       return;
@@ -1355,12 +1365,11 @@ const BookingsManagement = ({ currentAdminRole }) => {
         alert("Booking deleted successfully!");
         fetchBookings();
       } else {
-        const errorData = await response.json().catch(() => ({}));
-        alert(`Failed to delete booking: ${errorData.message || 'Unknown error'}`);
+        alert("Failed to delete booking");
       }
     } catch (error) {
       console.error("Error deleting booking:", error);
-      alert("Failed to delete booking: Network error");
+      alert("Failed to delete booking");
     }
   };
 
@@ -1486,6 +1495,7 @@ const BookingsManagement = ({ currentAdminRole }) => {
                   >
                     Edit
                   </button>
+                  {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                   {currentAdminRole === 0 && (
                     <button
                       onClick={() => handleDelete(booking.id)}
@@ -1511,126 +1521,54 @@ const BookingsManagement = ({ currentAdminRole }) => {
 };
 
 const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) => {
-  const getTodayDate = () => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-  };
-
-  const getMinCheckoutDate = (checkInDate) => {
-    if (!checkInDate) return getTodayDate();
-    const checkIn = new Date(checkInDate);
-    const nextDay = new Date(checkIn);
-    nextDay.setDate(checkIn.getDate() + 1);
-    return nextDay.toISOString().split('T')[0];
-  };
-
   const [formData, setFormData] = useState({
     user_id: booking?.user_id || "",
     room_type: booking?.room_type || "",
-    check_in: booking?.check_in || getTodayDate(),
-    check_out: booking?.check_out || getMinCheckoutDate(booking?.check_in || getTodayDate()),
+    check_in: booking?.check_in || "",
+    check_out: booking?.check_out || "",
     guests: booking?.guests || 1,
     nationality: booking?.nationality || "",
     status: booking?.status || "confirmed",
   });
 
-  const [errors, setErrors] = useState({});
-
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    
-    setFormData(prevData => {
-      const newData = {
-        ...prevData,
-        [name]: value,
-      };
-
-      // If check_in changes, update check_out to be at least one day after
-      if (name === 'check_in' && value) {
-        const minCheckout = getMinCheckoutDate(value);
-        if (new Date(newData.check_out) <= new Date(value)) {
-          newData.check_out = minCheckout;
-        }
-      }
-
-      return newData;
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
-
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: '',
-      });
-    }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.user_id) newErrors.user_id = 'User ID is required';
-    if (!formData.room_type) newErrors.room_type = 'Room type is required';
-    if (!formData.check_in) newErrors.check_in = 'Check-in date is required';
-    if (!formData.check_out) newErrors.check_out = 'Check-out date is required';
-    if (!formData.guests || formData.guests < 1) newErrors.guests = 'Number of guests is required';
-    if (!formData.nationality) newErrors.nationality = 'Nationality is required';
-
-    // Date validation
-    const today = new Date(getTodayDate());
-    const checkIn = new Date(formData.check_in);
-    const checkOut = new Date(formData.check_out);
-
-    if (checkIn < today) {
-      newErrors.check_in = 'Check-in date cannot be in the past';
-    }
-
-    if (checkOut <= checkIn) {
-      newErrors.check_out = 'Check-out date must be after check-in date';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      onSubmit(formData);
-    }
+    onSubmit(formData);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg max-w-md w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg max-w-md w-full p-6">
         <h3 className="text-lg font-semibold mb-4">
           {booking ? 'Edit Booking' : 'Create New Booking'}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">User ID *</label>
+            <label className="block text-sm font-medium text-gray-700">User ID</label>
             <input
               type="number"
               name="user_id"
               value={formData.user_id}
               onChange={handleChange}
-              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
-                errors.user_id ? 'border-red-300' : 'border-gray-300'
-              }`}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
               required
             />
-            {errors.user_id && (
-              <p className="mt-1 text-sm text-red-600">{errors.user_id}</p>
-            )}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700">Room Type *</label>
+            <label className="block text-sm font-medium text-gray-700">Room Type</label>
             <select
               name="room_type"
               value={formData.room_type}
               onChange={handleChange}
-              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
-                errors.room_type ? 'border-red-300' : 'border-gray-300'
-              }`}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
               required
             >
               <option value="">Select Room Type</option>
@@ -1640,51 +1578,36 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
                 </option>
               ))}
             </select>
-            {errors.room_type && (
-              <p className="mt-1 text-sm text-red-600">{errors.room_type}</p>
-            )}
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Check-in *</label>
+              <label className="block text-sm font-medium text-gray-700">Check-in</label>
               <input
                 type="date"
                 name="check_in"
                 value={formData.check_in}
                 onChange={handleChange}
-                min={getTodayDate()}
-                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
-                  errors.check_in ? 'border-red-300' : 'border-gray-300'
-                }`}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
                 required
               />
-              {errors.check_in && (
-                <p className="mt-1 text-sm text-red-600">{errors.check_in}</p>
-              )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Check-out *</label>
+              <label className="block text-sm font-medium text-gray-700">Check-out</label>
               <input
                 type="date"
                 name="check_out"
                 value={formData.check_out}
                 onChange={handleChange}
-                min={getMinCheckoutDate(formData.check_in)}
-                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
-                  errors.check_out ? 'border-red-300' : 'border-gray-300'
-                }`}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
                 required
               />
-              {errors.check_out && (
-                <p className="mt-1 text-sm text-red-600">{errors.check_out}</p>
-              )}
             </div>
           </div>
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Guests *</label>
+              <label className="block text-sm font-medium text-gray-700">Guests</label>
               <input
                 type="number"
                 name="guests"
@@ -1692,14 +1615,9 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
                 onChange={handleChange}
                 min="1"
                 max="20"
-                className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
-                  errors.guests ? 'border-red-300' : 'border-gray-300'
-                }`}
+                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
                 required
               />
-              {errors.guests && (
-                <p className="mt-1 text-sm text-red-600">{errors.guests}</p>
-              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Status</label>
@@ -1718,14 +1636,12 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700">Nationality *</label>
+            <label className="block text-sm font-medium text-gray-700">Nationality</label>
             <select
               name="nationality"
               value={formData.nationality}
               onChange={handleChange}
-              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
-                errors.nationality ? 'border-red-300' : 'border-gray-300'
-              }`}
+              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
               required
             >
               <option value="">Select Nationality</option>
@@ -1735,9 +1651,6 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
                 </option>
               ))}
             </select>
-            {errors.nationality && (
-              <p className="mt-1 text-sm text-red-600">{errors.nationality}</p>
-            )}
           </div>
           
           <div className="flex justify-end space-x-3 pt-4">
@@ -1808,6 +1721,7 @@ const UsersManagement = ({ currentAdminRole }) => {
   };
 
   const handleDeleteUser = async (userId) => {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete users.");
       return;
@@ -1857,6 +1771,7 @@ const UsersManagement = ({ currentAdminRole }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole === 0 && (
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -1883,6 +1798,7 @@ const UsersManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(user.created_at).toLocaleDateString()}
                 </td>
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 {currentAdminRole === 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
@@ -1896,6 +1812,7 @@ const UsersManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
                   No users found or unable to load users.
                 </td>
@@ -1965,7 +1882,7 @@ const AdminManagement = ({ currentAdminRole }) => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(formData), // Fixed: Remove nesting
+        body: JSON.stringify({ admin: formData }),
       });
 
       const responseText = await response.text();
@@ -2021,6 +1938,7 @@ const AdminManagement = ({ currentAdminRole }) => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
+        {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
         {currentAdminRole === 0 && (
           <button
             onClick={() => setShowForm(true)}
@@ -2054,6 +1972,7 @@ const AdminManagement = ({ currentAdminRole }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole === 0 && (
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -2078,6 +1997,7 @@ const AdminManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(admin.created_at).toLocaleDateString()}
                 </td>
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 {currentAdminRole === 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
@@ -2091,6 +2011,7 @@ const AdminManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
                   No admins found or unable to load admins.
                 </td>
@@ -2108,7 +2029,7 @@ const AdminForm = ({ onSubmit, onCancel }) => {
     email: "",
     password: "",
     password_confirmation: "",
-    role: 1,
+    role: 1, // Always set to admin (1)
   });
 
   const [errors, setErrors] = useState({});
@@ -2137,6 +2058,7 @@ const AdminForm = ({ onSubmit, onCancel }) => {
       newErrors.password_confirmation = 'Passwords do not match';
     }
 
+    // Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
@@ -2214,6 +2136,7 @@ const AdminForm = ({ onSubmit, onCancel }) => {
             )}
           </div>
 
+          {/* Hidden role field - always set to admin (1) */}
           <input type="hidden" name="role" value={1} />
 
           <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
@@ -2298,37 +2221,8 @@ const MessagesManagement = ({ currentAdminRole }) => {
     }
   };
 
-  const handleMarkAsRead = async (messageId) => {
-    try {
-      const token = localStorage.getItem("adminToken");
-      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages/${messageId}/mark_as_read`, {
-        method: "PATCH",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        // Update local state
-        setMessages(messages.map(msg => 
-          msg.id === messageId ? { ...msg, status: 'read' } : msg
-        ));
-      } else {
-        alert("Failed to mark message as read");
-      }
-    } catch (error) {
-      console.error("Error marking message as read:", error);
-      alert("Failed to mark message as read");
-    }
-  };
-
-  const handleReply = (message) => {
-    const subject = encodeURIComponent(`Re: Your message to Southcoast Outdoors`);
-    const body = encodeURIComponent(`Dear ${message.name},\n\nThank you for your message. We will get back to you shortly.\n\nBest regards,\nSouthcoast Outdoors Team`);
-    window.location.href = `mailto:${message.email}?subject=${subject}&body=${body}`;
-  };
-
   const handleDeleteMessage = async (messageId) => {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
     if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete messages.");
       return;
@@ -2387,23 +2281,14 @@ const MessagesManagement = ({ currentAdminRole }) => {
             <p className="text-gray-700 mb-4">{message.message}</p>
             <div className="flex justify-between items-center">
               <div className="flex space-x-2">
-                {message.status === 'new' ? (
-                  <button 
-                    onClick={() => handleMarkAsRead(message.id)}
-                    className="text-sm text-cyan-600 hover:text-cyan-800"
-                  >
-                    Mark as Read
-                  </button>
-                ) : (
-                  <span className="text-sm text-gray-500">Read</span>
-                )}
-                <button 
-                  onClick={() => handleReply(message)}
-                  className="text-sm text-green-600 hover:text-green-800"
-                >
+                <button className="text-sm text-cyan-600 hover:text-cyan-800">
+                  Mark as {message.status === 'read' ? 'Unread' : 'Read'}
+                </button>
+                <button className="text-sm text-green-600 hover:text-green-800">
                   Reply
                 </button>
               </div>
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
               {currentAdminRole === 0 && (
                 <button
                   onClick={() => handleDeleteMessage(message.id)}
