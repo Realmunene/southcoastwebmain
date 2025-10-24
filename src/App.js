@@ -189,7 +189,11 @@ const App = () => {
             <Route path='/loginform' 
             onAdminLogin= {handleAdminLogin}
             element={<LoginForm />} />
-            <Route path='/packagepage/:roomTitle' element={<PackagePage/>}/>
+            <Route path='/packagepage/:roomTitle' element={<PackagePage
+            onLoginClick={handleLoginClick} 
+            user={user} 
+            onLogout={handleLogout}
+            />}/>
             <Route path='/firstlogin' element={<LoginPopup/>}/>
             <Route path='/admin/dashboard' element ={<AdminDashboard/>}/>
             {/* ✅ MyBookings Route with user prop */}

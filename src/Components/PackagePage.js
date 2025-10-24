@@ -1,13 +1,14 @@
 // PackagePage.js
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Package from "./Package"; 
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-export default function PackagePage({ onLoginClick }) {
+export default function PackagePage({ onLoginClick, user, onLogout }) {
   const { roomTitle } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const room = location.state?.room;
 
   // Get today's date in YYYY-MM-DD format
@@ -34,7 +35,6 @@ export default function PackagePage({ onLoginClick }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoadingNationalities, setIsLoadingNationalities] = useState(true);
-  const [user, setUser] = useState(null);
   const [pendingBooking, setPendingBooking] = useState(false);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
 
@@ -46,26 +46,17 @@ export default function PackagePage({ onLoginClick }) {
         const decoded = jwtDecode(storedUser.token);
         // Check if token is expired
         if (decoded.exp * 1000 > Date.now()) {
-          setUser({ 
-            id: decoded.user_id || decoded.id, 
-            token: storedUser.token,
-            email: storedUser.email,
-            name: storedUser.name 
-          });
           return true;
         } else {
           // Token expired, remove it
           localStorage.removeItem("user");
-          setUser(null);
           return false;
         }
       } else {
-        setUser(null);
         return false;
       }
     } catch (error) {
       console.error("Error checking auth:", error);
-      setUser(null);
       return false;
     }
   };
@@ -261,7 +252,7 @@ export default function PackagePage({ onLoginClick }) {
     return true;
   };
 
-  // Handle login popup
+  // Handle login popup FOR BOOKING
   const handleLoginPopup = () => {
     setPendingBooking(true);
     setShowLoginAlert(true);
@@ -270,6 +261,22 @@ export default function PackagePage({ onLoginClick }) {
     } else {
       alert("Please log in to make a booking");
     }
+  };
+
+  // Handle Join Us button click - SEPARATE FUNCTION
+  const handleJoinUsClick = () => {
+    if (typeof onLoginClick === "function") {
+      onLoginClick();
+    } else {
+      // This should not happen if the prop is properly passed
+      console.error("onLoginClick prop not provided to PackagePage");
+      alert("Please log in to join South Coast");
+    }
+  };
+
+  // Handle My Bookings navigation
+  const handleMyBookings = () => {
+    navigate("/mybookings");
   };
 
   // Handle form submission
@@ -482,7 +489,7 @@ export default function PackagePage({ onLoginClick }) {
           <button 
             type="submit" 
             disabled={isSubmitting || (!user && pendingBooking)}
-            className=" min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition text-black font-bold p-3 md:px-10 bg-white hover:rounded-full hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className=" min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition text-white font-bold p-3 md:px-10 bg-cyan-500 hover:rounded-full hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {!user ? "Please Login to Book" : 
              isSubmitting ? "Submitting..." : "Submit Booking"}
@@ -555,12 +562,21 @@ export default function PackagePage({ onLoginClick }) {
               Whether it's flights, airport transfers, or exciting activities, we handle the
               details so you can focus on making lasting memories.
             </p>
-            <button 
-              onClick={user ? () => {} : handleLoginPopup}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md"
-            >
-              {user ? 'My Account' : 'Join Us'}
-            </button>
+            {user ? (
+              <button 
+                onClick={handleMyBookings}
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md"
+              >
+                My Account
+              </button>
+            ) : (
+              <button 
+                onClick={handleJoinUsClick}
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md"
+              >
+                Join Us
+              </button>
+            )}
           </div>
 
           {/* Right Section - Why South Coast */}

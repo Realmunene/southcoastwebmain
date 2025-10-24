@@ -378,7 +378,7 @@ export default function BookingSearch({ onLoginClick }) {
             loading 
               ? "bg-gray-400" 
               : "bg-cyan-500 hover:bg-cyan-600"
-          } text-white rounded-2xl hover:rounded-full`}
+          } text-white  hover:rounded-full`}
         >
           <FontAwesomeIcon 
             icon={faSearch} 
