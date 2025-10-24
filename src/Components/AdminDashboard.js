@@ -13,22 +13,11 @@ export default function AdminDashboard() {
     totalMessages: 0,
     totalPartners: 0,
   });
-  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     fetchAdminProfile();
     fetchDashboardStats();
   }, []);
-
-  // Auto-hide success message after 5 seconds
-  useEffect(() => {
-    if (successMessage) {
-      const timer = setTimeout(() => {
-        setSuccessMessage("");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [successMessage]);
 
   const fetchAdminProfile = async () => {
     try {
@@ -280,13 +269,6 @@ export default function AdminDashboard() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Success Message */}
-        {successMessage && (
-          <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-md">
-            <p className="font-semibold">{successMessage}</p>
-          </div>
-        )}
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <StatCard
             title="Total Users"
@@ -340,7 +322,7 @@ export default function AdminDashboard() {
           </div>
 
           <div className="p-6">
-            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} setSuccessMessage={setSuccessMessage} />}
+            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} />}
@@ -1188,7 +1170,7 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
   );
 };
 
-const BookingsManagement = ({ currentAdminRole, setSuccessMessage }) => {
+const BookingsManagement = ({ currentAdminRole }) => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingBooking, setEditingBooking] = useState(null);
@@ -1370,7 +1352,7 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage }) => {
       });
 
       if (response.ok) {
-        setSuccessMessage("✅ Booking deleted successfully!");
+        alert("Booking deleted successfully!");
         fetchBookings();
       } else {
         const errorData = await response.json().catch(() => ({}));
@@ -1409,12 +1391,7 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage }) => {
       }
 
       if (response.ok) {
-        // ✅ Show success message with email notification info
-        const successMsg = editingBooking 
-          ? "✅ Booking updated successfully! Email notification has been sent to super admin."
-          : "✅ Booking created successfully! Email notification has been sent to super admin.";
-        
-        setSuccessMessage(successMsg);
+        alert(`Booking ${editingBooking ? 'updated' : 'created'} successfully!`);
         setShowForm(false);
         setEditingBooking(null);
         fetchBookings();
