@@ -1,0 +1,15 @@
+{
+  "app_title": "SouthCoast",
+  "book_stay": "Book a Stay",
+  "experiences": "Experiences",
+  "partner_with_us": "Partner With Us",
+  "login_signup": "Log In / Sign Up",
+  "my_bookings": "My Bookings",
+  "logout": "Logout",
+  "admin": "Admin",
+  "super_admin": "Super Admin",
+  "admin_dashboard": "Admin Dashboard",
+  "user": "User",
+  "logout_success": "✅ Logged out successfully!",
+  "admin_logout_success": "✅ Admin logged out successfully!"
+}
