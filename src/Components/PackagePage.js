@@ -37,6 +37,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   const [isLoadingNationalities, setIsLoadingNationalities] = useState(true);
   const [pendingBooking, setPendingBooking] = useState(false);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
 
   // Enhanced authentication check
   const checkUserAuth = () => {
@@ -103,6 +104,16 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
       return () => clearTimeout(timer);
     }
   }, [showLoginAlert]);
+
+  // Auto-hide success message after 5 seconds
+  useEffect(() => {
+    if (bookingSuccess) {
+      const timer = setTimeout(() => {
+        setBookingSuccess(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [bookingSuccess]);
 
   // Fetch nationalities from API
   useEffect(() => {
@@ -293,6 +304,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
 
     setIsSubmitting(true);
     setMessage("");
+    setBookingSuccess(false);
 
     try {
       if (!user.token) {
@@ -336,7 +348,8 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
       }
 
       if (response.ok) {
-        setMessage("✅ Booking submitted successfully!");
+        // ✅ Show success message and reset form
+        setBookingSuccess(true);
         
         // Reset form
         setBookingData({
@@ -388,6 +401,14 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
             {room.title}
           </h1>
         </div>
+
+        {/* Success Message - Shows when booking is successful */}
+        {bookingSuccess && (
+          <div className="max-w-7xl mx-auto mt-4 p-4 bg-green-100 text-green-700 rounded-md">
+            <p className="font-semibold">✅ Booking successful!</p>
+            <p>Your booking has been confirmed and the admin has been notified.</p>
+          </div>
+        )}
 
         {/* Login Alert - Only shows when booking is attempted without login */}
         {showLoginAlert && (
