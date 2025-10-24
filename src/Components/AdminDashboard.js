@@ -14,7 +14,6 @@ export default function AdminDashboard() {
     totalPartners: 0,
   });
   const [successMessage, setSuccessMessage] = useState("");
-  const [apiErrors, setApiErrors] = useState({});
 
   useEffect(() => {
     fetchAdminProfile();
@@ -31,14 +30,6 @@ export default function AdminDashboard() {
     }
   }, [successMessage]);
 
-  // Fixed: Renamed from useFallbackAdminData to loadFallbackAdminData
-  const loadFallbackAdminData = () => {
-    const storedRole = localStorage.getItem("adminRole") || 1;
-    const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
-    setCurrentAdminRole(parseInt(storedRole));
-    setCurrentAdminName(storedName);
-  };
-
   const fetchAdminProfile = async () => {
     try {
       const token = localStorage.getItem("adminToken");
@@ -48,75 +39,88 @@ export default function AdminDashboard() {
         return;
       }
 
-      // Try to fetch profile, but handle 404 gracefully
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/profile", {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      const responseText = await response.text();
+      let data;
+
       try {
-        const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/profile", {
-          method: "GET",
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        });
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        const storedRole = localStorage.getItem("adminRole") || 1; // Default to admin
+        const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+        setCurrentAdminRole(parseInt(storedRole));
+        setCurrentAdminName(storedName);
+        return;
+      }
 
-        if (response.ok) {
-          const responseText = await response.text();
-          let data;
+      if (response.ok) {
+        let adminRole = 1; // Default to admin (1)
+        let adminName = "Admin";
 
-          try {
-            data = JSON.parse(responseText);
-          } catch (parseError) {
-            console.error("JSON Parse Error:", parseError);
-            // Use fallback data if profile endpoint returns invalid JSON
-            loadFallbackAdminData(); // Fixed: Changed function name
-            return;
-          }
-
-          // Extract admin data from response
-          let adminRole = 1;
-          let adminName = "Admin";
-
-          if (data.role !== undefined) {
-            adminRole = parseInt(data.role);
-          } else if (data.data && data.data.role !== undefined) {
-            adminRole = parseInt(data.data.role);
-          } else if (data.admin && data.admin.role !== undefined) {
-            adminRole = parseInt(data.admin.role);
-          }
-
-          if (data.name) {
-            adminName = data.name;
-          } else if (data.data && data.data.name) {
-            adminName = data.data.name;
-          } else if (data.admin && data.admin.name) {
-            adminName = data.admin.name;
-          } else if (data.email) {
-            adminName = data.email;
-          } else if (data.data && data.data.email) {
-            adminName = data.data.email;
-          } else if (data.admin && data.admin.email) {
-            adminName = data.admin.email;
-          }
-
-          setCurrentAdminRole(adminRole);
-          setCurrentAdminName(adminName);
-          
-          localStorage.setItem("adminRole", adminRole.toString());
-          localStorage.setItem("adminName", adminName);
-        } else if (response.status === 404) {
-          // Profile endpoint not found, use fallback
-          console.warn("Profile endpoint not found, using fallback data");
-          loadFallbackAdminData(); // Fixed: Changed function name
-        } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        // Extract role (0 = super_admin, 1 = admin)
+        let roleValue;
+        if (data.role !== undefined) {
+          roleValue = data.role;
+        } else if (data.data && data.data.role !== undefined) {
+          roleValue = data.data.role;
+        } else if (data.admin && data.admin.role !== undefined) {
+          roleValue = data.admin.role;
         }
-      } catch (profileError) {
-        console.error("Failed to fetch admin profile:", profileError);
-        loadFallbackAdminData(); // Fixed: Changed function name
+
+        // Set role as number (0 or 1)
+        if (roleValue !== undefined) {
+          adminRole = parseInt(roleValue);
+        }
+
+        // Extract name/email
+        if (data.name) {
+          adminName = data.name;
+        } else if (data.data && data.data.name) {
+          adminName = data.data.name;
+        } else if (data.admin && data.admin.name) {
+          adminName = data.admin.name;
+        } else if (data.email) {
+          adminName = data.email;
+        } else if (data.data && data.data.email) {
+          adminName = data.data.email;
+        } else if (data.admin && data.admin.email) {
+          adminName = data.admin.email;
+        }
+
+        setCurrentAdminRole(adminRole);
+        setCurrentAdminName(adminName);
+        
+        localStorage.setItem("adminRole", adminRole.toString());
+        localStorage.setItem("adminName", adminName);
+        
+        if (data.email) {
+          localStorage.setItem("adminEmail", data.email);
+        } else if (data.data && data.data.email) {
+          localStorage.setItem("adminEmail", data.data.email);
+        } else if (data.admin && data.admin.email) {
+          localStorage.setItem("adminEmail", data.admin.email);
+        }
+      } else {
+        const storedRole = localStorage.getItem("adminRole") || 1;
+        const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+        setCurrentAdminRole(parseInt(storedRole));
+        setCurrentAdminName(storedName);
       }
     } catch (error) {
-      console.error("Error in fetchAdminProfile:", error);
-      loadFallbackAdminData(); // Fixed: Changed function name
+      console.error("Failed to fetch admin profile:", error);
+      const storedRole = localStorage.getItem("adminRole") || 1;
+      const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+      setCurrentAdminRole(parseInt(storedRole));
+      setCurrentAdminName(storedName);
     }
   };
 
@@ -283,18 +287,6 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* API Error Messages */}
-        {Object.keys(apiErrors).length > 0 && (
-          <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md">
-            <p className="font-semibold">API Errors:</p>
-            {Object.entries(apiErrors).map(([endpoint, error]) => (
-              <p key={endpoint} className="text-sm mt-1">
-                {endpoint}: {error}
-              </p>
-            ))}
-          </div>
-        )}
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <StatCard
             title="Total Users"
@@ -348,11 +340,11 @@ export default function AdminDashboard() {
           </div>
 
           <div className="p-6">
-            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} setSuccessMessage={setSuccessMessage} setApiErrors={setApiErrors} />}
-            {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
-            {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
-            {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
-            {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
+            {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} setSuccessMessage={setSuccessMessage} />}
+            {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "complimentNote" && <ComplimentNoteModal />}
           </div>
         </div>
@@ -586,10 +578,7 @@ const ComplimentNoteModal = () => {
   );
 };
 
-// ... Rest of the component code remains exactly the same as in the previous version ...
-// (PartnersManagement, PartnerForm, BookingsManagement, BookingForm, UsersManagement, AdminManagement, AdminForm, MessagesManagement)
-
-const PartnersManagement = ({ currentAdminRole, setApiErrors }) => {
+const PartnersManagement = ({ currentAdminRole }) => {
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingPartner, setEditingPartner] = useState(null);
@@ -614,26 +603,24 @@ const PartnersManagement = ({ currentAdminRole, setApiErrors }) => {
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setPartners([]);
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setLoading(false);
+        return;
+      }
+      
+      if (response.ok) {
         setPartners(data);
       } else {
         console.error("Failed to fetch partners:", response.status);
-        setApiErrors(prev => ({ ...prev, partners: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching partners:", error);
-      setApiErrors(prev => ({ ...prev, partners: error.message }));
     } finally {
       setLoading(false);
     }
@@ -885,7 +872,7 @@ const PartnersManagement = ({ currentAdminRole, setApiErrors }) => {
             )) : (
               <tr>
                 <td colSpan="10" className="px-6 py-4 text-center text-sm text-gray-500">
-                  No partners found
+                  No partners found or unable to load partners.
                 </td>
               </tr>
             )}
@@ -1201,7 +1188,7 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
   );
 };
 
-const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors }) => {
+const BookingsManagement = ({ currentAdminRole, setSuccessMessage }) => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingBooking, setEditingBooking] = useState(null);
@@ -1230,31 +1217,24 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setBookings([]);
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setLoading(false);
+        return;
+      }
+      
+      if (response.ok) {
         setBookings(data);
       } else {
         console.error("Failed to fetch bookings:", response.status);
-        setApiErrors(prev => ({ ...prev, bookings: `HTTP ${response.status}` }));
-        
-        // Show user-friendly error message
-        if (response.status === 500) {
-          alert("Server error while fetching bookings. Please try again later.");
-        }
       }
     } catch (error) {
       console.error("Error fetching bookings:", error);
-      setApiErrors(prev => ({ ...prev, bookings: error.message }));
     } finally {
       setLoading(false);
     }
@@ -1269,38 +1249,54 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setNationalities(getFallbackNationalities());
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setNationalities([
+          { id: 1, name: "Kenyan" },
+          { id: 2, name: "American" },
+          { id: 3, name: "British" },
+          { id: 4, name: "Canadian" },
+          { id: 5, name: "German" },
+          { id: 6, name: "French" },
+          { id: 7, name: "Chinese" },
+          { id: 8, name: "Indian" },
+        ]);
+        return;
+      }
+      
+      if (response.ok) {
         setNationalities(data);
       } else {
-        setNationalities(getFallbackNationalities());
+        setNationalities([
+          { id: 1, name: "Kenyan" },
+          { id: 2, name: "American" },
+          { id: 3, name: "British" },
+          { id: 4, name: "Canadian" },
+          { id: 5, name: "German" },
+          { id: 6, name: "French" },
+          { id: 7, name: "Chinese" },
+          { id: 8, name: "Indian" },
+        ]);
       }
     } catch (error) {
       console.error("Error fetching nationalities:", error);
-      setNationalities(getFallbackNationalities());
+      setNationalities([
+        { id: 1, name: "Kenyan" },
+        { id: 2, name: "American" },
+        { id: 3, name: "British" },
+        { id: 4, name: "Canadian" },
+        { id: 5, name: "German" },
+        { id: 6, name: "French" },
+        { id: 7, name: "Chinese" },
+        { id: 8, name: "Indian" },
+      ]);
     }
   };
-
-  const getFallbackNationalities = () => [
-    { id: 1, name: "Kenyan" },
-    { id: 2, name: "American" },
-    { id: 3, name: "British" },
-    { id: 4, name: "Canadian" },
-    { id: 5, name: "German" },
-    { id: 6, name: "French" },
-    { id: 7, name: "Chinese" },
-    { id: 8, name: "Indian" },
-  ];
 
   const fetchRoomTypes = async () => {
     try {
@@ -1311,35 +1307,45 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setRoomTypes(getFallbackRoomTypes());
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setRoomTypes([
+          { id: 1, name: "Single Room" },
+          { id: 2, name: "Double Room" },
+          { id: 3, name: "Deluxe Room" },
+          { id: 4, name: "Suite" },
+          { id: 5, name: "Executive Suite" },
+        ]);
+        return;
+      }
+      
+      if (response.ok) {
         setRoomTypes(data);
       } else {
-        setRoomTypes(getFallbackRoomTypes());
+        setRoomTypes([
+          { id: 1, name: "Single Room" },
+          { id: 2, name: "Double Room" },
+          { id: 3, name: "Deluxe Room" },
+          { id: 4, name: "Suite" },
+          { id: 5, name: "Executive Suite" },
+        ]);
       }
     } catch (error) {
       console.error("Error fetching room types:", error);
-      setRoomTypes(getFallbackRoomTypes());
+      setRoomTypes([
+        { id: 1, name: "Single Room" },
+        { id: 2, name: "Double Room" },
+        { id: 3, name: "Deluxe Room" },
+        { id: 4, name: "Suite" },
+        { id: 5, name: "Executive Suite" },
+      ]);
     }
   };
-
-  const getFallbackRoomTypes = () => [
-    { id: 1, name: "Single Room" },
-    { id: 2, name: "Double Room" },
-    { id: 3, name: "Deluxe Room" },
-    { id: 4, name: "Suite" },
-    { id: 5, name: "Executive Suite" },
-  ];
 
   const handleEdit = (booking) => {
     setEditingBooking(booking);
@@ -1403,6 +1409,7 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
       }
 
       if (response.ok) {
+        // ✅ Show success message with email notification info
         const successMsg = editingBooking 
           ? "✅ Booking updated successfully! Email notification has been sent to super admin."
           : "✅ Booking created successfully! Email notification has been sent to super admin.";
@@ -1515,7 +1522,7 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
             )) : (
               <tr>
                 <td colSpan="6" className="px-6 py-4 text-center text-sm text-gray-500">
-                  No bookings found
+                  No bookings found or unable to load bookings.
                 </td>
               </tr>
             )}
@@ -1777,7 +1784,7 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
   );
 };
 
-const UsersManagement = ({ currentAdminRole, setApiErrors }) => {
+const UsersManagement = ({ currentAdminRole }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -1800,26 +1807,24 @@ const UsersManagement = ({ currentAdminRole, setApiErrors }) => {
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setUsers([]);
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setLoading(false);
+        return;
+      }
+      
+      if (response.ok) {
         setUsers(data);
       } else {
         console.error("Failed to fetch users:", response.status);
-        setApiErrors(prev => ({ ...prev, users: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching users:", error);
-      setApiErrors(prev => ({ ...prev, users: error.message }));
     } finally {
       setLoading(false);
     }
@@ -1915,7 +1920,7 @@ const UsersManagement = ({ currentAdminRole, setApiErrors }) => {
             )) : (
               <tr>
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No users found
+                  No users found or unable to load users.
                 </td>
               </tr>
             )}
@@ -1926,7 +1931,7 @@ const UsersManagement = ({ currentAdminRole, setApiErrors }) => {
   );
 };
 
-const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
+const AdminManagement = ({ currentAdminRole }) => {
   const [admins, setAdmins] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -1951,30 +1956,24 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setAdmins([]);
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setLoading(false);
+        return;
+      }
+      
+      if (response.ok) {
         setAdmins(data);
-      } else if (response.status === 401) {
-        console.error("Unauthorized to fetch admins - insufficient permissions");
-        setApiErrors(prev => ({ ...prev, admins: "Unauthorized - You don't have permission to access admin management" }));
-        alert("You don't have permission to access admin management. Only Super Admin can manage other admins.");
       } else {
         console.error("Failed to fetch admins:", response.status);
-        setApiErrors(prev => ({ ...prev, admins: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching admins:", error);
-      setApiErrors(prev => ({ ...prev, admins: error.message }));
     } finally {
       setLoading(false);
     }
@@ -1989,7 +1988,7 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData), // Fixed: Remove nesting
       });
 
       const responseText = await response.text();
@@ -2116,7 +2115,7 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
             )) : (
               <tr>
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No admins found or insufficient permissions
+                  No admins found or unable to load admins.
                 </td>
               </tr>
             )}
@@ -2276,7 +2275,7 @@ const AdminForm = ({ onSubmit, onCancel }) => {
   );
 };
 
-const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
+const MessagesManagement = ({ currentAdminRole }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -2293,33 +2292,30 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
         return;
       }
 
-      // FIXED: Using the correct endpoint for contact messages
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages", {
         headers: {
           "Authorization": `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
-        const responseText = await response.text();
-        let data;
+      const responseText = await response.text();
+      let data;
 
-        try {
-          data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setMessages([]);
-          return;
-        }
-        
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setLoading(false);
+        return;
+      }
+      
+      if (response.ok) {
         setMessages(data);
       } else {
         console.error("Failed to fetch messages:", response.status);
-        setApiErrors(prev => ({ ...prev, messages: `HTTP ${response.status}` }));
       }
     } catch (error) {
       console.error("Error fetching messages:", error);
-      setApiErrors(prev => ({ ...prev, messages: error.message }));
     } finally {
       setLoading(false);
     }
@@ -2328,7 +2324,7 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
   const handleMarkAsRead = async (messageId) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}/mark_as_read`, {
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages/${messageId}/mark_as_read`, {
         method: "PATCH",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -2365,7 +2361,7 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
 
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}`, {
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/messages/${messageId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -2396,9 +2392,6 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
               <div>
                 <h3 className="text-sm font-medium text-gray-900">{message.name}</h3>
                 <p className="text-sm text-gray-500">{message.email}</p>
-                {message.phone && (
-                  <p className="text-sm text-gray-500">Phone: {message.phone}</p>
-                )}
               </div>
               <div className="text-right">
                 <p className="text-xs text-gray-400">
@@ -2410,14 +2403,14 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
                   message.status === 'read' ? 'bg-gray-100 text-gray-800' :
                   'bg-green-100 text-green-800'
                 }`}>
-                  {message.status || 'new'}
+                  {message.status}
                 </span>
               </div>
             </div>
             <p className="text-gray-700 mb-4">{message.message}</p>
             <div className="flex justify-between items-center">
               <div className="flex space-x-2">
-                {(!message.status || message.status === 'new') ? (
+                {message.status === 'new' ? (
                   <button 
                     onClick={() => handleMarkAsRead(message.id)}
                     className="text-sm text-cyan-600 hover:text-cyan-800"
@@ -2446,7 +2439,7 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
           </div>
         )) : (
           <div className="text-center py-8 text-gray-500">
-            No messages found
+            No messages found or unable to load messages.
           </div>
         )}
       </div>
