@@ -189,6 +189,7 @@ export default function AdminDashboard() {
     const baseTabs = [
       { id: "bookings", name: "Bookings Management" },
       { id: "users", name: "Users Management" },
+      { id: "messages", name: "Messages" },
       { id: "partners", name: "Partners Management" },
       { id: "complimentNote", name: "Compliment Note" },
     ];
@@ -349,6 +350,7 @@ export default function AdminDashboard() {
             {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} setSuccessMessage={setSuccessMessage} setApiErrors={setApiErrors} />}
             {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
+            {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "complimentNote" && <ComplimentNoteModal />}
           </div>
@@ -2257,6 +2259,183 @@ const AdminForm = ({ onSubmit, onCancel }) => {
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  );
+};
+
+const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
+  const fetchMessages = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        console.error("No admin token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          setMessages([]);
+          return;
+        }
+        
+        setMessages(data);
+      } else {
+        console.error("Failed to fetch messages:", response.status);
+        setApiErrors(prev => ({ ...prev, messages: `HTTP ${response.status}` }));
+      }
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+      setApiErrors(prev => ({ ...prev, messages: error.message }));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMarkAsRead = async (messageId) => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}/mark_as_read`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Update local state
+        setMessages(messages.map(msg => 
+          msg.id === messageId ? { ...msg, status: 'read' } : msg
+        ));
+      } else {
+        alert("Failed to mark message as read");
+      }
+    } catch (error) {
+      console.error("Error marking message as read:", error);
+      alert("Failed to mark message as read");
+    }
+  };
+
+  const handleReply = (message) => {
+    const subject = encodeURIComponent(`Re: Your message to Southcoast Outdoors`);
+    const body = encodeURIComponent(`Dear ${message.name},\n\nThank you for your message. We will get back to you shortly.\n\nBest regards,\nSouthcoast Outdoors Team`);
+    window.location.href = `mailto:${message.email}?subject=${subject}&body=${body}`;
+  };
+
+  const handleDeleteMessage = async (messageId) => {
+    if (currentAdminRole !== 0) {
+      alert("Only Super Admin can delete messages.");
+      return;
+    }
+
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
+
+    try {
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        alert("Message deleted successfully!");
+        fetchMessages();
+      } else {
+        alert("Failed to delete message");
+      }
+    } catch (error) {
+      console.error("Error deleting message:", error);
+      alert("Failed to delete message");
+    }
+  };
+
+  if (loading) return <div className="text-center py-8">Loading messages...</div>;
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
+      <div className="space-y-4">
+        {messages.length > 0 ? messages.map((message) => (
+          <div key={message.id} className="bg-white border border-gray-200 rounded-lg p-6">
+            <div className="flex justify-between items-start mb-3">
+              <div>
+                <h3 className="text-sm font-medium text-gray-900">{message.name}</h3>
+                <p className="text-sm text-gray-500">{message.email}</p>
+                {message.phone && (
+                  <p className="text-sm text-gray-500">Phone: {message.phone}</p>
+                )}
+              </div>
+              <div className="text-right">
+                <p className="text-xs text-gray-400">
+                  {new Date(message.created_at).toLocaleDateString()} at{" "}
+                  {new Date(message.created_at).toLocaleTimeString()}
+                </p>
+                <span className={`inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full ${
+                  message.status === 'new' ? 'bg-blue-100 text-blue-800' :
+                  message.status === 'read' ? 'bg-gray-100 text-gray-800' :
+                  'bg-green-100 text-green-800'
+                }`}>
+                  {message.status || 'new'}
+                </span>
+              </div>
+            </div>
+            <p className="text-gray-700 mb-4">{message.message}</p>
+            <div className="flex justify-between items-center">
+              <div className="flex space-x-2">
+                {(!message.status || message.status === 'new') ? (
+                  <button 
+                    onClick={() => handleMarkAsRead(message.id)}
+                    className="text-sm text-cyan-600 hover:text-cyan-800"
+                  >
+                    Mark as Read
+                  </button>
+                ) : (
+                  <span className="text-sm text-gray-500">Read</span>
+                )}
+                <button 
+                  onClick={() => handleReply(message)}
+                  className="text-sm text-green-600 hover:text-green-800"
+                >
+                  Reply
+                </button>
+              </div>
+              {currentAdminRole === 0 && (
+                <button
+                  onClick={() => handleDeleteMessage(message.id)}
+                  className="text-sm text-red-600 hover:text-red-800"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          </div>
+        )) : (
+          <div className="text-center py-8 text-gray-500">
+            No messages found
+          </div>
+        )}
       </div>
     </div>
   );
