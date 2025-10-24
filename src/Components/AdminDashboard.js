@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import logo from "./images/IMG-20251008-WA0008logo0.png";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("bookings");
   const [loading, setLoading] = useState(true);
-  const [currentAdminRole, setCurrentAdminRole] = useState("admin"); // Default to admin
+  const [currentAdminRole, setCurrentAdminRole] = useState(1); // Default to admin (1)
+  const [currentAdminName, setCurrentAdminName] = useState("Admin");
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalBookings: 0,
@@ -17,7 +19,6 @@ export default function AdminDashboard() {
     fetchDashboardStats();
   }, []);
 
-  // Fetch admin profile to get the actual role
   const fetchAdminProfile = async () => {
     try {
       const token = localStorage.getItem("adminToken");
@@ -43,29 +44,72 @@ export default function AdminDashboard() {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
-        // Fallback to localStorage role
-        const storedRole = localStorage.getItem("adminRole") || "admin";
-        setCurrentAdminRole(storedRole);
+        const storedRole = localStorage.getItem("adminRole") || 1; // Default to admin
+        const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+        setCurrentAdminRole(parseInt(storedRole));
+        setCurrentAdminName(storedName);
         return;
       }
 
       if (response.ok) {
-        // Update role from server response
-        const adminRole = data.role || data.data?.role || "admin";
+        let adminRole = 1; // Default to admin (1)
+        let adminName = "Admin";
+
+        // Extract role (0 = super_admin, 1 = admin)
+        let roleValue;
+        if (data.role !== undefined) {
+          roleValue = data.role;
+        } else if (data.data && data.data.role !== undefined) {
+          roleValue = data.data.role;
+        } else if (data.admin && data.admin.role !== undefined) {
+          roleValue = data.admin.role;
+        }
+
+        // Set role as number (0 or 1)
+        if (roleValue !== undefined) {
+          adminRole = parseInt(roleValue);
+        }
+
+        // Extract name/email
+        if (data.name) {
+          adminName = data.name;
+        } else if (data.data && data.data.name) {
+          adminName = data.data.name;
+        } else if (data.admin && data.admin.name) {
+          adminName = data.admin.name;
+        } else if (data.email) {
+          adminName = data.email;
+        } else if (data.data && data.data.email) {
+          adminName = data.data.email;
+        } else if (data.admin && data.admin.email) {
+          adminName = data.admin.email;
+        }
+
         setCurrentAdminRole(adminRole);
-        // Also update localStorage
-        localStorage.setItem("adminRole", adminRole);
+        setCurrentAdminName(adminName);
+        
+        localStorage.setItem("adminRole", adminRole.toString());
+        localStorage.setItem("adminName", adminName);
+        
+        if (data.email) {
+          localStorage.setItem("adminEmail", data.email);
+        } else if (data.data && data.data.email) {
+          localStorage.setItem("adminEmail", data.data.email);
+        } else if (data.admin && data.admin.email) {
+          localStorage.setItem("adminEmail", data.admin.email);
+        }
       } else {
-        // Fallback to localStorage role
-        const storedRole = localStorage.getItem("adminRole") || "admin";
-        setCurrentAdminRole(storedRole);
+        const storedRole = localStorage.getItem("adminRole") || 1;
+        const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+        setCurrentAdminRole(parseInt(storedRole));
+        setCurrentAdminName(storedName);
       }
     } catch (error) {
       console.error("Failed to fetch admin profile:", error);
-      // Fallback to localStorage role
-      const storedRole = localStorage.getItem("adminRole") || "admin";
-      setCurrentAdminRole(storedRole);
+      const storedRole = localStorage.getItem("adminRole") || 1;
+      const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
+      setCurrentAdminRole(parseInt(storedRole));
+      setCurrentAdminName(storedName);
     }
   };
 
@@ -95,23 +139,18 @@ export default function AdminDashboard() {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
-        throw new Error("Server returned an invalid response. Please check if the backend is running properly.");
+        throw new Error("Server returned an invalid response.");
       }
 
-      console.log("Dashboard stats response:", data);
-      
       if (response.ok) {
         let statsData = data;
         
         if (data.data) {
           statsData = data.data;
-          console.log("Using nested data property:", statsData);
         }
         
         if (data.stats) {
           statsData = data.stats;
-          console.log("Using stats property:", statsData);
         }
 
         const formattedStats = {
@@ -122,7 +161,6 @@ export default function AdminDashboard() {
           totalPartners: statsData.totalPartners || statsData.partners || statsData.total_partners || 0,
         };
 
-        console.log("Formatted stats for state:", formattedStats);
         setStats(formattedStats);
       } else {
         throw new Error(data.error || data.message || `HTTP error! Status: ${response.status}`);
@@ -141,49 +179,44 @@ export default function AdminDashboard() {
     }
   };
 
-  // Define tabs based on admin role
   const getTabs = () => {
     const baseTabs = [
       { id: "bookings", name: "Bookings Management" },
       { id: "users", name: "Users Management" },
       { id: "messages", name: "Messages" },
       { id: "partners", name: "Partners Management" },
+      { id: "complimentNote", name: "Compliment Note" },
     ];
 
-    // Only super_admin can see and access Admin Management
-    if (currentAdminRole === "super_admin") {
-      baseTabs.splice(2, 0, { id: "admins", name: "Admin Management" });
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole === 0) {
+      // Insert Admin Management tab after Users Management
+      const tabsWithAdmin = [...baseTabs];
+      tabsWithAdmin.splice(2, 0, { id: "admins", name: "Admin Management" });
+      return tabsWithAdmin;
     }
 
     return baseTabs;
   };
 
-  // Debug: log current stats state
-  useEffect(() => {
-    console.log("Current stats state:", stats);
-  }, [stats]);
-
-  // Loading state remains the same as previous fix...
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        {/* Header */}
         <div className="bg-white shadow-sm border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
               <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-600">
-                  Welcome, {localStorage.getItem("adminName") || "Admin"} ({currentAdminRole})
+                  Welcome, {currentAdminName}
                 </span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Loading State for Stats */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
             {[...Array(5)].map((_, index) => (
               <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 animate-pulse">
                 <div className="flex items-center">
@@ -199,7 +232,6 @@ export default function AdminDashboard() {
             ))}
           </div>
           
-          {/* Loading for content area */}
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="animate-pulse">
               <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
@@ -212,39 +244,34 @@ export default function AdminDashboard() {
     );
   }
 
+  const tabs = getTabs();
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Welcome, {localStorage.getItem("adminName") || "Admin"} 
-                <span className={`ml-1 px-2 py-1 text-xs font-semibold rounded-full ${
-                  currentAdminRole === 'super_admin' 
-                    ? 'bg-purple-100 text-purple-800' 
-                    : 'bg-blue-100 text-blue-800'
-                }`}>
-                  ({currentAdminRole})
-                </span>
+                Welcome, {currentAdminName}
               </span>
-              {/* Add refresh button for debugging */}
               <button 
-                onClick={fetchDashboardStats}
+                onClick={() => {
+                  fetchAdminProfile();
+                  fetchDashboardStats();
+                }}
                 className="text-sm bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-1 rounded"
               >
-                Refresh Stats
+                Refresh
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Stats Overview */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <StatCard
             title="Total Users"
             value={stats.totalUsers}
@@ -277,11 +304,10 @@ export default function AdminDashboard() {
           />
         </div>
 
-        {/* Rest of your component remains the same */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
-              {getTabs().map((tab) => (
+              {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
@@ -297,13 +323,14 @@ export default function AdminDashboard() {
             </nav>
           </div>
 
-          {/* Tab Content */}
           <div className="p-6">
             {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} />}
-            {activeTab === "admins" && currentAdminRole === "super_admin" && <AdminManagement currentAdminRole={currentAdminRole} />}
+            {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+            {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} />}
             {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} />}
+            {activeTab === "complimentNote" && <ComplimentNoteModal />}
           </div>
         </div>
       </div>
@@ -311,7 +338,6 @@ export default function AdminDashboard() {
   );
 }
 
-// StatCard component remains the same
 const StatCard = ({ title, value, icon, color }) => {
   const colorClasses = {
     blue: "bg-blue-50 text-blue-600",
@@ -336,7 +362,207 @@ const StatCard = ({ title, value, icon, color }) => {
   );
 };
 
-// Updated Partners Management Component with role-based permissions
+const ComplimentNoteModal = () => {
+  const [accommodations, setAccommodations] = useState([
+    "Executive Room, Ensuite",
+    "2-Connected Room, 1 Ensuite",
+    "2 Bedroom Apartment - Living + Kitchen + 1 Ensuite",
+    "3-BedRoom Apartment-Kitchen, 2 Ensuite",
+    "ExecutiveRoom, Ensuite",
+    "2-Connected Room, I-Ensuite",
+    "2-BedRoom Apartment with Kitchen, 1-Ensuite",
+    "Larger Apartment with Kitchen, Balcony, Living, 2 Ensuites"
+  ]);
+  const [location, setLocation] = useState("South Coast, Kenya — Near Diani Beach");
+  const [contact, setContact] = useState({
+    phone: "+254 7XX XXX XXX",
+    email: "info@southcoastoutdoors.co.ke",
+  });
+
+  const noteRef = useRef();
+
+  const handlePrint = () => {
+    const printContents = noteRef.current.innerHTML;
+    const printWindow = window.open("", "", "width=600,height=800");
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Southcoast Outdoors With Compliments</title>
+          <style>
+            body {
+              font-family: 'Poppins', sans-serif;
+              padding: 24px;
+              background-color: #fdfdfc;
+            }
+            .note-container {
+              border: 1px solid #e2e8f0;
+              border-radius: 18px;
+              padding: 24px;
+              width: 100%;
+              max-width: 480px;
+              margin: auto;
+              box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+              background-color: white;
+            }
+            .header {
+              display: flex;
+              align-items: center;
+              gap: 14px;
+              border-bottom: 2px solid #f3f4f6;
+              padding-bottom: 10px;
+              margin-bottom: 12px;
+            }
+            .header img {
+              width: 65px;
+              height: 65px;
+              border-radius: 14px;
+            }
+            .header h1 {
+              font-size: 1.4rem;
+              color: #003366;
+              margin: 0;
+              line-height: 1.3;
+            }
+            .header span {
+              font-size: 0.95rem;
+              color: #6b7280;
+            }
+            .section {
+              margin-top: 1rem;
+            }
+            .section h2 {
+              font-size: 1.1rem;
+              color: #0074cc;
+              margin-bottom: 6px;
+              border-bottom: 1px solid #e5e7eb;
+              display: inline-block;
+            }
+            .section p {
+              margin: 2px 0;
+              font-size: 0.96rem;
+              color: #374151;
+            }
+            footer {
+              margin-top: 1.8rem;
+              text-align: center;
+              font-size: 0.85rem;
+              color: #6b7280;
+              border-top: 1px solid #e5e7eb;
+              padding-top: 8px;
+            }
+          </style>
+        </head>
+        <body>${printContents}</body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
+  const handleAddAccommodation = (newItem) => {
+    if (newItem.trim()) setAccommodations([...accommodations, newItem]);
+  };
+
+  return (
+    <div className="font-poppins">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          ref={noteRef}
+          className="note-container border border-gray-200 rounded-xl p-6 shadow-sm bg-white"
+        >
+          <div className="header flex items-center gap-4 mb-4 pb-4 border-b border-gray-200">
+            <img src={logo} alt="Southcoast Outdoors Logo" className="w-16 h-16 rounded-lg" />
+            <div>
+              <h1 className="text-xl font-bold text-blue-900 leading-tight">
+                Southcoast Outdoors
+              </h1>
+              <span className="text-gray-500 text-sm">With Compliments</span>
+            </div>
+          </div>
+
+          <div className="section mb-4">
+            <h2 className="text-blue-700 font-semibold mb-2 pb-1 border-b border-gray-200">Our Accommodations</h2>
+            {accommodations.map((unit, idx) => (
+              <p key={idx} className="text-gray-700 mb-1">• {unit}</p>
+            ))}
+          </div>
+
+          <div className="section mb-4">
+            <h2 className="text-blue-700 font-semibold mb-2 pb-1 border-b border-gray-200">Our Location</h2>
+            <p className="text-gray-700">{location}</p>
+          </div>
+
+          <div className="section mb-4">
+            <h2 className="text-blue-700 font-semibold mb-2 pb-1 border-b border-gray-200">Contact Us</h2>
+            <p className="text-gray-700">Tel: {contact.phone}</p>
+            <p className="text-gray-700">Email: {contact.email}</p>
+          </div>
+
+          <footer className="text-center text-gray-500 text-sm border-t border-gray-200 pt-4 mt-6">
+            Thank you for choosing Southcoast Outdoors
+          </footer>
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-blue-800 font-semibold text-lg mb-4">Edit Note Details</h3>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">Add Accommodation</label>
+            <input
+              type="text"
+              placeholder="e.g. Family Villas"
+              className="border border-gray-300 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleAddAccommodation(e.target.value);
+                  e.target.value = "";
+                }
+              }}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">Location</label>
+            <input
+              type="text"
+              className="border border-gray-300 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">Phone</label>
+            <input
+              type="text"
+              className="border border-gray-300 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={contact.phone}
+              onChange={(e) => setContact({ ...contact, phone: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">Email</label>
+            <input
+              type="email"
+              className="border border-gray-300 rounded-lg w-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={contact.email}
+              onChange={(e) => setContact({ ...contact, email: e.target.value })}
+            />
+          </div>
+
+          <button
+            onClick={handlePrint}
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition-colors duration-200"
+          >
+            Print Note
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const PartnersManagement = ({ currentAdminRole }) => {
   const [partners, setPartners] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -369,7 +595,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setLoading(false);
         return;
       }
@@ -387,8 +612,8 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const handleEdit = (partner) => {
-    // Only allow editing if super_admin or if the partner is not active
-    if (currentAdminRole === "super_admin" || partner.status !== "active") {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole === 0 || partner.status !== "active") {
       setEditingPartner(partner);
       setShowForm(true);
     } else {
@@ -397,7 +622,8 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const handleDelete = async (partnerId) => {
-    if (currentAdminRole !== "super_admin") {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete partners.");
       return;
     }
@@ -434,7 +660,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
 
       const method = editingPartner ? "PUT" : "POST";
       
-      // Remove password fields if editing and passwords are empty
       const submitData = { ...formData };
       if (editingPartner) {
         if (!submitData.password) {
@@ -459,7 +684,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
         result = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         throw new Error("Server returned an invalid response.");
       }
 
@@ -478,7 +702,8 @@ const PartnersManagement = ({ currentAdminRole }) => {
   };
 
   const togglePartnerStatus = async (partnerId, currentStatus) => {
-    if (currentAdminRole !== "super_admin") {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole !== 0) {
       alert("Only Super Admin can change partner status.");
       return;
     }
@@ -608,11 +833,12 @@ const PartnersManagement = ({ currentAdminRole }) => {
                   <button
                     onClick={() => handleEdit(partner)}
                     className="text-cyan-600 hover:text-cyan-900"
-                    disabled={currentAdminRole !== "super_admin" && partner.status === "active"}
+                    disabled={currentAdminRole !== 0 && partner.status === "active"}
                   >
                     Edit
                   </button>
-                  {currentAdminRole === "super_admin" && (
+                  {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+                  {currentAdminRole === 0 && (
                     <>
                       <button
                         onClick={() => togglePartnerStatus(partner.id, partner.status)}
@@ -646,7 +872,6 @@ const PartnersManagement = ({ currentAdminRole }) => {
   );
 };
 
-// Partner Form Component with role-based restrictions
 const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
   const [formData, setFormData] = useState({
     supplier_type: partner?.supplier_type || "",
@@ -670,7 +895,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
       ...formData,
       [name]: value,
     });
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -690,7 +914,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
     if (!formData.city) newErrors.city = 'City is required';
     if (!formData.address) newErrors.address = 'Address is required';
 
-    // Password validation for new partners
     if (!partner) {
       if (!formData.password) newErrors.password = 'Password is required';
       if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
@@ -698,7 +921,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
         newErrors.password_confirmation = 'Passwords do not match';
       }
     } else {
-      // For editing, validate password only if provided
       if (formData.password && formData.password.length < 6) {
         newErrors.password = 'Password must be at least 6 characters';
       }
@@ -725,7 +947,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
           {partner ? 'Edit Partner' : 'Add New Partner'}
         </h3>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Supplier Type */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Supplier Type *</label>
             <select
@@ -751,7 +972,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
             )}
           </div>
 
-          {/* Supplier Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Supplier Name *</label>
             <input
@@ -771,7 +991,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Mobile */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Mobile *</label>
               <input
@@ -790,7 +1009,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
               )}
             </div>
 
-            {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Email Address *</label>
               <input
@@ -810,7 +1028,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
             </div>
           </div>
 
-          {/* Contact Person */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Contact Person *</label>
             <input
@@ -829,7 +1046,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
             )}
           </div>
 
-          {/* Password Fields - Only show for new partners or when editing with password change */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -872,7 +1088,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
             </div>
           </div>
 
-          {/* Description */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Description</label>
             <textarea
@@ -886,7 +1101,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* City */}
             <div>
               <label className="block text-sm font-medium text-gray-700">City *</label>
               <input
@@ -905,7 +1119,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
               )}
             </div>
 
-            {/* Status - Only for super_admin */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Status</label>
               <select
@@ -913,19 +1126,20 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
                 value={formData.status}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
-                disabled={currentAdminRole !== "super_admin"}
+                // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+                disabled={currentAdminRole !== 0}
               >
                 <option value="pending">Pending</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>
-              {currentAdminRole !== "super_admin" && (
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+              {currentAdminRole !== 0 && (
                 <p className="mt-1 text-xs text-gray-500">Only Super Admin can change status</p>
               )}
             </div>
           </div>
 
-          {/* Address */}
           <div>
             <label className="block text-sm font-medium text-gray-700">Address *</label>
             <textarea
@@ -965,7 +1179,6 @@ const PartnerForm = ({ partner, onSubmit, onCancel, currentAdminRole }) => {
   );
 };
 
-// Updated BookingsManagement Component with role-based permissions
 const BookingsManagement = ({ currentAdminRole }) => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1002,7 +1215,6 @@ const BookingsManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setLoading(false);
         return;
       }
@@ -1035,7 +1247,6 @@ const BookingsManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setNationalities([
           { id: 1, name: "Kenyan" },
           { id: 2, name: "American" },
@@ -1094,7 +1305,6 @@ const BookingsManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setRoomTypes([
           { id: 1, name: "Single Room" },
           { id: 2, name: "Double Room" },
@@ -1134,7 +1344,8 @@ const BookingsManagement = ({ currentAdminRole }) => {
   };
 
   const handleDelete = async (bookingId) => {
-    if (currentAdminRole !== "super_admin") {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete bookings.");
       return;
     }
@@ -1185,7 +1396,6 @@ const BookingsManagement = ({ currentAdminRole }) => {
         result = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         throw new Error("Server returned an invalid response.");
       }
 
@@ -1285,7 +1495,8 @@ const BookingsManagement = ({ currentAdminRole }) => {
                   >
                     Edit
                   </button>
-                  {currentAdminRole === "super_admin" && (
+                  {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+                  {currentAdminRole === 0 && (
                     <button
                       onClick={() => handleDelete(booking.id)}
                       className="text-red-600 hover:text-red-900"
@@ -1309,7 +1520,6 @@ const BookingsManagement = ({ currentAdminRole }) => {
   );
 };
 
-// Booking Form Component (unchanged)
 const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) => {
   const [formData, setFormData] = useState({
     user_id: booking?.user_id || "",
@@ -1464,7 +1674,6 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
   );
 };
 
-// Updated UsersManagement Component with role-based permissions
 const UsersManagement = ({ currentAdminRole }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1495,7 +1704,6 @@ const UsersManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setLoading(false);
         return;
       }
@@ -1513,7 +1721,8 @@ const UsersManagement = ({ currentAdminRole }) => {
   };
 
   const handleDeleteUser = async (userId) => {
-    if (currentAdminRole !== "super_admin") {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete users.");
       return;
     }
@@ -1562,7 +1771,8 @@ const UsersManagement = ({ currentAdminRole }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
-              {currentAdminRole === "super_admin" && (
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+              {currentAdminRole === 0 && (
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
                 </th>
@@ -1588,7 +1798,8 @@ const UsersManagement = ({ currentAdminRole }) => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(user.created_at).toLocaleDateString()}
                 </td>
-                {currentAdminRole === "super_admin" && (
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+                {currentAdminRole === 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
                       onClick={() => handleDeleteUser(user.id)}
@@ -1601,7 +1812,8 @@ const UsersManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
-                <td colSpan={currentAdminRole === "super_admin" ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+                <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
                   No users found or unable to load users.
                 </td>
               </tr>
@@ -1613,7 +1825,6 @@ const UsersManagement = ({ currentAdminRole }) => {
   );
 };
 
-// Updated AdminManagement Component - Only accessible to super_admin
 const AdminManagement = ({ currentAdminRole }) => {
   const [admins, setAdmins] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -1646,7 +1857,6 @@ const AdminManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setLoading(false);
         return;
       }
@@ -1682,7 +1892,6 @@ const AdminManagement = ({ currentAdminRole }) => {
         result = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         throw new Error("Server returned an invalid response.");
       }
 
@@ -1729,7 +1938,8 @@ const AdminManagement = ({ currentAdminRole }) => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
-        {currentAdminRole === 'super_admin' && (
+        {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+        {currentAdminRole === 0 && (
           <button
             onClick={() => setShowForm(true)}
             className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
@@ -1762,7 +1972,8 @@ const AdminManagement = ({ currentAdminRole }) => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
-              {currentAdminRole === 'super_admin' && (
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+              {currentAdminRole === 0 && (
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
                 </th>
@@ -1780,13 +1991,14 @@ const AdminManagement = ({ currentAdminRole }) => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
-                    {admin.role}
+                    {admin.role === 0 ? 'super_admin' : 'admin'}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(admin.created_at).toLocaleDateString()}
                 </td>
-                {currentAdminRole === 'super_admin' && (
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+                {currentAdminRole === 0 && (
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
                       onClick={() => handleDeleteAdmin(admin.id)}
@@ -1799,7 +2011,8 @@ const AdminManagement = ({ currentAdminRole }) => {
               </tr>
             )) : (
               <tr>
-                <td colSpan={currentAdminRole === 'super_admin' ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
+                {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+                <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
                   No admins found or unable to load admins.
                 </td>
               </tr>
@@ -1811,38 +2024,55 @@ const AdminManagement = ({ currentAdminRole }) => {
   );
 };
 
-// AdminForm Component (unchanged)
 const AdminForm = ({ onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     password_confirmation: "",
-    role: "admin",
-    name: "",
+    role: 1, // Always set to admin (1)
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+    if (formData.password !== formData.password_confirmation) {
+      newErrors.password_confirmation = 'Passwords do not match';
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.email && !emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Basic validation
-    if (formData.password !== formData.password_confirmation) {
-      alert("Passwords do not match!");
-      return;
+    if (validateForm()) {
+      onSubmit(formData);
     }
-    
-    if (formData.password.length < 6) {
-      alert("Password must be at least 6 characters long!");
-      return;
-    }
-    
-    onSubmit(formData);
   };
 
   return (
@@ -1851,64 +2081,79 @@ const AdminForm = ({ onSubmit, onCancel }) => {
         <h3 className="text-lg font-semibold mb-4">Create New Admin</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">Email *</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              placeholder="Enter admin email address"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.email ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            )}
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">Password *</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              placeholder="Enter password (min 6 characters)"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.password ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
               minLength="6"
-              placeholder="At least 6 characters with uppercase, lowercase, number, and special character"
             />
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+            )}
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <label className="block text-sm font-medium text-gray-700">Confirm Password *</label>
             <input
               type="password"
               name="password_confirmation"
               value={formData.password_confirmation}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
+              placeholder="Confirm password"
+              className={`mt-1 block w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500 ${
+                errors.password_confirmation ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
               minLength="6"
             />
+            {errors.password_confirmation && (
+              <p className="mt-1 text-sm text-red-600">{errors.password_confirmation}</p>
+            )}
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"
-            >
-              <option value="admin">Admin</option>
-              <option value="super_admin">Super Admin</option>
-            </select>
+
+          {/* Hidden role field - always set to admin (1) */}
+          <input type="hidden" name="role" value={1} />
+
+          <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+            <div className="flex items-center">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-blue-700">
+                  This admin will be created with <strong>Admin</strong> role. Only existing Super Admin can create other admins.
+                </p>
+              </div>
+            </div>
           </div>
+
           <div className="flex justify-end space-x-3 pt-4">
             <button
               type="button"
@@ -1930,7 +2175,6 @@ const AdminForm = ({ onSubmit, onCancel }) => {
   );
 };
 
-// Updated MessagesManagement Component with role-based permissions
 const MessagesManagement = ({ currentAdminRole }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1961,7 +2205,6 @@ const MessagesManagement = ({ currentAdminRole }) => {
         data = JSON.parse(responseText);
       } catch (parseError) {
         console.error("JSON Parse Error:", parseError);
-        console.log("Server Response:", responseText.substring(0, 200));
         setLoading(false);
         return;
       }
@@ -1979,7 +2222,8 @@ const MessagesManagement = ({ currentAdminRole }) => {
   };
 
   const handleDeleteMessage = async (messageId) => {
-    if (currentAdminRole !== "super_admin") {
+    // FIX: Check for numeric 0 (super_admin) instead of string "super_admin"
+    if (currentAdminRole !== 0) {
       alert("Only Super Admin can delete messages.");
       return;
     }
@@ -2044,7 +2288,8 @@ const MessagesManagement = ({ currentAdminRole }) => {
                   Reply
                 </button>
               </div>
-              {currentAdminRole === "super_admin" && (
+              {/* FIX: Check for numeric 0 (super_admin) instead of string "super_admin" */}
+              {currentAdminRole === 0 && (
                 <button
                   onClick={() => handleDeleteMessage(message.id)}
                   className="text-sm text-red-600 hover:text-red-800"
