@@ -36,6 +36,7 @@ export default function PackagePage({ onLoginClick }) {
   const [isLoadingNationalities, setIsLoadingNationalities] = useState(true);
   const [user, setUser] = useState(null);
   const [pendingBooking, setPendingBooking] = useState(false);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
 
   // Enhanced authentication check
   const checkUserAuth = () => {
@@ -101,6 +102,16 @@ export default function PackagePage({ onLoginClick }) {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, [pendingBooking]);
+
+  // Auto-hide login alert after 5 seconds
+  useEffect(() => {
+    if (showLoginAlert) {
+      const timer = setTimeout(() => {
+        setShowLoginAlert(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showLoginAlert]);
 
   // Fetch nationalities from API
   useEffect(() => {
@@ -253,7 +264,7 @@ export default function PackagePage({ onLoginClick }) {
   // Handle login popup
   const handleLoginPopup = () => {
     setPendingBooking(true);
-    setMessage("Please log in to complete your booking");
+    setShowLoginAlert(true);
     if (typeof onLoginClick === "function") {
       onLoginClick();
     } else {
@@ -341,12 +352,6 @@ export default function PackagePage({ onLoginClick }) {
     }
   };
 
-  // Refresh authentication manually
-  const refreshAuth = () => {
-    checkUserAuth();
-    setMessage("Authentication status refreshed");
-  };
-
   // If user comes directly without state (refresh or direct URL)
   if (!room) {
     return (
@@ -362,23 +367,6 @@ export default function PackagePage({ onLoginClick }) {
   return (
     <div>
       <div className="min-h-screen bg-gray-50">
-        {/* Auth Status Indicator */}
-        <div className="max-w-7xl mx-auto pt-4 px-4 flex justify-between items-center">
-          <div className="text-sm">
-            {user ? (
-              <span className="text-green-600">✅ Logged in as {user.name || user.email}</span>
-            ) : (
-              <span className="text-red-600">🔒 Please log in to book</span>
-            )}
-          </div>
-          <button
-            onClick={refreshAuth}
-            className="text-xs bg-cyan-600 text-white px-2 py-1 rounded"
-          >
-            Refresh Auth
-          </button>
-        </div>
-
         {/* Hero Section */}
         <div
           className="relative h-80 flex items-center justify-center text-white"
@@ -393,6 +381,13 @@ export default function PackagePage({ onLoginClick }) {
             {room.title}
           </h1>
         </div>
+
+        {/* Login Alert - Only shows when booking is attempted without login */}
+        {showLoginAlert && (
+          <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
+            <p>You need to be logged in to make a booking.</p>
+          </div>
+        )}
 
         {/* 🏨 Booking Component */}
         <form onSubmit={handleSubmit} className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
@@ -487,7 +482,7 @@ export default function PackagePage({ onLoginClick }) {
           <button 
             type="submit" 
             disabled={isSubmitting || (!user && pendingBooking)}
-            className="rounded-2xl min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition text-white font-bold p-3 md:px-10 bg-cyan-300 hover:rounded-full hover:bg-cyan-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className=" min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition text-black font-bold p-3 md:px-10 bg-white hover:rounded-full hover:bg-cyan-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {!user ? "Please Login to Book" : 
              isSubmitting ? "Submitting..." : "Submit Booking"}
@@ -502,28 +497,6 @@ export default function PackagePage({ onLoginClick }) {
               : "bg-green-100 text-green-700"
           }`}>
             {message}
-          </div>
-        )}
-
-        {/* Login prompt for non-logged in users */}
-        {!user && (
-          <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
-            <p className="font-semibold">Login Required</p>
-            <p>You need to be logged in to make a booking.</p>
-            <div className="mt-2 flex gap-4">
-              <button 
-                onClick={handleLoginPopup}
-                className="text-cyan-600 hover:underline font-semibold"
-              >
-                Click here to login
-              </button>
-              <button 
-                onClick={refreshAuth}
-                className="text-gray-600 hover:underline text-sm"
-              >
-                Refresh status
-              </button>
-            </div>
           </div>
         )}
 

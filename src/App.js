@@ -1,4 +1,5 @@
 import './App.css';
+import './i18n'; // Add this import
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 
@@ -23,7 +24,6 @@ import MyBookings from './Components/MyBookings';
 import BookingSearch from './Components/BookingSearch';
 import PackagePage from './Components/PackagePage';
 import AdminDashboard from './Components/AdminDashboard';
-
 
 const App = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -60,49 +60,51 @@ const App = () => {
   const handleLogout = () => {
     setUser(null);
   };
- const [admin, setAdmin] = useState(null);
 
-// Check for existing admin session on component mount
-useEffect(() => {
-  const checkAdminSession = () => {
-    const adminToken = localStorage.getItem('adminToken');
-    const adminEmail = localStorage.getItem('adminEmail');
-    const adminRole = localStorage.getItem('adminRole');
-    const adminName = localStorage.getItem('adminName');
+  const [admin, setAdmin] = useState(null);
+
+  // Check for existing admin session on component mount
+  useEffect(() => {
+    const checkAdminSession = () => {
+      const adminToken = localStorage.getItem('adminToken');
+      const adminEmail = localStorage.getItem('adminEmail');
+      const adminRole = localStorage.getItem('adminRole');
+      const adminName = localStorage.getItem('adminName');
+      
+      if (adminToken && adminEmail) {
+        setAdmin({
+          email: adminEmail,
+          role: adminRole || 'admin',
+          name: adminName || adminEmail.split('@')[0],
+          token: adminToken
+        });
+      } else {
+        setAdmin(null);
+      }
+    };
+
+    // Check immediately
+    checkAdminSession();
     
-    if (adminToken && adminEmail) {
-      setAdmin({
-        email: adminEmail,
-        role: adminRole || 'admin',
-        name: adminName || adminEmail.split('@')[0],
-        token: adminToken
-      });
-    } else {
-      setAdmin(null);
-    }
+    // Also check when the route changes
+    const interval = setInterval(checkAdminSession, 1000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleAdminLogin = (adminData) => {
+    console.log("handleAdminLogin called with:", adminData);
+    setAdmin(adminData);
   };
 
-  // Check immediately
-  checkAdminSession();
-  
-  // Also check when the route changes
-  const interval = setInterval(checkAdminSession, 1000);
-  
-  return () => clearInterval(interval);
-}, []);
+  const handleAdminLogout = () => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminEmail');
+    localStorage.removeItem('adminRole');
+    localStorage.removeItem('adminName');
+    setAdmin(null);
+  };
 
-const handleAdminLogin = (adminData) => {
-  console.log("handleAdminLogin called with:", adminData);
-  setAdmin(adminData);
-};
-
-const handleAdminLogout = () => {
-  localStorage.removeItem('adminToken');
-  localStorage.removeItem('adminEmail');
-  localStorage.removeItem('adminRole');
-  localStorage.removeItem('adminName');
-  setAdmin(null);
-};
   const handleLoginClick = () => {
     setShowLogin(true);
   };

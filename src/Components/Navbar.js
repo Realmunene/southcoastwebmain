@@ -194,7 +194,7 @@ export default function Navbar({
 
           <button className="flex items-center space-x-1 text-gray-700 hover:text-coral-500 transition">
             <FontAwesomeIcon icon={faGlobe} className="text-lg" />
-            <span className="text-sm font-medium">USD</span>
+            <span className="text-sm font-medium">LNG</span>
             <span className="text-xs">▼</span>
           </button>
 
@@ -315,7 +315,7 @@ export default function Navbar({
 
             <button className="flex items-center space-x-2 text-gray-700 hover:text-coral-500 transition">
               <FontAwesomeIcon icon={faGlobe} />
-              <span>USD ▼</span>
+              <span>LNG ▼</span>
             </button>
 
             <Link
