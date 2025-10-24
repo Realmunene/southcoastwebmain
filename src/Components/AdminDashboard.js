@@ -1242,6 +1242,11 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
       } else {
         console.error("Failed to fetch bookings:", response.status);
         setApiErrors(prev => ({ ...prev, bookings: `HTTP ${response.status}` }));
+        
+        // Show user-friendly error message
+        if (response.status === 500) {
+          alert("Server error while fetching bookings. Please try again later.");
+        }
       }
     } catch (error) {
       console.error("Error fetching bookings:", error);
@@ -1394,7 +1399,6 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
       }
 
       if (response.ok) {
-        // ✅ Show success message with email notification info
         const successMsg = editingBooking 
           ? "✅ Booking updated successfully! Email notification has been sent to super admin."
           : "✅ Booking created successfully! Email notification has been sent to super admin.";
@@ -1956,6 +1960,10 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
         }
         
         setAdmins(data);
+      } else if (response.status === 401) {
+        console.error("Unauthorized to fetch admins - insufficient permissions");
+        setApiErrors(prev => ({ ...prev, admins: "Unauthorized - You don't have permission to access admin management" }));
+        alert("You don't have permission to access admin management. Only Super Admin can manage other admins.");
       } else {
         console.error("Failed to fetch admins:", response.status);
         setApiErrors(prev => ({ ...prev, admins: `HTTP ${response.status}` }));
@@ -2104,7 +2112,7 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
             )) : (
               <tr>
                 <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No admins found
+                  No admins found or insufficient permissions
                 </td>
               </tr>
             )}
@@ -2281,6 +2289,7 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
         return;
       }
 
+      // FIXED: Using the correct endpoint for contact messages
       const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages", {
         headers: {
           "Authorization": `Bearer ${token}`,
