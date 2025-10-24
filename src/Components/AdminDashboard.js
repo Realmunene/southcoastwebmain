@@ -2065,22 +2065,44 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
   const [admins, setAdmins] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchAdmins();
-  }, []);
+    if (currentAdminRole === 0) {
+      fetchAdmins();
+    }
+  }, [currentAdminRole]);
 
   const fetchAdmins = async () => {
     try {
+      setLoading(true);
+      setError("");
       const token = localStorage.getItem("adminToken");
+      
       if (!token) {
-        console.error("No admin token found");
+        setError("No authentication token found. Please log in again.");
+        setLoading(false);
+        return;
+      }
+
+      // Verify token structure
+      try {
+        const tokenParts = token.split('.');
+        if (tokenParts.length !== 3) {
+          setError("Invalid authentication token format.");
+          setLoading(false);
+          return;
+        }
+      } catch (tokenError) {
+        setError("Invalid authentication token.");
         setLoading(false);
         return;
       }
 
       const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/admins", {
+        method: "GET",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
@@ -2094,22 +2116,52 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
           data = JSON.parse(responseText);
         } catch (parseError) {
           console.error("JSON Parse Error:", parseError);
+          setError("Server returned an invalid response format.");
           setAdmins([]);
           return;
         }
         
-        setAdmins(data);
+        // Handle different response formats
+        if (Array.isArray(data)) {
+          setAdmins(data);
+        } else if (data.data && Array.isArray(data.data)) {
+          setAdmins(data.data);
+        } else if (data.admins && Array.isArray(data.admins)) {
+          setAdmins(data.admins);
+        } else {
+          console.warn("Unexpected admins response format:", data);
+          setAdmins([]);
+        }
       } else if (response.status === 401) {
-        console.error("Unauthorized to fetch admins - insufficient permissions");
-        setApiErrors(prev => ({ ...prev, admins: "Unauthorized - You don't have permission to access admin management" }));
-        alert("You don't have permission to access admin management. Only Super Admin can manage other admins.");
+        // Even for super admin, we might get 401 if token is invalid/expired
+        const errorMsg = "Authentication failed. This could be due to:\n\n• Expired session\n• Invalid token\n• Server authentication issues\n\nPlease try refreshing the page or logging in again.";
+        setError(errorMsg);
+        console.error("Unauthorized to fetch admins - token issue:", response.status);
+        setApiErrors(prev => ({ ...prev, admins: "Authentication failed (401)" }));
+        setAdmins([]);
+      } else if (response.status === 403) {
+        // This should not happen for super admin, but handle it anyway
+        setError("Forbidden: You don't have permission to access admin management. Please verify your account has super admin privileges.");
+        setApiErrors(prev => ({ ...prev, admins: "Forbidden (403)" }));
+        setAdmins([]);
+      } else if (response.status === 404) {
+        setError("Admin management endpoint not found. The feature might be unavailable or under maintenance.");
+        setApiErrors(prev => ({ ...prev, admins: "Endpoint not found (404)" }));
+        setAdmins([]);
+      } else if (response.status >= 500) {
+        setError("Server error: Unable to load admin data due to server issues. Please try again later.");
+        setApiErrors(prev => ({ ...prev, admins: `Server Error (${response.status})` }));
+        setAdmins([]);
       } else {
-        console.error("Failed to fetch admins:", response.status);
+        setError(`Failed to load admins: Server returned ${response.status} error`);
         setApiErrors(prev => ({ ...prev, admins: `HTTP ${response.status}` }));
+        setAdmins([]);
       }
     } catch (error) {
+      setError("Network error: Unable to fetch admin data. Please check your connection.");
       console.error("Error fetching admins:", error);
       setApiErrors(prev => ({ ...prev, admins: error.message }));
+      setAdmins([]);
     } finally {
       setLoading(false);
     }
@@ -2124,7 +2176,14 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          admin: {
+            email: formData.email,
+            password: formData.password,
+            password_confirmation: formData.password_confirmation,
+            role: 1 // Always create as regular admin
+          }
+        }),
       });
 
       const responseText = await response.text();
@@ -2141,8 +2200,12 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
         alert("Admin created successfully!");
         setShowForm(false);
         fetchAdmins();
+      } else if (response.status === 401) {
+        throw new Error("Authentication failed. Your session may have expired.");
+      } else if (response.status === 403) {
+        throw new Error("You don't have permission to create admins.");
       } else {
-        throw new Error(result.errors?.join(', ') || result.error || 'Failed to create admin');
+        throw new Error(result.errors?.join(', ') || result.error || `Server returned ${response.status} error`);
       }
     } catch (error) {
       console.error("Error creating admin:", error);
@@ -2151,7 +2214,7 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
   };
 
   const handleDeleteAdmin = async (adminId) => {
-    if (!window.confirm("Are you sure you want to delete this admin?")) return;
+    if (!window.confirm("Are you sure you want to delete this admin? This action cannot be undone.")) return;
 
     try {
       const token = localStorage.getItem("adminToken");
@@ -2165,29 +2228,129 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
       if (response.ok) {
         alert("Admin deleted successfully!");
         fetchAdmins();
+      } else if (response.status === 401) {
+        alert("Authentication failed. Your session may have expired.");
+      } else if (response.status === 403) {
+        alert("You don't have permission to delete admins.");
       } else {
-        alert("Failed to delete admin");
+        alert("Failed to delete admin. Please try again.");
       }
     } catch (error) {
       console.error("Error deleting admin:", error);
-      alert("Failed to delete admin");
+      alert("Failed to delete admin due to a network error.");
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading admins...</div>;
+  const handleRetry = () => {
+    fetchAdmins();
+  };
 
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
-        {currentAdminRole === 0 && (
+  const handleRefreshSession = () => {
+    window.location.reload();
+  };
+
+  if (currentAdminRole !== 0) {
+    return (
+      <div className="text-center py-8">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 inline-block">
+          <svg className="mx-auto h-12 w-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-3a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <h3 className="mt-4 text-lg font-medium text-yellow-800">Access Restricted</h3>
+          <p className="mt-2 text-yellow-700">
+            Admin Management is only available to Super Administrators.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading admin data...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
           <button
             onClick={() => setShowForm(true)}
             className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
           >
             Add New Admin
           </button>
+        </div>
+
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-12 w-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            <div className="ml-4">
+              <h3 className="text-lg font-medium text-red-800">Unable to Load Admin Data</h3>
+              <div className="mt-2 text-red-700">
+                <p className="whitespace-pre-line">{error}</p>
+              </div>
+              <div className="mt-6 flex space-x-4">
+                <button
+                  onClick={handleRetry}
+                  className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Try Again
+                </button>
+                <button
+                  onClick={handleRefreshSession}
+                  className="inline-flex items-center px-4 py-2 border border-red-300 shadow-sm text-sm font-medium rounded-md text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Refresh Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {showForm && (
+          <AdminForm
+            onSubmit={handleCreateAdmin}
+            onCancel={() => setShowForm(false)}
+          />
         )}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">Admin Management</h2>
+        <div className="flex space-x-2">
+          <button
+            onClick={fetchAdmins}
+            className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            Refresh
+          </button>
+          <button
+            onClick={() => setShowForm(true)}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            Add New Admin
+          </button>
+        </div>
       </div>
 
       {showForm && (
@@ -2197,66 +2360,81 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
         />
       )}
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Admin ID
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Created At
-              </th>
-              {currentAdminRole === 0 && (
+      <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Admin ID
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Email
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Role
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Created At
+                </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
                 </th>
-              )}
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {admins.length > 0 ? admins.map((admin) => (
-              <tr key={admin.id}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  #{admin.id}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {admin.email}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">
-                    {admin.role === 0 ? 'super_admin' : 'admin'}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(admin.created_at).toLocaleDateString()}
-                </td>
-                {currentAdminRole === 0 && (
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {admins.length > 0 ? admins.map((admin) => (
+                <tr key={admin.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    #{admin.id}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {admin.email}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                      admin.role === 0 ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
+                    }`}>
+                      {admin.role === 0 ? 'Super Admin' : 'Admin'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {new Date(admin.created_at).toLocaleDateString()}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <button
                       onClick={() => handleDeleteAdmin(admin.id)}
-                      className="text-red-600 hover:text-red-900"
+                      className="text-red-600 hover:text-red-900 font-medium"
+                      disabled={admin.role === 0} // Prevent deleting own super admin account
                     >
-                      Delete
+                      {admin.role === 0 ? 'Cannot Delete' : 'Delete'}
                     </button>
                   </td>
-                )}
-              </tr>
-            )) : (
-              <tr>
-                <td colSpan={currentAdminRole === 0 ? "5" : "4"} className="px-6 py-4 text-center text-sm text-gray-500">
-                  No admins found or insufficient permissions
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                </tr>
+              )) : (
+                <tr>
+                  <td colSpan="5" className="px-6 py-8 text-center">
+                    <div className="text-gray-500">
+                      <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-3a2 2 0 00-2-2H6a2 2 0 00-2 2v3a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                      <h3 className="mt-2 text-sm font-medium text-gray-900">No admins found</h3>
+                      <p className="mt-1 text-sm text-gray-500">Get started by creating a new admin account.</p>
+                      <div className="mt-6">
+                        <button
+                          onClick={() => setShowForm(true)}
+                          className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+                        >
+                          Add New Admin
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
