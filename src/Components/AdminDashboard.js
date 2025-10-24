@@ -2602,26 +2602,30 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
     try {
       setLoading(true);
       setError("");
+
       const token = localStorage.getItem("adminToken");
-      
+
       if (!token) {
         setError("No authentication token found. Please log in again.");
         setLoading(false);
         return;
       }
 
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages", {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const responseText = await response.text();
-        
+
         if (!responseText.trim()) {
           setMessages([]);
           return;
@@ -2630,36 +2634,34 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
         let data;
         try {
           data = JSON.parse(responseText);
-        } catch (parseError) {
-          console.error("JSON Parse Error:", parseError);
-          setError("Server returned an invalid response format.");
+        } catch (e) {
+          console.error("Invalid JSON response:", e);
+          setError("Server returned invalid JSON.");
           setMessages([]);
           return;
         }
-        
-        if (Array.isArray(data)) {
-          setMessages(data);
-        } else if (data.data && Array.isArray(data.data)) {
-          setMessages(data.data);
-        } else if (data.messages && Array.isArray(data.messages)) {
-          setMessages(data.messages);
-        } else if (data.contact_messages && Array.isArray(data.contact_messages)) {
-          setMessages(data.contact_messages);
-        } else {
-          setMessages([]);
-        }
+
+        // ✅ handle all response shapes
+        const extracted =
+          Array.isArray(data) ? data :
+          data.contact_messages ? data.contact_messages :
+          data.messages ? data.messages :
+          data.data ? data.data :
+          [];
+
+        setMessages(extracted);
       } else if (response.status === 401) {
-        setError("Authentication failed. Please ensure you're logged in as an admin.");
-        setApiErrors(prev => ({ ...prev, messages: "Unauthorized (401)" }));
+        setError("Authentication failed. Ensure you're logged in as admin.");
+        setApiErrors((prev) => ({ ...prev, messages: "Unauthorized (401)" }));
         setMessages([]);
       } else {
-        setError(`Unable to load messages: Server returned ${response.status} error`);
-        setApiErrors(prev => ({ ...prev, messages: `HTTP ${response.status}` }));
+        setError(`Server returned ${response.status} error`);
+        setApiErrors((prev) => ({ ...prev, messages: `HTTP ${response.status}` }));
         setMessages([]);
       }
     } catch (error) {
-      setError("Network error: Unable to fetch messages. Please check your connection.");
-      setApiErrors(prev => ({ ...prev, messages: error.message }));
+      setError("Network error. Please check your connection.");
+      setApiErrors((prev) => ({ ...prev, messages: error.message }));
       setMessages([]);
     } finally {
       setLoading(false);
@@ -2669,26 +2671,44 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
   const handleMarkAsRead = async (messageId) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}/mark_as_read`, {
-        method: "PATCH",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}/mark_as_read`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
-        setMessages(messages.map(msg => 
-          msg.id === messageId ? { ...msg, status: 'read' } : msg
-        ));
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId ? { ...msg, status: "read" } : msg
+          )
+        );
       }
     } catch (error) {
-      console.error("Error marking message as read:", error);
+      console.error("Error marking read:", error);
     }
   };
 
   const handleReply = (message) => {
-    const subject = encodeURIComponent(`Re: Your message to Southcoast Outdoors`);
-    const body = encodeURIComponent(`Dear ${message.name},\n\nThank you for contacting Southcoast Outdoors. We have received your message and will get back to you shortly.\n\nBest regards,\nSouthcoast Outdoors Team\n\n---\nOriginal message:\n${message.message}`);
+    const subject = encodeURIComponent("Re: Your message to Southcoast Outdoors");
+    const body = encodeURIComponent(
+      `Dear ${message.name},
+
+Thank you for contacting Southcoast Outdoors. We have received your message and will get back to you shortly.
+
+Best regards,
+Southcoast Outdoors Team
+
+---
+Original Message:
+${message.message}`
+    );
     window.location.href = `mailto:${message.email}?subject=${subject}&body=${body}`;
   };
 
@@ -2698,28 +2718,30 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
       return;
     }
 
-    if (!window.confirm("Are you sure you want to delete this message? This action cannot be undone.")) return;
+    if (!window.confirm("Are you sure you want to delete this message?"))
+      return;
 
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}`, {
-        method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/contact_messages/${messageId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
-        setMessages(messages.filter(msg => msg.id !== messageId));
+        setMessages((prev) => prev.filter((msg) => msg.id !== messageId));
       }
     } catch (error) {
-      console.error("Error deleting message:", error);
+      console.error("Delete error:", error);
     }
   };
 
-  const handleRetry = () => {
-    fetchMessages();
-  };
+  const handleRetry = () => fetchMessages();
 
   if (loading) {
     return (
@@ -2734,32 +2756,13 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
     return (
       <div>
         <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <svg className="h-12 w-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-            </div>
-            <div className="ml-4">
-              <h3 className="text-lg font-medium text-yellow-800">Unable to Load Messages</h3>
-              <div className="mt-2 text-yellow-700">
-                <p>{error}</p>
-                <p className="mt-2 text-sm">
-                  <strong>Backend Issue:</strong> The messages endpoint is currently checking for User admin permissions instead of Admin model authentication.
-                </p>
-              </div>
-              <div className="mt-6">
-                <button
-                  onClick={handleRetry}
-                  className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-                >
-                  Try Again
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <p className="text-red-600">{error}</p>
+        <button
+          onClick={handleRetry}
+          className="mt-4 bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-md text-sm"
+        >
+          Try Again
+        </button>
       </div>
     );
   }
@@ -2767,84 +2770,59 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
   return (
     <div>
       <h2 className="text-lg font-semibold text-gray-900 mb-6">Messages Management</h2>
-      
+
       <div className="mb-4 flex justify-between items-center">
         <button
           onClick={fetchMessages}
           className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
         >
-          Refresh Messages
+          Refresh
         </button>
         <span className="text-sm text-gray-500">
-          {messages.length} message{messages.length !== 1 ? 's' : ''} found
+          {messages.length} message{messages.length !== 1 ? "s" : ""}
         </span>
       </div>
 
-      <div className="space-y-4">
-        {messages.length > 0 ? messages.map((message) => (
-          <div key={message.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-            <div className="flex justify-between items-start mb-3">
-              <div>
-                <h3 className="text-sm font-medium text-gray-900">{message.name}</h3>
-                <p className="text-sm text-gray-500">{message.email}</p>
-                {message.phone && (
-                  <p className="text-sm text-gray-500">Phone: {message.phone}</p>
-                )}
-              </div>
-              <div className="text-right">
-                <p className="text-xs text-gray-400">
-                  {new Date(message.created_at).toLocaleDateString()} at{" "}
-                  {new Date(message.created_at).toLocaleTimeString()}
-                </p>
-                <span className={`inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full ${
-                  message.status === 'new' ? 'bg-blue-100 text-blue-800' :
-                  message.status === 'read' ? 'bg-gray-100 text-gray-800' :
-                  'bg-green-100 text-green-800'
-                }`}>
-                  {message.status || 'new'}
-                </span>
-              </div>
-            </div>
-            <p className="text-gray-700 mb-4 whitespace-pre-wrap">{message.message}</p>
-            <div className="flex justify-between items-center">
-              <div className="flex space-x-2">
-                {(!message.status || message.status === 'new') ? (
-                  <button 
-                    onClick={() => handleMarkAsRead(message.id)}
-                    className="text-sm text-cyan-600 hover:text-cyan-800 font-medium"
-                  >
-                    Mark as Read
-                  </button>
-                ) : (
-                  <span className="text-sm text-gray-500">Read</span>
-                )}
-                <button 
-                  onClick={() => handleReply(message)}
-                  className="text-sm text-green-600 hover:text-green-800 font-medium"
-                >
-                  Reply via Email
-                </button>
-              </div>
-              {currentAdminRole === 0 && (
-                <button
-                  onClick={() => handleDeleteMessage(message.id)}
-                  className="text-sm text-red-600 hover:text-red-800 font-medium"
-                >
-                  Delete
-                </button>
-              )}
-            </div>
+      {messages.map((message) => (
+        <div key={message.id} className="bg-white border rounded-lg p-4 mb-3">
+          <p className="font-medium">{message.name}</p>
+          <p className="text-sm text-gray-500">{message.email}</p>
+          <p className="mt-3">{message.message}</p>
+
+          <div className="flex justify-between mt-4 text-sm">
+            {message.status !== "read" ? (
+              <button
+                onClick={() => handleMarkAsRead(message.id)}
+                className="text-cyan-600 hover:text-cyan-800"
+              >
+                Mark as Read
+              </button>
+            ) : (
+              <span className="text-gray-500">Read</span>
+            )}
+
+            <button
+              onClick={() => handleReply(message)}
+              className="text-green-600 hover:text-green-800"
+            >
+              Reply via Email
+            </button>
+
+            {currentAdminRole === 0 && (
+              <button
+                onClick={() => handleDeleteMessage(message.id)}
+                className="text-red-600 hover:text-red-800"
+              >
+                Delete
+              </button>
+            )}
           </div>
-        )) : (
-          <div className="text-center py-12 text-gray-500 bg-white rounded-lg border border-gray-200">
-            <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">No messages</h3>
-            <p className="mt-1 text-sm text-gray-500">No contact messages have been received yet.</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ))}
+
+      {messages.length === 0 && (
+        <p className="text-center text-gray-500">No messages available.</p>
+      )}
     </div>
   );
 };
