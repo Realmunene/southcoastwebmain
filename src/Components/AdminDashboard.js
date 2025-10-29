@@ -39,14 +39,28 @@ export default function AdminDashboard() {
     setCurrentAdminName(storedName);
   };
 
-  const fetchAdminProfile = async () => {
+const fetchAdminProfile = async () => {
+  try {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      console.error("No admin token found");
+      setLoading(false);
+      return;
+    }
+
+    // Debug: Log token info
+    console.log("Token exists:", !!token);
+    console.log("Token length:", token.length);
+    
+    // Try to decode token payload to see actual roles
     try {
-      const token = localStorage.getItem("adminToken");
-      if (!token) {
-        console.error("No admin token found");
-        setLoading(false);
-        return;
-      }
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      console.log("Token payload:", payload);
+      console.log("Token roles/claims:", payload.role, payload.roles, payload.admin_role);
+    } catch (e) {
+      console.log("Cannot decode token (might not be JWT)");
+    }
+
 
       // Try to fetch profile, but handle 404 gracefully
       try {
@@ -2073,17 +2087,101 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
     }
   }, [currentAdminRole]);
 
-  const fetchAdmins = async () => {
-    try {
-      setLoading(true);
-      setError("");
-      const token = localStorage.getItem("adminToken");
-      
-      if (!token) {
-        setError("No authentication token found. Please log in again.");
-        setLoading(false);
+const fetchAdmins = async () => {
+  try {
+    setLoading(true);
+    setError("");
+    const token = localStorage.getItem("adminToken");
+    
+    if (!token) {
+      setError("No authentication token found. Please log in again.");
+      setLoading(false);
+      return;
+    }
+
+    const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/admins", {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
+    console.log("Admins endpoint response status:", response.status);
+
+    if (response.ok) {
+      const responseText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error("JSON Parse Error:", parseError);
+        setError("Server returned an invalid response format.");
+        setAdmins([]);
         return;
       }
+      
+      // Handle response formats
+      if (Array.isArray(data)) {
+        setAdmins(data);
+      } else if (data.data && Array.isArray(data.data)) {
+        setAdmins(data.data);
+      } else if (data.admins && Array.isArray(data.admins)) {
+        setAdmins(data.admins);
+      } else {
+        console.warn("Unexpected admins response format:", data);
+        setAdmins([]);
+      }
+    } else if (response.status === 401) {
+      setError("Authentication failed (401). Your session may have expired or you don't have permission to access admin management.");
+      console.error("Unauthorized access to admins endpoint");
+      // Clear invalid token
+      localStorage.removeItem("adminToken");
+      localStorage.removeItem("adminRole");
+      localStorage.removeItem("adminName");
+    } else if (response.status === 403) {
+      setError("Access forbidden (403). You don't have sufficient permissions to manage admins. Required role: Super Admin (0)");
+    } else if (response.status === 404) {
+      setError("Admin management endpoint not found (404). The feature might be unavailable.");
+    } else {
+      setError(`Failed to load admins: Server returned ${response.status} error`);
+    }
+  } catch (error) {
+    setError(`Network error: ${error.message}`);
+    console.error("Error fetching admins:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+// Add this function to verify roles
+const verifyAdminPermissions = async () => {
+  try {
+    const token = localStorage.getItem("adminToken");
+    const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/verify", {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log("Role verification:", data);
+      return data;
+    }
+    return null;
+  } catch (error) {
+    console.error("Role verification failed:", error);
+    return null;
+  }
+};
+
+// Call this in your useEffect
+useEffect(() => {
+  fetchAdminProfile();
+  fetchDashboardStats();
+  verifyAdminPermissions(); // Add this
+}, []);
 
       // Verify token structure
       try {
