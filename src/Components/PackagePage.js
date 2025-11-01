@@ -574,7 +574,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
               Join the South Coast Experience
             </h2>
             <p className="text-gray-700 text-left px-6 leading-relaxed mb-4">
-              Discover the beauty of Kenya's coastline like never before. At South Coast Web,
+              Discover the beauty of Kenya's coastline like never before. At SouthCoast Outdoors,
               we make it easy for you to plan and enjoy unforgettable getaways filled with sun,
               sea, and adventure. From exclusive travel deals to inspiring destination highlights,
               we'll deliver the best offers straight to your inbox.
@@ -602,7 +602,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
 
           {/* Right Section - Why South Coast */}
           <div className="w-full md:w-1/2">
-            <h3 className="text-2xl font-bold mb-4">Why South Coast Web?</h3>
+            <h3 className="text-2xl font-bold mb-4">Why SouthCoast Outdoors?</h3>
             <ul className="space-y-3 text-gray-700 px-6">
               <li>✅ Tailor-made holiday experiences</li>
               <li>✅ Trusted support from start to finish</li>
