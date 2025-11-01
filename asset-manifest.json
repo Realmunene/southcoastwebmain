@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/southcoastwebmain/static/css/main.01aa594e.css",
-    "main.js": "/southcoastwebmain/static/js/main.38cf6dd9.js",
+    "main.js": "/southcoastwebmain/static/js/main.022254b1.js",
     "static/js/453.1f735320.chunk.js": "/southcoastwebmain/static/js/453.1f735320.chunk.js",
     "static/media/background.jpg": "/southcoastwebmain/static/media/background.9ab2861bd6e17cdb6731.jpg",
     "static/media/ensuite.jpg": "/southcoastwebmain/static/media/ensuite.ed996c8648221acc2fdc.jpg",
+    "static/media/image8.jpg": "/southcoastwebmain/static/media/image8.ab0c88cc84306b5979a4.jpg",
     "static/media/image6.jpg": "/southcoastwebmain/static/media/image6.4e58cd905bc8f06ad2de.jpg",
-    "static/media/image8.jpg": "/southcoastwebmain/static/media/image8.24533055fcc0dea34faf.jpg",
     "static/media/2BA.jpg": "/southcoastwebmain/static/media/2BA.49ce5ee78ed2b30fd544.jpg",
     "static/media/image2.jpg": "/southcoastwebmain/static/media/image2.4a3d51721398622de790.jpg",
     "static/media/IMG-20251011-WA0000.jpg": "/southcoastwebmain/static/media/IMG-20251011-WA0000.4dfaa25397b97cef670b.jpg",
@@ -25,11 +25,11 @@
     "index.html": "/southcoastwebmain/index.html",
     "static/media/getFetch.cjs": "/southcoastwebmain/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.01aa594e.css.map": "/southcoastwebmain/static/css/main.01aa594e.css.map",
-    "main.38cf6dd9.js.map": "/southcoastwebmain/static/js/main.38cf6dd9.js.map",
+    "main.022254b1.js.map": "/southcoastwebmain/static/js/main.022254b1.js.map",
     "453.1f735320.chunk.js.map": "/southcoastwebmain/static/js/453.1f735320.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.01aa594e.css",
-    "static/js/main.38cf6dd9.js"
+    "static/js/main.022254b1.js"
   ]
 }
