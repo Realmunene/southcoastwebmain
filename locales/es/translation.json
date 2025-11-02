@@ -1,0 +1,15 @@
+{
+  "app_title": "SouthCoast",
+  "book_stay": "Reservar Estancia",
+  "experiences": "Experiencias",
+  "partner_with_us": "Asóciese Con Nosotros",
+  "login_signup": "Iniciar Sesión / Registrarse",
+  "my_bookings": "Mis Reservas",
+  "logout": "Cerrar Sesión",
+  "admin": "Administrador",
+  "super_admin": "Super Administrador",
+  "admin_dashboard": "Panel de Administración",
+  "user": "Usuario",
+  "logout_success": "✅ ¡Sesión cerrada exitosamente!",
+  "admin_logout_success": "✅ ¡Administrador cerró sesión exitosamente!"
+}

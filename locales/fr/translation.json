@@ -1,0 +1,15 @@
+{
+  "app_title": "SouthCoast",
+  "book_stay": "Réserver un Séjour",
+  "experiences": "Expériences",
+  "partner_with_us": "Devenez Partenaire",
+  "login_signup": "Se Connecter / S'Inscrire",
+  "my_bookings": "Mes Réservations",
+  "logout": "Déconnexion",
+  "admin": "Administrateur",
+  "super_admin": "Super Admin",
+  "admin_dashboard": "Tableau de Bord Admin",
+  "user": "Utilisateur",
+  "logout_success": "✅ Déconnexion réussie !",
+  "admin_logout_success": "✅ Admin déconnecté avec succès !"
+}
