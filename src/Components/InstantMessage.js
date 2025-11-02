@@ -8,63 +8,26 @@ export default function InstantMessage({ onClose }) {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Email reputation check (NO KEY)
-  const checkEmailReputation = async (email) => {
-    const API_URL = "https://emailreputation.abstractapi.com/v1?email=joseph.m.munene690@gmail.com"; // GET URL here
-
-    try {
-      const response = await fetch(`${API_URL}?email=${email}`);
-      const data = await response.json();
-
-      console.log("Email reputation result:", data);
-
-      // MUST be deliverable
-      if (data.email_deliverability.status !== "deliverable") return false;
-
-      // SMTP & MX must be valid
-      if (!data.email_deliverability.is_smtp_valid) return false;
-      if (!data.email_deliverability.is_mx_valid) return false;
-
-      // Block fake/temporary email
-      if (data.email_quality.is_disposable) return false;
-
-      // Format must look correct
-      if (!data.email_deliverability.is_format_valid) return false;
-
-      return true;
-    } catch (err) {
-      console.error("Email reputation error:", err);
-      return false;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    // ✅ validate email reputation first
-    const isReal = await checkEmailReputation(email);
-
-    if (!isReal) {
-      alert("❌ The email you entered is not valid or not deliverable.");
-      setLoading(false);
+    // ✅ Basic email syntax check before sending to backend
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("❌ Please enter a valid email address.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      const response = await fetch(
-        "https://backend-southcoastwebmain-1.onrender.com/api/v1/contact_messages",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contact_message: {
-              email,
-              message,
-            },
-          }),
-        }
-      );
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/contact_messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contact_message: { email, message },
+        }),
+      });
 
       const text = await response.text();
       let data = {};
@@ -80,11 +43,11 @@ export default function InstantMessage({ onClose }) {
         setMessage("");
         onClose();
       } else {
-        alert(`❌ Error: ${data.errors?.join(", ") || "Unknown error"}`);
+        alert(`❌ ${data.errors?.join(", ") || "Please enter a real, deliverable email."}`);
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      alert("⚠️ Could not send message. Please try again.");
+      alert("⚠️ Could not send message. Please try again later.");
     } finally {
       setLoading(false);
     }

@@ -23,13 +23,14 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
     return tomorrow.toISOString().split('T')[0];
   };
 
-  // State for booking form
+  // State for booking form - UPDATED with adults and children
   const [bookingData, setBookingData] = useState({
     nationality: "",
     roomType: room?.title || "",
     checkIn: getTodayDate(), // Default to today
     checkOut: getTomorrowDate(), // Default to tomorrow
-    guests: 1
+    adults: "1",
+    children: "0"
   });
   const [nationalities, setNationalities] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,6 +39,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   const [pendingBooking, setPendingBooking] = useState(false);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
 
   // Enhanced authentication check
   const checkUserAuth = () => {
@@ -171,16 +173,21 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     
-    // For guests input, ensure it's a number and within limits
-    if (name === 'guests') {
-      const guestCount = parseInt(value) || 1;
-      // Limit guests to reasonable number (e.g., 1-10)
-      if (guestCount >= 1 && guestCount <= 10) {
-        setBookingData(prev => ({
-          ...prev,
-          [name]: guestCount
-        }));
-      }
+    // For guest inputs (adults and children), ensure they're numbers and within limits
+    if (name === 'adults' || name === 'children') {
+      const numericValue = value.replace(/\D/g, '');
+      
+      setBookingData(prev => ({
+        ...prev,
+        [name]: numericValue
+      }));
+
+      // Clear guest-related errors when user starts typing
+      setErrors(prev => ({ 
+        ...prev, 
+        [name]: "",
+        guests: "" 
+      }));
       return;
     }
 
@@ -201,66 +208,86 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
         checkIn: newCheckIn,
         checkOut: newCheckOut
       }));
+
+      setErrors(prev => ({ ...prev, checkIn: "", checkOut: "" }));
       return;
     }
 
+    // For check-out date changes
+    if (name === 'checkOut') {
+      setBookingData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+      setErrors(prev => ({ ...prev, checkOut: "" }));
+      return;
+    }
+
+    // For nationality and room type
     setBookingData(prev => ({
       ...prev,
       [name]: value
     }));
+
+    if (name === 'nationality') {
+      setErrors(prev => ({ ...prev, nationality: "" }));
+    }
   };
 
   // Validate form
   const validateForm = () => {
-    if (!bookingData.nationality) {
-      setMessage("Please select your nationality");
-      return false;
-    }
-    if (!bookingData.checkIn) {
-      setMessage("Please select check-in date");
-      return false;
-    }
-    if (!bookingData.checkOut) {
-      setMessage("Please select check-out date");
-      return false;
-    }
-    if (bookingData.guests < 1 || bookingData.guests > 10) {
-      setMessage("Please enter a valid number of guests (1-10)");
-      return false;
+    const newErrors = {};
+    const today = getTodayDate();
+
+    if (!bookingData.nationality) newErrors.nationality = "Nationality is required";
+    
+    // Guest validations
+    const adults = parseInt(bookingData.adults, 10);
+    const children = parseInt(bookingData.children, 10);
+    const totalGuests = adults + children;
+
+    if (!bookingData.adults || isNaN(adults) || adults < 1 || adults > 20) {
+      newErrors.adults = "Adults must be between 1 and 20";
     }
     
+    if (!bookingData.children || isNaN(children) || children < 0 || children > 20) {
+      newErrors.children = "Children must be between 0 and 20";
+    }
+
+    if (totalGuests < 1 || totalGuests > 20) {
+      newErrors.guests = "Total guests must be between 1 and 20";
+    }
+
     // Date validations
-    const today = getTodayDate();
-    const checkInDate = new Date(bookingData.checkIn);
-    const checkOutDate = new Date(bookingData.checkOut);
-    const todayDate = new Date(today);
+    if (bookingData.checkIn && bookingData.checkOut) {
+      const checkInDate = new Date(bookingData.checkIn);
+      const checkOutDate = new Date(bookingData.checkOut);
+      const todayDate = new Date(today);
 
-    // Check if check-in is today or in the future
-    if (checkInDate < todayDate) {
-      setMessage("Check-in date cannot be in the past");
-      return false;
+      // Check if check-in is today or in the future
+      if (checkInDate < todayDate) {
+        newErrors.checkIn = "Check-in date cannot be in the past";
+      }
+
+      // Check if check-out is today or in the future
+      if (checkOutDate < todayDate) {
+        newErrors.checkOut = "Check-out date cannot be in the past";
+      }
+
+      // Check if check-out is after check-in
+      if (checkOutDate <= checkInDate) {
+        newErrors.checkOut = "Check-out date must be after check-in date";
+      }
+
+      // Optional: Maximum stay duration (30 days)
+      const stayDuration = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+      if (stayDuration > 30) {
+        newErrors.checkOut = "Maximum stay duration is 30 days";
+      }
     }
 
-    // Check if check-out is today or in the future
-    if (checkOutDate < todayDate) {
-      setMessage("Check-out date cannot be in the past");
-      return false;
-    }
-
-    // Check if check-out is after check-in
-    if (checkOutDate <= checkInDate) {
-      setMessage("Check-out date must be after check-in date");
-      return false;
-    }
-
-    // Check if stay is not too long (optional: you can remove this if not needed)
-    const stayDuration = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-    if (stayDuration > 30) {
-      setMessage("Maximum stay duration is 30 days");
-      return false;
-    }
-
-    return true;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   // Handle login popup FOR BOOKING
@@ -311,18 +338,15 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
         throw new Error('No authentication token found');
       }
 
-      // Prepare the data to send to backend - matching BookingSearch format
+      // Prepare the data to send to backend - UPDATED with adults and children
       const bookingPayload = {
         booking: {
-          user_id: user.id,
           nationality: bookingData.nationality,
           room_type: bookingData.roomType,
           check_in: bookingData.checkIn,
           check_out: bookingData.checkOut,
-          guests: bookingData.guests,
-          room_id: room?.id,
-          room_title: room?.title,
-          price: room?.price
+          adults: parseInt(bookingData.adults, 10),
+          children: parseInt(bookingData.children, 10)
         }
       };
 
@@ -357,8 +381,10 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
           roomType: room?.title || "",
           checkIn: getTodayDate(),
           checkOut: getTomorrowDate(),
-          guests: 1
+          adults: "1",
+          children: "0"
         });
+        setErrors({});
 
       } else {
         console.error("Booking error:", result);
@@ -371,6 +397,12 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
       setIsSubmitting(false);
     }
   };
+
+  // Helper function for input classes
+  const getInputClass = (field) =>
+    errors[field]
+      ? "w-full border border-red-500 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+      : "w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400";
 
   // If user comes directly without state (refresh or direct URL)
   if (!room) {
@@ -417,8 +449,21 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
           </div>
         )}
 
-        {/* 🏨 Booking Component */}
+        {/* Error summary */}
+        {Object.keys(errors).length > 0 && (
+          <div className="max-w-7xl mx-auto mt-4 p-4 bg-red-100 text-red-700 rounded-md">
+            <p className="font-semibold">Please fix the following errors:</p>
+            <ul className="list-disc list-inside mt-2">
+              {Object.values(errors).map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* 🏨 Booking Component - UPDATED with separate adults/children inputs */}
         <form onSubmit={handleSubmit} className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
+          {/* Nationality */}
           <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Guest Nationality *
@@ -427,7 +472,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
               name="nationality"
               value={bookingData.nationality}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className={getInputClass("nationality")}
               required
               disabled={isLoadingNationalities}
             >
@@ -438,11 +483,15 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
                 </option>
               ))}
             </select>
+            {errors.nationality && (
+              <p className="text-red-500 text-xs mt-1">{errors.nationality}</p>
+            )}
             {isLoadingNationalities && (
               <p className="text-xs text-gray-500 mt-1">Loading nationalities...</p>
             )}
           </div>
 
+          {/* Room Type */}
           <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
             <label className="block text-sm font-semibold text-gray-700 mb-1">
               Room Type *
@@ -457,6 +506,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
             />
           </div>
 
+          {/* Dates */}
           <div className="flex-1 min-w-[280px] border-b md:border-b-0 md:border-r border-gray-300 p-3 flex flex-col sm:flex-row items-center justify-center gap-4">
             <div className="w-full sm:w-1/2">
               <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -468,10 +518,15 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
                 value={bookingData.checkIn}
                 onChange={handleInputChange}
                 min={getTodayDate()} // Cannot select past dates
-                className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" 
+                className={getInputClass("checkIn")}
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">Today or later</p>
+              {errors.checkIn && (
+                <p className="text-red-500 text-xs mt-1">{errors.checkIn}</p>
+              )}
+              {!errors.checkIn && (
+                <p className="text-xs text-gray-500 mt-1">Today or later</p>
+              )}
             </div>
             <div className="w-full sm:w-1/2">
               <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -483,28 +538,61 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
                 value={bookingData.checkOut}
                 onChange={handleInputChange}
                 min={bookingData.checkIn || getTodayDate()} // Minimum is check-in date or today
-                className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" 
+                className={getInputClass("checkOut")}
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">After check-in</p>
+              {errors.checkOut && (
+                <p className="text-red-500 text-xs mt-1">{errors.checkOut}</p>
+              )}
+              {!errors.checkOut && (
+                <p className="text-xs text-gray-500 mt-1">After check-in</p>
+              )}
             </div>
           </div>
 
-          <div className="flex-1 min-w-[160px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Guests *
-            </label>
-            <input 
-              type="number" 
-              name="guests"
-              min="1" 
-              max="10"
-              value={bookingData.guests}
-              onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400" 
-              required
-            />
-            <p className="text-xs text-gray-500 mt-1">1-10 guests</p>
+          {/* Guests - UPDATED to two inputs */}
+          <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Guests *</label>
+            <div className="flex gap-2">
+              <div className="flex-1">
+                <label className="block text-xs text-gray-600 mb-1">Adults</label>
+                <input
+                  type="text"
+                  name="adults"
+                  value={bookingData.adults}
+                  onChange={handleInputChange}
+                  className={getInputClass("adults")}
+                  placeholder="Adults"
+                  maxLength="2"
+                />
+                {errors.adults && (
+                  <p className="text-red-500 text-xs mt-1">{errors.adults}</p>
+                )}
+              </div>
+              <div className="flex-1">
+                <label className="block text-xs text-gray-600 mb-1">Children</label>
+                <input
+                  type="text"
+                  name="children"
+                  value={bookingData.children}
+                  onChange={handleInputChange}
+                  className={getInputClass("children")}
+                  placeholder="Children"
+                  maxLength="2"
+                />
+                {errors.children && (
+                  <p className="text-red-500 text-xs mt-1">{errors.children}</p>
+                )}
+              </div>
+            </div>
+            {errors.guests && (
+              <p className="text-red-500 text-xs mt-1">{errors.guests}</p>
+            )}
+            {!errors.guests && !errors.adults && !errors.children && (
+              <p className="text-gray-500 text-xs mt-2">
+                Total guests: {parseInt(bookingData.adults || 0) + parseInt(bookingData.children || 0)}
+              </p>
+            )}
           </div>
 
           <button 

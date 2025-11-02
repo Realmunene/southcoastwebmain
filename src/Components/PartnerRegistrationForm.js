@@ -79,8 +79,30 @@ export default function PartnerRegistrationForm({ onClose }) {
         if (data.token) {
           localStorage.setItem("partnerToken", data.token);
         }
-        alert("Registration successful!");
-        onClose();
+        
+        // Show custom success message
+        alert("Registration successful! Our support team will reach out to you shortly.");
+        
+        // Safe onClose call
+        if (typeof onClose === 'function') {
+          onClose();
+        } else {
+          console.log('Registration successful - onClose not available');
+          // Reset form on success
+          setForm({
+            supplierType: "",
+            supplierName: "",
+            mobile: "",
+            email: "",
+            contactPerson: "",
+            password: "",
+            confirmPassword: "",
+            description: "",
+            city: "",
+            address: "",
+            agree: false,
+          });
+        }
       } else {
         alert(data.errors ? data.errors.join(", ") : data.message || "Registration failed");
       }
@@ -133,7 +155,14 @@ export default function PartnerRegistrationForm({ onClose }) {
         }
         alert("Login successful!");
         setShowLogin(false);
-        onClose();
+        
+        // Safe onClose call
+        if (typeof onClose === 'function') {
+          onClose();
+        } else {
+          console.log('Login successful - onClose not available');
+          setLoginForm({ email: "", password: "" });
+        }
       } else {
         alert(data.message || "Login failed");
       }
@@ -152,10 +181,28 @@ export default function PartnerRegistrationForm({ onClose }) {
     }
   };
 
+  const handleClose = () => {
+    if (typeof onClose === 'function') {
+      onClose();
+    } else {
+      console.log('Close functionality not available');
+    }
+  };
+
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-cyan-400 to-cyan-800 p-4">
-        <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8">
+        <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8 relative">
+          {/* Close button - only show if onClose is provided */}
+          {typeof onClose === 'function' && (
+            <button
+              onClick={handleClose}
+              className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-xl font-bold"
+            >
+              &times;
+            </button>
+          )}
+          
           <div className="text-center mb-6">
             <img src={logo} alt="Southcoast logo" className="mx-auto mb-2 w-40" />
             <p className="text-gray-700 font-semibold">Free Sign Up</p>

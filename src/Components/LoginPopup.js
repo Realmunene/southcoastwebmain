@@ -138,7 +138,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/users", {
+      const response = await fetch("http://127.0.0.1:3000/api/v1/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: registerData }),

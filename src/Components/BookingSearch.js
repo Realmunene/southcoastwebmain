@@ -27,7 +27,10 @@ export default function BookingSearch({ onLoginClick }) {
   const [selectedRoomType, setSelectedRoomType] = useState("");
   const [checkIn, setCheckIn] = useState(getTodayDate());
   const [checkOut, setCheckOut] = useState(getTomorrowDate());
-  const [guests, setGuests] = useState("1");
+  const [guests, setGuests] = useState({
+    adults: "1",
+    children: "0"
+  });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -125,7 +128,23 @@ export default function BookingSearch({ onLoginClick }) {
     if (!selectedRoomType) newErrors.selectedRoomType = "Room type is required";
     if (!checkIn) newErrors.checkIn = "Check-in date is required";
     if (!checkOut) newErrors.checkOut = "Check-out date is required";
-    if (!guests) newErrors.guests = "Number of guests is required";
+    
+    // Guest validations
+    const adults = parseInt(guests.adults, 10);
+    const children = parseInt(guests.children, 10);
+    const totalGuests = adults + children;
+
+    if (!guests.adults || isNaN(adults) || adults < 1 || adults > 20) {
+      newErrors.adults = "Adults must be between 1 and 20";
+    }
+    
+    if (!guests.children || isNaN(children) || children < 0 || children > 20) {
+      newErrors.children = "Children must be between 0 and 20";
+    }
+
+    if (totalGuests < 1 || totalGuests > 20) {
+      newErrors.guests = "Total guests must be between 1 and 20";
+    }
 
     // Date validations
     if (checkIn && checkOut) {
@@ -155,10 +174,6 @@ export default function BookingSearch({ onLoginClick }) {
       }
     }
 
-    if (guests && (isNaN(guests) || guests < 1 || guests > 20)) {
-      newErrors.guests = "Guests must be between 1 and 20";
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -175,12 +190,13 @@ export default function BookingSearch({ onLoginClick }) {
     try {
       const bookingData = {
         booking: {
-          user_id: userId,
+          // user_id: userId,
           nationality: selectedNationality,
           room_type: selectedRoomType,
           check_in: checkIn,
           check_out: checkOut,
-          guests: parseInt(guests, 10),
+          adults: parseInt(guests.adults, 10),
+          children: parseInt(guests.children, 10)
         },
       };
 
@@ -204,7 +220,10 @@ export default function BookingSearch({ onLoginClick }) {
         setSelectedRoomType("");
         setCheckIn(getTodayDate());
         setCheckOut(getTomorrowDate());
-        setGuests("1");
+        setGuests({
+          adults: "1",
+          children: "0"
+        });
         setErrors({});
 
         // Auto-hide success message after 5 seconds
@@ -244,6 +263,24 @@ export default function BookingSearch({ onLoginClick }) {
     const newCheckOut = e.target.value;
     setCheckOut(newCheckOut);
     setErrors((prev) => ({ ...prev, checkOut: "" }));
+  };
+
+  // Handle guest input changes
+  const handleGuestChange = (type, value) => {
+    // Only allow numbers and remove any non-digit characters
+    const numericValue = value.replace(/\D/g, '');
+    
+    setGuests(prev => ({
+      ...prev,
+      [type]: numericValue
+    }));
+    
+    // Clear guest-related errors when user starts typing
+    setErrors(prev => ({ 
+      ...prev, 
+      [type]: "",
+      guests: "" 
+    }));
   };
 
   // ✅ Enhanced booking handler with login alert
@@ -355,27 +392,44 @@ export default function BookingSearch({ onLoginClick }) {
           </div>
         </div>
 
-        {/* Guests */}
-        <div className="flex-1 min-w-[160px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Guests</label>
-          <input
-            type="number"
-            min="1"
-            max="20"
-            value={guests}
-            onChange={(e) => {
-              const value = e.target.value.replace(/\D/, "");
-              setGuests(value);
-              setErrors((prev) => ({ ...prev, guests: "" }));
-            }}
-            className={getInputClass("guests")}
-            placeholder="Number of guests"
-          />
+        {/* Guests - Updated with proper labels */}
+        <div className="flex-1 min-w-[220px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Guests</label>
+          <div className="flex gap-3">
+            <div className="flex-1">
+              <label className="block text-xs text-gray-600 mb-1">Adults</label>
+              <input
+                type="text"
+                value={guests.adults}
+                onChange={(e) => handleGuestChange("adults", e.target.value)}
+                className={getInputClass("adults")}
+                placeholder="Adults"
+                maxLength="2"
+              />
+              {errors.adults && (
+                <p className="text-red-500 text-xs mt-1">{errors.adults}</p>
+              )}
+            </div>
+            <div className="flex-1">
+              <label className="block text-xs text-gray-600 mb-1">Children</label>
+              <input
+                type="text"
+                value={guests.children}
+                onChange={(e) => handleGuestChange("children", e.target.value)}
+                className={getInputClass("children")}
+                placeholder="Children"
+                maxLength="2"
+              />
+              {errors.children && (
+                <p className="text-red-500 text-xs mt-1">{errors.children}</p>
+              )}
+            </div>
+          </div>
           {errors.guests && (
             <p className="text-red-500 text-xs mt-1">{errors.guests}</p>
           )}
-          {!errors.guests && (
-            <p className="text-gray-500 text-xs mt-1">1-20 guests</p>
+          {!errors.guests && !errors.adults && !errors.children && (
+            <p className="text-gray-500 text-xs mt-2">Total guests: {parseInt(guests.adults || 0) + parseInt(guests.children || 0)}</p>
           )}
         </div>
 

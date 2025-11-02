@@ -31,7 +31,6 @@ export default function AdminDashboard() {
     }
   }, [successMessage]);
 
-  // Fixed: Renamed from useFallbackAdminData to loadFallbackAdminData
   const loadFallbackAdminData = () => {
     const storedRole = localStorage.getItem("adminRole") || 1;
     const storedName = localStorage.getItem("adminName") || localStorage.getItem("adminEmail") || "Admin";
@@ -48,7 +47,7 @@ export default function AdminDashboard() {
         return;
       }
 
-      // Try to fetch profile, but handle 404 gracefully
+      // Try to fetch profile, but handle errors gracefully
       try {
         const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/profile", {
           method: "GET",
@@ -67,8 +66,7 @@ export default function AdminDashboard() {
             data = JSON.parse(responseText);
           } catch (parseError) {
             console.error("JSON Parse Error:", parseError);
-            // Use fallback data if profile endpoint returns invalid JSON
-            loadFallbackAdminData(); // Fixed: Changed function name
+            loadFallbackAdminData();
             return;
           }
 
@@ -106,17 +104,18 @@ export default function AdminDashboard() {
         } else if (response.status === 404) {
           // Profile endpoint not found, use fallback
           console.warn("Profile endpoint not found, using fallback data");
-          loadFallbackAdminData(); // Fixed: Changed function name
+          loadFallbackAdminData();
         } else {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          console.warn("Profile fetch failed with status:", response.status);
+          loadFallbackAdminData();
         }
       } catch (profileError) {
         console.error("Failed to fetch admin profile:", profileError);
-        loadFallbackAdminData(); // Fixed: Changed function name
+        loadFallbackAdminData();
       }
     } catch (error) {
       console.error("Error in fetchAdminProfile:", error);
-      loadFallbackAdminData(); // Fixed: Changed function name
+      loadFallbackAdminData();
     }
   };
 
@@ -139,17 +138,18 @@ export default function AdminDashboard() {
         },
       });
 
-      const responseText = await response.text();
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("JSON Parse Error:", parseError);
-        throw new Error("Server returned an invalid response.");
-      }
-
       if (response.ok) {
+        const responseText = await response.text();
+        let data;
+
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          // Continue with default stats
+          return;
+        }
+
         let statsData = data;
         
         if (data.data) {
@@ -170,17 +170,12 @@ export default function AdminDashboard() {
 
         setStats(formattedStats);
       } else {
-        throw new Error(data.error || data.message || `HTTP error! Status: ${response.status}`);
+        console.warn("Stats fetch failed with status:", response.status);
+        // Continue with default stats
       }
     } catch (error) {
       console.error("Failed to fetch stats:", error);
-      setStats({
-        totalUsers: 0,
-        totalBookings: 0,
-        activeBookings: 0,
-        totalMessages: 0,
-        totalPartners: 0,
-      });
+      // Continue with default stats
     } finally {
       setLoading(false);
     }
@@ -585,9 +580,6 @@ const ComplimentNoteModal = () => {
     </div>
   );
 };
-
-// ... Rest of the component code remains exactly the same as in the previous version ...
-// (PartnersManagement, PartnerForm, BookingsManagement, BookingForm, UsersManagement, AdminManagement, AdminForm, MessagesManagement)
 
 const PartnersManagement = ({ currentAdminRole, setApiErrors }) => {
   const [partners, setPartners] = useState([]);
@@ -1266,10 +1258,6 @@ const BookingsManagement = ({ currentAdminRole, setSuccessMessage, setApiErrors 
         console.error("Server error while fetching bookings:", response.status);
         setApiErrors(prev => ({ ...prev, bookings: "Internal Server Error (500)" }));
         setBookings([]);
-      } else if (response.status === 401) {
-        setError("Unauthorized: You don't have permission to view bookings.");
-        setApiErrors(prev => ({ ...prev, bookings: "Unauthorized (401)" }));
-        setBookings([]);
       } else {
         setError(`Failed to load bookings: Server returned ${response.status} error`);
         console.error("Failed to fetch bookings:", response.status);
@@ -1850,7 +1838,7 @@ const BookingForm = ({ booking, onSubmit, onCancel, nationalities, roomTypes }) 
               />
               {errors.guests && (
                 <p className="mt-1 text-sm text-red-600">{errors.guests}</p>
-              )}
+            )}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Status</label>
@@ -2085,20 +2073,6 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
         return;
       }
 
-      // Verify token structure
-      try {
-        const tokenParts = token.split('.');
-        if (tokenParts.length !== 3) {
-          setError("Invalid authentication token format.");
-          setLoading(false);
-          return;
-        }
-      } catch (tokenError) {
-        setError("Invalid authentication token.");
-        setLoading(false);
-        return;
-      }
-
       const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/admins", {
         method: "GET",
         headers: {
@@ -2132,26 +2106,6 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
           console.warn("Unexpected admins response format:", data);
           setAdmins([]);
         }
-      } else if (response.status === 401) {
-        // Even for super admin, we might get 401 if token is invalid/expired
-        const errorMsg = "Authentication failed. This could be due to:\n\n• Expired session\n• Invalid token\n• Server authentication issues\n\nPlease try refreshing the page or logging in again.";
-        setError(errorMsg);
-        console.error("Unauthorized to fetch admins - token issue:", response.status);
-        setApiErrors(prev => ({ ...prev, admins: "Authentication failed (401)" }));
-        setAdmins([]);
-      } else if (response.status === 403) {
-        // This should not happen for super admin, but handle it anyway
-        setError("Forbidden: You don't have permission to access admin management. Please verify your account has super admin privileges.");
-        setApiErrors(prev => ({ ...prev, admins: "Forbidden (403)" }));
-        setAdmins([]);
-      } else if (response.status === 404) {
-        setError("Admin management endpoint not found. The feature might be unavailable or under maintenance.");
-        setApiErrors(prev => ({ ...prev, admins: "Endpoint not found (404)" }));
-        setAdmins([]);
-      } else if (response.status >= 500) {
-        setError("Server error: Unable to load admin data due to server issues. Please try again later.");
-        setApiErrors(prev => ({ ...prev, admins: `Server Error (${response.status})` }));
-        setAdmins([]);
       } else {
         setError(`Failed to load admins: Server returned ${response.status} error`);
         setApiErrors(prev => ({ ...prev, admins: `HTTP ${response.status}` }));
@@ -2200,10 +2154,6 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
         alert("Admin created successfully!");
         setShowForm(false);
         fetchAdmins();
-      } else if (response.status === 401) {
-        throw new Error("Authentication failed. Your session may have expired.");
-      } else if (response.status === 403) {
-        throw new Error("You don't have permission to create admins.");
       } else {
         throw new Error(result.errors?.join(', ') || result.error || `Server returned ${response.status} error`);
       }
@@ -2228,10 +2178,6 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
       if (response.ok) {
         alert("Admin deleted successfully!");
         fetchAdmins();
-      } else if (response.status === 401) {
-        alert("Authentication failed. Your session may have expired.");
-      } else if (response.status === 403) {
-        alert("You don't have permission to delete admins.");
       } else {
         alert("Failed to delete admin. Please try again.");
       }
@@ -2243,10 +2189,6 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
 
   const handleRetry = () => {
     fetchAdmins();
-  };
-
-  const handleRefreshSession = () => {
-    window.location.reload();
   };
 
   if (currentAdminRole !== 0) {
@@ -2297,9 +2239,9 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
             <div className="ml-4">
               <h3 className="text-lg font-medium text-red-800">Unable to Load Admin Data</h3>
               <div className="mt-2 text-red-700">
-                <p className="whitespace-pre-line">{error}</p>
+                <p>{error}</p>
               </div>
-              <div className="mt-6 flex space-x-4">
+              <div className="mt-6">
                 <button
                   onClick={handleRetry}
                   className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -2308,15 +2250,6 @@ const AdminManagement = ({ currentAdminRole, setApiErrors }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                   </svg>
                   Try Again
-                </button>
-                <button
-                  onClick={handleRefreshSession}
-                  className="inline-flex items-center px-4 py-2 border border-red-300 shadow-sm text-sm font-medium rounded-md text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                >
-                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                  </svg>
-                  Refresh Page
                 </button>
               </div>
             </div>
@@ -2650,10 +2583,6 @@ const MessagesManagement = ({ currentAdminRole, setApiErrors }) => {
           [];
 
         setMessages(extracted);
-      } else if (response.status === 401) {
-        setError("Authentication failed. Ensure you're logged in as admin.");
-        setApiErrors((prev) => ({ ...prev, messages: "Unauthorized (401)" }));
-        setMessages([]);
       } else {
         setError(`Server returned ${response.status} error`);
         setApiErrors((prev) => ({ ...prev, messages: `HTTP ${response.status}` }));

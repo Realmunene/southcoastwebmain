@@ -196,49 +196,69 @@
     gap: 15px;
   }
 }
+
 .my-background {
-  position: relative;                 /* required for overlay positioning */
+  position: relative;
   background-image: url('./images/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 100vh;                  /* full screen height — adjust as needed */
+  min-height: 100vh;
 }
 
 .my-background::before {
   content: "";
   position: absolute;
-  top: 0;                             /* important — cover from top */
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.661);    /* overlay effect */
+  background: rgba(0, 0, 0, 0.661);
   z-index: 1;
 }
 
 .my-background > * {
-  position: relative;                 /* ensures content is above overlay */
+  position: relative;
   z-index: 2;
 }
+
+/* ✅ Responsive zoom-out fix for .my-package */
 .my-package {
   position: relative;
-  width: 300px;
-  height: 300px; /* You can adjust this height as needed */
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYQbpmvNCbJvJNhCUlFEIhnP9BB-VVrH2-eg&s');
-  background-size: cover;          /* Makes sure the image fully covers the card */
-  background-position: center;     /* Centers the image nicely */
-  background-repeat: no-repeat;    /* Prevents repeating the image */
-  border-radius: 0.75rem;          /* Matches Tailwind rounded-xl */
-  overflow: hidden;               /* Ensures overlays and rounded corners work cleanly */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0.75rem;
+  overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Shrink (zoom-out) but keep full cover on smaller screens */
+@media (max-width: 768px) {
+  .my-package {
+    max-width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .my-package {
+    max-width: 200px;
+    height: 200px;
+  }
 }
 
 .my-package::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2);  /* Optional subtle dark overlay behind everything */
+  background: rgba(0, 0, 0, 0.2);
   z-index: 0;
 }
 
@@ -272,7 +292,7 @@
 }
 
 .my-package .bottom-overlay button {
-  background-color: #0891b2;  /* Tailwind cyan-600 */
+  background-color: #0891b2;
   color: white;
   padding: 0.4rem 1rem;
   border-radius: 9999px;
@@ -284,7 +304,7 @@
 }
 
 .my-package .bottom-overlay button:hover {
-  background-color: #0e7490;  /* Tailwind cyan-700 */
+  background-color: #0e7490;
 }
 
 @media (max-width: 480px) {
@@ -301,6 +321,7 @@
     justify-content: flex-start;
   }
 }
+
 @keyframes slide-up {
   from {
     transform: translateY(20px);

@@ -86,7 +86,7 @@ export default function Navbar({
     try {
       const token = localStorage.getItem("authToken") || (user && user.token);
       
-      const response = await fetch("http://127.0.0.1:3000/api/v1/user/logout", {
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/logout", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
