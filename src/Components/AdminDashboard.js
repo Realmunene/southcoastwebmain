@@ -395,10 +395,10 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
 
   const fetchPayments = async () => {
     try {
-      const storedUser = JSON.parse(localStorage.getItem("adminToken"));
+      const token = localStorage.getItem("adminToken");
       const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/payments", {
         headers: {
-          Authorization: `Bearer ${storedUser}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -421,12 +421,12 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
     setUpdating(prev => ({ ...prev, [bookingId]: true }));
     
     try {
-      const storedUser = JSON.parse(localStorage.getItem("adminToken"));
+      const token = localStorage.getItem("adminToken");
       const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings/${bookingId}/payments/status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${storedUser}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           payment: { payment_status: status }
@@ -465,6 +465,18 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
     }
   };
 
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const calculateTotalGuests = (adults, children) => {
+    return (parseInt(adults) || 0) + (parseInt(children) || 0);
+  };
+
   if (loading) {
     return (
       <div className="text-center py-8">
@@ -492,78 +504,119 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
           <p className="text-gray-500">No payments have been initiated yet.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Booking ID
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Room Type
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  M-Pesa Phone
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Amount (KES)
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Current Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {payments.map((payment) => (
-                <tr key={payment.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    #{payment.id}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {payment.room_type}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {payment.mpesa_phone || 'N/A'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {payment.payment_amount ? `KES ${payment.payment_amount}` : 'N/A'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(payment.payment_status)}`}>
-                      {getStatusText(payment.payment_status)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                    <button
-                      onClick={() => updatePaymentStatus(payment.id, 'partial_paid')}
-                      disabled={updating[payment.id] || payment.payment_status === 'partial_paid'}
-                      className={`px-3 py-1 rounded text-sm ${
-                        payment.payment_status === 'partial_paid' 
-                          ? 'bg-blue-100 text-blue-800 cursor-not-allowed'
-                          : 'bg-blue-500 hover:bg-blue-600 text-white'
-                      }`}
-                    >
-                      {updating[payment.id] ? 'Updating...' : 'Mark Partial Paid'}
-                    </button>
-                    <button
-                      onClick={() => updatePaymentStatus(payment.id, 'payment_made')}
-                      disabled={updating[payment.id] || payment.payment_status === 'payment_made'}
-                      className={`px-3 py-1 rounded text-sm ${
-                        payment.payment_status === 'payment_made' 
-                          ? 'bg-green-100 text-green-800 cursor-not-allowed'
-                          : 'bg-green-500 hover:bg-green-600 text-white'
-                      }`}
-                    >
-                      {updating[payment.id] ? 'Updating...' : 'Mark Payment Made'}
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-6">
+          {payments.map((payment) => (
+            <div key={payment.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="p-6">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      Booking #{payment.id} - {payment.room_type}
+                    </h3>
+                    
+                    <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
+                      <span>Booking ID: #{payment.id}</span>
+                      <span className={`${getStatusColor(payment.payment_status)} text-xs font-medium px-2.5 py-0.5 rounded`}>
+                        {getStatusText(payment.payment_status)}
+                      </span>
+                    </div>
+                    
+                    {/* Booking Details */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-600 mb-4">
+                      <div>
+                        <span className="font-medium text-gray-900">Check-in:</span>
+                        <p>{formatDate(payment.check_in)}</p>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Check-out:</span>
+                        <p>{formatDate(payment.check_out)}</p>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Guests:</span>
+                        <div className="flex flex-col">
+                          <span>Adults: {payment.adults || 1}</span>
+                          <span>Children: {payment.children || 0}</span>
+                          <span className="font-medium mt-1">
+                            Total: {calculateTotalGuests(payment.adults, payment.children)} guests
+                          </span>
+                        </div>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Nationality:</span>
+                        <p>{payment.nationality || 'Not specified'}</p>
+                      </div>
+                    </div>
+
+                    {/* Payment Information */}
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <h4 className="font-medium text-gray-900 mb-2">Payment Information:</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="font-medium text-gray-900">M-Pesa Phone:</span>
+                          <p>{payment.mpesa_phone || 'N/A'}</p>
+                        </div>
+                        <div>
+                          <span className="font-medium text-gray-900">Amount:</span>
+                          <p className="text-lg font-semibold text-cyan-600">
+                            {payment.payment_amount ? `KES ${payment.payment_amount}` : 'N/A'}
+                          </p>
+                        </div>
+                        <div>
+                          <span className="font-medium text-gray-900">User Email:</span>
+                          <p>{payment.user_email || payment.user?.email || 'N/A'}</p>
+                        </div>
+                        <div>
+                          <span className="font-medium text-gray-900">Payment Initiated:</span>
+                          <p>{payment.created_at ? new Date(payment.created_at).toLocaleDateString() : 'N/A'}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 lg:mt-0 lg:ml-6">
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <h4 className="font-medium text-gray-900 mb-3">Update Payment Status</h4>
+                      <div className="flex flex-col space-y-2">
+                        <button
+                          onClick={() => updatePaymentStatus(payment.id, 'pending')}
+                          disabled={updating[payment.id] || payment.payment_status === 'pending'}
+                          className={`px-4 py-2 rounded text-sm font-medium ${
+                            payment.payment_status === 'pending' 
+                              ? 'bg-yellow-100 text-yellow-800 cursor-not-allowed'
+                              : 'bg-yellow-500 hover:bg-yellow-600 text-white'
+                          }`}
+                        >
+                          {updating[payment.id] ? 'Updating...' : 'Mark as Pending'}
+                        </button>
+                        <button
+                          onClick={() => updatePaymentStatus(payment.id, 'partial_paid')}
+                          disabled={updating[payment.id] || payment.payment_status === 'partial_paid'}
+                          className={`px-4 py-2 rounded text-sm font-medium ${
+                            payment.payment_status === 'partial_paid' 
+                              ? 'bg-blue-100 text-blue-800 cursor-not-allowed'
+                              : 'bg-blue-500 hover:bg-blue-600 text-white'
+                          }`}
+                        >
+                          {updating[payment.id] ? 'Updating...' : 'Mark as Partial Paid'}
+                        </button>
+                        <button
+                          onClick={() => updatePaymentStatus(payment.id, 'payment_made')}
+                          disabled={updating[payment.id] || payment.payment_status === 'payment_made'}
+                          className={`px-4 py-2 rounded text-sm font-medium ${
+                            payment.payment_status === 'payment_made' 
+                              ? 'bg-green-100 text-green-800 cursor-not-allowed'
+                              : 'bg-green-500 hover:bg-green-600 text-white'
+                          }`}
+                        >
+                          {updating[payment.id] ? 'Updating...' : 'Mark as Payment Made'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

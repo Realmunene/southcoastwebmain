@@ -215,7 +215,7 @@ export default function MyBookings() {
     }
   };
 
-  // NEW: Handle M-Pesa payment with admin approval flow
+  // Handle M-Pesa payment with admin approval flow
   const handleMpesaPayment = async (bookingId, amount) => {
     const phone = prompt("Please enter your M-Pesa phone number (format: 2547XXXXXXXX):");
     
@@ -245,7 +245,8 @@ export default function MyBookings() {
         body: JSON.stringify({
           payment: {
             phone: phone,
-            amount: amount
+            amount: amount,
+            payment_status: 'pending' // Set initial status as pending
           }
         }),
       });
@@ -256,7 +257,7 @@ export default function MyBookings() {
 
       const data = await response.json();
       
-      alert("Payment initiated successfully! Please make the payment and wait for admin confirmation. You'll be notified when your payment status is updated.");
+      alert("Payment initiated successfully! Your payment status is now 'Pending'. Please wait for admin confirmation. You'll be notified when your payment status is updated.");
       
       // Start polling for payment status updates
       startPaymentStatusPolling(bookingId);
@@ -269,7 +270,7 @@ export default function MyBookings() {
     }
   };
 
-  // NEW: Poll for payment status updates
+  // Poll for payment status updates
   const startPaymentStatusPolling = (bookingId) => {
     const interval = setInterval(async () => {
       try {
@@ -292,6 +293,12 @@ export default function MyBookings() {
               return newIntervals;
             });
             fetchBookings(); // Refresh to get updated status
+            
+            if (booking.payment_status === 'partial_paid') {
+              alert("Your payment has been marked as 'Partial Paid' by the admin. Thank you!");
+            } else if (booking.payment_status === 'payment_made') {
+              alert("Your payment has been confirmed as 'Payment Made' by the admin. Thank you for your payment!");
+            }
           }
         }
       } catch (error) {
