@@ -7,24 +7,28 @@ export default function MyBookings() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [roomPrices, setRoomPrices] = useState({});
-  const [paymentStatus, setPaymentStatus] = useState({});
   const [processingPayment, setProcessingPayment] = useState({});
   const [loadingRoomPrices, setLoadingRoomPrices] = useState(true);
   const [exchangeRate, setExchangeRate] = useState(null);
   const [loadingExchangeRate, setLoadingExchangeRate] = useState(true);
   const [generatingPDF, setGeneratingPDF] = useState({});
+  const [pollingIntervals, setPollingIntervals] = useState({});
 
   useEffect(() => {
     fetchBookings();
     fetchRoomPrices();
     fetchExchangeRate();
+    
+    return () => {
+      // Cleanup polling intervals on unmount
+      Object.values(pollingIntervals).forEach(interval => clearInterval(interval));
+    };
   }, []);
 
   // Fetch real-time USD to KES exchange rate
   const fetchExchangeRate = async () => {
     try {
       setLoadingExchangeRate(true);
-      // Using free currency API - you can replace with any currency API
       const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
       
       if (!response.ok) {
@@ -41,8 +45,7 @@ export default function MyBookings() {
       setExchangeRate(kesRate);
     } catch (error) {
       console.error("Error fetching exchange rate:", error);
-      // Fallback to approximate rate if API fails
-      setExchangeRate(130); // Approximate USD to KES rate
+      setExchangeRate(130);
     } finally {
       setLoadingExchangeRate(false);
     }
@@ -212,31 +215,91 @@ export default function MyBookings() {
     }
   };
 
-  // Handle M-Pesa payment
+  // NEW: Handle M-Pesa payment with admin approval flow
   const handleMpesaPayment = async (bookingId, amount) => {
+    const phone = prompt("Please enter your M-Pesa phone number (format: 2547XXXXXXXX):");
+    
+    if (!phone) {
+      alert("Payment cancelled. Phone number is required.");
+      return;
+    }
+
+    // Basic phone validation
+    const phoneRegex = /^254[17]\d{8}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid M-Pesa phone number in format 2547XXXXXXXX");
+      return;
+    }
+
     setProcessingPayment(prev => ({ ...prev, [bookingId]: true }));
     
     try {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       
-      // Simulate M-Pesa payment processing
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      // Simulate successful payment
-      const paymentSuccessful = true;
-      
-      if (paymentSuccessful) {
-        setPaymentStatus(prev => ({ ...prev, [bookingId]: 'paid' }));
-        alert(`Payment of KES ${amount} completed successfully!`);
-      } else {
-        throw new Error("Payment failed. Please try again.");
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings/${bookingId}/payments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${storedUser.token}`,
+        },
+        body: JSON.stringify({
+          payment: {
+            phone: phone,
+            amount: amount
+          }
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to initiate payment');
       }
+
+      const data = await response.json();
+      
+      alert("Payment initiated successfully! Please make the payment and wait for admin confirmation. You'll be notified when your payment status is updated.");
+      
+      // Start polling for payment status updates
+      startPaymentStatusPolling(bookingId);
+      
     } catch (error) {
-      console.error("Payment error:", error);
-      alert(error.message || "Payment failed. Please try again.");
+      console.error("Payment initiation error:", error);
+      alert(error.message || "Failed to initiate payment. Please try again.");
     } finally {
       setProcessingPayment(prev => ({ ...prev, [bookingId]: false }));
     }
+  };
+
+  // NEW: Poll for payment status updates
+  const startPaymentStatusPolling = (bookingId) => {
+    const interval = setInterval(async () => {
+      try {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings/${bookingId}`, {
+          headers: {
+            Authorization: `Bearer ${storedUser.token}`,
+          },
+        });
+
+        if (response.ok) {
+          const booking = await response.json();
+          
+          // If payment status is no longer pending, stop polling and refresh bookings
+          if (booking.payment_status && booking.payment_status !== 'pending') {
+            clearInterval(interval);
+            setPollingIntervals(prev => {
+              const newIntervals = { ...prev };
+              delete newIntervals[bookingId];
+              return newIntervals;
+            });
+            fetchBookings(); // Refresh to get updated status
+          }
+        }
+      } catch (error) {
+        console.error("Error polling payment status:", error);
+      }
+    }, 5000); // Poll every 5 seconds
+
+    setPollingIntervals(prev => ({ ...prev, [bookingId]: interval }));
   };
 
   // Calculate total guests from adults and children
@@ -255,7 +318,6 @@ export default function MyBookings() {
       
       // Add logo at top center
       if (logo) {
-        // You might need to adjust the logo dimensions based on your actual logo
         pdf.addImage(logo, 'PNG', pageWidth / 2 - 25, 15, 50, 20);
       }
       
@@ -322,10 +384,10 @@ export default function MyBookings() {
         yPosition += 8;
         
         if (parseInt(booking.children) > 0) {
-          pdf.setTextColor(255, 140, 0); // Orange color for children notice
+          pdf.setTextColor(255, 140, 0);
           pdf.text(`* Children charges to be discussed upon arrival`, 20, yPosition);
           yPosition += 8;
-          pdf.setTextColor(0, 0, 0); // Reset to black
+          pdf.setTextColor(0, 0, 0);
         }
         
         pdf.setFont("helvetica", "bold");
@@ -334,10 +396,24 @@ export default function MyBookings() {
       }
       
       // Payment Status
-      const isPaid = paymentStatus[booking.id] === 'paid';
-      pdf.setTextColor(isPaid ? 0 : 255, 0, 0); // Green if paid, red if not
-      pdf.text(`Payment Status: ${isPaid ? 'PAID' : 'PENDING'}`, 20, yPosition);
-      pdf.setTextColor(0, 0, 0); // Reset to black
+      const paymentStatus = booking.payment_status || 'pending';
+      let statusColor = [0, 0, 0]; // Default black
+      let statusText = 'PENDING';
+      
+      if (paymentStatus === 'partial_paid') {
+        statusColor = [255, 140, 0]; // Orange
+        statusText = 'PARTIAL PAID';
+      } else if (paymentStatus === 'payment_made') {
+        statusColor = [0, 128, 0]; // Green
+        statusText = 'PAYMENT MADE';
+      } else {
+        statusColor = [255, 0, 0]; // Red
+        statusText = 'PENDING';
+      }
+      
+      pdf.setTextColor(...statusColor);
+      pdf.text(`Payment Status: ${statusText}`, 20, yPosition);
+      pdf.setTextColor(0, 0, 0);
       yPosition += 15;
       
       // Booking Date
@@ -363,6 +439,20 @@ export default function MyBookings() {
       alert("Failed to generate PDF. Please try again.");
     } finally {
       setGeneratingPDF(prev => ({ ...prev, [booking.id]: false }));
+    }
+  };
+
+  // Helper function to get payment status display
+  const getPaymentStatusDisplay = (paymentStatus) => {
+    switch (paymentStatus) {
+      case 'pending':
+        return { text: 'Pending Payment', color: 'bg-yellow-100 text-yellow-800' };
+      case 'partial_paid':
+        return { text: 'Partial Paid', color: 'bg-blue-100 text-blue-800' };
+      case 'payment_made':
+        return { text: 'Payment Made', color: 'bg-green-100 text-green-800' };
+      default:
+        return { text: 'Pending Payment', color: 'bg-yellow-100 text-yellow-800' };
     }
   };
 
@@ -442,10 +532,12 @@ export default function MyBookings() {
               const priceDetails = calculateTotalPrice(booking);
               const totalGuests = calculateTotalGuests(booking.adults, booking.children);
               const hasChildren = parseInt(booking.children) > 0;
-              const isPaid = paymentStatus[booking.id] === 'paid';
+              const paymentStatus = booking.payment_status || 'pending';
               const isProcessing = processingPayment[booking.id];
               const hasRoomPrice = roomPrices[booking.room_type];
               const isGeneratingPDF = generatingPDF[booking.id];
+              const paymentStatusDisplay = getPaymentStatusDisplay(paymentStatus);
+              const isPaid = paymentStatus === 'partial_paid' || paymentStatus === 'payment_made';
 
               return (
                 <div key={booking.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
@@ -456,11 +548,9 @@ export default function MyBookings() {
                         <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
                           <span>Booking ID: #{booking.id}</span>
                           {getStatusBadge(booking.check_in, booking.check_out)}
-                          {isPaid && (
-                            <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                              Paid
-                            </span>
-                          )}
+                          <span className={`${paymentStatusDisplay.color} text-xs font-medium px-2.5 py-0.5 rounded`}>
+                            {paymentStatusDisplay.text}
+                          </span>
                         </div>
                         
                         {/* Booking Details */}
@@ -605,7 +695,7 @@ export default function MyBookings() {
                             {isProcessing ? (
                               <div className="flex items-center justify-center">
                                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                                Processing...
+                                Initiating...
                               </div>
                             ) : (
                               `Pay KES ${priceDetails.totalPriceKES} via M-Pesa`
@@ -614,9 +704,13 @@ export default function MyBookings() {
                         ) : (
                           <button
                             disabled
-                            className="px-4 py-2 bg-green-100 text-green-800 rounded-md text-sm font-medium cursor-not-allowed"
+                            className={`px-4 py-2 rounded-md text-sm font-medium cursor-not-allowed ${
+                              paymentStatus === 'partial_paid' 
+                                ? 'bg-blue-100 text-blue-800' 
+                                : 'bg-green-100 text-green-800'
+                            }`}
                           >
-                            ✅ Payment Made
+                            {paymentStatus === 'partial_paid' ? '✅ Partial Payment Made' : '✅ Payment Made'}
                           </button>
                         )}
                         
@@ -633,7 +727,7 @@ export default function MyBookings() {
                           {isPaid ? 'Cancellation Not Available' : 'Cancel Booking'}
                         </button>
 
-                        {/* Download PDF button - only appears when payment is made */}
+                        {/* Download PDF button - appears when payment is partial or full */}
                         {isPaid && (
                           <button
                             onClick={() => generateBookingPDF(booking)}

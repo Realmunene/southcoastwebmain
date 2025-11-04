@@ -192,7 +192,9 @@ export default function AdminDashboard() {
 
     if (currentAdminRole === 0) {
       const tabsWithAdmin = [...baseTabs];
+      // Insert Admin Management and Payments Management tabs for super admin
       tabsWithAdmin.splice(2, 0, { id: "admins", name: "Admin Management" });
+      tabsWithAdmin.splice(3, 0, { id: "payments", name: "Payments Management" });
       return tabsWithAdmin;
     }
 
@@ -346,6 +348,7 @@ export default function AdminDashboard() {
             {activeTab === "bookings" && <BookingsManagement currentAdminRole={currentAdminRole} setSuccessMessage={setSuccessMessage} setApiErrors={setApiErrors} />}
             {activeTab === "users" && <UsersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "admins" && currentAdminRole === 0 && <AdminManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
+            {activeTab === "payments" && currentAdminRole === 0 && <SuperAdminPayments currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "messages" && <MessagesManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "partners" && <PartnersManagement currentAdminRole={currentAdminRole} setApiErrors={setApiErrors} />}
             {activeTab === "complimentNote" && <ComplimentNoteModal />}
@@ -376,6 +379,193 @@ const StatCard = ({ title, value, icon, color }) => {
           <p className="text-2xl font-bold text-gray-900">{value}</p>
         </div>
       </div>
+    </div>
+  );
+};
+
+// NEW: SuperAdminPayments Component
+const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState({});
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
+  const fetchPayments = async () => {
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("adminToken"));
+      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/admin/payments", {
+        headers: {
+          Authorization: `Bearer ${storedUser}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setPayments(data.payments || []);
+      } else {
+        console.error("Failed to fetch payments:", response.status);
+        setApiErrors(prev => ({ ...prev, payments: `HTTP ${response.status}` }));
+      }
+    } catch (error) {
+      console.error("Error fetching payments:", error);
+      setApiErrors(prev => ({ ...prev, payments: error.message }));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updatePaymentStatus = async (bookingId, status) => {
+    setUpdating(prev => ({ ...prev, [bookingId]: true }));
+    
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("adminToken"));
+      const response = await fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings/${bookingId}/payments/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${storedUser}`,
+        },
+        body: JSON.stringify({
+          payment: { payment_status: status }
+        }),
+      });
+
+      if (response.ok) {
+        alert("Payment status updated successfully!");
+        fetchPayments();
+      } else {
+        throw new Error("Failed to update payment status");
+      }
+    } catch (error) {
+      console.error("Error updating payment status:", error);
+      alert("Failed to update payment status");
+    } finally {
+      setUpdating(prev => ({ ...prev, [bookingId]: false }));
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'pending': return 'bg-yellow-100 text-yellow-800';
+      case 'partial_paid': return 'bg-blue-100 text-blue-800';
+      case 'payment_made': return 'bg-green-100 text-green-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getStatusText = (status) => {
+    switch (status) {
+      case 'pending': return 'Pending';
+      case 'partial_paid': return 'Partial Paid';
+      case 'payment_made': return 'Payment Made';
+      default: return status;
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center py-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading payments...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-semibold text-gray-900">Payment Management</h2>
+        <button
+          onClick={fetchPayments}
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 rounded-md text-sm"
+        >
+          Refresh Payments
+        </button>
+      </div>
+      
+      {payments.length === 0 ? (
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No payments yet</h3>
+          <p className="text-gray-500">No payments have been initiated yet.</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Booking ID
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Room Type
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  M-Pesa Phone
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Amount (KES)
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Current Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {payments.map((payment) => (
+                <tr key={payment.id}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    #{payment.id}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {payment.room_type}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {payment.mpesa_phone || 'N/A'}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {payment.payment_amount ? `KES ${payment.payment_amount}` : 'N/A'}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(payment.payment_status)}`}>
+                      {getStatusText(payment.payment_status)}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                    <button
+                      onClick={() => updatePaymentStatus(payment.id, 'partial_paid')}
+                      disabled={updating[payment.id] || payment.payment_status === 'partial_paid'}
+                      className={`px-3 py-1 rounded text-sm ${
+                        payment.payment_status === 'partial_paid' 
+                          ? 'bg-blue-100 text-blue-800 cursor-not-allowed'
+                          : 'bg-blue-500 hover:bg-blue-600 text-white'
+                      }`}
+                    >
+                      {updating[payment.id] ? 'Updating...' : 'Mark Partial Paid'}
+                    </button>
+                    <button
+                      onClick={() => updatePaymentStatus(payment.id, 'payment_made')}
+                      disabled={updating[payment.id] || payment.payment_status === 'payment_made'}
+                      className={`px-3 py-1 rounded text-sm ${
+                        payment.payment_status === 'payment_made' 
+                          ? 'bg-green-100 text-green-800 cursor-not-allowed'
+                          : 'bg-green-500 hover:bg-green-600 text-white'
+                      }`}
+                    >
+                      {updating[payment.id] ? 'Updating...' : 'Mark Payment Made'}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
