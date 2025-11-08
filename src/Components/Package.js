@@ -21,7 +21,7 @@ import house7 from "./images/2BA.jpg";
 import house8 from "./images/LargerApartment.jpg";
 
 const initialRooms = [
-  { title: "Executive Room, Ensuite", price: "$75", image: [room1, house1] },
+  { title: "Executive Room, Ensuite", price: "$75", image: [room1, house1, room1, house1] },
   { title: "2 Connected Room, 1 Ensuite", price: "$110", image: [room2, house2] },
   { title: "2 Bedroom Apartment - Living + Kitchen + 1 Ensuite", price: "$110", image: [room3, house3] },
   { title: "3 Bedroom Apartment - Kitchen, 2 Ensuites", price: "$125", image: [room4, house4] },

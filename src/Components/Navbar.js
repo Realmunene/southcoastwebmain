@@ -10,6 +10,8 @@ import {
   faBars,
   faXmark,
   faChevronDown,
+  faCalendarCheck,
+  faReceipt,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -86,7 +88,7 @@ export default function Navbar({
     try {
       const token = localStorage.getItem("authToken") || (user && user.token);
       
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/logout", {
+      const response = await fetch("http://127.0.0.1:3000/api/v1/logout", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -149,13 +151,13 @@ export default function Navbar({
   };
 
   return (
-    <div className="sticky top-0 left-0 w-full bg-white shadow-md z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
-        {/* LEFT SECTION */}
+    <div className="sticky top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200 z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        {/* LEFT SECTION - Logo */}
         <div className="flex items-center space-x-4">
           <Link
             to="/southcoastwebmain"
-            className="flex items-center space-x-1 focus:outline-none"
+            className="flex items-center space-x-3 focus:outline-none group"
             onClick={() => {
               setActiveSection("home");
               setShowMenu(false);
@@ -164,49 +166,54 @@ export default function Navbar({
             <img
               src={logo}
               alt="SCoast Logo"
-              className="h-8 w-auto object-contain"
+              className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <span className="text-xl font-bold text-gray-800">SouthCoast</span>
+            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-cyan-800 bg-clip-text text-transparent">
+              SouthCoast
+            </span>
           </Link>
         </div>
 
         {/* RIGHT SECTION - DESKTOP */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-8">
+          {/* Navigation Links */}
           <Link
             to='/package'
-            className="flex items-center space-x-1 text-gray-700 hover:text-coral-500 transition"
+            className="flex items-center space-x-2 text-gray-700 hover:text-cyan-600 transition-all duration-300 group font-medium"
           >
-            <FontAwesomeIcon icon={faHouse} className="text-lg" />
-            <span className="text-sm font-medium">Book a Stay</span>
+            <div className="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+              <FontAwesomeIcon icon={faHouse} className="text-cyan-600 text-lg" />
+            </div>
+            <span>Book a Stay</span>
           </Link>
-
-          <span className="text-gray-300 text-xl">|</span>
 
           <Link
             to='/gallery'
-            className="flex items-center space-x-1 text-gray-700 hover:text-coral-500 transition"
+            className="flex items-center space-x-2 text-gray-700 hover:text-cyan-600 transition-all duration-300 group font-medium"
           >
-            <FontAwesomeIcon icon={faUmbrellaBeach} className="text-lg" />
-            <span className="text-sm font-medium">Experiences</span>
+            <div className="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+              <FontAwesomeIcon icon={faUmbrellaBeach} className="text-cyan-600 text-lg" />
+            </div>
+            <span>Experiences</span>
           </Link>
 
-          <span className="text-gray-300 text-xl">|</span>
+          {/* Language Selector */}
+          <div className="flex items-center space-x-2 text-gray-700 group cursor-pointer font-medium">
+            <div className="w-10 h-10 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+              <FontAwesomeIcon icon={faGlobe} className="text-cyan-600 text-lg" />
+            </div>
+            <span>ENG</span>
+            <FontAwesomeIcon icon={faChevronDown} className="text-xs text-gray-400" />
+          </div>
 
-          <button className="flex items-center space-x-1 text-gray-700 hover:text-coral-500 transition">
-            <FontAwesomeIcon icon={faGlobe} className="text-lg" />
-            <span className="text-sm font-medium">LNG</span>
-            <span className="text-xs">▼</span>
-          </button>
-
-          <span className="text-gray-300 text-xl">|</span>
-
+          {/* Partner With Us */}
           <Link
             to="/partnership"
             onClick={() => setShowMenu(false)}
-            className="px-3 py-2 text-sm font-medium text-gray-700 border rounded-full hover:bg-coral-500 hover:text-black transition flex items-center"
+            className="px-6 py-3 text-sm font-semibold text-cyan-600 border-2 border-cyan-600 rounded-full hover:bg-cyan-600 hover:text-white transition-all duration-300 flex items-center space-x-2 group"
           >
-            <FontAwesomeIcon icon={faHandshake} className="mr-1" />
-            Partner With Us
+            <FontAwesomeIcon icon={faHandshake} className="group-hover:scale-110 transition-transform" />
+            <span>Partner With Us</span>
           </Link>
 
           {/* ADMIN / USER MENU */}
@@ -215,29 +222,40 @@ export default function Navbar({
               <button
                 onClick={() => setShowUserMenu((s) => !s)}
                 type="button"
-                className="px-4 py-2 bg-purple-500 text-white text-sm font-medium rounded-full hover:bg-purple-600 transition inline-flex items-center"
+                className="px-6 py-3 bg-gradient-to-r from-cyan-700 to-cyan-800 text-white text-sm font-semibold rounded-full hover:from-cyan-800 hover:to-cyan-900 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center space-x-3 group"
                 aria-expanded={showUserMenu}
               >
-                <FontAwesomeIcon icon={faUser} className="mr-2" />
-                <span className="mr-2">
-                  {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}: {adminDisplayName}
-                </span>
-                <FontAwesomeIcon icon={faChevronDown} />
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faUser} className="text-white text-sm" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs text-cyan-200">Admin Panel</div>
+                  <div className="text-sm">
+                    {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}: {adminDisplayName}
+                  </div>
+                </div>
+                <FontAwesomeIcon 
+                  icon={faChevronDown} 
+                  className={`text-cyan-200 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} 
+                />
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-md py-1 z-50">
+                <div className="absolute right-0 mt-3 w-56 bg-white border border-gray-200 rounded-2xl shadow-2xl py-3 z-50 backdrop-blur-sm">
                   <button
                     onClick={handleAdminDashboard}
-                    className="block w-full text-left px-4 py-2 text-sm hover:bg-purple-100"
+                    className="block w-full text-left px-6 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 transition-all duration-200 flex items-center space-x-3"
                   >
-                    Admin Dashboard
+                    <FontAwesomeIcon icon={faReceipt} className="text-cyan-600" />
+                    <span>Admin Dashboard</span>
                   </button>
+                  <div className="border-t border-gray-100 my-2"></div>
                   <button
                     onClick={handleAdminLogout}
-                    className="w-full text-left px-4 py-2 text-sm hover:bg-purple-100"
+                    className="block w-full text-left px-6 py-3 text-sm text-red-600 hover:bg-red-50 transition-all duration-200 flex items-center space-x-3"
                   >
-                    Logout
+                    <FontAwesomeIcon icon={faXmark} className="text-red-500" />
+                    <span>Logout</span>
                   </button>
                 </div>
               )}
@@ -247,27 +265,38 @@ export default function Navbar({
               <button
                 onClick={() => setShowUserMenu((s) => !s)}
                 type="button"
-                className="px-4 py-2 bg-coral-500 text-black text-sm font-medium rounded-full hover:bg-coral-600 transition inline-flex items-center"
+                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white text-sm font-semibold rounded-full hover:from-cyan-600 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center space-x-3 group"
                 aria-expanded={showUserMenu}
               >
-                <FontAwesomeIcon icon={faUser} className="mr-2" />
-                <span className="mr-2">{displayName}</span>
-                <FontAwesomeIcon icon={faChevronDown} />
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faUser} className="text-white text-sm" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs text-cyan-200">Welcome back</div>
+                  <div className="text-sm">{displayName}</div>
+                </div>
+                <FontAwesomeIcon 
+                  icon={faChevronDown} 
+                  className={`text-cyan-200 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} 
+                />
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-md py-1 z-50">
+                <div className="absolute right-0 mt-3 w-48 bg-white border border-gray-200 rounded-2xl shadow-2xl py-3 z-50 backdrop-blur-sm">
                   <button
                     onClick={handleMyBookings}
-                    className="block w-full text-left px-4 py-2 text-sm hover:bg-cyan-100"
+                    className="block w-full text-left px-6 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-700 transition-all duration-200 flex items-center space-x-3"
                   >
-                    My Bookings
+                    <FontAwesomeIcon icon={faCalendarCheck} className="text-cyan-600" />
+                    <span>My Bookings</span>
                   </button>
+                  <div className="border-t border-gray-100 my-2"></div>
                   <button
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-2 text-sm hover:bg-cyan-100"
+                    className="block w-full text-left px-6 py-3 text-sm text-red-600 hover:bg-red-50 transition-all duration-200 flex items-center space-x-3"
                   >
-                    Logout
+                    <FontAwesomeIcon icon={faXmark} className="text-red-500" />
+                    <span>Logout</span>
                   </button>
                 </div>
               )}
@@ -276,10 +305,12 @@ export default function Navbar({
             <button
               onClick={onLoginClick}
               type="button"
-              className="px-4 py-2 bg-coral-500 text-black text-sm font-medium rounded-full hover:bg-coral-600 transition"
+              className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white text-sm font-semibold rounded-full hover:from-cyan-600 hover:to-cyan-700 transition-all duration-300 shadow-lg hover:shadow-xl inline-flex items-center space-x-3 group"
             >
-              <FontAwesomeIcon icon={faUser} className="mr-1" />
-              Log In / Sign Up
+              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <FontAwesomeIcon icon={faUser} className="text-white text-sm" />
+              </div>
+              <span>Log In / Sign Up</span>
             </button>
           )}
         </div>
@@ -287,79 +318,117 @@ export default function Navbar({
         {/* HAMBURGER MENU - MOBILE */}
         <button
           onClick={() => setShowMenu(!showMenu)}
-          className="md:hidden text-gray-700 focus:outline-none"
+          className="lg:hidden text-gray-700 focus:outline-none w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center hover:bg-cyan-200 transition-colors"
         >
-          <FontAwesomeIcon icon={showMenu ? faXmark : faBars} size="lg" />
+          <FontAwesomeIcon 
+            icon={showMenu ? faXmark : faBars} 
+            className="text-cyan-600 text-xl" 
+          />
         </button>
       </div>
 
       {/* MOBILE MENU CONTENT */}
       {showMenu && (
-        <div className="md:hidden bg-white shadow-lg border-t">
-          <div className="flex flex-col p-4 space-y-4">
-            <button
-              onClick={handleHomeClick}
-              className="flex items-center space-x-2 text-gray-700 hover:text-coral-500 transition"
+        <div className="lg:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-xl">
+          <div className="flex flex-col p-6 space-y-4">
+            {/* Navigation Links */}
+            <Link
+              to='/package'
+              onClick={() => setShowMenu(false)}
+              className="flex items-center space-x-4 text-gray-700 hover:text-cyan-600 transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-cyan-50"
             >
-              <FontAwesomeIcon icon={faHouse} />
-              <span>Book a Stay</span>
-            </button>
+              <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+                <FontAwesomeIcon icon={faHouse} className="text-cyan-600 text-lg" />
+              </div>
+              <span className="font-medium">Book a Stay</span>
+            </Link>
 
-            <button
-              onClick={handleHomeClick}
-              className="flex items-center space-x-2 text-gray-700 hover:text-coral-500 transition"
+            <Link
+              to='/gallery'
+              onClick={() => setShowMenu(false)}
+              className="flex items-center space-x-4 text-gray-700 hover:text-cyan-600 transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-cyan-50"
             >
-              <FontAwesomeIcon icon={faUmbrellaBeach} />
-              <span>Experiences</span>
-            </button>
+              <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+                <FontAwesomeIcon icon={faUmbrellaBeach} className="text-cyan-600 text-lg" />
+              </div>
+              <span className="font-medium">Experiences</span>
+            </Link>
 
-            <button className="flex items-center space-x-2 text-gray-700 hover:text-coral-500 transition">
-              <FontAwesomeIcon icon={faGlobe} />
-              <span>LNG ▼</span>
-            </button>
+            {/* Language Selector */}
+            <div className="flex items-center space-x-4 text-gray-700 group py-3 px-4 rounded-2xl cursor-pointer">
+              <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+                <FontAwesomeIcon icon={faGlobe} className="text-cyan-600 text-lg" />
+              </div>
+              <span className="font-medium">English</span>
+            </div>
 
+            {/* Partner With Us */}
             <Link
               to="/partnership"
               onClick={() => setShowMenu(false)}
-              className="flex items-center space-x-2 text-gray-700 hover:text-coral-500 transition"
+              className="flex items-center space-x-4 text-cyan-600 hover:text-white transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-cyan-600 border-2 border-cyan-600"
             >
-              <FontAwesomeIcon icon={faHandshake} />
-              <span>Partner With Us</span>
+              <div className="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+                <FontAwesomeIcon icon={faHandshake} className="text-white group-hover:text-cyan-600 text-lg" />
+              </div>
+              <span className="font-medium">Partner With Us</span>
             </Link>
 
             {/* Mobile admin / user */}
             {admin ? (
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-4 mt-4 pt-4 border-t border-gray-200">
+                <div className="px-4 py-2">
+                  <div className="text-sm text-gray-500 mb-1">Admin Panel</div>
+                  <div className="font-semibold text-cyan-700">
+                    {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}: {adminDisplayName}
+                  </div>
+                </div>
+                
                 <button
                   onClick={handleAdminDashboard}
-                  className="px-4 py-2 bg-purple-500 text-white text-sm font-medium rounded-full hover:bg-purple-600 transition inline-flex items-center"
+                  className="flex items-center space-x-4 text-gray-700 hover:text-cyan-600 transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-cyan-50"
                 >
-                  <FontAwesomeIcon icon={faUser} className="mr-2" />
-                  {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}: {adminDisplayName}
+                  <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+                    <FontAwesomeIcon icon={faReceipt} className="text-cyan-600 text-lg" />
+                  </div>
+                  <span className="font-medium">Admin Dashboard</span>
                 </button>
 
                 <button
                   onClick={handleAdminLogout}
-                  className="px-4 py-2 bg-gray-100 text-sm font-medium rounded-full hover:bg-gray-200 transition"
+                  className="flex items-center space-x-4 text-red-600 hover:text-white transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-red-600 mt-2"
                 >
-                  Logout
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+                    <FontAwesomeIcon icon={faXmark} className="text-red-600 group-hover:text-red-600 text-lg" />
+                  </div>
+                  <span className="font-medium">Logout</span>
                 </button>
               </div>
             ) : user ? (
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-4 mt-4 pt-4 border-t border-gray-200">
+                <div className="px-4 py-2">
+                  <div className="text-sm text-gray-500 mb-1">Welcome back</div>
+                  <div className="font-semibold text-cyan-600">{displayName}</div>
+                </div>
+                
                 <button
                   onClick={handleMyBookings}
-                  className="px-4 py-2 bg-cyan-500 text-black text-sm font-medium rounded-full hover:bg-coral-600 transition inline-flex items-center"
+                  className="flex items-center space-x-4 text-gray-700 hover:text-cyan-600 transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-cyan-50"
                 >
-                  <FontAwesomeIcon icon={faUser} className="mr-2" />
-                  {displayName}
+                  <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center group-hover:bg-cyan-200 transition-colors">
+                    <FontAwesomeIcon icon={faCalendarCheck} className="text-cyan-600 text-lg" />
+                  </div>
+                  <span className="font-medium">My Bookings</span>
                 </button>
 
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 bg-gray-100 text-sm font-medium rounded-full hover:bg-gray-200 transition"
+                  className="flex items-center space-x-4 text-red-600 hover:text-white transition-all duration-300 group py-3 px-4 rounded-2xl hover:bg-red-600 mt-2"
                 >
-                  Logout
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center group-hover:bg-white transition-colors">
+                    <FontAwesomeIcon icon={faXmark} className="text-red-600 group-hover:text-red-600 text-lg" />
+                  </div>
+                  <span className="font-medium">Logout</span>
                 </button>
               </div>
             ) : (
@@ -368,10 +437,12 @@ export default function Navbar({
                   setShowMenu(false);
                   onLoginClick();
                 }}
-                className="px-4 py-2 bg-coral-500 text-black text-sm font-medium rounded-full hover:bg-coral-600 transition"
+                className="flex items-center space-x-4 text-white transition-all duration-300 group py-4 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 mt-4"
               >
-                <FontAwesomeIcon icon={faUser} className="mr-1" />
-                Log In / Sign Up
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <FontAwesomeIcon icon={faUser} className="text-white text-lg" />
+                </div>
+                <span className="font-semibold text-lg">Log In / Sign Up</span>
               </button>
             )}
           </div>

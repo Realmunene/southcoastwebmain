@@ -4,7 +4,7 @@ import { faFacebookF, faInstagram, faXTwitter, faTiktok } from "@fortawesome/fre
 import {  faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 const Topcon = () => {
   return (
-    <div className="w-full bg-cyan-500 py-2 px-4 flex flex-wrap items-center justify-between shadow-md z-50">
+    <div className="w-full bg-gradient-to-r from-cyan-500 to-blue-300 py-2 px-4 flex flex-wrap items-center justify-between shadow-md z-50">
                     {/* LEFT: CONTACTS */}
                     <div className="flex flex-col sm:flex-row items-start sm:items-center sm:space-x-6 text-white space-y-2 sm:space-y-0">
                       <a

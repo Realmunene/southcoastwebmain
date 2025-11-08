@@ -1,7 +1,7 @@
+import "./Footer.css";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import "./Footer.css";
+import { faTimes, faPaperPlane, faEnvelope, faComment } from "@fortawesome/free-solid-svg-icons";
 
 export default function InstantMessage({ onClose }) {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ export default function InstantMessage({ onClose }) {
     setLoading(true);
 
     try {
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/contact_messages", {
+      const response = await fetch("http://127.0.0.1:3000/api/v1/contact_messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -54,44 +54,97 @@ export default function InstantMessage({ onClose }) {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 bg-white shadow-xl border border-gray-200 rounded-xl w-80 z-50 p-4 animate-slide-up">
-      <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold text-gray-700">Contact Support</h2>
-        <button
-          onClick={onClose}
-          className="text-gray-500 hover:text-red-500 transition"
-        >
-          <FontAwesomeIcon icon={faTimes} size="lg" />
-        </button>
+    <div className="fixed bottom-6 right-6 bg-white rounded-2xl shadow-2xl border border-gray-200 w-96 z-50 overflow-hidden animate-slide-up">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 p-6 text-white">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+              <FontAwesomeIcon icon={faComment} className="text-white text-lg" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold">Contact Support</h2>
+              <p className="text-cyan-100 text-sm">We're here to help!</p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+          >
+            <FontAwesomeIcon icon={faTimes} className="text-white text-sm" />
+          </button>
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input
-          type="email"
-          placeholder="Your real email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
-        />
-        <textarea
-          placeholder="Type your message..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-          rows="3"
-          className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
-        ></textarea>
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        {/* Email Input */}
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <FontAwesomeIcon icon={faEnvelope} className="text-cyan-600 text-sm" />
+            Email Address
+          </label>
+          <input
+            type="email"
+            placeholder="your.email@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+            disabled={loading}
+          />
+        </div>
+
+        {/* Message Input */}
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <FontAwesomeIcon icon={faComment} className="text-cyan-600 text-sm" />
+            Your Message
+          </label>
+          <textarea
+            placeholder="Tell us how we can help you today..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+            rows="4"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 resize-none bg-gray-50 hover:bg-white"
+            disabled={loading}
+          ></textarea>
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
-          className={`bg-cyan-500 hover:bg-cyan-700 text-white font-semibold py-2 rounded-lg transition-all ${
-            loading ? "opacity-50 cursor-not-allowed" : ""
+          className={`w-full py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 shadow-lg hover:shadow-xl"
           }`}
         >
-          {loading ? "Sending..." : "Send"}
+          {loading ? (
+            <>
+              <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+              <span>Sending Message...</span>
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faPaperPlane} className="text-white" />
+              <span>Send Message</span>
+            </>
+          )}
         </button>
+
+        {/* Help Text */}
+        <div className="text-center">
+          <p className="text-xs text-gray-500">
+            We typically respond within <span className="font-semibold text-cyan-600">2 minutes</span>
+          </p>
+        </div>
       </form>
+
+      {/* Decorative Footer */}
+      <div className="h-1 bg-gradient-to-r from-cyan-500 to-cyan-600"></div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faCalendarDay, faCalendarCheck, faUsers, faGlobe, faBed } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { jwtDecode } from "jwt-decode";
@@ -33,22 +33,23 @@ export default function BookingSearch({ onLoginClick }) {
   });
 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState({
+    formButton: false,
+    heroButton: false
+  });
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
 
-  // ✅ Enhanced user initialization with polling for popup login
+  // Enhanced user initialization with polling for popup login
   const checkUserAuth = () => {
     const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
     if (storedUser?.token) {
       try {
         const decoded = jwtDecode(storedUser.token);
-        // Check if token is expired
         if (decoded.exp * 1000 > Date.now()) {
           setUser({ id: decoded.user_id, token: storedUser.token });
           return true;
         } else {
-          // Token expired, remove it
           localStorage.removeItem("user");
           setUser(null);
           return false;
@@ -64,12 +65,12 @@ export default function BookingSearch({ onLoginClick }) {
     }
   };
 
-  // ✅ Initialize user on mount
+  // Initialize user on mount
   useEffect(() => {
     checkUserAuth();
   }, []);
 
-  // ✅ Enhanced storage event listener
+  // Enhanced storage event listener
   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === "user") {
@@ -81,10 +82,7 @@ export default function BookingSearch({ onLoginClick }) {
       checkUserAuth();
     };
 
-    // Listen for storage changes (cross-tab)
     window.addEventListener("storage", handleStorageChange);
-    
-    // Listen for custom login event (same-tab)
     window.addEventListener("userLoggedIn", handleUserLogin);
     
     return () => {
@@ -98,8 +96,8 @@ export default function BookingSearch({ onLoginClick }) {
     const fetchData = async () => {
       try {
         const [natRes, roomRes] = await Promise.all([
-          fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/nationalities"),
-          fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/room_types"),
+          fetch("http://127.0.0.1:3000/api/v1/nationalities"),
+          fetch("http://127.0.0.1:3000/api/v1/room_types"),
         ]);
 
         if (!natRes.ok) throw new Error("Failed to fetch nationalities");
@@ -129,45 +127,42 @@ export default function BookingSearch({ onLoginClick }) {
     if (!checkIn) newErrors.checkIn = "Check-in date is required";
     if (!checkOut) newErrors.checkOut = "Check-out date is required";
     
-    // Guest validations
     const adults = parseInt(guests.adults, 10);
     const children = parseInt(guests.children, 10);
     const totalGuests = adults + children;
 
-    if (!guests.adults || isNaN(adults) || adults < 1 || adults > 20) {
-      newErrors.adults = "Adults must be between 1 and 20";
+    // Updated validation for adults (max 2)
+    if (!guests.adults || isNaN(adults) || adults < 1 || adults > 2) {
+      newErrors.adults = "Adults must be between 1 and 2";
     }
     
-    if (!guests.children || isNaN(children) || children < 0 || children > 20) {
-      newErrors.children = "Children must be between 0 and 20";
+    // Updated validation for children (max 3)
+    if (!guests.children || isNaN(children) || children < 0 || children > 3) {
+      newErrors.children = "Children must be between 0 and 3";
     }
 
-    if (totalGuests < 1 || totalGuests > 20) {
-      newErrors.guests = "Total guests must be between 1 and 20";
+    // Updated total guests validation (max 5: 2 adults + 3 children)
+    if (totalGuests < 1 || totalGuests > 5) {
+      newErrors.guests = "Total guests must be between 1 and 5";
     }
 
-    // Date validations
     if (checkIn && checkOut) {
       const checkInDate = new Date(checkIn);
       const checkOutDate = new Date(checkOut);
       const todayDate = new Date(today);
 
-      // Check if check-in is today or in the future
       if (checkInDate < todayDate) {
         newErrors.checkIn = "Check-in date cannot be in the past";
       }
 
-      // Check if check-out is today or in the future
       if (checkOutDate < todayDate) {
         newErrors.checkOut = "Check-out date cannot be in the past";
       }
 
-      // Check if check-out is after check-in
       if (checkOutDate <= checkInDate) {
         newErrors.checkOut = "Check-out date must be after check-in date";
       }
 
-      // Optional: Maximum stay duration (30 days)
       const stayDuration = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
       if (stayDuration > 30) {
         newErrors.checkOut = "Maximum stay duration is 30 days";
@@ -178,19 +173,18 @@ export default function BookingSearch({ onLoginClick }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const executeBooking = async (token, userId) => {
+  const executeBooking = async (token, userId, buttonType) => {
     if (!validateForm()) {
       alert("Please fix the form errors before submitting.");
       return;
     }
 
-    setLoading(true);
+    setLoading(prev => ({ ...prev, [buttonType]: true }));
     setBookingSuccess(false);
 
     try {
       const bookingData = {
         booking: {
-          // user_id: userId,
           nationality: selectedNationality,
           room_type: selectedRoomType,
           check_in: checkIn,
@@ -200,7 +194,7 @@ export default function BookingSearch({ onLoginClick }) {
         },
       };
 
-      const response = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings", {
+      const response = await fetch("http://127.0.0.1:3000/api/v1/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -212,10 +206,8 @@ export default function BookingSearch({ onLoginClick }) {
       const result = await response.json();
 
       if (response.ok) {
-        // ✅ Show success message and reset form
         setBookingSuccess(true);
         
-        // Reset form fields
         setSelectedNationality("");
         setSelectedRoomType("");
         setCheckIn(getTodayDate());
@@ -226,7 +218,6 @@ export default function BookingSearch({ onLoginClick }) {
         });
         setErrors({});
 
-        // Auto-hide success message after 5 seconds
         setTimeout(() => {
           setBookingSuccess(false);
         }, 5000);
@@ -238,7 +229,7 @@ export default function BookingSearch({ onLoginClick }) {
       console.error("Booking error:", err);
       alert("Booking failed due to network error. Please try again.");
     } finally {
-      setLoading(false);
+      setLoading(prev => ({ ...prev, [buttonType]: false }));
     }
   };
 
@@ -265,17 +256,29 @@ export default function BookingSearch({ onLoginClick }) {
     setErrors((prev) => ({ ...prev, checkOut: "" }));
   };
 
-  // Handle guest input changes
+  // Handle guest input changes with restrictions
   const handleGuestChange = (type, value) => {
-    // Only allow numbers and remove any non-digit characters
     const numericValue = value.replace(/\D/g, '');
+    
+    // Apply restrictions based on guest type
+    let restrictedValue = numericValue;
+    if (type === "adults" && numericValue !== "") {
+      const adultCount = parseInt(numericValue, 10);
+      if (adultCount > 2) {
+        restrictedValue = "2";
+      }
+    } else if (type === "children" && numericValue !== "") {
+      const childCount = parseInt(numericValue, 10);
+      if (childCount > 3) {
+        restrictedValue = "3";
+      }
+    }
     
     setGuests(prev => ({
       ...prev,
-      [type]: numericValue
+      [type]: restrictedValue
     }));
     
-    // Clear guest-related errors when user starts typing
     setErrors(prev => ({ 
       ...prev, 
       [type]: "",
@@ -283,13 +286,21 @@ export default function BookingSearch({ onLoginClick }) {
     }));
   };
 
-  // ✅ Enhanced booking handler with login alert
-  const handleBooking = () => {
+  // Enhanced booking handler with login alert
+  const handleFormBooking = () => {
     if (!user) {
       setShowLoginAlert(true);
       return;
     }
-    executeBooking(user.token, user.id);
+    executeBooking(user.token, user.id, 'formButton');
+  };
+
+  const handleHeroBooking = () => {
+    if (!user) {
+      setShowLoginAlert(true);
+      return;
+    }
+    executeBooking(user.token, user.id, 'heroButton');
   };
 
   // Auto-hide login alert after 5 seconds
@@ -304,211 +315,260 @@ export default function BookingSearch({ onLoginClick }) {
 
   const getInputClass = (field) =>
     errors[field]
-      ? "w-full border border-red-500 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-      : "w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-600";
+      ? "w-full border-2 border-red-400 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors bg-white/90"
+      : "w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors bg-white/90";
 
   return (
-    <div className="my-background py-4">
-      <div className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
-        {/* Nationality */}
-        <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Guest Nationality</label>
-          <select
-            value={selectedNationality}
-            onChange={(e) => {
-              setSelectedNationality(e.target.value);
-              setErrors((prev) => ({ ...prev, selectedNationality: "" }));
-            }}
-            className={getInputClass("selectedNationality")}
-          >
-            <option value="">Select Nationality</option>
-            {nationalities.map((nat) => (
-              <option key={nat.__key} value={nat.name}>
-                {nat.name}
-              </option>
-            ))}
-          </select>
-          {errors.selectedNationality && (
-            <p className="text-red-500 text-xs mt-1">{errors.selectedNationality}</p>
-          )}
-        </div>
-
-        {/* Room Type */}
-        <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Room Type</label>
-          <select
-            value={selectedRoomType}
-            onChange={(e) => {
-              setSelectedRoomType(e.target.value);
-              setErrors((prev) => ({ ...prev, selectedRoomType: "" }));
-            }}
-            className={getInputClass("selectedRoomType")}
-          >
-            <option value="">Select Room Type</option>
-            {roomTypes.map((room) => (
-              <option key={room.__key} value={room.name}>
-                {room.name}
-              </option>
-            ))}
-          </select>
-          {errors.selectedRoomType && (
-            <p className="text-red-500 text-xs mt-1">{errors.selectedRoomType}</p>
-          )}
-        </div>
-
-        {/* Dates */}
-        <div className="flex-1 min-w-[280px] border-b md:border-b-0 md:border-r border-gray-300 p-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <div className="w-full sm:w-1/2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Check-in</label>
-            <input
-              type="date"
-              value={checkIn}
-              min={getTodayDate()}
-              onChange={handleCheckInChange}
-              className={getInputClass("checkIn")}
-            />
-            {errors.checkIn && (
-              <p className="text-red-500 text-xs mt-1">{errors.checkIn}</p>
-            )}
-            {!errors.checkIn && (
-              <p className="text-gray-500 text-xs mt-1">Today or later</p>
-            )}
-          </div>
-          <div className="w-full sm:w-1/2">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Check-out</label>
-            <input
-              type="date"
-              value={checkOut}
-              min={checkIn || getTodayDate()}
-              onChange={handleCheckOutChange}
-              className={getInputClass("checkOut")}
-            />
-            {errors.checkOut && (
-              <p className="text-red-500 text-xs mt-1">{errors.checkOut}</p>
-            )}
-            {!errors.checkOut && (
-              <p className="text-gray-500 text-xs mt-1">After check-in</p>
-            )}
-          </div>
-        </div>
-
-        {/* Guests - Updated with proper labels */}
-        <div className="flex-1 min-w-[220px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Guests</label>
-          <div className="flex gap-3">
-            <div className="flex-1">
-              <label className="block text-xs text-gray-600 mb-1">Adults</label>
-              <input
-                type="text"
-                value={guests.adults}
-                onChange={(e) => handleGuestChange("adults", e.target.value)}
-                className={getInputClass("adults")}
-                placeholder="Adults"
-                maxLength="2"
-              />
-              {errors.adults && (
-                <p className="text-red-500 text-xs mt-1">{errors.adults}</p>
+    <div className="my-background py-8">
+      {/* Booking Form Section */}
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-0">
+            
+            {/* Nationality */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FontAwesomeIcon icon={faGlobe} className="text-cyan-600 text-sm" />
+                Guest Nationality
+              </label>
+              <select
+                value={selectedNationality}
+                onChange={(e) => {
+                  setSelectedNationality(e.target.value);
+                  setErrors((prev) => ({ ...prev, selectedNationality: "" }));
+                }}
+                className={getInputClass("selectedNationality")}
+              >
+                <option value="">Select Nationality</option>
+                {nationalities.map((nat) => (
+                  <option key={nat.__key} value={nat.name}>
+                    {nat.name}
+                  </option>
+                ))}
+              </select>
+              {errors.selectedNationality && (
+                <p className="text-red-400 text-xs mt-2 font-medium">{errors.selectedNationality}</p>
               )}
             </div>
-            <div className="flex-1">
-              <label className="block text-xs text-gray-600 mb-1">Children</label>
-              <input
-                type="text"
-                value={guests.children}
-                onChange={(e) => handleGuestChange("children", e.target.value)}
-                className={getInputClass("children")}
-                placeholder="Children"
-                maxLength="2"
-              />
-              {errors.children && (
-                <p className="text-red-500 text-xs mt-1">{errors.children}</p>
+
+            {/* Room Type */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FontAwesomeIcon icon={faBed} className="text-cyan-600 text-sm" />
+                Room Type
+              </label>
+              <select
+                value={selectedRoomType}
+                onChange={(e) => {
+                  setSelectedRoomType(e.target.value);
+                  setErrors((prev) => ({ ...prev, selectedRoomType: "" }));
+                }}
+                className={getInputClass("selectedRoomType")}
+              >
+                <option value="">Select Room Type</option>
+                {roomTypes.map((room) => (
+                  <option key={room.__key} value={room.name}>
+                    {room.name}
+                  </option>
+                ))}
+              </select>
+              {errors.selectedRoomType && (
+                <p className="text-red-400 text-xs mt-2 font-medium">{errors.selectedRoomType}</p>
               )}
             </div>
+
+            {/* Dates */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <FontAwesomeIcon icon={faCalendarDay} className="text-cyan-600 text-sm" />
+                    Check-in
+                  </label>
+                  <input
+                    type="date"
+                    value={checkIn}
+                    min={getTodayDate()}
+                    onChange={handleCheckInChange}
+                    className={getInputClass("checkIn")}
+                  />
+                  {errors.checkIn && (
+                    <p className="text-red-400 text-xs mt-2 font-medium">{errors.checkIn}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <FontAwesomeIcon icon={faCalendarCheck} className="text-cyan-600 text-sm" />
+                    Check-out
+                  </label>
+                  <input
+                    type="date"
+                    value={checkOut}
+                    min={checkIn || getTodayDate()}
+                    onChange={handleCheckOutChange}
+                    className={getInputClass("checkOut")}
+                  />
+                  {errors.checkOut && (
+                    <p className="text-red-400 text-xs mt-2 font-medium">{errors.checkOut}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Guests */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FontAwesomeIcon icon={faUsers} className="text-cyan-600 text-sm" />
+                Guests
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1 font-medium">
+                    Adults <span className="text-gray-400">(max 2)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={guests.adults}
+                    onChange={(e) => handleGuestChange("adults", e.target.value)}
+                    className={getInputClass("adults")}
+                    placeholder="0"
+                    maxLength="1"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1 font-medium">
+                    Children <span className="text-gray-400">(max 3)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={guests.children}
+                    onChange={(e) => handleGuestChange("children", e.target.value)}
+                    className={getInputClass("children")}
+                    placeholder="0"
+                    maxLength="1"
+                  />
+                </div>
+              </div>
+              {errors.guests && (
+                <p className="text-red-400 text-xs mt-2 font-medium">{errors.guests}</p>
+              )}
+              {!errors.guests && (
+                <p className="text-gray-600 text-xs mt-2 font-medium">
+                  Total: {parseInt(guests.adults || 0) + parseInt(guests.children || 0)} guests (max 5)
+                </p>
+              )}
+            </div>
+
+            {/* Book Button */}
+            <div className="p-6 flex items-center justify-center">
+              <button
+                type="button"
+                onClick={handleFormBooking}
+                disabled={loading.formButton}
+                className={`w-full max-w-xs flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 ${
+                  loading.formButton 
+                    ? "bg-gray-400 cursor-not-allowed" 
+                    : "bg-cyan-600 hover:bg-cyan-700 shadow-lg hover:shadow-xl"
+                }`}
+              >
+                <FontAwesomeIcon 
+                  icon={faSearch} 
+                  className={`text-lg ${loading.formButton ? "animate-spin" : ""}`} 
+                />
+                <span>
+                  {loading.formButton ? "Processing..." : (user ? "Book Now" : "Login to Book")}
+                </span>
+              </button>
+            </div>
           </div>
-          {errors.guests && (
-            <p className="text-red-500 text-xs mt-1">{errors.guests}</p>
-          )}
-          {!errors.guests && !errors.adults && !errors.children && (
-            <p className="text-gray-500 text-xs mt-2">Total guests: {parseInt(guests.adults || 0) + parseInt(guests.children || 0)}</p>
-          )}
         </div>
 
-        {/* Button */}
-        <button
-          type="button"
-          onClick={handleBooking}
-          disabled={loading}
-          className={`min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition p-3 md:px-10 ${
-            loading 
-              ? "bg-gray-400" 
-              : "bg-cyan-500 hover:bg-cyan-600"
-          } text-white  hover:rounded-full`}
-        >
-          <FontAwesomeIcon 
-            icon={faSearch} 
-            className={`text-lg ${loading ? "text-gray-200" : "text-white"}`} 
-          />
-          {loading && <span className="ml-2">Booking...</span>}
-          {!loading && <span className="ml-2">{user ? "Book Now" : "Login to Book"}</span>}
-        </button>
+        {/* Status Messages */}
+        <div className="mt-6 space-y-4">
+          {/* Success Message */}
+          {bookingSuccess && (
+            <div className="bg-green-500/90 backdrop-blur-sm border border-green-300 rounded-xl p-4 shadow-lg">
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0 w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faSearch} className="text-white text-sm" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Booking Confirmed!</p>
+                  <p className="text-green-100 text-sm">Your reservation has been successfully created and the admin has been notified.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Login Alert */}
+          {showLoginAlert && (
+            <div className="bg-amber-500/90 backdrop-blur-sm border border-amber-300 rounded-xl p-4 shadow-lg">
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0 w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faUsers} className="text-white text-sm" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white">Authentication Required</p>
+                  <p className="text-amber-100 text-sm">Please log in to complete your booking.</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Error Summary */}
+          {Object.keys(errors).length > 0 && (
+            <div className="bg-red-500/90 backdrop-blur-sm border border-red-300 rounded-xl p-4 shadow-lg">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="flex-shrink-0 w-8 h-8 bg-red-400 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon icon={faSearch} className="text-white text-sm" />
+                </div>
+                <p className="font-semibold text-white">Please correct the following issues:</p>
+              </div>
+              <ul className="list-disc list-inside space-y-1">
+                {Object.values(errors).map((error, index) => (
+                  <li key={index} className="text-red-100 text-sm">{error}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Success Message - Shows when booking is successful */}
-      {bookingSuccess && (
-        <div className="max-w-7xl mx-auto mt-4 p-4 bg-green-100 text-green-700 rounded-md">
-          <p className="font-semibold">✅ Booking successful!</p>
-          <p>Your booking has been confirmed and the admin has been notified.</p>
-        </div>
-      )}
-
-      {/* Login Alert - Only shows when booking is attempted without login */}
-      {showLoginAlert && (
-        <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
-          <p>You need to be logged in to make a booking.</p>
-        </div>
-      )}
-
-      {/* Error summary */}
-      {Object.keys(errors).length > 0 && (
-        <div className="max-w-7xl mx-auto mt-4 p-4 bg-red-100 text-red-700 rounded-md">
-          <p className="font-semibold">Please fix the following errors:</p>
-          <ul className="list-disc list-inside mt-2">
-            {Object.values(errors).map((error, index) => (
-              <li key={index}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       {/* Hero Section */}
-      <div className="py-20 text-4xl md:text-7xl font-extrabold text-center text-white text-shadow-lg/30">
-        <h1 className="py-3">YOUR JOURNEY</h1>
-        <h1 className="py-2">BEGINS WITH A STAY</h1>
-        <div className="relative flex flex-col items-center justify-center text-white text-center py-6">
-          <div className="relative max-w-2xl">
-            <p className="text-base md:text-lg font-normal font-sans mb-6 leading-relaxed">
+      <div className="max-w-7xl mx-auto px-4 py-16 text-center">
+        <div className="mb-12">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+            YOUR JOURNEY
+            <span className="block text-cyan-500 drop-shadow-lg">
+              BEGINS WITH A STAY
+            </span>
+          </h1>
+          
+          <div className="max-w-4xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-200 leading-relaxed mb-8 font-light drop-shadow">
               Just 300 meters from the beach, we offer the perfect escape with a refreshing pool,
               free parking, and 5 kitchens for self-cooking or a private chef. Enjoy thrilling
               adventures like kite surfing, snorkeling, scuba diving, dhow cruises, and safaris to
               national parks. Your unforgettable getaway starts here.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 to="/about"
-                className="bg-cyan-500 hover:bg-blue-700 text-white text-sm font-medium py-2 px-6 rounded-full transition"
+                className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 LEARN MORE
               </Link>
               <button
-                onClick={handleBooking}
-                disabled={loading}
-                className={`border-2 text-sm font-medium py-2 px-6 rounded-full transition ${
-                  loading
+                onClick={handleHeroBooking}
+                disabled={loading.heroButton}
+                className={`border-2 font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                  loading.heroButton
                     ? "bg-gray-400 text-gray-200 border-gray-400 cursor-not-allowed"
-                    : "border-white hover:bg-white hover:text-black text-white"
+                    : "border-cyan-300 text-cyan-300 hover:bg-cyan-300 hover:text-gray-900 shadow-lg hover:shadow-xl"
                 }`}
               >
-                {loading ? "BOOKING..." : user ? "BOOK NOW" : "LOGIN TO BOOK"}
+                {loading.heroButton ? "PROCESSING..." : user ? "BOOK NOW" : "LOGIN TO BOOK"}
               </button>
             </div>
           </div>

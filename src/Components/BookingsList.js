@@ -9,7 +9,7 @@ export default function BookingsList({ user }) {
     if (!user) return;
 
     setLoading(true);
-    fetch(`https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings?user_id=${user.id}`)
+    fetch(`http://127.0.0.1:3000/api/v1/bookings?user_id=${user.id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch bookings");
         return res.json();

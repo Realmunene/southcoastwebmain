@@ -4,6 +4,8 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Package from "./Package"; 
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDay, faCalendarCheck, faUsers, faGlobe, faBed, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function PackagePage({ onLoginClick, user, onLogout }) {
   const { roomTitle } = useParams();
@@ -121,7 +123,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   useEffect(() => {
     const fetchNationalities = async () => {
       try {
-        const response = await fetch('https://backend-southcoastwebmain-1.onrender.com/api/v1/nationalities');
+        const response = await fetch('http://127.0.0.1:3000/api/v1/nationalities');
         
         // First get response as text to check if it's valid JSON
         const responseText = await response.text();
@@ -350,7 +352,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
         }
       };
 
-      const response = await fetch('https://backend-southcoastwebmain-1.onrender.com/api/v1/bookings', {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -401,303 +403,380 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   // Helper function for input classes
   const getInputClass = (field) =>
     errors[field]
-      ? "w-full border border-red-500 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-      : "w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-cyan-400";
+      ? "w-full border-2 border-red-400 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors bg-white/90"
+      : "w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors bg-white/90";
 
   // If user comes directly without state (refresh or direct URL)
   if (!room) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-700">
-        <p>Room information not available. Please return to the rooms page.</p>
-        <Link to="/rooms" className="ml-2 text-cyan-600 hover:underline">
-          Go to Rooms
-        </Link>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8 bg-white rounded-2xl shadow-lg border border-gray-200">
+          <p className="text-gray-700 text-lg mb-4">Room information not available.</p>
+          <Link 
+            to="/rooms" 
+            className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105"
+          >
+            Return to Rooms
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="min-h-screen bg-gray-50">
-        {/* Hero Section */}
-        <div
-          className="relative h-80 flex items-center justify-center text-white"
-          style={{
-            backgroundImage: `url(${room.image[0]})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40" />
-          <h1 className="relative text-3xl md:text-6xl font-bold text-center px-4 drop-shadow-lg">
+    <div className="bg-gray-50">
+      {/* Hero Section */}
+      <div
+        className="relative h-96 flex items-center justify-center text-white"
+        style={{
+          backgroundImage: `url(${room.image[0]})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative text-center px-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
             {room.title}
           </h1>
+          <p className="text-xl md:text-2xl text-cyan-200 font-light drop-shadow">
+            Luxury Accommodation & Unforgettable Experiences
+          </p>
         </div>
+      </div>
 
-        {/* Success Message - Shows when booking is successful */}
+      {/* Status Messages */}
+      <div className="max-w-7xl mx-auto px-4 mt-6 space-y-4">
+        {/* Success Message */}
         {bookingSuccess && (
-          <div className="max-w-7xl mx-auto mt-4 p-4 bg-green-100 text-green-700 rounded-md">
-            <p className="font-semibold">✅ Booking successful!</p>
-            <p>Your booking has been confirmed and the admin has been notified.</p>
+          <div className="bg-green-500/90 backdrop-blur-sm border border-green-300 rounded-xl p-4 shadow-lg">
+            <div className="flex items-center gap-3">
+              <div className="flex-shrink-0 w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                <FontAwesomeIcon icon={faCheckCircle} className="text-white text-sm" />
+              </div>
+              <div>
+                <p className="font-semibold text-white">Booking Confirmed!</p>
+                <p className="text-green-100 text-sm">Your booking has been confirmed and the admin has been notified.</p>
+              </div>
+            </div>
           </div>
         )}
 
-        {/* Login Alert - Only shows when booking is attempted without login */}
+        {/* Login Alert */}
         {showLoginAlert && (
-          <div className="max-w-7xl mx-auto mt-4 p-4 bg-yellow-100 text-yellow-700 rounded-md">
-            <p>You need to be logged in to make a booking.</p>
+          <div className="bg-amber-500/90 backdrop-blur-sm border border-amber-300 rounded-xl p-4 shadow-lg">
+            <div className="flex items-center gap-3">
+              <div className="flex-shrink-0 w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center">
+                <FontAwesomeIcon icon={faUsers} className="text-white text-sm" />
+              </div>
+              <div>
+                <p className="font-semibold text-white">Authentication Required</p>
+                <p className="text-amber-100 text-sm">Please log in to complete your booking.</p>
+              </div>
+            </div>
           </div>
         )}
 
-        {/* Error summary */}
+        {/* Error Summary */}
         {Object.keys(errors).length > 0 && (
-          <div className="max-w-7xl mx-auto mt-4 p-4 bg-red-100 text-red-700 rounded-md">
-            <p className="font-semibold">Please fix the following errors:</p>
-            <ul className="list-disc list-inside mt-2">
+          <div className="bg-red-500/90 backdrop-blur-sm border border-red-300 rounded-xl p-4 shadow-lg">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="flex-shrink-0 w-8 h-8 bg-red-400 rounded-full flex items-center justify-center">
+                <FontAwesomeIcon icon={faCheckCircle} className="text-white text-sm" />
+              </div>
+              <p className="font-semibold text-white">Please correct the following issues:</p>
+            </div>
+            <ul className="list-disc list-inside space-y-1">
               {Object.values(errors).map((error, index) => (
-                <li key={index}>{error}</li>
+                <li key={index} className="text-red-100 text-sm">{error}</li>
               ))}
             </ul>
           </div>
         )}
+      </div>
 
-        {/* 🏨 Booking Component - UPDATED with separate adults/children inputs */}
-        <form onSubmit={handleSubmit} className="max-w-7xl mx-auto border border-gray-400 flex flex-wrap bg-white shadow-md">
-          {/* Nationality */}
-          <div className="flex-1 min-w-[180px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Guest Nationality *
-            </label>
-            <select 
-              name="nationality"
-              value={bookingData.nationality}
-              onChange={handleInputChange}
-              className={getInputClass("nationality")}
-              required
-              disabled={isLoadingNationalities}
-            >
-              <option value="">Select Nationality</option>
-              {nationalities.map((nationality) => (
-                <option key={nationality.id || nationality.name} value={nationality.name}>
-                  {nationality.name}
-                </option>
-              ))}
-            </select>
-            {errors.nationality && (
-              <p className="text-red-500 text-xs mt-1">{errors.nationality}</p>
-            )}
-            {isLoadingNationalities && (
-              <p className="text-xs text-gray-500 mt-1">Loading nationalities...</p>
-            )}
-          </div>
+      {/* Booking Form Section */}
+      <div className="max-w-7xl mx-auto px-4 mt-8">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-0">
+            
+            {/* Nationality */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FontAwesomeIcon icon={faGlobe} className="text-cyan-600 text-sm" />
+                Guest Nationality
+              </label>
+              <select 
+                name="nationality"
+                value={bookingData.nationality}
+                onChange={handleInputChange}
+                className={getInputClass("nationality")}
+                required
+                disabled={isLoadingNationalities}
+              >
+                <option value="">Select Nationality</option>
+                {nationalities.map((nationality) => (
+                  <option key={nationality.id || nationality.name} value={nationality.name}>
+                    {nationality.name}
+                  </option>
+                ))}
+              </select>
+              {errors.nationality && (
+                <p className="text-red-500 text-xs mt-2 font-medium">{errors.nationality}</p>
+              )}
+              {isLoadingNationalities && (
+                <p className="text-xs text-gray-500 mt-2">Loading nationalities...</p>
+              )}
+            </div>
 
-          {/* Room Type */}
-          <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Room Type *
-            </label>
-            <input 
-              type="text" 
-              name="roomType"
-              value={bookingData.roomType}
-              readOnly
-              className="w-full border border-gray-300 rounded-md p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              required
-            />
-          </div>
-
-          {/* Dates */}
-          <div className="flex-1 min-w-[280px] border-b md:border-b-0 md:border-r border-gray-300 p-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <div className="w-full sm:w-1/2">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Check-in *
+            {/* Room Type */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FontAwesomeIcon icon={faBed} className="text-cyan-600 text-sm" />
+                Room Type
               </label>
               <input 
-                type="date" 
-                name="checkIn"
-                value={bookingData.checkIn}
-                onChange={handleInputChange}
-                min={getTodayDate()} // Cannot select past dates
-                className={getInputClass("checkIn")}
+                type="text" 
+                name="roomType"
+                value={bookingData.roomType}
+                readOnly
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 bg-gray-100/80 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-700"
                 required
               />
-              {errors.checkIn && (
-                <p className="text-red-500 text-xs mt-1">{errors.checkIn}</p>
-              )}
-              {!errors.checkIn && (
-                <p className="text-xs text-gray-500 mt-1">Today or later</p>
-              )}
             </div>
-            <div className="w-full sm:w-1/2">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Check-out *
+
+            {/* Dates */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <FontAwesomeIcon icon={faCalendarDay} className="text-cyan-600 text-sm" />
+                    Check-in
+                  </label>
+                  <input 
+                    type="date" 
+                    name="checkIn"
+                    value={bookingData.checkIn}
+                    onChange={handleInputChange}
+                    min={getTodayDate()}
+                    className={getInputClass("checkIn")}
+                    required
+                  />
+                  {errors.checkIn && (
+                    <p className="text-red-500 text-xs mt-2 font-medium">{errors.checkIn}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <FontAwesomeIcon icon={faCalendarCheck} className="text-cyan-600 text-sm" />
+                    Check-out
+                  </label>
+                  <input 
+                    type="date" 
+                    name="checkOut"
+                    value={bookingData.checkOut}
+                    onChange={handleInputChange}
+                    min={bookingData.checkIn || getTodayDate()}
+                    className={getInputClass("checkOut")}
+                    required
+                  />
+                  {errors.checkOut && (
+                    <p className="text-red-500 text-xs mt-2 font-medium">{errors.checkOut}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Guests */}
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+              <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <FontAwesomeIcon icon={faUsers} className="text-cyan-600 text-sm" />
+                Guests
               </label>
-              <input 
-                type="date" 
-                name="checkOut"
-                value={bookingData.checkOut}
-                onChange={handleInputChange}
-                min={bookingData.checkIn || getTodayDate()} // Minimum is check-in date or today
-                className={getInputClass("checkOut")}
-                required
-              />
-              {errors.checkOut && (
-                <p className="text-red-500 text-xs mt-1">{errors.checkOut}</p>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1 font-medium">Adults</label>
+                  <input
+                    type="text"
+                    name="adults"
+                    value={bookingData.adults}
+                    onChange={handleInputChange}
+                    className={getInputClass("adults")}
+                    placeholder="0"
+                    maxLength="2"
+                  />
+                  {errors.adults && (
+                    <p className="text-red-500 text-xs mt-2 font-medium">{errors.adults}</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1 font-medium">Children</label>
+                  <input
+                    type="text"
+                    name="children"
+                    value={bookingData.children}
+                    onChange={handleInputChange}
+                    className={getInputClass("children")}
+                    placeholder="0"
+                    maxLength="2"
+                  />
+                  {errors.children && (
+                    <p className="text-red-500 text-xs mt-2 font-medium">{errors.children}</p>
+                  )}
+                </div>
+              </div>
+              {errors.guests && (
+                <p className="text-red-500 text-xs mt-2 font-medium">{errors.guests}</p>
               )}
-              {!errors.checkOut && (
-                <p className="text-xs text-gray-500 mt-1">After check-in</p>
+              {!errors.guests && !errors.adults && !errors.children && (
+                <p className="text-gray-600 text-xs mt-2 font-medium">
+                  Total: {parseInt(bookingData.adults || 0) + parseInt(bookingData.children || 0)} guests
+                </p>
               )}
             </div>
-          </div>
 
-          {/* Guests - UPDATED to two inputs */}
-          <div className="flex-1 min-w-[200px] border-b md:border-b-0 md:border-r border-gray-300 p-3">
-            <label className="block text-sm font-semibold text-gray-700 mb-2">Guests *</label>
-            <div className="flex gap-2">
-              <div className="flex-1">
-                <label className="block text-xs text-gray-600 mb-1">Adults</label>
-                <input
-                  type="text"
-                  name="adults"
-                  value={bookingData.adults}
-                  onChange={handleInputChange}
-                  className={getInputClass("adults")}
-                  placeholder="Adults"
-                  maxLength="2"
-                />
-                {errors.adults && (
-                  <p className="text-red-500 text-xs mt-1">{errors.adults}</p>
-                )}
-              </div>
-              <div className="flex-1">
-                <label className="block text-xs text-gray-600 mb-1">Children</label>
-                <input
-                  type="text"
-                  name="children"
-                  value={bookingData.children}
-                  onChange={handleInputChange}
-                  className={getInputClass("children")}
-                  placeholder="Children"
-                  maxLength="2"
-                />
-                {errors.children && (
-                  <p className="text-red-500 text-xs mt-1">{errors.children}</p>
-                )}
-              </div>
+            {/* Submit Button */}
+            <div className="p-6 flex items-center justify-center">
+              <button 
+                type="submit" 
+                onClick={handleSubmit}
+                disabled={isSubmitting || (!user && pendingBooking)}
+                className={`w-full max-w-xs flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 ${
+                  isSubmitting || (!user && pendingBooking)
+                    ? "bg-gray-400 cursor-not-allowed" 
+                    : "bg-cyan-600 hover:bg-cyan-700 shadow-lg hover:shadow-xl"
+                }`}
+              >
+                {!user ? "Login to Book" : 
+                 isSubmitting ? "Processing..." : "Book Now"}
+              </button>
             </div>
-            {errors.guests && (
-              <p className="text-red-500 text-xs mt-1">{errors.guests}</p>
-            )}
-            {!errors.guests && !errors.adults && !errors.children && (
-              <p className="text-gray-500 text-xs mt-2">
-                Total guests: {parseInt(bookingData.adults || 0) + parseInt(bookingData.children || 0)}
-              </p>
-            )}
           </div>
+        </div>
+      </div>
 
-          <button 
-            type="submit" 
-            disabled={isSubmitting || (!user && pendingBooking)}
-            className=" min-w-full md:min-w-[40px] flex items-center justify-center cursor-pointer transition text-white font-bold p-3 md:px-10 bg-cyan-500 hover:rounded-full hover:bg-cyan-600 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {!user ? "Please Login to Book" : 
-             isSubmitting ? "Submitting..." : "Submit Booking"}
-          </button>
-        </form>
-
-        {/* Message display */}
-        {message && (
-          <div className={`max-w-7xl mx-auto mt-4 p-4 rounded-md ${
+      {/* Message display */}
+      {message && (
+        <div className="max-w-7xl mx-auto px-4 mt-6">
+          <div className={`rounded-xl p-4 shadow-lg ${
             message.includes("❌") || message.includes("Error") || message.includes("Please") || message.includes("cannot") 
-              ? "bg-red-100 text-red-700" 
-              : "bg-green-100 text-green-700"
+              ? "bg-red-500/90 text-white" 
+              : "bg-green-500/90 text-white"
           }`}>
-            {message}
+            <div className="flex items-center gap-3">
+              <FontAwesomeIcon 
+                icon={faCheckCircle} 
+                className={`text-sm ${message.includes("❌") ? "text-red-100" : "text-green-100"}`}
+              />
+              <span>{message}</span>
+            </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Room Details Section */}
-        <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div>
-            <img
-              src={room.image[1]}
-              alt={room.title}
-              className="rounded-l-2xl w-full h-auto shadow-lg object-cover"
-            />
-          </div>
+      {/* Room Details Section */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="p-8">
+              <img
+                src={room.image[1]}
+                alt={room.title}
+                className="rounded-2xl w-full h-80 object-cover shadow-lg"
+              />
+            </div>
 
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-3">{room.title}</h2>
-            <p className="text-gray-700 mb-4">
-              Enjoy our luxurious {room.title} with modern amenities, elegant interiors,
-              and a peaceful environment perfect for both business and leisure stays.
-            </p>
-            <p className="text-lg font-semibold text-cyan-600 mb-6">
-              Price: {room.price} / night
-            </p>
-            <button 
-              onClick={() => !user ? handleLoginPopup() : handleSubmit({ preventDefault: () => {} })}
-              className={`px-5 py-2 rounded-lg font-semibold ${
-                user 
-                  ? "bg-cyan-600 hover:bg-cyan-700 text-white cursor-pointer" 
-                  : "bg-cyan-600 hover:bg-cyan-700 text-white cursor-pointer"
-              }`}
-            >
-              {user ? "Proceed to Booking" : "Login to Book"}
-            </button>
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">{room.title}</h2>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                Enjoy our luxurious {room.title} with modern amenities, elegant interiors,
+                and a peaceful environment perfect for both business and leisure stays.
+              </p>
+              <p className="text-2xl font-bold text-cyan-600 mb-8">
+                {room.price} / night
+              </p>
+              <button 
+                onClick={() => !user ? handleLoginPopup() : handleSubmit({ preventDefault: () => {} })}
+                className={`px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+                  user 
+                    ? "bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg hover:shadow-xl" 
+                    : "bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg hover:shadow-xl"
+                }`}
+              >
+                {user ? "Book This Room" : "Login to Book"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* 🧳 Packages Section */}
-      <div className="px-4 py-10">
+      <div className="px-4 py-16 bg-gray-100/50">
         <Package />
       </div>
 
-      <div className="w-full bg-cyan-200 py-14 p-auto flex text-center">
-        <div className="flex justify-between flex-col md:flex-row gap-10">
-          {/* Left Section - Join Us */}
-          <div className="w-full md:w-1/2">
-            <h2 className="text-3xl font-bold mb-4">
-              Join the South Coast Experience
-            </h2>
-            <p className="text-gray-700 text-left px-6 leading-relaxed mb-4">
-              Discover the beauty of Kenya's coastline like never before. At SouthCoast Outdoors,
-              we make it easy for you to plan and enjoy unforgettable getaways filled with sun,
-              sea, and adventure. From exclusive travel deals to inspiring destination highlights,
-              we'll deliver the best offers straight to your inbox.
-            </p>
-            <p className="text-gray-700 text-left px-6 leading-relaxed mb-4">
-              Whether it's flights, airport transfers, or exciting activities, we handle the
-              details so you can focus on making lasting memories.
-            </p>
-            {user ? (
-              <button 
-                onClick={handleMyBookings}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md"
-              >
-                My Account
-              </button>
-            ) : (
-              <button 
-                onClick={handleJoinUsClick}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-xl shadow-md"
-              >
-                Join Us
-              </button>
-            )}
-          </div>
+      {/* CTA Section */}
+      <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Section - Join Us */}
+            <div className="text-white">
+              <h2 className="text-4xl font-bold mb-6">
+                Join the South Coast Experience
+              </h2>
+              <p className="text-cyan-100 leading-relaxed mb-6">
+                Discover the beauty of Kenya's coastline like never before. At SouthCoast Outdoors,
+                we make it easy for you to plan and enjoy unforgettable getaways filled with sun,
+                sea, and adventure. From exclusive travel deals to inspiring destination highlights,
+                we'll deliver the best offers straight to your inbox.
+              </p>
+              <p className="text-cyan-100 leading-relaxed mb-8">
+                Whether it's flights, airport transfers, or exciting activities, we handle the
+                details so you can focus on making lasting memories.
+              </p>
+              {user ? (
+                <button 
+                  onClick={handleMyBookings}
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  My Account
+                </button>
+              ) : (
+                <button 
+                  onClick={handleJoinUsClick}
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  Join Us Today
+                </button>
+              )}
+            </div>
 
-          {/* Right Section - Why South Coast */}
-          <div className="w-full md:w-1/2">
-            <h3 className="text-2xl font-bold mb-4">Why SouthCoast Outdoors?</h3>
-            <ul className="space-y-3 text-gray-700 px-6">
-              <li>✅ Tailor-made holiday experiences</li>
-              <li>✅ Trusted support from start to finish</li>
-              <li>✅ Exceptional value for your money</li>
-              <li>✅ Flexible travel options</li>
-              <li>✅ Exclusive deals and offers</li>
-            </ul>
+            {/* Right Section - Why South Coast */}
+            <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8 border border-white/40">
+              <h3 className="text-2xl font-bold text-white mb-6">Why SouthCoast Outdoors?</h3>
+              <ul className="space-y-4 text-white">
+                <li className="flex items-center gap-3">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-400" />
+                  <span>Tailor-made holiday experiences</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-400" />
+                  <span>Trusted support from start to finish</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-400" />
+                  <span>Exceptional value for your money</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-400" />
+                  <span>Flexible travel options</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <FontAwesomeIcon icon={faCheckCircle} className="text-green-400" />
+                  <span>Exclusive deals and offers</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

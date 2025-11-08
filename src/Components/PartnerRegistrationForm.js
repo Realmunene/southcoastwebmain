@@ -1,4 +1,20 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faXmark, 
+  faBuilding, 
+  faUser, 
+  faPhone, 
+  faEnvelope, 
+  faLock, 
+  faMapMarkerAlt,
+  faFileAlt,
+  faCity,
+  faHome,
+  faArrowRight,
+  faArrowLeft,
+  faHandshake
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "./images/IMG-20251008-WA0008logo0.png";
 
 export default function PartnerRegistrationForm({ onClose }) {
@@ -55,7 +71,7 @@ export default function PartnerRegistrationForm({ onClose }) {
         address: form.address,
       };
 
-      const res = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/partners/register", {
+      const res = await fetch("http://127.0.0.1:3000/api/v1/partners/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ partner: payload }),
@@ -131,7 +147,7 @@ export default function PartnerRegistrationForm({ onClose }) {
     setLoginLoading(true);
 
     try {
-      const res = await fetch("https://backend-southcoastwebmain-1.onrender.com/api/v1/partners/login", {
+      const res = await fetch("http://127.0.0.1:3000/api/v1/partners/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginForm),
@@ -191,257 +207,447 @@ export default function PartnerRegistrationForm({ onClose }) {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-cyan-400 to-cyan-800 p-4">
-        <div className="w-full max-w-3xl bg-white rounded-2xl shadow-lg p-8 relative">
-          {/* Close button - only show if onClose is provided */}
-          {typeof onClose === 'function' && (
-            <button
-              onClick={handleClose}
-              className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-xl font-bold"
-            >
-              &times;
-            </button>
-          )}
-          
-          <div className="text-center mb-6">
-            <img src={logo} alt="Southcoast logo" className="mx-auto mb-2 w-40" />
-            <p className="text-gray-700 font-semibold">Free Sign Up</p>
-            <h2 className="text-2xl font-bold mb-1">Partner Registration</h2>
-            <p className="text-red-500 text-sm">This section is for service providers only</p>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-600 via-cyan-700 to-cyan-800 flex items-center justify-center p-6">
+        <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 p-8 text-white relative">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <img src={logo} alt="SouthCoast Logo" className="h-12 w-auto drop-shadow-lg" />
+                <div>
+                  <h1 className="text-3xl font-bold">SouthCoast</h1>
+                  <p className="text-cyan-100">Partner Portal</p>
+                </div>
+              </div>
+              
+              {/* Close button - only show if onClose is provided */}
+              {typeof onClose === 'function' && (
+                <button
+                  onClick={handleClose}
+                  className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+                >
+                  <FontAwesomeIcon icon={faXmark} className="text-white text-lg" />
+                </button>
+              )}
+            </div>
+            
+            <div className="mt-6 text-center">
+              <div className="w-16 h-1 bg-cyan-300 rounded-full mx-auto mb-4"></div>
+              <h2 className="text-2xl font-bold mb-2">Partner Registration</h2>
+              <p className="text-cyan-100">
+                Join our network of trusted service providers
+              </p>
+              <div className="mt-2 px-4 py-1 bg-amber-500/20 rounded-full inline-block">
+                <p className="text-amber-200 text-sm font-medium">
+                  This section is for service providers only
+                </p>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Supplier Type</label>
-              <select
-                name="supplierType"
-                value={form.supplierType}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-              >
-                <option value="">Select supplier type</option>
-                <option value="accommodation">Accommodation Provider</option>
-                <option value="transport">Transport Provider</option>
-                <option value="tour">Tour Operator</option>
-              </select>
-            </div>
+          {/* Form Content */}
+          <div className="p-8">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Supplier Type */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faBuilding} className="text-cyan-600 text-sm" />
+                  Supplier Type
+                </label>
+                <div className="relative">
+                  <select
+                    name="supplierType"
+                    value={form.supplierType}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                  >
+                    <option value="">Select supplier type</option>
+                    <option value="accommodation">Accommodation Provider</option>
+                    <option value="transport">Transport Provider</option>
+                    <option value="tour">Tour Operator</option>
+                  </select>
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faBuilding} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Supplier Name</label>
-              <input
-                name="supplierName"
-                placeholder="Enter your business name"
-                value={form.supplierName}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-              />
-            </div>
+              {/* Supplier Name */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faBuilding} className="text-cyan-600 text-sm" />
+                  Business Name
+                </label>
+                <div className="relative">
+                  <input
+                    name="supplierName"
+                    placeholder="Enter your business name"
+                    value={form.supplierName}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faBuilding} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Mobile</label>
-              <input
-                name="mobile"
-                placeholder="+254712345678"
-                value={form.mobile}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-              />
-            </div>
+              {/* Mobile */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faPhone} className="text-cyan-600 text-sm" />
+                  Mobile Number
+                </label>
+                <div className="relative">
+                  <input
+                    name="mobile"
+                    placeholder="+254 712 345 678"
+                    value={form.mobile}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faPhone} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Email address</label>
-              <input
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                value={form.email}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-              />
-            </div>
+              {/* Email */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faEnvelope} className="text-cyan-600 text-sm" />
+                  Email Address
+                </label>
+                <div className="relative">
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="business@example.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faEnvelope} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Contact Person</label>
-              <input
-                name="contactPerson"
-                placeholder="Enter your name"
-                value={form.contactPerson}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-              />
-            </div>
+              {/* Contact Person */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faUser} className="text-cyan-600 text-sm" />
+                  Contact Person
+                </label>
+                <div className="relative">
+                  <input
+                    name="contactPerson"
+                    placeholder="Full name of contact person"
+                    value={form.contactPerson}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faUser} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Password</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                value={form.password}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-                minLength="6"
-              />
-            </div>
+              {/* Password */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faLock} className="text-cyan-600 text-sm" />
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    name="password"
+                    type="password"
+                    placeholder="Create a secure password"
+                    value={form.password}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                    minLength="6"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faLock} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Confirm Password</label>
-              <input
-                name="confirmPassword"
-                type="password"
-                placeholder="Repeat your password"
-                value={form.confirmPassword}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-                minLength="6"
-              />
-            </div>
+              {/* Confirm Password */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faLock} className="text-cyan-600 text-sm" />
+                  Confirm Password
+                </label>
+                <div className="relative">
+                  <input
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Repeat your password"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                    minLength="6"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faLock} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Description</label>
-              <input
-                name="description"
-                placeholder="Describe your business"
-                value={form.description}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-            </div>
+              {/* Description */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faFileAlt} className="text-cyan-600 text-sm" />
+                  Business Description
+                </label>
+                <div className="relative">
+                  <input
+                    name="description"
+                    placeholder="Describe your business services"
+                    value={form.description}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faFileAlt} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">City</label>
-              <input
-                name="city"
-                placeholder="Enter your city"
-                value={form.city}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                required
-              />
-            </div>
+              {/* City */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faCity} className="text-cyan-600 text-sm" />
+                  City
+                </label>
+                <div className="relative">
+                  <input
+                    name="city"
+                    placeholder="Enter your city"
+                    value={form.city}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                    required
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faCity} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-1">Address</label>
-              <input
-                name="address"
-                placeholder="Enter your address"
-                value={form.address}
-                onChange={handleChange}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-            </div>
+              {/* Address */}
+              <div className="md:col-span-2 space-y-2">
+                <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="text-cyan-600 text-sm" />
+                  Business Address
+                </label>
+                <div className="relative">
+                  <input
+                    name="address"
+                    placeholder="Enter your complete business address"
+                    value={form.address}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-400" />
+                  </div>
+                </div>
+              </div>
 
-            <div className="md:col-span-2 flex items-center mt-2">
-              <input
-                type="checkbox"
-                name="agree"
-                checked={form.agree}
-                onChange={handleChange}
-                className="h-4 w-4"
-                required
-              />
-              <label className="ml-2 text-sm text-gray-600">
-                I accept{" "}
-                <a href="#" className="text-blue-600 underline">
-                  Terms and Conditions
-                </a>
-              </label>
-            </div>
+              {/* Terms and Conditions */}
+              <div className="md:col-span-2 flex items-start space-x-3 mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <input
+                  type="checkbox"
+                  name="agree"
+                  checked={form.agree}
+                  onChange={handleChange}
+                  className="h-5 w-5 text-cyan-600 focus:ring-cyan-500 border-gray-300 rounded mt-1"
+                  required
+                />
+                <label className="text-sm text-gray-700">
+                  I accept the{" "}
+                  <a href="#" className="text-cyan-600 hover:text-cyan-700 font-semibold underline">
+                    Terms and Conditions
+                  </a>{" "}
+                  and agree to the processing of my personal data
+                </label>
+              </div>
 
-            <div className="md:col-span-2 text-center mt-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-32 font-semibold py-2 rounded-lg ${
-                  loading 
-                    ? "bg-gray-400 cursor-not-allowed text-white" 
-                    : "bg-cyan-600 hover:bg-cyan-700 text-white"
-                }`}
-              >
-                {loading ? "Signing Up..." : "Sign Up"}
-              </button>
-
-              <p className="mt-3 text-sm">
-                Already have an account?{" "}
+              {/* Submit Button */}
+              <div className="md:col-span-2 text-center mt-6 space-y-4">
                 <button
-                  type="button"
-                  onClick={() => setShowLogin(true)}
-                  className="text-cyan-600 font-semibold underline"
+                  type="submit"
+                  disabled={loading}
+                  className={`px-12 py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 mx-auto ${
+                    loading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 shadow-lg hover:shadow-xl"
+                  }`}
                 >
-                  Log In
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Processing Registration...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faHandshake} className="text-white" />
+                      <span>Become a Partner</span>
+                    </>
+                  )}
                 </button>
-              </p>
-            </div>
-          </form>
+
+                <div className="text-center">
+                  <p className="text-gray-600">
+                    Already have a partner account?{" "}
+                    <button
+                      type="button"
+                      onClick={() => setShowLogin(true)}
+                      className="text-cyan-600 hover:text-cyan-700 font-semibold underline transition-colors flex items-center gap-2 mx-auto"
+                    >
+                      <span>Sign In to Partner Portal</span>
+                      <FontAwesomeIcon icon={faArrowRight} className="text-sm" />
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
       {/* LOGIN MODAL */}
       {showLogin && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
-            <button
-              onClick={() => setShowLogin(false)}
-              className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-xl"
-            >
-              &times;
-            </button>
-
-            <h2 className="text-2xl font-bold mb-4 text-center text-cyan-700">Partner Login</h2>
-
-            <form onSubmit={handleLoginSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Email address</label>
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={loginForm.email}
-                  onChange={handleLoginChange}
-                  className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                  required
-                />
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex justify-center items-center z-50 p-6">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-gray-200">
+            {/* Login Header */}
+            <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 p-6 text-white">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <FontAwesomeIcon icon={faHandshake} className="text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold">Partner Login</h2>
+                    <p className="text-cyan-100 text-sm">Access your partner account</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowLogin(false)}
+                  className="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <FontAwesomeIcon icon={faXmark} className="text-white text-sm" />
+                </button>
               </div>
+            </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">Password</label>
-                <input
-                  name="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={loginForm.password}
-                  onChange={handleLoginChange}
-                  className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-                  required
-                />
+            {/* Login Form */}
+            <div className="p-6">
+              <form onSubmit={handleLoginSubmit} className="space-y-6">
+                {/* Email */}
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                    <FontAwesomeIcon icon={faEnvelope} className="text-cyan-600 text-sm" />
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="partner@example.com"
+                      value={loginForm.email}
+                      onChange={handleLoginChange}
+                      className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                      required
+                      disabled={loginLoading}
+                    />
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <FontAwesomeIcon icon={faEnvelope} className="text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Password */}
+                <div className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                    <FontAwesomeIcon icon={faLock} className="text-cyan-600 text-sm" />
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      name="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      value={loginForm.password}
+                      onChange={handleLoginChange}
+                      className="w-full border border-gray-300 rounded-xl px-4 py-4 pl-12 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                      required
+                      disabled={loginLoading}
+                    />
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <FontAwesomeIcon icon={faLock} className="text-gray-400" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={loginLoading}
+                  className={`w-full py-4 rounded-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 ${
+                    loginLoading
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 shadow-lg hover:shadow-xl"
+                  }`}
+                >
+                  {loginLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      <span>Signing In...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FontAwesomeIcon icon={faArrowRight} className="text-white" />
+                      <span>Sign In to Partner Portal</span>
+                    </>
+                  )}
+                </button>
+              </form>
+
+              {/* Footer Links */}
+              <div className="mt-6 text-center space-y-3">
+                <button
+                  type="button"
+                  className="text-cyan-600 hover:text-cyan-700 text-sm font-medium transition-colors"
+                >
+                  Forgot your password?
+                </button>
+                
+                <div className="border-t border-gray-200 pt-4">
+                  <p className="text-gray-600 text-sm">
+                    Not a partner yet?{" "}
+                    <button
+                      type="button"
+                      onClick={() => setShowLogin(false)}
+                      className="text-cyan-600 hover:text-cyan-700 font-semibold underline transition-colors"
+                    >
+                      Join our network
+                    </button>
+                  </p>
+                </div>
               </div>
-
-              <button
-                type="submit"
-                disabled={loginLoading}
-                className={`w-full font-semibold py-2 rounded-lg ${
-                  loginLoading 
-                    ? "bg-gray-400 cursor-not-allowed text-white" 
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
-                }`}
-              >
-                {loginLoading ? "Logging In..." : "Log In"}
-              </button>
-            </form>
-
-            <p className="mt-3 text-sm text-center">
-              Forgot your password?{" "}
-              <a href="#" className="text-blue-600 font-semibold underline">
-                Reset
-              </a>
-            </p>
+            </div>
           </div>
         </div>
       )}
