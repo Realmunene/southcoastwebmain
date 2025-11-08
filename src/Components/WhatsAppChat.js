@@ -17,7 +17,7 @@ export default function WhatsAppChat() {
     <>
       {/* Floating Bouncing WhatsApp Button */}
       {!open && (
-        <div className="fixed bottom-5 right-5 z-50 animate-bounce">
+        <div className="fixed bottom-5 right-5 z-[9999] animate-bounce">
           <button
             onClick={() => setOpen(true)}
             className="bg-green-500 hover:bg-green-400 text-white rounded-full p-4 shadow-lg transition duration-300 flex items-center justify-center"
@@ -30,7 +30,7 @@ export default function WhatsAppChat() {
 
       {/* Popup Chat Card */}
       {open && (
-        <div className="fixed bottom-5 right-5 z-50 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden animate-fadeIn">
+        <div className="fixed bottom-5 right-5 z-[9999] w-80 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden animate-fadeIn">
           {/* Header */}
           <div className="flex items-center justify-between bg-cyan-700 text-white px-4 py-3">
             <div className="flex items-center space-x-2">
