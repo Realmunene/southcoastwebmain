@@ -442,13 +442,19 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState({});
   const [exporting, setExporting] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const API_BASE = "http://127.0.0.1:3000/api/v1/admin";
 
-  const fetchPayments = useCallback(async () => {
+  // Enhanced fetchPayments with proper state management
+  const fetchPayments = useCallback(async (showLoading = true) => {
     try {
-      setLoading(true);
+      if (showLoading) setLoading(true);
       const token = localStorage.getItem("adminToken");
+      if (!token) {
+        throw new Error("Authentication required");
+      }
+
       const response = await fetch(`${API_BASE}/payments`, {
         headers: { 
           "Content-Type": "application/json",
@@ -456,18 +462,25 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Fetched payments data:", data);
-        setPayments(data.payments || data || []);
-      } else {
-        throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
+
+      const data = await response.json();
+      console.log("Fetched payments data:", data);
+      
+      const paymentsData = data.payments || data || [];
+      setPayments(Array.isArray(paymentsData) ? paymentsData : []);
+      setLastUpdated(new Date());
+      
     } catch (error) {
       console.error("Error fetching payments:", error);
-      setApiErrors(prev => ({ ...prev, payments: error.message }));
+      setApiErrors(prev => ({ 
+        ...prev, 
+        payments: error.message || "Failed to load payments" 
+      }));
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   }, [setApiErrors]);
 
@@ -475,14 +488,33 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
     fetchPayments();
   }, [fetchPayments]);
 
-  const updatePaymentStatus = async (bookingId, status) => {
-    const updateKey = `${bookingId}_${status}`;
+  // Optimized polling - only refresh when needed
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Only auto-refresh if not currently updating anything
+      if (Object.keys(updating).length === 0) {
+        fetchPayments(false); // Silent refresh without loading indicator
+      }
+    }, 10000); // Reduced to 10 seconds for better real-time updates
+
+    return () => clearInterval(interval);
+  }, [fetchPayments, updating]);
+
+  // FIXED: updatePaymentStatus that properly updates both admin and user sides
+  const updatePaymentStatus = async (bookingId, newStatus) => {
+    const updateKey = `${bookingId}_${newStatus}`;
+    
+    if (updating[updateKey]) return;
+    
     setUpdating(prev => ({ ...prev, [updateKey]: true }));
 
     try {
       const token = localStorage.getItem("adminToken");
+      if (!token) {
+        throw new Error("Authentication required");
+      }
       
-      console.log("Updating booking:", bookingId, "to status:", status);
+      console.log("Updating booking:", bookingId, "to status:", newStatus);
       
       const response = await fetch(`${API_BASE}/bookings/${bookingId}/payment_status`, {
         method: "PATCH",
@@ -491,7 +523,7 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ 
-          payment_status: status
+          payment_status: newStatus
         }),
       });
 
@@ -499,14 +531,46 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
       console.log("Update response:", responseData);
 
       if (response.ok) {
-        alert(`Payment status updated to: ${status.replace('_', ' ').toUpperCase()}`);
-        fetchPayments();
+        const statusText = newStatus.replace('_', ' ').toUpperCase();
+        
+        // FIX: Update local state immediately for better UX
+        setPayments(prevPayments => 
+          prevPayments.map(payment => {
+            const paymentData = getPaymentDisplayData(payment);
+            if (paymentData.bookingId == bookingId) {
+              // Create a deep copy and update payment_status at all levels
+              const updatedPayment = JSON.parse(JSON.stringify(payment));
+              
+              // Update payment_status at root level
+              updatedPayment.payment_status = newStatus;
+              updatedPayment.status = newStatus;
+              
+              // Update payment_status in nested booking object if it exists
+              if (updatedPayment.booking) {
+                updatedPayment.booking.payment_status = newStatus;
+              }
+              
+              return updatedPayment;
+            }
+            return payment;
+          })
+        );
+        
+        setLastUpdated(new Date());
+        alert(`✅ Payment status updated to: ${statusText}`);
+        
+        // Force a refresh to ensure backend consistency
+        setTimeout(() => fetchPayments(false), 1000);
+        
       } else {
         throw new Error(responseData.error || responseData.message || "Failed to update payment status");
       }
     } catch (error) {
       console.error("Error updating payment status:", error);
-      alert(error.message || "Failed to update payment status");
+      alert(`❌ ${error.message || "Failed to update payment status"}`);
+      
+      // Revert by refetching actual data
+      fetchPayments(false);
     } finally {
       setUpdating(prev => ({ ...prev, [updateKey]: false }));
     }
@@ -552,7 +616,7 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
     if (!status) return '❓ NO STATUS';
     
     switch (status.toLowerCase()) {
-      case 'pending': return '⏳ PENDING';
+      case 'pending': return '⏳ WAITING FOR ADMIN CONFIRMATION';
       case 'partial_paid': return '💰 PARTIAL PAID';
       case 'payment_made': return '✅ FULLY PAID';
       default: return `❓ ${status.toUpperCase()}`;
@@ -578,20 +642,51 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
     return adultsCount + childrenCount;
   };
 
+  // FIXED: Enhanced getPaymentDisplayData to properly extract all data
   const getPaymentDisplayData = (payment) => {
-    console.log("Raw payment data:", payment);
+    console.log("Raw payment data for debugging:", payment);
     
+    // FIX: Better payment status extraction
     const paymentStatus = 
       payment.payment_status || 
       payment.status || 
       (payment.booking && payment.booking.payment_status) ||
-      'unknown';
+      'pending'; // Default to pending if not found
     
     const bookingId = 
       payment.booking_id || 
       payment.bookingId ||
       (payment.booking && payment.booking.id) ||
       payment.id;
+
+    // FIX: Enhanced data extraction with multiple fallbacks
+    const adults = 
+      payment.adults || 
+      (payment.booking && payment.booking.adults) || 
+      (payment.booking_details && payment.booking_details.adults) ||
+      (payment.guests && payment.guests.adults) ||
+      1; // Default to 1 adult
+    
+    const children = 
+      payment.children || 
+      (payment.booking && payment.booking.children) || 
+      (payment.booking_details && payment.booking_details.children) ||
+      (payment.guests && payment.guests.children) ||
+      0;
+    
+    const nationality = 
+      payment.nationality || 
+      (payment.booking && payment.booking.nationality) || 
+      (payment.booking_details && payment.booking_details.nationality) ||
+      (payment.user && payment.user.nationality) ||
+      'Not specified';
+
+    const amount = 
+      payment.amount || 
+      payment.payment_amount || 
+      (payment.booking && payment.booking.payment_amount) ||
+      (payment.booking && payment.booking.amount) ||
+      'N/A';
 
     return {
       id: payment.id || 'N/A',
@@ -603,10 +698,10 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
       createdAt: payment.created_at || payment.createdAt,
       checkIn: payment.check_in || payment.checkIn || (payment.booking && payment.booking.check_in),
       checkOut: payment.check_out || payment.checkOut || (payment.booking && payment.booking.check_out),
-      adults: payment.adults || (payment.booking && payment.booking.adults),
-      children: payment.children || (payment.booking && payment.booking.children),
-      nationality: payment.nationality || (payment.booking && payment.booking.nationality),
-      amount: payment.amount || payment.payment_amount || (payment.booking && payment.booking.payment_amount),
+      adults: adults,
+      children: children,
+      nationality: nationality,
+      amount: amount,
       paymentStatus: paymentStatus
     };
   };
@@ -626,10 +721,14 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Payment Management</h2>
           <p className="text-gray-600 mt-1">Manage and confirm user payments</p>
+          <p className="text-xs text-blue-600 mt-1">
+            🔄 Auto-refreshes every 10 seconds • 
+            Last updated: {lastUpdated ? lastUpdated.toLocaleTimeString() : 'Never'}
+          </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <button
-            onClick={fetchPayments}
+            onClick={() => fetchPayments(true)}
             className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
           >
             ↻ Refresh Data
@@ -697,6 +796,10 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
                             </span>
                             <span className="flex items-center gap-1">
                               <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
+                              Email: {paymentData.userEmail}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
                               Phone: {paymentData.phone}
                             </span>
                             <span className="flex items-center gap-1">
@@ -721,11 +824,16 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
                           <p className="text-sm font-medium text-gray-600 mb-1">Total Guests</p>
                           <p className="text-lg font-semibold text-gray-900">
                             {calculateTotalGuests(paymentData.adults, paymentData.children)}
+                            {paymentData.adults > 0 && (
+                              <span className="text-sm text-gray-500 block mt-1">
+                                ({paymentData.adults} adults, {paymentData.children} children)
+                              </span>
+                            )}
                           </p>
                         </div>
                         <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
                           <p className="text-sm font-medium text-gray-600 mb-1">Nationality</p>
-                          <p className="text-lg font-semibold text-gray-900">{paymentData.nationality || 'Not specified'}</p>
+                          <p className="text-lg font-semibold text-gray-900">{paymentData.nationality}</p>
                         </div>
                       </div>
 
@@ -760,6 +868,9 @@ const SuperAdminPayments = ({ currentAdminRole, setApiErrors }) => {
                     <div className="xl:w-80 flex-shrink-0">
                       <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
                         <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-4">Update Payment Status</h4>
+                        <p className="text-xs text-gray-500 mb-4 text-center">
+                          This will update both admin and user views
+                        </p>
                         <div className="space-y-3">
                           <button
                             onClick={() => updatePaymentStatus(paymentData.bookingId, 'pending')}

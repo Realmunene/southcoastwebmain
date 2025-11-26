@@ -122,7 +122,17 @@ export default function MyBookings() {
         return;
       }
 
-      setBookings(Array.isArray(data) ? data : []);
+      const bookingsData = Array.isArray(data) ? data : [];
+      setBookings(bookingsData);
+
+      // FIX: Restart polling for any bookings that are still pending
+      bookingsData.forEach(booking => {
+        if (booking.payment_status === 'pending' && !pollingIntervals[booking.id]) {
+          console.log(`🔄 Restarting polling for booking ${booking.id}`);
+          startPaymentStatusPolling(booking.id);
+        }
+      });
+
     } catch (err) {
       console.error("Error fetching bookings:", err);
       
@@ -409,7 +419,6 @@ export default function MyBookings() {
         payment: {
           phone: phoneValidation.formattedPhone,
           amount: parseFloat(paymentAmount)
-          // Removed: booking_id, currency, payment_method (these are unpermitted)
         }
       };
 
@@ -478,14 +487,17 @@ export default function MyBookings() {
     }
   };
 
-  // FIXED: Enhanced Payment Status Polling with better error handling
-  const startPaymentStatusPolling = (bookingId, retryCount = 0) => {
-    const maxRetries = 30; // Reduced from 48 to 30 (2.5 minutes instead of 4 minutes)
+  // FIXED: Enhanced Payment Status Polling that properly detects admin updates
+  const startPaymentStatusPolling = (bookingId) => {
+    console.log(`🚀 Starting payment status polling for booking ${bookingId}`);
     
     // Clear any existing interval for this booking
     if (pollingIntervals[bookingId]) {
-      clearInterval(pollingIntervals[bookingId].interval);
+      clearInterval(pollingIntervals[bookingId]);
     }
+
+    let retryCount = 0;
+    const maxRetries = 360; // 30 minutes (360 * 5 seconds)
 
     const interval = setInterval(async () => {
       try {
@@ -503,17 +515,29 @@ export default function MyBookings() {
         });
 
         if (response.ok) {
-          const booking = await response.json();
+          const updatedBooking = await response.json();
           
-          // Check if payment status has been updated
-          const newStatus = booking.payment_status;
-          console.log(`Polling booking ${bookingId}: current status = ${newStatus}, retry ${retryCount}`);
+          // FIX: Get current booking from state to compare
+          const currentBooking = bookings.find(b => b.id === bookingId);
+          const currentStatus = currentBooking?.payment_status || 'pending';
+          const newStatus = updatedBooking.payment_status || 'pending';
           
-          // If payment status changed from 'pending' to something else, stop polling and update state
-          if (newStatus && newStatus !== 'pending') {
-            console.log(`Payment status updated for booking ${bookingId}:`, newStatus);
+          console.log(`📡 Polling booking ${bookingId}:`, {
+            currentStatus,
+            newStatus, 
+            retryCount
+          });
+          
+          // If payment status changed from pending to something else (admin action)
+          if (newStatus !== currentStatus && currentStatus === 'pending' && newStatus !== 'pending') {
+            console.log(`🎉 Admin updated payment status for booking ${bookingId}:`, { 
+              from: currentStatus, 
+              to: newStatus 
+            });
             
             clearInterval(interval);
+            
+            // Remove from polling intervals
             setPollingIntervals(prev => {
               const newIntervals = { ...prev };
               delete newIntervals[bookingId];
@@ -534,26 +558,52 @@ export default function MyBookings() {
               alert("✅ Partial payment confirmed! Thank you for your payment. The remaining balance will be due before check-in.");
             } else if (newStatus === 'payment_made') {
               alert("✅ Payment confirmed! Your booking is now fully paid. Thank you for your business!");
-            } else if (newStatus === 'failed' || newStatus === 'cancelled') {
-              alert("❌ Payment failed or was cancelled. Please try again or contact support.");
             }
-          } else if (retryCount >= maxRetries) {
-            // Stop polling after max retries without status change from admin
-            console.log(`Polling stopped for booking ${bookingId} after ${maxRetries} attempts - still waiting for admin confirmation`);
+          } 
+          // If status is still pending, continue polling
+          else if (newStatus === 'pending') {
+            retryCount++;
+            console.log(`⏳ Still waiting for admin confirmation for booking ${bookingId}, retry ${retryCount}`);
+            
+            if (retryCount >= maxRetries) {
+              console.log(`⏹️ Max retries reached for booking ${bookingId}, stopping polling`);
+              clearInterval(interval);
+              setPollingIntervals(prev => {
+                const newIntervals = { ...prev };
+                delete newIntervals[bookingId];
+                return newIntervals;
+              });
+              
+              alert("⏳ Payment confirmation is taking longer than expected. Please check back later or contact support for updates.");
+            }
+          }
+          // If status changed but we're not in pending state (shouldn't happen normally)
+          else if (newStatus !== currentStatus) {
+            console.log(`🔄 Status changed for booking ${bookingId}:`, { from: currentStatus, to: newStatus });
+            
+            // Update state anyway
+            setBookings(prevBookings => 
+              prevBookings.map(b => 
+                b.id === bookingId 
+                  ? { ...b, payment_status: newStatus }
+                  : b
+              )
+            );
+            
             clearInterval(interval);
             setPollingIntervals(prev => {
               const newIntervals = { ...prev };
               delete newIntervals[bookingId];
               return newIntervals;
             });
-            
-            alert("⏳ Payment confirmation is taking longer than expected. Please check back later or contact support for updates.");
           }
         } else {
           console.warn(`Failed to fetch booking ${bookingId} status: ${response.status}`);
+          retryCount++;
         }
       } catch (error) {
         console.error("Error polling payment status:", error);
+        retryCount++;
         
         if (retryCount >= maxRetries) {
           clearInterval(interval);
@@ -568,9 +618,10 @@ export default function MyBookings() {
       }
     }, 5000); // Poll every 5 seconds
 
+    // Store the interval
     setPollingIntervals(prev => ({ 
       ...prev, 
-      [bookingId]: { interval, retryCount: retryCount + 1 } 
+      [bookingId]: interval 
     }));
   };
 
