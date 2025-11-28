@@ -150,7 +150,7 @@ const App = () => {
           <Routes>
             {/* 🏠 Default Home Route */}
             <Route
-              path="/southcoastwebmain"
+              path="/"
               element={
                 <>
                   {activeSection === "home" && (
