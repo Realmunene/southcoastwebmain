@@ -156,7 +156,7 @@ export default function Navbar({
         {/* LEFT SECTION - Logo */}
         <div className="flex items-center space-x-4">
           <Link
-            to="/southcoastwebmain"
+            to="/"
             className="flex items-center space-x-3 focus:outline-none group"
             onClick={() => {
               setActiveSection("home");
