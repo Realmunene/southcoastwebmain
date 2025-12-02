@@ -24,9 +24,9 @@ production:
   connects_to:
     database:
       writing: production
-      cache: production_cache
+      cache: cache
 
 # Cache database configuration
-production_cache:
+cache:
   <<: *default
   database: backend_southcoastwebmain_cache
