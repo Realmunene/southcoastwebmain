@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.4.7"
 
 # --- Core Rails ---
-gem "rails", "~> 8.0.3"
+gem "rails", "~> 8.1.1"
 
 # --- Database & Server ---
 gem "pg", "~> 1.1"
@@ -12,7 +12,7 @@ gem "puma", ">= 5.0"
 # --- Email / Mailers ---
 gem "resend"
 gem "mail", "~> 2.9.0"
-gem "actionmailer", "~> 8.0.3"
+gem "actionmailer", "~> 8.1.1"
 
 # --- Authentication & Utilities ---
 gem "bcrypt", "~> 3.1.7"
