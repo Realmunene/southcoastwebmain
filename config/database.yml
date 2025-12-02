@@ -19,3 +19,14 @@ test:
 production:
   <<: *default
   database: backend_southcoastwebmain_production
+
+  # Rails 8 Solid Cache requirement
+  connects_to:
+    database:
+      writing: production
+      cache: production_cache
+
+# Cache database configuration
+production_cache:
+  <<: *default
+  database: backend_southcoastwebmain_cache
