@@ -1,64 +1,7 @@
 {
-  "name": "southcoastwebmain",
-  "version": "0.1.0",
-  "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^7.1.0",
-    "@fortawesome/free-brands-svg-icons": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "@fortawesome/react-fontawesome": "^3.1.0",
-    "@react-google-maps/api": "^2.20.7",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "framer-motion": "^12.23.24",
-    "i18next": "^22.4.9",
-    "i18next-browser-languagedetector": "^7.1.0",
-    "i18next-http-backend": "^2.2.0",
-    "jspdf": "^3.0.3",
-    "jspdf-autotable": "^5.0.2",
     "jwt-decode": "^4.0.0",
-    "leaflet": "^1.9.4",
-    "lucide-react": "^0.545.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-i18next": "^12.2.0",
-    "react-leaflet": "^5.0.0",
-    "react-router-dom": "^7.9.4",
-    "react-scripts": "^5.0.1",
-    "react-toastify": "^11.0.5",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "gh-pages": "^6.3.0",
-    "tailwindcss": "^3.4.18",
-    "typescript": "^4.9.5"
+    "react-email": "^4.3.2",
+    "resend": "^6.2.2"
   }
 }

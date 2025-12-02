@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "./static/css/main.e4267a90.css",
+    "main.js": "./static/js/main.c85425c1.js",
+    "static/js/239.41848a0e.chunk.js": "./static/js/239.41848a0e.chunk.js",
+    "static/js/977.8d4cde38.chunk.js": "./static/js/977.8d4cde38.chunk.js",
+    "static/js/455.5d02a408.chunk.js": "./static/js/455.5d02a408.chunk.js",
+    "static/js/453.c467cd43.chunk.js": "./static/js/453.c467cd43.chunk.js",
+    "static/media/background.jpg": "./static/media/background.9ab2861bd6e17cdb6731.jpg",
+    "static/media/ensuite.jpg": "./static/media/ensuite.ed996c8648221acc2fdc.jpg",
+    "static/media/image8.jpg": "./static/media/image8.ab0c88cc84306b5979a4.jpg",
+    "static/media/image6.jpg": "./static/media/image6.4e58cd905bc8f06ad2de.jpg",
+    "static/media/2BA.jpg": "./static/media/2BA.49ce5ee78ed2b30fd544.jpg",
+    "static/media/image2.jpg": "./static/media/image2.4a3d51721398622de790.jpg",
+    "static/media/IMG-20251011-WA0000.jpg": "./static/media/IMG-20251011-WA0000.4dfaa25397b97cef670b.jpg",
+    "static/media/LargerApartment.jpg": "./static/media/LargerApartment.838e6eb6c1d2eabdd3af.jpg",
+    "static/media/image4.jpg": "./static/media/image4.838e6eb6c1d2eabdd3af.jpg",
+    "static/media/2 connected room.jpg": "./static/media/2 connected room.cb0316b6f6777646e776.jpg",
+    "static/media/Apartment.jpg": "./static/media/Apartment.69740d79b9a34e1bc857.jpg",
+    "static/media/image3.jpg": "./static/media/image3.ad8cefc9018d4145d8b2.jpg",
+    "static/media/image1.jpg": "./static/media/image1.71f565916a47f13f3747.jpg",
+    "static/media/image5.jpg": "./static/media/image5.0f5f08b3b1bc765339e1.jpg",
+    "static/media/Executive 2.jpg": "./static/media/Executive 2.b5e3a5fe3a2694d43319.jpg",
+    "static/media/image7.jpg": "./static/media/image7.af45ace9f6210342c3d2.jpg",
+    "static/media/image9.jpg": "./static/media/image9.201715c5aef52ed28cba.jpg",
+    "static/media/2 coneected.jpg": "./static/media/2 coneected.e4d1cf6dd6057d966dd8.jpg",
+    "static/media/IMG-20251008-WA0008logo0.png": "./static/media/IMG-20251008-WA0008logo0.2a749e18f6dd5fef7b5d.png",
+    "index.html": "./index.html",
+    "static/media/getFetch.cjs": "./static/media/getFetch.7a7a1c81840c96d5a3ea.cjs",
+    "main.e4267a90.css.map": "./static/css/main.e4267a90.css.map",
+    "main.c85425c1.js.map": "./static/js/main.c85425c1.js.map",
+    "239.41848a0e.chunk.js.map": "./static/js/239.41848a0e.chunk.js.map",
+    "977.8d4cde38.chunk.js.map": "./static/js/977.8d4cde38.chunk.js.map",
+    "455.5d02a408.chunk.js.map": "./static/js/455.5d02a408.chunk.js.map",
+    "453.c467cd43.chunk.js.map": "./static/js/453.c467cd43.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e4267a90.css",
+    "static/js/main.c85425c1.js"
+  ]
+}

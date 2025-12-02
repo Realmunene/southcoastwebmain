@@ -1,0 +1,17 @@
+<h2>New Booking Notification</h2>
+
+<p>A new booking has been created:</p>
+
+<ul>
+  <li>Booking ID: <%= @booking.id %></li>
+  <li>Room Type: <%= @booking.room_type %></li>
+  <li>Check-in: <%= @booking.check_in %></li>
+  <li>Check-out: <%= @booking.check_out %></li>
+  <li>Guests: <%= @booking.guests %></li>
+  <li>Nationality: <%= @booking.nationality %></li>
+  <% if @booking.user %>
+    <li>User: <%= @booking.user.email %></li>
+  <% end %>
+</ul>
+
+<p>Login to your admin dashboard for details.</p>

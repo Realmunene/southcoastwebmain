@@ -1,0 +1,15 @@
+<h1>🛎️ New Booking Received</h1>
+
+<p>A new booking has been made by <%= @booking.user.email %></p>
+
+<ul>
+  <li><strong>Nationality:</strong> <%= @booking.nationality %></li>
+  <li><strong>Room Type:</strong> <%= @booking.room_type %></li>
+  <li><strong>Adults:</strong> <%= @booking.adults %></li>
+  <li><strong>Children:</strong> <%= @booking.children %></li>
+  <li><strong>Total Guests:</strong> <%= @total_guests %></li>
+  <li><strong>Check-in:</strong> <%= @booking.check_in %></li>
+  <li><strong>Check-out:</strong> <%= @booking.check_out %></li>
+</ul>
+
+<p>Sent automatically from SouthCoast Booking System.</p>

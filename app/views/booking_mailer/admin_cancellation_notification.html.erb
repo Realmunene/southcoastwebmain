@@ -1,0 +1,17 @@
+<h1>❌ Booking Cancelled</h1>
+
+<p>A booking has been cancelled by <%= @booking_details[:email] %></p>
+
+<ul>
+  <li><strong>Nationality:</strong> <%= @booking_details[:nationality] %></li>
+  <li><strong>Room Type:</strong> <%= @booking_details[:room_type] %></li>
+  <li><strong>Adults:</strong> <%= @booking_details[:adults] %></li>
+  <li><strong>Children:</strong> <%= @booking_details[:children] %></li>
+  <li><strong>Total Guests:</strong> <%= @total_guests %></li>
+  <li><strong>Check-in:</strong> <%= @booking_details[:check_in] %></li>
+  <li><strong>Check-out:</strong> <%= @booking_details[:check_out] %></li>
+  <li><strong>User ID:</strong> <%= @booking_details[:user_id] %></li>
+  <li><strong>Originally Booked:</strong> <%= @booking_details[:created_at].strftime("%B %d, %Y at %H:%M") %></li>
+</ul>
+
+<p>Sent automatically from SouthCoast Booking System.</p>
