@@ -23,7 +23,7 @@ gem "countries"
 gem "rack-cors", require: "rack/cors"
 gem "bootsnap", require: false
 gem "thruster", require: false
-gem 'redis', '~> 4.0'
+gem 'redis', '~> 5.4'
 gem 'prawn'
 gem 'kaminari'
 # --- Deployment ---
