@@ -1,0 +1,1509 @@
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[553574b0-e081-4c61-941f-ff82f2f3aad0] Started GET "/" for 159.203.91.216 at 2025-12-02 20:44:02 +0000
+[553574b0-e081-4c61-941f-ff82f2f3aad0] Processing by StaticController#index as HTML
+[553574b0-e081-4c61-941f-ff82f2f3aad0] Completed 200 OK in 82ms (Views: 15.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[73bd0e5b-7889-4a86-824d-47d7285fb6f0] Started GET "/favicon.ico" for 159.203.91.216 at 2025-12-02 20:44:03 +0000
+[73bd0e5b-7889-4a86-824d-47d7285fb6f0]   
+[73bd0e5b-7889-4a86-824d-47d7285fb6f0] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[73bd0e5b-7889-4a86-824d-47d7285fb6f0]   
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[6261383a-e519-4349-a734-618c7cd1bfd9] Started HEAD "/api/v1/up" for 72.61.196.141 at 2025-12-03 08:50:55 +0000
+[6261383a-e519-4349-a734-618c7cd1bfd9]   
+[6261383a-e519-4349-a734-618c7cd1bfd9] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[6261383a-e519-4349-a734-618c7cd1bfd9] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[6261383a-e519-4349-a734-618c7cd1bfd9] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[6261383a-e519-4349-a734-618c7cd1bfd9] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[6261383a-e519-4349-a734-618c7cd1bfd9]   
+[6261383a-e519-4349-a734-618c7cd1bfd9] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[6261383a-e519-4349-a734-618c7cd1bfd9]   
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[6261383a-e519-4349-a734-618c7cd1bfd9] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[6261383a-e519-4349-a734-618c7cd1bfd9] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[6261383a-e519-4349-a734-618c7cd1bfd9]   
+[6261383a-e519-4349-a734-618c7cd1bfd9] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[6261383a-e519-4349-a734-618c7cd1bfd9] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[6261383a-e519-4349-a734-618c7cd1bfd9] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[6261383a-e519-4349-a734-618c7cd1bfd9] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[6261383a-e519-4349-a734-618c7cd1bfd9] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 08:52:13 +0000
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd]   
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd]   
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd]   
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd]   
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[00a9cb27-4b7e-40af-ac2a-3eac9ef848bd] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 08:52:56 +0000
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246]   
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246]   
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246]   
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246]   
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[d07a0b03-8577-4d6d-9759-6a7e3ab3a246] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[ce4b79ca-b8d5-4c70-b339-409f56681c54] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 08:57:36 +0000
+[ce4b79ca-b8d5-4c70-b339-409f56681c54] Processing by Api::V1::SessionsController#admin_profile as */*
+[ce4b79ca-b8d5-4c70-b339-409f56681c54] Completed 401 Unauthorized in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[54c6b61f-0c40-4253-b4dc-1dd0d320bde6] Started GET "/api/v1/users" for 127.0.0.1 at 2025-12-03 08:57:36 +0000
+[54c6b61f-0c40-4253-b4dc-1dd0d320bde6]   
+[54c6b61f-0c40-4253-b4dc-1dd0d320bde6] ActionController::RoutingError (No route matches [GET] "/api/v1/users"):
+[54c6b61f-0c40-4253-b4dc-1dd0d320bde6]   
+[3541aca6-c60c-4870-b81b-0bf112982bf6] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 08:58:45 +0000
+[3541aca6-c60c-4870-b81b-0bf112982bf6] Processing by Api::V1::SessionsController#admin_profile as */*
+[3541aca6-c60c-4870-b81b-0bf112982bf6] Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[f0637d97-c69e-474c-8614-9251c416d6b6] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 08:59:03 +0000
+[f0637d97-c69e-474c-8614-9251c416d6b6]   
+[f0637d97-c69e-474c-8614-9251c416d6b6] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[f0637d97-c69e-474c-8614-9251c416d6b6] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[f0637d97-c69e-474c-8614-9251c416d6b6] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[f0637d97-c69e-474c-8614-9251c416d6b6] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[f0637d97-c69e-474c-8614-9251c416d6b6]   
+[f0637d97-c69e-474c-8614-9251c416d6b6] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[f0637d97-c69e-474c-8614-9251c416d6b6]   
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[f0637d97-c69e-474c-8614-9251c416d6b6] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[f0637d97-c69e-474c-8614-9251c416d6b6] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[f0637d97-c69e-474c-8614-9251c416d6b6]   
+[f0637d97-c69e-474c-8614-9251c416d6b6] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[f0637d97-c69e-474c-8614-9251c416d6b6] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[f0637d97-c69e-474c-8614-9251c416d6b6] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[f0637d97-c69e-474c-8614-9251c416d6b6] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[f0637d97-c69e-474c-8614-9251c416d6b6] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[a5415a5d-0cca-4c1c-8980-c4ff8d7bc519] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 08:59:19 +0000
+[a5415a5d-0cca-4c1c-8980-c4ff8d7bc519] Processing by Api::V1::SessionsController#admin_profile as */*
+[a5415a5d-0cca-4c1c-8980-c4ff8d7bc519] Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[4249657d-5800-4a63-8337-89f903edd042] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 08:59:50 +0000
+[4249657d-5800-4a63-8337-89f903edd042] Processing by Api::V1::SessionsController#admin_profile as */*
+[4249657d-5800-4a63-8337-89f903edd042] Completed 401 Unauthorized in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[96115b5d-42ab-4fe5-a779-87a36efb9f90] Started GET "/" for 127.0.0.1 at 2025-12-03 09:00:04 +0000
+[96115b5d-42ab-4fe5-a779-87a36efb9f90] Processing by StaticController#index as */*
+[96115b5d-42ab-4fe5-a779-87a36efb9f90] Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[6d52629c-b448-4a78-8be5-5a85323deb9d] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 09:03:37 +0000
+[6d52629c-b448-4a78-8be5-5a85323deb9d]   
+[6d52629c-b448-4a78-8be5-5a85323deb9d] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[6d52629c-b448-4a78-8be5-5a85323deb9d] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[6d52629c-b448-4a78-8be5-5a85323deb9d] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[6d52629c-b448-4a78-8be5-5a85323deb9d] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[6d52629c-b448-4a78-8be5-5a85323deb9d]   
+[6d52629c-b448-4a78-8be5-5a85323deb9d] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[6d52629c-b448-4a78-8be5-5a85323deb9d]   
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[6d52629c-b448-4a78-8be5-5a85323deb9d]   
+[6d52629c-b448-4a78-8be5-5a85323deb9d] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[6d52629c-b448-4a78-8be5-5a85323deb9d] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[f5646a92-ced0-484d-a467-bc90a785ab3b] Started GET "/api/v1/nationalities" for 127.0.0.1 at 2025-12-03 09:08:45 +0000
+[f5646a92-ced0-484d-a467-bc90a785ab3b] Processing by Api::V1::NationalitiesController#index as */*
+[f5646a92-ced0-484d-a467-bc90a785ab3b] Completed 500 Internal Server Error in 76ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+[f5646a92-ced0-484d-a467-bc90a785ab3b]   
+[f5646a92-ced0-484d-a467-bc90a785ab3b] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[f5646a92-ced0-484d-a467-bc90a785ab3b] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[f5646a92-ced0-484d-a467-bc90a785ab3b] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[f5646a92-ced0-484d-a467-bc90a785ab3b]   
+[f5646a92-ced0-484d-a467-bc90a785ab3b] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[f5646a92-ced0-484d-a467-bc90a785ab3b] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[f5646a92-ced0-484d-a467-bc90a785ab3b]   
+[f5646a92-ced0-484d-a467-bc90a785ab3b] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[62192b4f-a849-46de-a32e-1aa4466288d3] Started GET "/api/v1/nationalities" for 105.161.203.139 at 2025-12-03 09:09:10 +0000
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] Started GET "/api/v1/room_types" for 105.161.203.139 at 2025-12-03 09:09:10 +0000
+[62192b4f-a849-46de-a32e-1aa4466288d3] Processing by Api::V1::NationalitiesController#index as */*
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] Processing by Api::V1::RoomTypesController#index as */*
+[62192b4f-a849-46de-a32e-1aa4466288d3] Completed 500 Internal Server Error in 32ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[62192b4f-a849-46de-a32e-1aa4466288d3]   
+[62192b4f-a849-46de-a32e-1aa4466288d3] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[62192b4f-a849-46de-a32e-1aa4466288d3] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[62192b4f-a849-46de-a32e-1aa4466288d3] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[62192b4f-a849-46de-a32e-1aa4466288d3]   
+[62192b4f-a849-46de-a32e-1aa4466288d3] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[62192b4f-a849-46de-a32e-1aa4466288d3] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[62192b4f-a849-46de-a32e-1aa4466288d3]   
+[62192b4f-a849-46de-a32e-1aa4466288d3] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+[ddc90e00-9470-40d7-84c0-c1dc075e362e]   
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[ddc90e00-9470-40d7-84c0-c1dc075e362e]   
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[ddc90e00-9470-40d7-84c0-c1dc075e362e]   
+[ddc90e00-9470-40d7-84c0-c1dc075e362e] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[287248d8-aa08-492b-9cf2-d8eb03967408] Started GET "/api/v1/nationalities" for 105.161.203.139 at 2025-12-03 09:09:10 +0000
+[287248d8-aa08-492b-9cf2-d8eb03967408] Processing by Api::V1::NationalitiesController#index as */*
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] Started GET "/api/v1/room_types" for 105.161.203.139 at 2025-12-03 09:09:10 +0000
+[287248d8-aa08-492b-9cf2-d8eb03967408] Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] Processing by Api::V1::RoomTypesController#index as */*
+[287248d8-aa08-492b-9cf2-d8eb03967408]   
+[287248d8-aa08-492b-9cf2-d8eb03967408] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[287248d8-aa08-492b-9cf2-d8eb03967408] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[287248d8-aa08-492b-9cf2-d8eb03967408] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[287248d8-aa08-492b-9cf2-d8eb03967408]   
+[287248d8-aa08-492b-9cf2-d8eb03967408] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[287248d8-aa08-492b-9cf2-d8eb03967408] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[287248d8-aa08-492b-9cf2-d8eb03967408]   
+[287248d8-aa08-492b-9cf2-d8eb03967408] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c]   
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c]   
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c]   
+[ca2fb781-3aec-4ffc-91ae-411038c1f67c] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[52465e13-ea1d-4e72-af05-54350b036e37] Started GET "/api/v1/room_types" for 105.161.203.139 at 2025-12-03 09:09:15 +0000
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] Started GET "/api/v1/nationalities" for 105.161.203.139 at 2025-12-03 09:09:15 +0000
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] Processing by Api::V1::NationalitiesController#index as */*
+[52465e13-ea1d-4e72-af05-54350b036e37] Processing by Api::V1::RoomTypesController#index as */*
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[52465e13-ea1d-4e72-af05-54350b036e37] Completed 500 Internal Server Error in 32ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0]   
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0]   
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0]   
+[a87b5d0a-0d62-4481-a88f-aa819c54abb0] app/controllers/api/v1/nationalities_controller.rb:5:in 'Api::V1::NationalitiesController#index'
+[52465e13-ea1d-4e72-af05-54350b036e37]   
+[52465e13-ea1d-4e72-af05-54350b036e37] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[52465e13-ea1d-4e72-af05-54350b036e37] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[52465e13-ea1d-4e72-af05-54350b036e37] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[52465e13-ea1d-4e72-af05-54350b036e37]   
+[52465e13-ea1d-4e72-af05-54350b036e37] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[52465e13-ea1d-4e72-af05-54350b036e37] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[52465e13-ea1d-4e72-af05-54350b036e37]   
+[52465e13-ea1d-4e72-af05-54350b036e37] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:10:59 +0000
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] Processing by Api::V1::RoomTypesController#index as */*
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58]   
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+)
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] Caused by: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+)
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] 
+Information for: ActiveRecord::NoDatabaseError (We could not find your database: southcoastwebmain_production. Available database configurations can be found in config/database.yml.
+
+To resolve this error:
+
+- Did you not create the database, or did you delete it? To create the database, run:
+
+    bin/rails db:create
+
+- Has the database name changed? Verify that config/database.yml contains the correct database name.
+):
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58]   
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] 
+Information for cause: PG::ConnectionBad (connection to server at "::1", port 5432 failed: FATAL:  database "southcoastwebmain_production" does not exist
+):
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58]   
+[95674ad2-7c0e-4827-9ecb-bb2fc74b0a58] app/controllers/api/v1/room_types_controller.rb:5:in 'Api::V1::RoomTypesController#index'
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] Started GET "/api/v1/up" for 105.161.203.139 at 2025-12-03 09:14:37 +0000
+[70620c85-edc3-4efa-b3f7-3060ab6308ef]   
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[70620c85-edc3-4efa-b3f7-3060ab6308ef]   
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[70620c85-edc3-4efa-b3f7-3060ab6308ef]   
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[70620c85-edc3-4efa-b3f7-3060ab6308ef]   
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[70620c85-edc3-4efa-b3f7-3060ab6308ef] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[c2f51ff8-ff2e-4279-bec1-7e44eaf37944] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:15:21 +0000
+[c2f51ff8-ff2e-4279-bec1-7e44eaf37944] Processing by Api::V1::RoomTypesController#index as */*
+[c2f51ff8-ff2e-4279-bec1-7e44eaf37944] Completed 200 OK in 39ms (Views: 0.2ms | ActiveRecord: 13.4ms (1 query, 0 cached) | GC: 2.7ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[c3f6e84c-47f9-4919-ab6c-935be0d01e3b] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:19:15 +0000
+[c3f6e84c-47f9-4919-ab6c-935be0d01e3b] Processing by Api::V1::RoomTypesController#index as */*
+[c3f6e84c-47f9-4919-ab6c-935be0d01e3b] Completed 200 OK in 51ms (Views: 0.2ms | ActiveRecord: 8.3ms (1 query, 0 cached) | GC: 17.6ms)
+[e392c5e0-2cee-456e-8e99-9b1aa83541b7] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:20:19 +0000
+[e392c5e0-2cee-456e-8e99-9b1aa83541b7] Processing by Api::V1::RoomTypesController#index as */*
+[e392c5e0-2cee-456e-8e99-9b1aa83541b7] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[5fd7ce0a-66cf-4021-94f3-22b3f15a71d6] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:22:08 +0000
+[5fd7ce0a-66cf-4021-94f3-22b3f15a71d6] Processing by Api::V1::RoomTypesController#index as */*
+[5fd7ce0a-66cf-4021-94f3-22b3f15a71d6] Completed 200 OK in 33ms (Views: 0.2ms | ActiveRecord: 28.7ms (1 query, 0 cached) | GC: 1.6ms)
+[0048b82a-1d8c-45e9-8b5e-1a8f8eb4af43] Started GET "/api/v1/nationalities" for 127.0.0.1 at 2025-12-03 09:24:19 +0000
+[0048b82a-1d8c-45e9-8b5e-1a8f8eb4af43] Processing by Api::V1::NationalitiesController#index as */*
+[0048b82a-1d8c-45e9-8b5e-1a8f8eb4af43] Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 5.3ms (1 query, 0 cached) | GC: 1.4ms)
+[790ffbda-ba79-446e-a8b9-facd6b847391] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:29:24 +0000
+[790ffbda-ba79-446e-a8b9-facd6b847391] Processing by Api::V1::RoomTypesController#index as */*
+[790ffbda-ba79-446e-a8b9-facd6b847391] Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 24.2ms (1 query, 0 cached) | GC: 1.3ms)
+[80b80768-6ccf-4cc9-a458-27f493b8e17b] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 09:29:24 +0000
+[80b80768-6ccf-4cc9-a458-27f493b8e17b] Processing by Api::V1::SessionsController#admin_profile as */*
+[80b80768-6ccf-4cc9-a458-27f493b8e17b] Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 09:29:24 +0000
+[737627a2-1bf6-4a4f-ac52-da5805d622ef]   
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[737627a2-1bf6-4a4f-ac52-da5805d622ef]   
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[737627a2-1bf6-4a4f-ac52-da5805d622ef]   
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[737627a2-1bf6-4a4f-ac52-da5805d622ef]   
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[737627a2-1bf6-4a4f-ac52-da5805d622ef] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[6c1b8392-7ebd-4616-babf-71a40a1e5ffe] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:29:50 +0000
+[6c1b8392-7ebd-4616-babf-71a40a1e5ffe] Processing by Api::V1::RoomTypesController#index as */*
+[6c1b8392-7ebd-4616-babf-71a40a1e5ffe] Completed 200 OK in 28ms (Views: 0.2ms | ActiveRecord: 27.4ms (1 query, 0 cached) | GC: 1.3ms)
+[3b8eb7f0-7330-463c-8613-7ce0799f761e] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 09:29:50 +0000
+[3b8eb7f0-7330-463c-8613-7ce0799f761e] Processing by Api::V1::SessionsController#admin_profile as */*
+[3b8eb7f0-7330-463c-8613-7ce0799f761e] Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 09:29:50 +0000
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799]   
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799]   
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799]   
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799]   
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[70ef3571-80a2-48c2-8c4e-ffdd7c450799] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[f0a93d1c-169c-4e54-8e05-2f76ed11b5d9] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:36:05 +0000
+[f0a93d1c-169c-4e54-8e05-2f76ed11b5d9] Processing by Api::V1::RoomTypesController#index as */*
+[f0a93d1c-169c-4e54-8e05-2f76ed11b5d9] Completed 200 OK in 29ms (Views: 0.2ms | ActiveRecord: 32.0ms (1 query, 0 cached) | GC: 0.9ms)
+[d5527bae-f6c9-41b8-bd08-2315e29cef76] Started GET "/api/v1/admin/profile" for 127.0.0.1 at 2025-12-03 09:36:05 +0000
+[d5527bae-f6c9-41b8-bd08-2315e29cef76] Processing by Api::V1::SessionsController#admin_profile as */*
+[d5527bae-f6c9-41b8-bd08-2315e29cef76] Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] Started GET "/api/v1/up" for 127.0.0.1 at 2025-12-03 09:36:05 +0000
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37]   
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37]   
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37]   
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37]   
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[abf006b9-75de-4a3a-a6b6-41b7e46c8e37] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[cc36a0a2-57b6-4f55-8dca-e9fcda12a604] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 09:47:06 +0000
+[cc36a0a2-57b6-4f55-8dca-e9fcda12a604] Processing by Api::V1::RoomTypesController#index as */*
+[cc36a0a2-57b6-4f55-8dca-e9fcda12a604] Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 26.2ms (1 query, 0 cached) | GC: 2.0ms)
+[ba1a5a64-4c7f-4217-9e01-98df2b7e072b] Started GET "/" for 127.0.0.1 at 2025-12-03 09:48:53 +0000
+[ba1a5a64-4c7f-4217-9e01-98df2b7e072b] Processing by StaticController#index as */*
+[ba1a5a64-4c7f-4217-9e01-98df2b7e072b] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[3b0db2ec-ae6c-45f3-9c13-18d197ac840f] Started GET "/" for 127.0.0.1 at 2025-12-03 09:54:56 +0000
+[3b0db2ec-ae6c-45f3-9c13-18d197ac840f] Processing by StaticController#index as */*
+[3b0db2ec-ae6c-45f3-9c13-18d197ac840f] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[57ce9a91-f14a-4bf4-b58d-214ce9c65685] Started GET "/" for 127.0.0.1 at 2025-12-03 10:05:02 +0000
+[57ce9a91-f14a-4bf4-b58d-214ce9c65685] Processing by StaticController#index as */*
+[57ce9a91-f14a-4bf4-b58d-214ce9c65685] Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[0f32b402-9a24-491b-8357-dea01bad221c] Started GET "/" for 127.0.0.1 at 2025-12-03 10:14:16 +0000
+[0f32b402-9a24-491b-8357-dea01bad221c] Processing by StaticController#index as */*
+[0f32b402-9a24-491b-8357-dea01bad221c] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[510a50fc-c7e1-4d07-9a3f-163b15c90d47] Started GET "/" for 127.0.0.1 at 2025-12-03 10:28:11 +0000
+[510a50fc-c7e1-4d07-9a3f-163b15c90d47] Processing by StaticController#index as */*
+[510a50fc-c7e1-4d07-9a3f-163b15c90d47] Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[44d3b4a9-84aa-4ccb-8904-6f0eab2306d6] Started GET "/" for 127.0.0.1 at 2025-12-03 10:28:20 +0000
+[44d3b4a9-84aa-4ccb-8904-6f0eab2306d6] Processing by StaticController#index as */*
+[44d3b4a9-84aa-4ccb-8904-6f0eab2306d6] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[a84f97da-a016-42ff-bdaf-9c90b0324378] Started GET "/" for 127.0.0.1 at 2025-12-03 10:43:55 +0000
+[a84f97da-a016-42ff-bdaf-9c90b0324378] Processing by StaticController#index as */*
+[a84f97da-a016-42ff-bdaf-9c90b0324378] Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[310e58d1-3939-4774-9de7-1c4a22b009ad] Started GET "/" for 127.0.0.1 at 2025-12-03 10:55:51 +0000
+[310e58d1-3939-4774-9de7-1c4a22b009ad] Processing by StaticController#index as */*
+[310e58d1-3939-4774-9de7-1c4a22b009ad] Sent file /root/southcoastwebmain/public/index.html (0.9ms)
+[310e58d1-3939-4774-9de7-1c4a22b009ad] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[6b59606c-bf1c-4b30-b68f-2a42180af4ab] Started GET "/static/js/main.ae8b7dd9.js" for 127.0.0.1 at 2025-12-03 10:58:11 +0000
+[6b59606c-bf1c-4b30-b68f-2a42180af4ab]   
+[6b59606c-bf1c-4b30-b68f-2a42180af4ab] ActionController::RoutingError (No route matches [GET] "/static/js/main.ae8b7dd9.js"):
+[6b59606c-bf1c-4b30-b68f-2a42180af4ab]   
+[bc426824-ecdc-4d0c-95c7-b656c727ccc5] Started GET "/static/css/main.0bb2bb43.css" for 127.0.0.1 at 2025-12-03 10:58:29 +0000
+[bc426824-ecdc-4d0c-95c7-b656c727ccc5]   
+[bc426824-ecdc-4d0c-95c7-b656c727ccc5] ActionController::RoutingError (No route matches [GET] "/static/css/main.0bb2bb43.css"):
+[bc426824-ecdc-4d0c-95c7-b656c727ccc5]   
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[692d354d-0582-4d42-b341-190d9090b8dd] Started GET "/api/nationalities" for 127.0.0.1 at 2025-12-03 11:23:51 +0000
+[692d354d-0582-4d42-b341-190d9090b8dd]   
+[692d354d-0582-4d42-b341-190d9090b8dd] ActionController::RoutingError (No route matches [GET] "/api/nationalities"):
+[692d354d-0582-4d42-b341-190d9090b8dd]   
+[094437cf-45e6-4313-9915-3f2294fb751e] Started GET "/api/nationalities" for 127.0.0.1 at 2025-12-03 11:26:49 +0000
+[094437cf-45e6-4313-9915-3f2294fb751e]   
+[094437cf-45e6-4313-9915-3f2294fb751e] ActionController::RoutingError (No route matches [GET] "/api/nationalities"):
+[094437cf-45e6-4313-9915-3f2294fb751e]   
+[8508b950-48f3-468e-9e8d-3de90d627036] Started GET "/api/nationalities" for 127.0.0.1 at 2025-12-03 11:27:08 +0000
+[8508b950-48f3-468e-9e8d-3de90d627036]   
+[8508b950-48f3-468e-9e8d-3de90d627036] ActionController::RoutingError (No route matches [GET] "/api/nationalities"):
+[8508b950-48f3-468e-9e8d-3de90d627036]   
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[7c73f03c-5f6a-40b0-834d-5cf09de7e32f] Started GET "/api/nationalities" for 127.0.0.1 at 2025-12-03 11:28:57 +0000
+[7c73f03c-5f6a-40b0-834d-5cf09de7e32f]   
+[7c73f03c-5f6a-40b0-834d-5cf09de7e32f] ActionController::RoutingError (No route matches [GET] "/api/nationalities"):
+[7c73f03c-5f6a-40b0-834d-5cf09de7e32f]   
+[25ff42c1-4fe6-4885-b512-97d4bc40fd9b] Started GET "/api/room_types" for 127.0.0.1 at 2025-12-03 11:29:13 +0000
+[25ff42c1-4fe6-4885-b512-97d4bc40fd9b]   
+[25ff42c1-4fe6-4885-b512-97d4bc40fd9b] ActionController::RoutingError (No route matches [GET] "/api/room_types"):
+[25ff42c1-4fe6-4885-b512-97d4bc40fd9b]   
+[fba4c9ee-1d19-4578-b292-8ec2e2e75470] Started GET "/api/v1/nationalities" for 127.0.0.1 at 2025-12-03 11:31:33 +0000
+[fba4c9ee-1d19-4578-b292-8ec2e2e75470] Processing by Api::V1::NationalitiesController#index as */*
+[fba4c9ee-1d19-4578-b292-8ec2e2e75470] Completed 200 OK in 49ms (Views: 1.0ms | ActiveRecord: 9.4ms (1 query, 0 cached) | GC: 1.5ms)
+[1161dc1d-d1de-46fa-88df-c8cd4c20179d] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 11:31:33 +0000
+[1161dc1d-d1de-46fa-88df-c8cd4c20179d] Processing by Api::V1::RoomTypesController#index as */*
+[1161dc1d-d1de-46fa-88df-c8cd4c20179d] Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 3.2ms (1 query, 0 cached) | GC: 0.0ms)
+[d2af680a-3678-40bf-bfee-053943885d07] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 11:31:47 +0000
+[d2af680a-3678-40bf-bfee-053943885d07] Processing by Api::V1::RoomTypesController#index as */*
+[d2af680a-3678-40bf-bfee-053943885d07] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[064b4860-6380-47da-a9e1-0cae0f03886d] Started GET "/api/" for 127.0.0.1 at 2025-12-03 11:32:15 +0000
+[064b4860-6380-47da-a9e1-0cae0f03886d]   
+[064b4860-6380-47da-a9e1-0cae0f03886d] ActionController::RoutingError (No route matches [GET] "/api"):
+[064b4860-6380-47da-a9e1-0cae0f03886d]   
+[e911cf46-923a-4e76-9b87-9ca33d4242ca] Started GET "/api" for 127.0.0.1 at 2025-12-03 11:32:26 +0000
+[e911cf46-923a-4e76-9b87-9ca33d4242ca]   
+[e911cf46-923a-4e76-9b87-9ca33d4242ca] ActionController::RoutingError (No route matches [GET] "/api"):
+[e911cf46-923a-4e76-9b87-9ca33d4242ca]   
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] Started GET "/api/v1/up" for 105.161.203.139 at 2025-12-03 11:33:21 +0000
+[348fa1ef-6fb6-4507-891b-7eeec07ff566]   
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[348fa1ef-6fb6-4507-891b-7eeec07ff566]   
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[348fa1ef-6fb6-4507-891b-7eeec07ff566]   
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[348fa1ef-6fb6-4507-891b-7eeec07ff566]   
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[348fa1ef-6fb6-4507-891b-7eeec07ff566] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[eee784a6-e26a-4d2c-85ae-89fdc142bc4e] Started GET "/" for 127.0.0.1 at 2025-12-03 11:37:30 +0000
+[eee784a6-e26a-4d2c-85ae-89fdc142bc4e] Processing by StaticController#index as */*
+[eee784a6-e26a-4d2c-85ae-89fdc142bc4e] Sent file /root/southcoastwebmain/public/index.html (1.0ms)
+[eee784a6-e26a-4d2c-85ae-89fdc142bc4e] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.

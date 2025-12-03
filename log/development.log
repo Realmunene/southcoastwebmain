@@ -1,0 +1,259 @@
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: srv1159196.hstgr.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: srv1159196.hstgr.cloud
+Started GET "/" for 185.16.39.146 at 2025-12-02 23:32:47 +0000
+Processing by StaticController#index as HTML
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+Started GET "/" for 167.94.138.57 at 2025-12-03 00:53:06 +0000
+Processing by StaticController#index as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for 167.94.138.57 at 2025-12-03 00:54:47 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/login"):
+  
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+Started GET "/" for 14.236.207.133 at 2025-12-03 01:59:23 +0000
+Processing by StaticController#index as HTML
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: 
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+Started GET "/.env" for 134.199.146.176 at 2025-12-03 04:12:50 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/.env"):
+  
+Started GET "/.git/config" for 134.199.146.176 at 2025-12-03 04:12:50 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/.git/config"):
+  
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: 4988g11.wpvwzwie.sbuxcsr.com
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+Started GET "/" for 147.185.133.172 at 2025-12-03 05:59:33 +0000
+Processing by StaticController#index as HTML
+Completed 200 OK in 23ms (Views: 7.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: www.southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+Started GET "/ReportServer" for 20.163.32.211 at 2025-12-03 07:35:47 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/ReportServer"):
+  
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+Started GET "/" for 185.16.39.146 at 2025-12-03 08:03:29 +0000
+Processing by StaticController#index as HTML
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+[ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.

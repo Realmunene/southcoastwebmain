@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 #!/usr/bin/env ruby.exe
+=======
+#!/usr/bin/env ruby
+>>>>>>> 2364cf9 (fixture)
 exec "./bin/rails", "server", *ARGV
