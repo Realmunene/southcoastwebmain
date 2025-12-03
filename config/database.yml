@@ -10,15 +10,15 @@ default: &default
 
 development:
   <<: *default
-  database: backend_southcoastwebmain_development
+  database: southcoastwebmain_development
 
 test:
   <<: *default
-  database: backend_southcoastwebmain_test
+  database: southcoastwebmain_test
 
 production:
   <<: *default
-  database: backend_southcoastwebmain_production
+  database: southcoastwebmain_production
 
   # Rails 8 Solid Cache requirement
   connects_to:
@@ -29,4 +29,4 @@ production:
 # Cache database configuration
 cache:
   <<: *default
-  database: backend_southcoastwebmain_cache
+  database: southcoastwebmain_cache

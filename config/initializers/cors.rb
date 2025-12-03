@@ -1,7 +1,7 @@
 # config/initializers/cors.rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://realmunene.github.io', 'http://localhost:3001'
+    origins 'https://southcoastoutdoors.cloud', 'https://realmunene.github.io'
 
     resource '*',
       headers: :any,
