@@ -352,7 +352,7 @@ export default function BookingSearch({ onLoginClick }) {
             </div>
 
             {/* Room Type */}
-            {/* <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
+            <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
               <label className="block text-sm font-semibold text-gray-800 mb-2 flex items-center gap-2">
                 <FontAwesomeIcon icon={faBed} className="text-cyan-600 text-sm" />
                 Room Type
@@ -375,7 +375,7 @@ export default function BookingSearch({ onLoginClick }) {
               {errors.selectedRoomType && (
                 <p className="text-red-400 text-xs mt-2 font-medium">{errors.selectedRoomType}</p>
               )}
-            </div> */}
+            </div>
 
             {/* Dates */}
             <div className="border-b md:border-b-0 md:border-r border-gray-200/50 p-6">
