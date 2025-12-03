@@ -1,5 +1,5 @@
 class StaticController < ApplicationController
   def index
-    render file: Rails.root.join("public", "index.html"), layout: false, content_type: "text/html"
+    send_file Rails.root.join('public', 'index.html'), type: 'text/html', disposition: 'inline'
   end
 end
