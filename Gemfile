@@ -34,7 +34,7 @@ gem "kamal", require: false
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 # --- Environment Variables ---
-gem "dotenv-rails", "~> 3.1"
+gem "dotenv-rails", "~> 3.2"
 
 # --- Production-only gems ---
 group :production do
