@@ -1507,3 +1507,811 @@ Information for cause: NameError (uninitialized constant Api::V1::Rails):
 ⚠️ Rack::Attack not loaded — skipping rate limiting.
 ✅ ResendDeliveryMethod registered successfully.
 ⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[294c3baf-243b-4bc9-a448-c89270e2e431] Started GET "/" for 127.0.0.1 at 2025-12-03 14:25:42 +0000
+[294c3baf-243b-4bc9-a448-c89270e2e431] Processing by StaticController#index as */*
+[294c3baf-243b-4bc9-a448-c89270e2e431] Sent file /var/www/southcoastwebmain/public/index.html (0.9ms)
+[294c3baf-243b-4bc9-a448-c89270e2e431] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[64099f7a-73a5-44d7-b902-7cc272065492] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 14:26:13 +0000
+[64099f7a-73a5-44d7-b902-7cc272065492] Processing by Api::V1::RoomTypesController#index as */*
+[64099f7a-73a5-44d7-b902-7cc272065492] Completed 200 OK in 212ms (Views: 1.3ms | ActiveRecord: 68.9ms (1 query, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[eb63bd5a-60d0-4d9c-b318-d84384d47974] Started GET "/api/v1/room_types" for 127.0.0.1 at 2025-12-03 15:12:02 +0000
+[eb63bd5a-60d0-4d9c-b318-d84384d47974] Processing by Api::V1::RoomTypesController#index as */*
+[eb63bd5a-60d0-4d9c-b318-d84384d47974] Completed 200 OK in 62ms (Views: 0.7ms | ActiveRecord: 11.0ms (1 query, 0 cached) | GC: 0.8ms)
+[649b0068-17af-402d-b8fe-fb0ac13153fc] Started GET "/api/v1/up" for 196.96.131.8 at 2025-12-03 15:19:41 +0000
+[649b0068-17af-402d-b8fe-fb0ac13153fc]   
+[649b0068-17af-402d-b8fe-fb0ac13153fc] ActionController::RoutingError (uninitialized constant Api::V1::Rails)
+[649b0068-17af-402d-b8fe-fb0ac13153fc] Caused by: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails)
+[649b0068-17af-402d-b8fe-fb0ac13153fc] Caused by: NameError (uninitialized constant Api::V1::Rails)
+[649b0068-17af-402d-b8fe-fb0ac13153fc] 
+Information for: ActionController::RoutingError (uninitialized constant Api::V1::Rails):
+[649b0068-17af-402d-b8fe-fb0ac13153fc]   
+[649b0068-17af-402d-b8fe-fb0ac13153fc] 
+Information for cause: ActionDispatch::MissingController (uninitialized constant Api::V1::Rails):
+[649b0068-17af-402d-b8fe-fb0ac13153fc]   
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/http/request.rb:102:in 'ActionDispatch::Request#controller_class_for'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] 
+Information for cause: NameError (uninitialized constant Api::V1::Rails):
+[649b0068-17af-402d-b8fe-fb0ac13153fc]   
+[649b0068-17af-402d-b8fe-fb0ac13153fc] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'Module#const_get'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] activesupport (8.0.4) lib/active_support/inflector/methods.rb:290:in 'ActiveSupport::Inflector#constantize'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] activesupport (8.0.4) lib/active_support/core_ext/string/inflections.rb:74:in 'String#constantize'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/http/request.rb:99:in 'ActionDispatch::Request#controller_class_for'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/http/request.rb:91:in 'ActionDispatch::Request#controller_class'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:61:in 'ActionDispatch::Routing::RouteSet::Dispatcher#controller'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:48:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-session (2.1.1) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-session (2.1.1) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/head.rb:15:in 'Rack::Head#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] activesupport (8.0.4) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] railties (8.0.4) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] railties (8.0.4) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] actionpack (8.0.4) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack (3.2.3) lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] rack-cors (3.0.0) lib/rack/cors.rb:102:in 'Rack::Cors#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] railties (8.0.4) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+[649b0068-17af-402d-b8fe-fb0ac13153fc] puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[e860c3dc-8f01-4433-bf48-279e639fbc65] Started GET "/wp-admin/setup-config.php" for 172.71.148.140 at 2025-12-03 15:20:45 +0000
+[e860c3dc-8f01-4433-bf48-279e639fbc65]   
+[e860c3dc-8f01-4433-bf48-279e639fbc65] ActionController::RoutingError (No route matches [GET] "/wp-admin/setup-config.php"):
+[e860c3dc-8f01-4433-bf48-279e639fbc65]   
+[fe67775b-1c34-48e2-91fb-cc42970ce040] Started GET "/wordpress/wp-admin/setup-config.php" for 172.71.241.30 at 2025-12-03 15:21:39 +0000
+[fe67775b-1c34-48e2-91fb-cc42970ce040]   
+[fe67775b-1c34-48e2-91fb-cc42970ce040] ActionController::RoutingError (No route matches [GET] "/wordpress/wp-admin/setup-config.php"):
+[fe67775b-1c34-48e2-91fb-cc42970ce040]   
+[f6739cb7-6416-4281-b0cd-2aad2515a6d0] Started GET "/" for 35.224.54.207 at 2025-12-03 15:38:01 +0000
+[f6739cb7-6416-4281-b0cd-2aad2515a6d0] Processing by StaticController#index as */*
+[f6739cb7-6416-4281-b0cd-2aad2515a6d0] Sent file /var/www/southcoastwebmain/public/index.html (1.0ms)
+[f6739cb7-6416-4281-b0cd-2aad2515a6d0] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[36c51a33-a707-451e-b0d1-8cb9d2ef4558] Started GET "/" for 35.224.54.207 at 2025-12-03 15:38:02 +0000
+[36c51a33-a707-451e-b0d1-8cb9d2ef4558] Processing by StaticController#index as HTML
+[36c51a33-a707-451e-b0d1-8cb9d2ef4558] Sent file /var/www/southcoastwebmain/public/index.html (1.5ms)
+[36c51a33-a707-451e-b0d1-8cb9d2ef4558] Completed 200 OK in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+[4d84dbc3-70a4-4bca-8531-f73adfe26fab] Started GET "/api/v1/room_types" for 35.224.54.207 at 2025-12-03 15:38:04 +0000
+[7c6a4f51-f7f9-49ff-9eec-b370368046ae] Started GET "/api/v1/nationalities" for 35.224.54.207 at 2025-12-03 15:38:04 +0000
+[4d84dbc3-70a4-4bca-8531-f73adfe26fab] Processing by Api::V1::RoomTypesController#index as */*
+[7c6a4f51-f7f9-49ff-9eec-b370368046ae] Processing by Api::V1::NationalitiesController#index as */*
+[4d84dbc3-70a4-4bca-8531-f73adfe26fab] Completed 200 OK in 47ms (Views: 0.3ms | ActiveRecord: 52.8ms (1 query, 0 cached) | GC: 0.6ms)
+[7c6a4f51-f7f9-49ff-9eec-b370368046ae] Completed 200 OK in 77ms (Views: 0.6ms | ActiveRecord: 11.9ms (1 query, 0 cached) | GC: 0.9ms)
+[370f9c20-8c2c-4014-91f2-61fc6a36ad3e] Started GET "/" for 35.224.54.207 at 2025-12-03 15:38:29 +0000
+[370f9c20-8c2c-4014-91f2-61fc6a36ad3e] Processing by StaticController#index as */*
+[370f9c20-8c2c-4014-91f2-61fc6a36ad3e] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[370f9c20-8c2c-4014-91f2-61fc6a36ad3e] Completed 200 OK in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[f3728139-ad5f-4442-a1a0-4a2d15dd1a1e] Started GET "/" for 43.135.130.202 at 2025-12-03 15:46:23 +0000
+[f3728139-ad5f-4442-a1a0-4a2d15dd1a1e] Processing by StaticController#index as HTML
+[f3728139-ad5f-4442-a1a0-4a2d15dd1a1e] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[f3728139-ad5f-4442-a1a0-4a2d15dd1a1e] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[c7038531-9c85-4249-b175-fe7b24c99736] Started GET "/wordpress/wp-admin/setup-config.php" for 172.71.164.76 at 2025-12-03 15:50:12 +0000
+[c7038531-9c85-4249-b175-fe7b24c99736]   
+[c7038531-9c85-4249-b175-fe7b24c99736] ActionController::RoutingError (No route matches [GET] "/wordpress/wp-admin/setup-config.php"):
+[c7038531-9c85-4249-b175-fe7b24c99736]   
+[38e20474-f8ea-4ff2-b4ce-b006fef7b7b4] Started GET "/wp-admin/setup-config.php" for 172.70.248.36 at 2025-12-03 15:51:32 +0000
+[38e20474-f8ea-4ff2-b4ce-b006fef7b7b4]   
+[38e20474-f8ea-4ff2-b4ce-b006fef7b7b4] ActionController::RoutingError (No route matches [GET] "/wp-admin/setup-config.php"):
+[38e20474-f8ea-4ff2-b4ce-b006fef7b7b4]   
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[c2b23942-8466-4ccb-9a73-ed96cac7dc8b] Started GET "/" for 167.94.138.40 at 2025-12-03 18:35:50 +0000
+[c2b23942-8466-4ccb-9a73-ed96cac7dc8b] Processing by StaticController#index as HTML
+[c2b23942-8466-4ccb-9a73-ed96cac7dc8b] Sent file /var/www/southcoastwebmain/public/index.html (1.2ms)
+[c2b23942-8466-4ccb-9a73-ed96cac7dc8b] Completed 200 OK in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[416bad26-0957-447b-b379-7d27ec4d9c7a] Started GET "/" for 167.94.138.40 at 2025-12-03 18:36:03 +0000
+[416bad26-0957-447b-b379-7d27ec4d9c7a] Processing by StaticController#index as */*
+[416bad26-0957-447b-b379-7d27ec4d9c7a] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[416bad26-0957-447b-b379-7d27ec4d9c7a] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[f2f1a800-45b8-4412-b8fa-a594854152f5] Started GET "/favicon.ico" for 167.94.138.40 at 2025-12-03 18:36:11 +0000
+[f2f1a800-45b8-4412-b8fa-a594854152f5]   
+[f2f1a800-45b8-4412-b8fa-a594854152f5] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[f2f1a800-45b8-4412-b8fa-a594854152f5]   
+[2d9f6888-8564-4903-960f-8897b787bf47] Started GET "/favicon.ico" for 167.94.138.40 at 2025-12-03 18:37:25 +0000
+[2d9f6888-8564-4903-960f-8897b787bf47]   
+[2d9f6888-8564-4903-960f-8897b787bf47] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[2d9f6888-8564-4903-960f-8897b787bf47]   
+[0634abd9-2d06-4d8f-be74-92dcf71f2b7d] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:42:27 +0000
+[0634abd9-2d06-4d8f-be74-92dcf71f2b7d] Processing by Api::V1::NationalitiesController#index as */*
+[0634abd9-2d06-4d8f-be74-92dcf71f2b7d] Completed 200 OK in 272ms (Views: 3.1ms | ActiveRecord: 78.4ms (1 query, 0 cached) | GC: 0.0ms)
+[b246d074-9ad1-44cd-b0a4-237adfabdcb9] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:42:28 +0000
+[b246d074-9ad1-44cd-b0a4-237adfabdcb9] Processing by Api::V1::RoomTypesController#index as */*
+[b246d074-9ad1-44cd-b0a4-237adfabdcb9] Completed 200 OK in 147ms (Views: 4.1ms | ActiveRecord: 25.6ms (1 query, 0 cached) | GC: 0.0ms)
+[2beba54f-19a3-4f01-b142-ec30bb5cd6ae] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:42:57 +0000
+[2beba54f-19a3-4f01-b142-ec30bb5cd6ae] Processing by Api::V1::RoomTypesController#index as */*
+[1af5664b-a977-4ac6-9466-8d8aed8a1da8] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:42:57 +0000
+[1af5664b-a977-4ac6-9466-8d8aed8a1da8] Processing by Api::V1::NationalitiesController#index as */*
+[2beba54f-19a3-4f01-b142-ec30bb5cd6ae] Completed 200 OK in 18ms (Views: 2.3ms | ActiveRecord: 7.3ms (1 query, 0 cached) | GC: 0.0ms)
+[1af5664b-a977-4ac6-9466-8d8aed8a1da8] Completed 200 OK in 17ms (Views: 0.5ms | ActiveRecord: 6.2ms (1 query, 0 cached) | GC: 0.0ms)
+[1f3721c2-876d-409f-b1ff-c93032d9a79f] Started POST "/api/v1/users" for 196.96.131.8 at 2025-12-03 18:43:28 +0000
+[1f3721c2-876d-409f-b1ff-c93032d9a79f] Processing by Api::V1::UsersController#create as */*
+[1f3721c2-876d-409f-b1ff-c93032d9a79f]   Parameters: {"user" => {"name" => "Joseph Mwangi", "email" => "[FILTERED]", "phone" => "+254797757406", "password" => "[FILTERED]"}}
+[1f3721c2-876d-409f-b1ff-c93032d9a79f] Completed 201 Created in 255ms (Views: 2.1ms | ActiveRecord: 16.0ms (2 queries, 0 cached) | GC: 0.0ms)
+[98a28e6f-c05f-40ac-8bbe-092e2e6e1f5e] Started POST "/api/v1/user/login" for 196.96.131.8 at 2025-12-03 18:43:31 +0000
+[98a28e6f-c05f-40ac-8bbe-092e2e6e1f5e] Processing by Api::V1::SessionsController#login_user as */*
+[98a28e6f-c05f-40ac-8bbe-092e2e6e1f5e]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[98a28e6f-c05f-40ac-8bbe-092e2e6e1f5e] Completed 200 OK in 216ms (Views: 0.3ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[75c9dd4d-63be-4330-80b9-e0dbf1290aa8] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:43:34 +0000
+[c11de78a-f584-4cf0-8d41-563e115ea91d] Started GET "/api/v1/bookings" for 196.96.131.8 at 2025-12-03 18:43:34 +0000
+[75c9dd4d-63be-4330-80b9-e0dbf1290aa8] Processing by Api::V1::RoomTypesController#index as */*
+[75c9dd4d-63be-4330-80b9-e0dbf1290aa8] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[c11de78a-f584-4cf0-8d41-563e115ea91d] Processing by Api::V1::BookingsController#index as */*
+[c11de78a-f584-4cf0-8d41-563e115ea91d]   Parameters: {"booking" => {}}
+[c11de78a-f584-4cf0-8d41-563e115ea91d] Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 7.4ms (2 queries, 0 cached) | GC: 0.0ms)
+[bdb48999-5267-42e6-ad18-98b4f7b92a8e] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:43:48 +0000
+[bdb48999-5267-42e6-ad18-98b4f7b92a8e] Processing by Api::V1::RoomTypesController#index as */*
+[bdb48999-5267-42e6-ad18-98b4f7b92a8e] Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[6e51e171-bf36-4d1c-a9ef-3a5b9e4156a9] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:43:48 +0000
+[6e51e171-bf36-4d1c-a9ef-3a5b9e4156a9] Processing by Api::V1::NationalitiesController#index as */*
+[6e51e171-bf36-4d1c-a9ef-3a5b9e4156a9] Completed 200 OK in 98ms (Views: 0.4ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 87.1ms)
+[b4087dc5-62f4-462a-8f8a-ace1e868abff] Started POST "/api/v1/admin/login" for 196.96.131.8 at 2025-12-03 18:46:51 +0000
+[b4087dc5-62f4-462a-8f8a-ace1e868abff] Processing by Api::V1::SessionsController#login_admin as */*
+[b4087dc5-62f4-462a-8f8a-ace1e868abff]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[b4087dc5-62f4-462a-8f8a-ace1e868abff] Completed 401 Unauthorized in 6ms (Views: 0.2ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 0.0ms)
+[b92ffb69-3e90-4e91-b5e6-8f333b05214e] Started DELETE "/api/v1/logout" for 196.96.131.8 at 2025-12-03 18:47:00 +0000
+[b92ffb69-3e90-4e91-b5e6-8f333b05214e] Processing by Api::V1::SessionsController#destroy as */*
+[b92ffb69-3e90-4e91-b5e6-8f333b05214e]   Parameters: {"session" => {}}
+[b92ffb69-3e90-4e91-b5e6-8f333b05214e] Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[7dcb1874-0143-46ad-be0d-06412bd27966] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:47:01 +0000
+[7dcb1874-0143-46ad-be0d-06412bd27966] Processing by Api::V1::NationalitiesController#index as */*
+[7dcb1874-0143-46ad-be0d-06412bd27966] Completed 200 OK in 133ms (Views: 128.7ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 127.2ms)
+[42eaaf0b-f783-48bb-9263-bccc9e70286b] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:47:02 +0000
+[42eaaf0b-f783-48bb-9263-bccc9e70286b] Processing by Api::V1::RoomTypesController#index as */*
+[42eaaf0b-f783-48bb-9263-bccc9e70286b] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+[3b42a3c6-25a2-46cf-9de3-ad76d412f038] Started POST "/api/v1/admin/login" for 196.96.131.8 at 2025-12-03 18:47:35 +0000
+[3b42a3c6-25a2-46cf-9de3-ad76d412f038] Processing by Api::V1::SessionsController#login_admin as */*
+[3b42a3c6-25a2-46cf-9de3-ad76d412f038]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[3b42a3c6-25a2-46cf-9de3-ad76d412f038] Completed 401 Unauthorized in 5ms (Views: 0.1ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+[2bda710e-e6f2-4f40-95da-844dc32610f6] Started POST "/api/v1/admin/login" for 196.96.131.8 at 2025-12-03 18:48:13 +0000
+[2bda710e-e6f2-4f40-95da-844dc32610f6] Processing by Api::V1::SessionsController#login_admin as */*
+[2bda710e-e6f2-4f40-95da-844dc32610f6]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[2bda710e-e6f2-4f40-95da-844dc32610f6] Completed 200 OK in 234ms (Views: 0.2ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 1.6ms)
+[d1d8bb8b-2d38-4490-be08-5d84e56071be] Started GET "/api/v1/admin/profile" for 196.96.131.8 at 2025-12-03 18:48:15 +0000
+[d1d8bb8b-2d38-4490-be08-5d84e56071be] Processing by Api::V1::SessionsController#admin_profile as JSON
+[d1d8bb8b-2d38-4490-be08-5d84e56071be]   Parameters: {"session" => {}}
+[d1d8bb8b-2d38-4490-be08-5d84e56071be] Completed 200 OK in 25ms (Views: 0.2ms | ActiveRecord: 2.4ms (1 query, 0 cached) | GC: 15.9ms)
+[3f4d25a2-4caf-421b-aba0-0d9dabb32ccd] Started GET "/api/v1/admin/stats" for 196.96.131.8 at 2025-12-03 18:48:15 +0000
+[3f4d25a2-4caf-421b-aba0-0d9dabb32ccd] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[3f4d25a2-4caf-421b-aba0-0d9dabb32ccd]   Parameters: {"dashboard" => {}}
+[3f4d25a2-4caf-421b-aba0-0d9dabb32ccd] Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 4.9ms (5 queries, 0 cached) | GC: 0.0ms)
+[17ebd778-dec1-45aa-b1c5-1ff1fd50545d] Started GET "/api/v1/admin/bookings" for 196.96.131.8 at 2025-12-03 18:48:16 +0000
+[17ebd778-dec1-45aa-b1c5-1ff1fd50545d] Processing by Api::V1::Admin::BookingsController#index as JSON
+[17ebd778-dec1-45aa-b1c5-1ff1fd50545d]   Parameters: {"booking" => {}}
+[17ebd778-dec1-45aa-b1c5-1ff1fd50545d] Completed 200 OK in 10ms (Views: 1.0ms | ActiveRecord: 3.7ms (2 queries, 0 cached) | GC: 0.0ms)
+[faa649da-82e9-48e7-9b5c-d5e6d56d8f1b] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:48:16 +0000
+[faa649da-82e9-48e7-9b5c-d5e6d56d8f1b] Processing by Api::V1::NationalitiesController#index as */*
+[faa649da-82e9-48e7-9b5c-d5e6d56d8f1b] Completed 200 OK in 12ms (Views: 0.4ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 6.4ms)
+[8acf3db6-03c7-4091-94e9-0b4594a45cd7] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:48:16 +0000
+[8acf3db6-03c7-4091-94e9-0b4594a45cd7] Processing by Api::V1::RoomTypesController#index as */*
+[8acf3db6-03c7-4091-94e9-0b4594a45cd7] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+[4b0938a3-8159-49c9-aeba-479c1cd4a217] Started GET "/api/v1/admin/users" for 196.96.131.8 at 2025-12-03 18:48:22 +0000
+[4b0938a3-8159-49c9-aeba-479c1cd4a217] Processing by Api::V1::Admin::UsersController#index as */*
+[4b0938a3-8159-49c9-aeba-479c1cd4a217] Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+[4ca855b6-f625-43ae-90a0-681e3377690d] Started GET "/api/v1/admin/contact_messages" for 196.96.131.8 at 2025-12-03 18:48:24 +0000
+[4ca855b6-f625-43ae-90a0-681e3377690d] Processing by Api::V1::Admin::ContactMessagesController#index as JSON
+[4ca855b6-f625-43ae-90a0-681e3377690d]   Parameters: {"contact_message" => {}}
+[4ca855b6-f625-43ae-90a0-681e3377690d] Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 2.8ms (2 queries, 0 cached) | GC: 0.0ms)
+[72f2795d-ee91-4395-b04f-d3e342ad8d9b] Started GET "/api/v1/admin/partners" for 196.96.131.8 at 2025-12-03 18:48:25 +0000
+[72f2795d-ee91-4395-b04f-d3e342ad8d9b] Processing by Api::V1::Admin::PartnersController#index as */*
+[72f2795d-ee91-4395-b04f-d3e342ad8d9b] Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 2.3ms (2 queries, 0 cached) | GC: 0.0ms)
+[7e58b70a-b473-42c4-a4eb-3fbd75ba0bd1] Started GET "/api/v1/admin/profile" for 196.96.131.8 at 2025-12-03 18:49:13 +0000
+[7e58b70a-b473-42c4-a4eb-3fbd75ba0bd1] Processing by Api::V1::SessionsController#admin_profile as JSON
+[7e58b70a-b473-42c4-a4eb-3fbd75ba0bd1]   Parameters: {"session" => {}}
+[7e58b70a-b473-42c4-a4eb-3fbd75ba0bd1] Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 0.0ms)
+[28087a44-673f-4649-8272-15f3e30a81bf] Started GET "/api/v1/admin/stats" for 196.96.131.8 at 2025-12-03 18:49:13 +0000
+[28087a44-673f-4649-8272-15f3e30a81bf] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[28087a44-673f-4649-8272-15f3e30a81bf]   Parameters: {"dashboard" => {}}
+[28087a44-673f-4649-8272-15f3e30a81bf] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.2ms (5 queries, 0 cached) | GC: 0.0ms)
+[301d962d-7cc3-4493-8561-daa429365988] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:49:13 +0000
+[301d962d-7cc3-4493-8561-daa429365988] Processing by Api::V1::RoomTypesController#index as */*
+[301d962d-7cc3-4493-8561-daa429365988] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[97b5ea0e-9756-4ceb-9822-3b81c0ab13e9] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:49:13 +0000
+[65eda1c5-ec90-4354-96a8-e903d42c1eb8] Started GET "/api/v1/admin/bookings" for 196.96.131.8 at 2025-12-03 18:49:13 +0000
+[97b5ea0e-9756-4ceb-9822-3b81c0ab13e9] Processing by Api::V1::NationalitiesController#index as */*
+[65eda1c5-ec90-4354-96a8-e903d42c1eb8] Processing by Api::V1::Admin::BookingsController#index as JSON
+[65eda1c5-ec90-4354-96a8-e903d42c1eb8]   Parameters: {"booking" => {}}
+[65eda1c5-ec90-4354-96a8-e903d42c1eb8] Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.0ms)
+[97b5ea0e-9756-4ceb-9822-3b81c0ab13e9] Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[169289f6-8fb5-41b6-aba2-35c557ea7f1d] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:52:13 +0000
+[169289f6-8fb5-41b6-aba2-35c557ea7f1d] Processing by Api::V1::RoomTypesController#index as HTML
+[169289f6-8fb5-41b6-aba2-35c557ea7f1d] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[f17a3d25-31fd-4293-ab65-6efb40b5cead] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:57:17 +0000
+[f17a3d25-31fd-4293-ab65-6efb40b5cead] Processing by Api::V1::NationalitiesController#index as */*
+[84b50521-2667-44ff-b560-5a0b2b0f2ce0] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:57:17 +0000
+[84b50521-2667-44ff-b560-5a0b2b0f2ce0] Processing by Api::V1::RoomTypesController#index as */*
+[84b50521-2667-44ff-b560-5a0b2b0f2ce0] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+[f17a3d25-31fd-4293-ab65-6efb40b5cead] Completed 200 OK in 34ms (Views: 0.3ms | ActiveRecord: 32.3ms (1 query, 0 cached) | GC: 1.9ms)
+[308f014d-2521-404e-bddc-c586187f1386] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 18:59:40 +0000
+[2a930b9b-6b17-4566-bf66-9749532ef211] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 18:59:40 +0000
+[308f014d-2521-404e-bddc-c586187f1386] Processing by Api::V1::NationalitiesController#index as */*
+[2a930b9b-6b17-4566-bf66-9749532ef211] Processing by Api::V1::RoomTypesController#index as */*
+[2a930b9b-6b17-4566-bf66-9749532ef211] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+[308f014d-2521-404e-bddc-c586187f1386] Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 1.0ms)
+[bebf4ccd-55be-43c4-b90e-b4ad66d20749] Started POST "/api/v1/users" for 196.96.131.8 at 2025-12-03 19:00:38 +0000
+[bebf4ccd-55be-43c4-b90e-b4ad66d20749] Processing by Api::V1::UsersController#create as */*
+[bebf4ccd-55be-43c4-b90e-b4ad66d20749]   Parameters: {"user" => {"name" => "john", "email" => "[FILTERED]", "phone" => "+254712396732", "password" => "[FILTERED]"}}
+[bebf4ccd-55be-43c4-b90e-b4ad66d20749] Completed 201 Created in 208ms (Views: 0.3ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 0.5ms)
+[ee29976b-e789-44a6-ae86-f7f24248bf82] Started POST "/api/v1/user/login" for 196.96.131.8 at 2025-12-03 19:00:42 +0000
+[ee29976b-e789-44a6-ae86-f7f24248bf82] Processing by Api::V1::SessionsController#login_user as */*
+[ee29976b-e789-44a6-ae86-f7f24248bf82]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[ee29976b-e789-44a6-ae86-f7f24248bf82] Completed 200 OK in 218ms (Views: 0.2ms | ActiveRecord: 5.2ms (1 query, 0 cached) | GC: 0.6ms)
+[d27a0e92-b160-4b88-a287-cc31961c4410] Started DELETE "/api/v1/logout" for 196.96.131.8 at 2025-12-03 19:00:53 +0000
+[d27a0e92-b160-4b88-a287-cc31961c4410] Processing by Api::V1::SessionsController#destroy as */*
+[d27a0e92-b160-4b88-a287-cc31961c4410]   Parameters: {"session" => {}}
+[d27a0e92-b160-4b88-a287-cc31961c4410] Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[51510728-eef8-4697-9d8c-9830ee958bdf] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 19:05:12 +0000
+[51510728-eef8-4697-9d8c-9830ee958bdf] Processing by Api::V1::RoomTypesController#index as */*
+[51510728-eef8-4697-9d8c-9830ee958bdf] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[ddcbb609-946c-4c50-a31b-8b48b3893ccf] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 19:05:12 +0000
+[ddcbb609-946c-4c50-a31b-8b48b3893ccf] Processing by Api::V1::NationalitiesController#index as */*
+[ddcbb609-946c-4c50-a31b-8b48b3893ccf] Completed 200 OK in 32ms (Views: 0.4ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 27.6ms)
+[c8a743fb-286e-4b24-908a-fffc97c895e0] Started GET "/api/v1/nationalities" for 196.96.131.8 at 2025-12-03 19:11:27 +0000
+[c8a743fb-286e-4b24-908a-fffc97c895e0] Processing by Api::V1::NationalitiesController#index as */*
+[c8a743fb-286e-4b24-908a-fffc97c895e0] Completed 200 OK in 47ms (Views: 0.3ms | ActiveRecord: 40.5ms (1 query, 0 cached) | GC: 18.3ms)
+[f17f3a31-978e-4f39-8d29-ce31abbf9954] Started GET "/api/v1/room_types" for 196.96.131.8 at 2025-12-03 19:31:36 +0000
+[f17f3a31-978e-4f39-8d29-ce31abbf9954] Processing by Api::V1::RoomTypesController#index as */*
+[f17f3a31-978e-4f39-8d29-ce31abbf9954] Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 25.7ms (1 query, 0 cached) | GC: 0.0ms)
+[3d419e17-6a8a-40f9-bdbb-bcb96e866508] Started GET "/api/v1/nationalities" for 41.81.135.108 at 2025-12-03 19:55:11 +0000
+[3d419e17-6a8a-40f9-bdbb-bcb96e866508] Processing by Api::V1::NationalitiesController#index as */*
+[3d419e17-6a8a-40f9-bdbb-bcb96e866508] Completed 200 OK in 32ms (Views: 0.5ms | ActiveRecord: 32.7ms (1 query, 0 cached) | GC: 1.0ms)
+[b5d711b0-3ac8-4915-a328-c80ec71c4942] Started GET "/api/v1/nationalities" for 41.81.135.108 at 2025-12-03 20:05:53 +0000
+[cd935ee2-bfe0-49ce-ab60-60e9522c3525] Started GET "/api/v1/room_types" for 41.81.135.108 at 2025-12-03 20:05:53 +0000
+[cd935ee2-bfe0-49ce-ab60-60e9522c3525] Processing by Api::V1::RoomTypesController#index as */*
+[b5d711b0-3ac8-4915-a328-c80ec71c4942] Processing by Api::V1::NationalitiesController#index as */*
+[cd935ee2-bfe0-49ce-ab60-60e9522c3525] Completed 200 OK in 46ms (Views: 0.2ms | ActiveRecord: 52.5ms (1 query, 0 cached) | GC: 1.0ms)
+[b5d711b0-3ac8-4915-a328-c80ec71c4942] Completed 200 OK in 59ms (Views: 1.0ms | ActiveRecord: 63.9ms (1 query, 0 cached) | GC: 0.0ms)
+[1f4a3e1f-6682-49e2-ad2a-f30ee65e351e] Started GET "/" for 167.94.138.186 at 2025-12-03 20:23:48 +0000
+[1f4a3e1f-6682-49e2-ad2a-f30ee65e351e] Processing by StaticController#index as HTML
+[1f4a3e1f-6682-49e2-ad2a-f30ee65e351e] Sent file /var/www/southcoastwebmain/public/index.html (2.2ms)
+[1f4a3e1f-6682-49e2-ad2a-f30ee65e351e] Completed 200 OK in 4ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[0068fe8a-1a41-4937-90d0-7cef61016af9] Started GET "/" for 167.94.138.186 at 2025-12-03 20:23:53 +0000
+[0068fe8a-1a41-4937-90d0-7cef61016af9] Processing by StaticController#index as */*
+[0068fe8a-1a41-4937-90d0-7cef61016af9] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[0068fe8a-1a41-4937-90d0-7cef61016af9] Completed 200 OK in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[884ca81a-df37-421f-911f-7bcea8a425df] Started GET "/favicon.ico" for 167.94.138.186 at 2025-12-03 20:23:55 +0000
+[884ca81a-df37-421f-911f-7bcea8a425df]   
+[884ca81a-df37-421f-911f-7bcea8a425df] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[884ca81a-df37-421f-911f-7bcea8a425df]   
+[55f41d9d-557b-43cb-b152-12b4310edf5d] Started GET "/security.txt" for 167.94.138.186 at 2025-12-03 20:23:59 +0000
+[55f41d9d-557b-43cb-b152-12b4310edf5d]   
+[55f41d9d-557b-43cb-b152-12b4310edf5d] ActionController::RoutingError (No route matches [GET] "/security.txt"):
+[55f41d9d-557b-43cb-b152-12b4310edf5d]   
+[f6a776a4-8351-4030-b078-79caace7623a] Started GET "/" for 167.94.138.205 at 2025-12-03 21:25:28 +0000
+[f6a776a4-8351-4030-b078-79caace7623a] Processing by StaticController#index as HTML
+[f6a776a4-8351-4030-b078-79caace7623a] Sent file /var/www/southcoastwebmain/public/index.html (8.8ms)
+[f6a776a4-8351-4030-b078-79caace7623a] Completed 200 OK in 22ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[d96af045-934d-4afa-b65e-f343c0fb6e23] Started GET "/" for 167.94.138.205 at 2025-12-03 21:25:32 +0000
+[d96af045-934d-4afa-b65e-f343c0fb6e23] Processing by StaticController#index as */*
+[d96af045-934d-4afa-b65e-f343c0fb6e23] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[d96af045-934d-4afa-b65e-f343c0fb6e23] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[4387ad6a-a8b2-4ee2-b165-8443976fed9d] Started GET "/favicon.ico" for 167.94.138.205 at 2025-12-03 21:25:32 +0000
+[4387ad6a-a8b2-4ee2-b165-8443976fed9d]   
+[4387ad6a-a8b2-4ee2-b165-8443976fed9d] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[4387ad6a-a8b2-4ee2-b165-8443976fed9d]   
+[fd3f311b-b1a7-474a-8aee-dcc6e712137f] Started GET "/wiki" for 167.94.138.205 at 2025-12-03 21:25:36 +0000
+[fd3f311b-b1a7-474a-8aee-dcc6e712137f]   
+[fd3f311b-b1a7-474a-8aee-dcc6e712137f] ActionController::RoutingError (No route matches [GET] "/wiki"):
+[fd3f311b-b1a7-474a-8aee-dcc6e712137f]   
+[41d18029-9a48-46e9-b161-8ad4f98ed998] Started GET "/" for 206.168.34.36 at 2025-12-04 01:49:29 +0000
+[41d18029-9a48-46e9-b161-8ad4f98ed998] Processing by StaticController#index as HTML
+[41d18029-9a48-46e9-b161-8ad4f98ed998] Sent file /var/www/southcoastwebmain/public/index.html (9.2ms)
+[41d18029-9a48-46e9-b161-8ad4f98ed998] Completed 200 OK in 27ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[2c58610c-e61c-4753-a8c5-e5e6e7564c65] Started GET "/" for 206.168.34.36 at 2025-12-04 01:49:36 +0000
+[2c58610c-e61c-4753-a8c5-e5e6e7564c65] Processing by StaticController#index as */*
+[2c58610c-e61c-4753-a8c5-e5e6e7564c65] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[2c58610c-e61c-4753-a8c5-e5e6e7564c65] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[bf99ab0f-aa45-43f1-ae65-6461e418b00f] Started GET "/favicon.ico" for 206.168.34.36 at 2025-12-04 01:49:51 +0000
+[bf99ab0f-aa45-43f1-ae65-6461e418b00f]   
+[bf99ab0f-aa45-43f1-ae65-6461e418b00f] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[bf99ab0f-aa45-43f1-ae65-6461e418b00f]   
+[3a282824-30d9-42b0-bcdb-bd01a6aa0133] Started GET "/sitemap.xml" for 206.168.34.36 at 2025-12-04 01:50:13 +0000
+[3a282824-30d9-42b0-bcdb-bd01a6aa0133]   
+[3a282824-30d9-42b0-bcdb-bd01a6aa0133] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[3a282824-30d9-42b0-bcdb-bd01a6aa0133]   
+[72d88e28-6f91-4d51-8c83-2d2b65a420e8] Started GET "/" for 198.235.24.251 at 2025-12-04 02:35:54 +0000
+[72d88e28-6f91-4d51-8c83-2d2b65a420e8] Processing by StaticController#index as HTML
+[72d88e28-6f91-4d51-8c83-2d2b65a420e8] Sent file /var/www/southcoastwebmain/public/index.html (7.8ms)
+[72d88e28-6f91-4d51-8c83-2d2b65a420e8] Completed 200 OK in 25ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[8d68376b-3bad-4ab7-9d95-72ba83f0c27d] Started GET "/api/v1/nationalities" for 62.210.90.217 at 2025-12-04 08:50:16 +0000
+[8d68376b-3bad-4ab7-9d95-72ba83f0c27d] Processing by Api::V1::NationalitiesController#index as */*
+[ac50ca7a-2987-4940-84b5-ac2225834d6f] Started GET "/api/v1/room_types" for 62.210.90.217 at 2025-12-04 08:50:16 +0000
+[ac50ca7a-2987-4940-84b5-ac2225834d6f] Processing by Api::V1::RoomTypesController#index as */*
+[8d68376b-3bad-4ab7-9d95-72ba83f0c27d] Completed 200 OK in 525ms (Views: 10.7ms | ActiveRecord: 369.9ms (1 query, 0 cached) | GC: 26.1ms)
+[ac50ca7a-2987-4940-84b5-ac2225834d6f] Completed 200 OK in 326ms (Views: 9.8ms | ActiveRecord: 133.3ms (1 query, 0 cached) | GC: 0.0ms)
+[0081b9ed-b015-4aa1-99c0-654f7928bab4] Started GET "/api/v1/nationalities" for 105.161.203.140 at 2025-12-04 08:52:58 +0000
+[0081b9ed-b015-4aa1-99c0-654f7928bab4] Processing by Api::V1::NationalitiesController#index as */*
+[0081b9ed-b015-4aa1-99c0-654f7928bab4] Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 4.0ms (1 query, 0 cached) | GC: 0.0ms)
+[1cba60fe-6bcc-4cb8-a39e-be4fc8190da2] Started GET "/api/v1/room_types" for 105.161.203.140 at 2025-12-04 08:52:58 +0000
+[1cba60fe-6bcc-4cb8-a39e-be4fc8190da2] Processing by Api::V1::RoomTypesController#index as */*
+[1cba60fe-6bcc-4cb8-a39e-be4fc8190da2] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+[cc5fc688-3824-4b87-8e24-7a167e10b891] Started POST "/api/v1/user/login" for 105.161.203.140 at 2025-12-04 08:55:49 +0000
+[cc5fc688-3824-4b87-8e24-7a167e10b891] Processing by Api::V1::SessionsController#login_user as */*
+[cc5fc688-3824-4b87-8e24-7a167e10b891]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[cc5fc688-3824-4b87-8e24-7a167e10b891] Completed 200 OK in 262ms (Views: 0.5ms | ActiveRecord: 5.0ms (1 query, 0 cached) | GC: 0.0ms)
+[391015b6-781c-485d-80ad-24fb76101136] Started GET "/api/v1/bookings" for 105.161.203.140 at 2025-12-04 08:55:55 +0000
+[391015b6-781c-485d-80ad-24fb76101136] Processing by Api::V1::BookingsController#index as */*
+[391015b6-781c-485d-80ad-24fb76101136]   Parameters: {"booking" => {}}
+[e4175bb7-3bc2-4f84-ba41-f63d19beb32f] Started GET "/api/v1/room_types" for 105.161.203.140 at 2025-12-04 08:55:56 +0000
+[e4175bb7-3bc2-4f84-ba41-f63d19beb32f] Processing by Api::V1::RoomTypesController#index as */*
+[e4175bb7-3bc2-4f84-ba41-f63d19beb32f] Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[391015b6-781c-485d-80ad-24fb76101136] Completed 200 OK in 104ms (Views: 7.8ms | ActiveRecord: 12.2ms (2 queries, 0 cached) | GC: 2.8ms)
+[bca943aa-ba10-47e6-9bf7-6c692de900a2] Started DELETE "/api/v1/logout" for 105.161.203.140 at 2025-12-04 08:57:21 +0000
+[bca943aa-ba10-47e6-9bf7-6c692de900a2] Processing by Api::V1::SessionsController#destroy as */*
+[bca943aa-ba10-47e6-9bf7-6c692de900a2]   Parameters: {"session" => {}}
+[bca943aa-ba10-47e6-9bf7-6c692de900a2] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[3f488302-7879-41d2-82ae-dcb57154e15a] Started DELETE "/api/v1/logout" for 105.161.203.140 at 2025-12-04 08:57:22 +0000
+[3f488302-7879-41d2-82ae-dcb57154e15a] Processing by Api::V1::SessionsController#destroy as */*
+[3f488302-7879-41d2-82ae-dcb57154e15a]   Parameters: {"session" => {}}
+[3f488302-7879-41d2-82ae-dcb57154e15a] Completed 200 OK in 0ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[b6d26cc1-caec-481d-b818-7bc21c58c0ee] Started GET "/api/v1/room_types" for 129.222.147.73 at 2025-12-04 11:51:31 +0000
+[65b6388d-7b39-490a-8137-f814e6868b39] Started GET "/api/v1/nationalities" for 129.222.147.73 at 2025-12-04 11:51:31 +0000
+[b6d26cc1-caec-481d-b818-7bc21c58c0ee] Processing by Api::V1::RoomTypesController#index as */*
+[65b6388d-7b39-490a-8137-f814e6868b39] Processing by Api::V1::NationalitiesController#index as */*
+[b6d26cc1-caec-481d-b818-7bc21c58c0ee] Completed 200 OK in 600ms (Views: 16.8ms | ActiveRecord: 446.4ms (1 query, 0 cached) | GC: 8.4ms)
+[65b6388d-7b39-490a-8137-f814e6868b39] Completed 200 OK in 615ms (Views: 12.9ms | ActiveRecord: 445.4ms (1 query, 0 cached) | GC: 0.0ms)
+[d671cc66-8206-4225-b389-57abd059ea30] Started GET "/api/v1/nationalities" for 129.222.147.73 at 2025-12-04 12:00:08 +0000
+[d671cc66-8206-4225-b389-57abd059ea30] Processing by Api::V1::NationalitiesController#index as */*
+[d671cc66-8206-4225-b389-57abd059ea30] Completed 200 OK in 65ms (Views: 1.4ms | ActiveRecord: 38.3ms (1 query, 0 cached) | GC: 4.3ms)
+[645d4b96-435b-44ca-9dc4-334fcf2e1a60] Started GET "/api/v1/room_types" for 129.222.147.73 at 2025-12-04 12:00:08 +0000
+[645d4b96-435b-44ca-9dc4-334fcf2e1a60] Processing by Api::V1::RoomTypesController#index as */*
+[645d4b96-435b-44ca-9dc4-334fcf2e1a60] Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+[70a9f7bb-fb1c-4b7c-b306-cdc0d53a0263] Started GET "/api/v1/room_types" for 95.177.163.4 at 2025-12-04 14:46:51 +0000
+[7acf1174-6ec8-40a3-8293-15e141a78e5c] Started GET "/api/v1/nationalities" for 95.177.163.4 at 2025-12-04 14:46:51 +0000
+[70a9f7bb-fb1c-4b7c-b306-cdc0d53a0263] Processing by Api::V1::RoomTypesController#index as */*
+[7acf1174-6ec8-40a3-8293-15e141a78e5c] Processing by Api::V1::NationalitiesController#index as */*
+[70a9f7bb-fb1c-4b7c-b306-cdc0d53a0263] Completed 200 OK in 412ms (Views: 12.8ms | ActiveRecord: 306.0ms (1 query, 0 cached) | GC: 7.0ms)
+[7acf1174-6ec8-40a3-8293-15e141a78e5c] Completed 200 OK in 416ms (Views: 11.2ms | ActiveRecord: 301.8ms (1 query, 0 cached) | GC: 6.1ms)
+[bd8d211e-abc4-443d-9393-fad5e65c78a9] Started GET "/api/v1/nationalities" for 105.160.76.226 at 2025-12-04 15:24:03 +0000
+[f187d1cc-6f38-4d43-ba83-6515ad3adf1a] Started GET "/api/v1/room_types" for 105.160.76.226 at 2025-12-04 15:24:03 +0000
+[bd8d211e-abc4-443d-9393-fad5e65c78a9] Processing by Api::V1::NationalitiesController#index as */*
+[f187d1cc-6f38-4d43-ba83-6515ad3adf1a] Processing by Api::V1::RoomTypesController#index as */*
+[bd8d211e-abc4-443d-9393-fad5e65c78a9] Completed 200 OK in 86ms (Views: 1.6ms | ActiveRecord: 75.1ms (1 query, 0 cached) | GC: 2.1ms)
+[f187d1cc-6f38-4d43-ba83-6515ad3adf1a] Completed 200 OK in 88ms (Views: 0.5ms | ActiveRecord: 70.0ms (1 query, 0 cached) | GC: 7.6ms)
+[042c294d-5604-48a7-87ea-7788b9b87957] Started POST "/api/v1/admin/login" for 105.160.76.226 at 2025-12-04 15:24:52 +0000
+[042c294d-5604-48a7-87ea-7788b9b87957] Processing by Api::V1::SessionsController#login_admin as */*
+[042c294d-5604-48a7-87ea-7788b9b87957]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[042c294d-5604-48a7-87ea-7788b9b87957] Completed 200 OK in 303ms (Views: 0.7ms | ActiveRecord: 10.2ms (1 query, 0 cached) | GC: 0.0ms)
+[22625426-6f64-405a-ad09-f72af5ade018] Started GET "/api/v1/admin/profile" for 105.160.76.226 at 2025-12-04 15:24:57 +0000
+[22625426-6f64-405a-ad09-f72af5ade018] Processing by Api::V1::SessionsController#admin_profile as JSON
+[22625426-6f64-405a-ad09-f72af5ade018]   Parameters: {"session" => {}}
+[22625426-6f64-405a-ad09-f72af5ade018] Completed 200 OK in 62ms (Views: 0.5ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+[8cb5c701-54b2-4c6a-a63d-28600f2c3996] Started GET "/api/v1/admin/stats" for 105.160.76.226 at 2025-12-04 15:24:57 +0000
+[8cb5c701-54b2-4c6a-a63d-28600f2c3996] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[8cb5c701-54b2-4c6a-a63d-28600f2c3996]   Parameters: {"dashboard" => {}}
+[8cb5c701-54b2-4c6a-a63d-28600f2c3996] Completed 200 OK in 34ms (Views: 0.3ms | ActiveRecord: 11.4ms (5 queries, 0 cached) | GC: 0.0ms)
+[de25880d-bab3-4d44-8160-fa60d471baaa] Started GET "/api/v1/admin/bookings" for 105.160.76.226 at 2025-12-04 15:24:58 +0000
+[9fc335ac-9147-45e5-834a-b7cf54448e73] Started GET "/api/v1/nationalities" for 105.160.76.226 at 2025-12-04 15:24:58 +0000
+[9fc335ac-9147-45e5-834a-b7cf54448e73] Processing by Api::V1::NationalitiesController#index as */*
+[de25880d-bab3-4d44-8160-fa60d471baaa] Processing by Api::V1::Admin::BookingsController#index as JSON
+[de25880d-bab3-4d44-8160-fa60d471baaa]   Parameters: {"booking" => {}}
+[de25880d-bab3-4d44-8160-fa60d471baaa] Completed 200 OK in 29ms (Views: 7.3ms | ActiveRecord: 3.5ms (2 queries, 0 cached) | GC: 0.0ms)
+[9fc335ac-9147-45e5-834a-b7cf54448e73] Completed 200 OK in 60ms (Views: 4.1ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 9.3ms)
+[8efa18bb-4451-4c91-9021-181966bea54a] Started GET "/api/v1/room_types" for 105.160.76.226 at 2025-12-04 15:24:58 +0000
+[8efa18bb-4451-4c91-9021-181966bea54a] Processing by Api::V1::RoomTypesController#index as */*
+[8efa18bb-4451-4c91-9021-181966bea54a] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[8a9d4a43-f76e-4f84-b466-13fc907277a0] Started GET "/api/v1/admin/profile" for 105.160.76.226 at 2025-12-04 15:25:06 +0000
+[216438ac-b30d-4f49-b803-4a79c1af1a37] Started GET "/api/v1/admin/stats" for 105.160.76.226 at 2025-12-04 15:25:06 +0000
+[8a9d4a43-f76e-4f84-b466-13fc907277a0] Processing by Api::V1::SessionsController#admin_profile as JSON
+[8a9d4a43-f76e-4f84-b466-13fc907277a0]   Parameters: {"session" => {}}
+[8a9d4a43-f76e-4f84-b466-13fc907277a0] Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+[216438ac-b30d-4f49-b803-4a79c1af1a37] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[216438ac-b30d-4f49-b803-4a79c1af1a37]   Parameters: {"dashboard" => {}}
+[216438ac-b30d-4f49-b803-4a79c1af1a37] Completed 200 OK in 86ms (Views: 0.2ms | ActiveRecord: 15.9ms (5 queries, 0 cached) | GC: 0.0ms)
+[2b42d3b5-7644-40e2-b5cb-eac5d31e59e1] Started GET "/api/v1/nationalities" for 105.160.76.226 at 2025-12-04 15:25:07 +0000
+[45e30123-5bf9-4808-8088-51b4116ba97c] Started GET "/api/v1/admin/bookings" for 105.160.76.226 at 2025-12-04 15:25:07 +0000
+[45e30123-5bf9-4808-8088-51b4116ba97c] Processing by Api::V1::Admin::BookingsController#index as JSON
+[45e30123-5bf9-4808-8088-51b4116ba97c]   Parameters: {"booking" => {}}
+[2b42d3b5-7644-40e2-b5cb-eac5d31e59e1] Processing by Api::V1::NationalitiesController#index as */*
+[2356951f-5be9-4dd6-9dc5-ae100a111a03] Started GET "/api/v1/room_types" for 105.160.76.226 at 2025-12-04 15:25:07 +0000
+[2356951f-5be9-4dd6-9dc5-ae100a111a03] Processing by Api::V1::RoomTypesController#index as */*
+[2b42d3b5-7644-40e2-b5cb-eac5d31e59e1] Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 2.2ms (1 query, 0 cached) | GC: 0.0ms)
+[45e30123-5bf9-4808-8088-51b4116ba97c] Completed 200 OK in 37ms (Views: 5.1ms | ActiveRecord: 18.0ms (2 queries, 0 cached) | GC: 0.0ms)
+[2356951f-5be9-4dd6-9dc5-ae100a111a03] Completed 200 OK in 46ms (Views: 0.8ms | ActiveRecord: 41.1ms (1 query, 0 cached) | GC: 0.0ms)
+[ba4aabb4-91f5-4926-bbc6-04f1b2ae5f13] Started GET "/api/v1/nationalities" for 105.160.76.226 at 2025-12-04 15:26:43 +0000
+[ba4aabb4-91f5-4926-bbc6-04f1b2ae5f13] Processing by Api::V1::NationalitiesController#index as */*
+[ba4aabb4-91f5-4926-bbc6-04f1b2ae5f13] Completed 200 OK in 14ms (Views: 2.7ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 0.0ms)
+[717ef9fd-9921-4643-9e2b-97164ca8d721] Started GET "/api/v1/room_types" for 105.160.76.226 at 2025-12-04 15:26:43 +0000
+[717ef9fd-9921-4643-9e2b-97164ca8d721] Processing by Api::V1::RoomTypesController#index as */*
+[717ef9fd-9921-4643-9e2b-97164ca8d721] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[f2acfa53-6f33-4029-aff0-b77f1efc17d4] Started POST "/api/v1/admin/login" for 105.160.76.226 at 2025-12-04 15:27:33 +0000
+[f2acfa53-6f33-4029-aff0-b77f1efc17d4] Processing by Api::V1::SessionsController#login_admin as */*
+[f2acfa53-6f33-4029-aff0-b77f1efc17d4]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[f2acfa53-6f33-4029-aff0-b77f1efc17d4] Completed 401 Unauthorized in 212ms (Views: 0.4ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+[c8e8797c-208c-408c-8e8d-e8edd87dbc6c] Started POST "/api/v1/admin/login" for 105.160.76.226 at 2025-12-04 15:28:19 +0000
+[c8e8797c-208c-408c-8e8d-e8edd87dbc6c] Processing by Api::V1::SessionsController#login_admin as */*
+[c8e8797c-208c-408c-8e8d-e8edd87dbc6c]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[c8e8797c-208c-408c-8e8d-e8edd87dbc6c] Completed 200 OK in 220ms (Views: 0.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+[afb1dd06-dfd1-4fe1-bdcb-81f1f5508cd5] Started GET "/api/v1/admin/stats" for 105.160.76.226 at 2025-12-04 15:28:22 +0000
+[afb1dd06-dfd1-4fe1-bdcb-81f1f5508cd5] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[afb1dd06-dfd1-4fe1-bdcb-81f1f5508cd5]   Parameters: {"dashboard" => {}}
+[afb1dd06-dfd1-4fe1-bdcb-81f1f5508cd5] Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 2.3ms (5 queries, 0 cached) | GC: 0.0ms)
+[b276715f-43de-4fac-b868-f58cc9ade433] Started GET "/api/v1/admin/profile" for 105.160.76.226 at 2025-12-04 15:28:22 +0000
+[b276715f-43de-4fac-b868-f58cc9ade433] Processing by Api::V1::SessionsController#admin_profile as JSON
+[b276715f-43de-4fac-b868-f58cc9ade433]   Parameters: {"session" => {}}
+[b276715f-43de-4fac-b868-f58cc9ade433] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[c5893be6-e3fb-458f-b676-0330dfa0f71a] Started GET "/api/v1/admin/bookings" for 105.160.76.226 at 2025-12-04 15:28:22 +0000
+[c5893be6-e3fb-458f-b676-0330dfa0f71a] Processing by Api::V1::Admin::BookingsController#index as JSON
+[c5893be6-e3fb-458f-b676-0330dfa0f71a]   Parameters: {"booking" => {}}
+[c5893be6-e3fb-458f-b676-0330dfa0f71a] Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+[4f1dc821-ccaf-4cae-9054-775e7ec3764c] Started GET "/api/v1/nationalities" for 105.160.76.226 at 2025-12-04 15:28:22 +0000
+[4f1dc821-ccaf-4cae-9054-775e7ec3764c] Processing by Api::V1::NationalitiesController#index as */*
+[4f1dc821-ccaf-4cae-9054-775e7ec3764c] Completed 200 OK in 14ms (Views: 4.1ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[37bba851-d3ee-4835-b2ec-2d8959517911] Started GET "/api/v1/room_types" for 105.160.76.226 at 2025-12-04 15:28:22 +0000
+[37bba851-d3ee-4835-b2ec-2d8959517911] Processing by Api::V1::RoomTypesController#index as */*
+[37bba851-d3ee-4835-b2ec-2d8959517911] Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[d69c8ff3-4c33-4514-a75c-56c25dfa728c] Started GET "/api/v1/admin/users" for 105.160.76.226 at 2025-12-04 15:36:33 +0000
+[d69c8ff3-4c33-4514-a75c-56c25dfa728c] Processing by Api::V1::Admin::UsersController#index as */*
+[d69c8ff3-4c33-4514-a75c-56c25dfa728c] Completed 200 OK in 233ms (Views: 2.4ms | ActiveRecord: 227.2ms (2 queries, 0 cached) | GC: 57.2ms)
+[075cbae7-a2c2-4408-963b-05404263a3f4] Started GET "/api/v1/nationalities" for 154.159.237.163 at 2025-12-04 15:49:19 +0000
+[075cbae7-a2c2-4408-963b-05404263a3f4] Processing by Api::V1::NationalitiesController#index as */*
+[075cbae7-a2c2-4408-963b-05404263a3f4] Completed 200 OK in 58ms (Views: 0.3ms | ActiveRecord: 60.2ms (1 query, 0 cached) | GC: 10.3ms)
+[760eb054-d45e-4d71-b1bb-2649f5be2f59] Started GET "/api/v1/room_types" for 154.159.237.163 at 2025-12-04 15:49:19 +0000
+[760eb054-d45e-4d71-b1bb-2649f5be2f59] Processing by Api::V1::RoomTypesController#index as */*
+[760eb054-d45e-4d71-b1bb-2649f5be2f59] Completed 200 OK in 36ms (Views: 0.2ms | ActiveRecord: 37.0ms (1 query, 0 cached) | GC: 1.3ms)
+[bdcf9617-98e1-4dc2-b219-ab1998ba889f] Started GET "/api/v1/nationalities" for 102.215.79.238 at 2025-12-04 15:54:49 +0000
+[bdcf9617-98e1-4dc2-b219-ab1998ba889f] Processing by Api::V1::NationalitiesController#index as */*
+[e9f276be-ca0c-4974-b4dd-56c2fc6ab437] Started GET "/api/v1/room_types" for 102.215.79.238 at 2025-12-04 15:54:49 +0000
+[e9f276be-ca0c-4974-b4dd-56c2fc6ab437] Processing by Api::V1::RoomTypesController#index as */*
+[e9f276be-ca0c-4974-b4dd-56c2fc6ab437] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+[bdcf9617-98e1-4dc2-b219-ab1998ba889f] Completed 200 OK in 25ms (Views: 7.5ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+[d06bacc9-7df3-4393-afdd-2b4c235eb925] Started GET "/api/v1/nationalities" for 197.136.0.5 at 2025-12-04 15:54:50 +0000
+[d06bacc9-7df3-4393-afdd-2b4c235eb925] Processing by Api::V1::NationalitiesController#index as */*
+[c5cf51a3-d143-4ca7-a54f-f9f6e61554f1] Started GET "/api/v1/room_types" for 197.136.0.5 at 2025-12-04 15:54:50 +0000
+[c5cf51a3-d143-4ca7-a54f-f9f6e61554f1] Processing by Api::V1::RoomTypesController#index as */*
+[c5cf51a3-d143-4ca7-a54f-f9f6e61554f1] Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[d06bacc9-7df3-4393-afdd-2b4c235eb925] Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 3.3ms)
+[a06d926c-ace0-497b-825b-b37b1ec26a8d] Started GET "/api/v1/room_types" for 66.102.8.32 at 2025-12-04 15:54:53 +0000
+[a06d926c-ace0-497b-825b-b37b1ec26a8d] Processing by Api::V1::RoomTypesController#index as */*
+[a06d926c-ace0-497b-825b-b37b1ec26a8d] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[defe9316-2044-4c2f-8868-f5b4c3b344d9] Started GET "/api/v1/nationalities" for 66.102.8.38 at 2025-12-04 15:54:53 +0000
+[defe9316-2044-4c2f-8868-f5b4c3b344d9] Processing by Api::V1::NationalitiesController#index as */*
+[defe9316-2044-4c2f-8868-f5b4c3b344d9] Completed 200 OK in 16ms (Views: 0.5ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 3.8ms)
+[160a7e7c-ce44-4b56-855c-80cc38daf3c5] Started POST "/api/v1/user/login" for 102.215.79.238 at 2025-12-04 15:55:38 +0000
+[160a7e7c-ce44-4b56-855c-80cc38daf3c5] Processing by Api::V1::SessionsController#login_user as */*
+[160a7e7c-ce44-4b56-855c-80cc38daf3c5]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[160a7e7c-ce44-4b56-855c-80cc38daf3c5] Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+[498492bf-eca0-4b81-8495-ae0dcfcd0c2d] Started POST "/api/v1/user/login" for 102.215.79.238 at 2025-12-04 15:55:43 +0000
+[498492bf-eca0-4b81-8495-ae0dcfcd0c2d] Processing by Api::V1::SessionsController#login_user as */*
+[498492bf-eca0-4b81-8495-ae0dcfcd0c2d]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[498492bf-eca0-4b81-8495-ae0dcfcd0c2d] Completed 401 Unauthorized in 2ms (Views: 0.4ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[dca61645-90c0-4c85-8c0f-8a865f061d32] Started POST "/api/v1/user/login" for 102.215.79.238 at 2025-12-04 15:56:24 +0000
+[dca61645-90c0-4c85-8c0f-8a865f061d32] Processing by Api::V1::SessionsController#login_user as */*
+[dca61645-90c0-4c85-8c0f-8a865f061d32]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[dca61645-90c0-4c85-8c0f-8a865f061d32] Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+[fecb2f0a-ab48-4ecc-9c01-1decbb88ccbc] Started POST "/api/v1/user/login" for 102.215.79.238 at 2025-12-04 15:57:24 +0000
+[fecb2f0a-ab48-4ecc-9c01-1decbb88ccbc] Processing by Api::V1::SessionsController#login_user as */*
+[fecb2f0a-ab48-4ecc-9c01-1decbb88ccbc]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[fecb2f0a-ab48-4ecc-9c01-1decbb88ccbc] Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[16ebc478-abd4-4332-8c1a-7757c5e3f04c] Started POST "/api/v1/user/login" for 102.215.79.238 at 2025-12-04 15:59:57 +0000
+[16ebc478-abd4-4332-8c1a-7757c5e3f04c] Processing by Api::V1::SessionsController#login_user as */*
+[16ebc478-abd4-4332-8c1a-7757c5e3f04c]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[16ebc478-abd4-4332-8c1a-7757c5e3f04c] Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[ff26c04d-3c59-490d-a648-4f487ea8fdb6] Started GET "/api/v1/admin/profile" for 105.160.76.226 at 2025-12-04 16:04:32 +0000
+[ff26c04d-3c59-490d-a648-4f487ea8fdb6] Processing by Api::V1::SessionsController#admin_profile as JSON
+[ff26c04d-3c59-490d-a648-4f487ea8fdb6]   Parameters: {"session" => {}}
+[54eca969-5fe5-490e-8b98-3e5ffef62aa1] Started GET "/api/v1/admin/stats" for 105.160.76.226 at 2025-12-04 16:04:32 +0000
+[54eca969-5fe5-490e-8b98-3e5ffef62aa1] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[54eca969-5fe5-490e-8b98-3e5ffef62aa1]   Parameters: {"dashboard" => {}}
+[ff26c04d-3c59-490d-a648-4f487ea8fdb6] Completed 200 OK in 33ms (Views: 0.2ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+[54eca969-5fe5-490e-8b98-3e5ffef62aa1] Completed 200 OK in 60ms (Views: 0.1ms | ActiveRecord: 55.3ms (5 queries, 0 cached) | GC: 3.7ms)
+[cd2efad4-32e4-4696-ab52-abbd1047be5e] Started GET "/api/v1/admin/bookings" for 105.160.76.226 at 2025-12-04 16:04:32 +0000
+[50be227b-82fe-4d9e-925a-60f735648fe0] Started GET "/api/v1/nationalities" for 105.160.76.226 at 2025-12-04 16:04:32 +0000
+[50be227b-82fe-4d9e-925a-60f735648fe0] Processing by Api::V1::NationalitiesController#index as */*
+[cd2efad4-32e4-4696-ab52-abbd1047be5e] Processing by Api::V1::Admin::BookingsController#index as JSON
+[cd2efad4-32e4-4696-ab52-abbd1047be5e]   Parameters: {"booking" => {}}
+[cd2efad4-32e4-4696-ab52-abbd1047be5e] Completed 200 OK in 12ms (Views: 1.8ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+[50be227b-82fe-4d9e-925a-60f735648fe0] Completed 200 OK in 31ms (Views: 1.8ms | ActiveRecord: 4.9ms (1 query, 0 cached) | GC: 4.3ms)
+[08664084-3318-4f8e-8908-073269e46307] Started GET "/api/v1/room_types" for 105.160.76.226 at 2025-12-04 16:04:32 +0000
+[08664084-3318-4f8e-8908-073269e46307] Processing by Api::V1::RoomTypesController#index as */*
+[08664084-3318-4f8e-8908-073269e46307] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[1caa45d6-8c5b-4d71-9029-3ab2f15f7456] Started GET "/api/v1/nationalities" for 34.116.238.221 at 2025-12-04 16:05:49 +0000
+[1caa45d6-8c5b-4d71-9029-3ab2f15f7456] Processing by Api::V1::NationalitiesController#index as */*
+[1caa45d6-8c5b-4d71-9029-3ab2f15f7456] Completed 200 OK in 15ms (Views: 2.0ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+[bcad1d50-a230-40df-b5b5-f4f644d38f9f] Started GET "/api/v1/room_types" for 34.116.238.221 at 2025-12-04 16:05:49 +0000
+[bcad1d50-a230-40df-b5b5-f4f644d38f9f] Processing by Api::V1::RoomTypesController#index as */*
+[bcad1d50-a230-40df-b5b5-f4f644d38f9f] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[8860a377-c790-490d-b17c-6369dc5f34a7] Started POST "/api/v1/user/login" for 102.215.79.238 at 2025-12-04 16:53:10 +0000
+[8860a377-c790-490d-b17c-6369dc5f34a7] Processing by Api::V1::SessionsController#login_user as */*
+[8860a377-c790-490d-b17c-6369dc5f34a7]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[8860a377-c790-490d-b17c-6369dc5f34a7] Completed 401 Unauthorized in 74ms (Views: 0.5ms | ActiveRecord: 58.3ms (1 query, 0 cached) | GC: 0.0ms)
+[954fd2a3-4e96-4154-bec8-fcff2e3d0ec8] Started GET "/" for 198.235.24.230 at 2025-12-04 18:40:29 +0000
+[954fd2a3-4e96-4154-bec8-fcff2e3d0ec8] Processing by StaticController#index as */*
+[954fd2a3-4e96-4154-bec8-fcff2e3d0ec8] Sent file /var/www/southcoastwebmain/public/index.html (14.8ms)
+[954fd2a3-4e96-4154-bec8-fcff2e3d0ec8] Completed 200 OK in 42ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[ccc0d725-313f-4262-aff3-ca7165aedbb8] Started GET "/" for 205.210.31.101 at 2025-12-04 19:01:56 +0000
+[ccc0d725-313f-4262-aff3-ca7165aedbb8] Processing by StaticController#index as HTML
+[ccc0d725-313f-4262-aff3-ca7165aedbb8] Sent file /var/www/southcoastwebmain/public/index.html (0.3ms)
+[ccc0d725-313f-4262-aff3-ca7165aedbb8] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[2ae82387-1151-4e8f-8081-06d4de577fa1] Started GET "/" for 104.248.113.42 at 2025-12-04 21:21:21 +0000
+[2ae82387-1151-4e8f-8081-06d4de577fa1] Processing by StaticController#index as HTML
+[2ae82387-1151-4e8f-8081-06d4de577fa1] Sent file /var/www/southcoastwebmain/public/index.html (1.0ms)
+[2ae82387-1151-4e8f-8081-06d4de577fa1] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[06df9499-0f42-4bea-b2a2-1085d798a8fd] Started GET "/api/v1/admin/profile" for 105.161.233.178 at 2025-12-04 21:25:02 +0000
+[06df9499-0f42-4bea-b2a2-1085d798a8fd] Processing by Api::V1::SessionsController#admin_profile as JSON
+[06df9499-0f42-4bea-b2a2-1085d798a8fd]   Parameters: {"session" => {}}
+[c75e07f2-8390-4a44-8d9d-1bea3ec1dc25] Started GET "/api/v1/admin/stats" for 105.161.233.178 at 2025-12-04 21:25:03 +0000
+[c75e07f2-8390-4a44-8d9d-1bea3ec1dc25] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[c75e07f2-8390-4a44-8d9d-1bea3ec1dc25]   Parameters: {"dashboard" => {}}
+[06df9499-0f42-4bea-b2a2-1085d798a8fd] Completed 200 OK in 505ms (Views: 7.2ms | ActiveRecord: 405.2ms (1 query, 0 cached) | GC: 5.9ms)
+[c75e07f2-8390-4a44-8d9d-1bea3ec1dc25] Completed 200 OK in 307ms (Views: 8.8ms | ActiveRecord: 159.7ms (5 queries, 0 cached) | GC: 0.0ms)
+[9ebf104e-8a8b-4c33-bee3-989bdd641acb] Started GET "/api/v1/admin/bookings" for 105.161.233.178 at 2025-12-04 21:25:03 +0000
+[f4793842-d5aa-41ee-b6c0-f69acd93b260] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 21:25:03 +0000
+[9ebf104e-8a8b-4c33-bee3-989bdd641acb] Processing by Api::V1::Admin::BookingsController#index as JSON
+[9ebf104e-8a8b-4c33-bee3-989bdd641acb]   Parameters: {"booking" => {}}
+[f4793842-d5aa-41ee-b6c0-f69acd93b260] Processing by Api::V1::NationalitiesController#index as */*
+[0b0f585a-15b0-4443-9e31-8491839169aa] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 21:25:03 +0000
+[0b0f585a-15b0-4443-9e31-8491839169aa] Processing by Api::V1::RoomTypesController#index as */*
+[f4793842-d5aa-41ee-b6c0-f69acd93b260] Completed 200 OK in 33ms (Views: 1.7ms | ActiveRecord: 8.3ms (1 query, 0 cached) | GC: 0.0ms)
+[9ebf104e-8a8b-4c33-bee3-989bdd641acb] Completed 200 OK in 57ms (Views: 7.1ms | ActiveRecord: 43.5ms (2 queries, 0 cached) | GC: 4.2ms)
+[0b0f585a-15b0-4443-9e31-8491839169aa] Completed 200 OK in 101ms (Views: 1.4ms | ActiveRecord: 79.0ms (1 query, 0 cached) | GC: 4.2ms)
+[bbde9875-294c-45cf-ba3f-293648b23240] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 21:41:55 +0000
+[bbde9875-294c-45cf-ba3f-293648b23240] Processing by Api::V1::NationalitiesController#index as */*
+[bbde9875-294c-45cf-ba3f-293648b23240] Completed 200 OK in 34ms (Views: 0.4ms | ActiveRecord: 32.3ms (1 query, 0 cached) | GC: 1.7ms)
+[ef9ec646-6b28-4147-ad70-41d489421a81] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 21:41:55 +0000
+[ef9ec646-6b28-4147-ad70-41d489421a81] Processing by Api::V1::RoomTypesController#index as */*
+[ef9ec646-6b28-4147-ad70-41d489421a81] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[aa583e75-6b53-4a49-bc01-a5f6f51037b2] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 21:42:03 +0000
+[aa583e75-6b53-4a49-bc01-a5f6f51037b2] Processing by Api::V1::NationalitiesController#index as */*
+[a3adde02-d369-4058-8b63-aafa3c46fcff] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 21:42:03 +0000
+[aa583e75-6b53-4a49-bc01-a5f6f51037b2] Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+[a3adde02-d369-4058-8b63-aafa3c46fcff] Processing by Api::V1::RoomTypesController#index as */*
+[a3adde02-d369-4058-8b63-aafa3c46fcff] Completed 200 OK in 32ms (Views: 0.7ms | ActiveRecord: 29.1ms (1 query, 0 cached) | GC: 0.0ms)
+[9bcba6df-5a86-4b7d-8bf4-6af569471572] Started POST "/api/v1/admin/login" for 105.161.233.178 at 2025-12-04 21:43:42 +0000
+[9bcba6df-5a86-4b7d-8bf4-6af569471572] Processing by Api::V1::SessionsController#login_admin as */*
+[9bcba6df-5a86-4b7d-8bf4-6af569471572]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[9bcba6df-5a86-4b7d-8bf4-6af569471572] Completed 200 OK in 231ms (Views: 0.3ms | ActiveRecord: 4.6ms (1 query, 0 cached) | GC: 0.0ms)
+[df5d74d8-937a-4ce3-af6f-92052fc2134e] Started GET "/api/v1/admin/profile" for 105.161.233.178 at 2025-12-04 21:43:47 +0000
+[df5d74d8-937a-4ce3-af6f-92052fc2134e] Processing by Api::V1::SessionsController#admin_profile as JSON
+[df5d74d8-937a-4ce3-af6f-92052fc2134e]   Parameters: {"session" => {}}
+[df5d74d8-937a-4ce3-af6f-92052fc2134e] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[9c49f95c-e4bd-4216-a74d-cf48be140245] Started GET "/api/v1/admin/stats" for 105.161.233.178 at 2025-12-04 21:43:47 +0000
+[9c49f95c-e4bd-4216-a74d-cf48be140245] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[9c49f95c-e4bd-4216-a74d-cf48be140245]   Parameters: {"dashboard" => {}}
+[9c49f95c-e4bd-4216-a74d-cf48be140245] Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 2.4ms (5 queries, 0 cached) | GC: 0.0ms)
+[e678b3f2-cb7e-4d14-a424-5532806adf13] Started GET "/api/v1/admin/bookings" for 105.161.233.178 at 2025-12-04 21:43:48 +0000
+[e678b3f2-cb7e-4d14-a424-5532806adf13] Processing by Api::V1::Admin::BookingsController#index as JSON
+[e678b3f2-cb7e-4d14-a424-5532806adf13]   Parameters: {"booking" => {}}
+[e678b3f2-cb7e-4d14-a424-5532806adf13] Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+[8df6a00b-de69-4de4-9e18-135e9d466706] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 21:43:48 +0000
+[8df6a00b-de69-4de4-9e18-135e9d466706] Processing by Api::V1::NationalitiesController#index as */*
+[8df6a00b-de69-4de4-9e18-135e9d466706] Completed 200 OK in 13ms (Views: 2.9ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+[d54f74a7-321a-4546-9443-a50403d14f53] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 21:43:48 +0000
+[d54f74a7-321a-4546-9443-a50403d14f53] Processing by Api::V1::RoomTypesController#index as */*
+[d54f74a7-321a-4546-9443-a50403d14f53] Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[63267fc0-5f47-4890-a33e-39de7ca1b5c4] Started GET "/api/v1/admin/profile" for 105.161.233.178 at 2025-12-04 22:24:35 +0000
+[63267fc0-5f47-4890-a33e-39de7ca1b5c4] Processing by Api::V1::SessionsController#admin_profile as JSON
+[63267fc0-5f47-4890-a33e-39de7ca1b5c4]   Parameters: {"session" => {}}
+[63267fc0-5f47-4890-a33e-39de7ca1b5c4] Completed 200 OK in 88ms (Views: 0.6ms | ActiveRecord: 35.4ms (1 query, 0 cached) | GC: 0.0ms)
+[542f257f-649e-49f0-8918-39a9fe395cb0] Started GET "/api/v1/admin/stats" for 105.161.233.178 at 2025-12-04 22:24:35 +0000
+[542f257f-649e-49f0-8918-39a9fe395cb0] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[542f257f-649e-49f0-8918-39a9fe395cb0]   Parameters: {"dashboard" => {}}
+[542f257f-649e-49f0-8918-39a9fe395cb0] Completed 200 OK in 36ms (Views: 0.3ms | ActiveRecord: 33.0ms (5 queries, 0 cached) | GC: 0.0ms)
+[a469ee19-73b4-4e44-bba1-6d99249b236d] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 22:24:35 +0000
+[a469ee19-73b4-4e44-bba1-6d99249b236d] Processing by Api::V1::NationalitiesController#index as */*
+[b0ac0260-b280-46ee-bbed-372e6b5d4073] Started GET "/api/v1/admin/bookings" for 105.161.233.178 at 2025-12-04 22:24:35 +0000
+[b0ac0260-b280-46ee-bbed-372e6b5d4073] Processing by Api::V1::Admin::BookingsController#index as JSON
+[b0ac0260-b280-46ee-bbed-372e6b5d4073]   Parameters: {"booking" => {}}
+[68b4adbf-9d06-4cda-aad1-c8ac637391d9] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 22:24:35 +0000
+[68b4adbf-9d06-4cda-aad1-c8ac637391d9] Processing by Api::V1::RoomTypesController#index as */*
+[68b4adbf-9d06-4cda-aad1-c8ac637391d9] Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+[a469ee19-73b4-4e44-bba1-6d99249b236d] Completed 200 OK in 28ms (Views: 1.8ms | ActiveRecord: 12.1ms (1 query, 0 cached) | GC: 0.0ms)
+[b0ac0260-b280-46ee-bbed-372e6b5d4073] Completed 200 OK in 49ms (Views: 0.8ms | ActiveRecord: 48.6ms (2 queries, 0 cached) | GC: 0.0ms)
