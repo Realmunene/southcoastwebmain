@@ -29,12 +29,6 @@ module BackendSouthcoastwebmain
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
 
-<<<<<<< HEAD
-    # Background jobs
-    config.active_job.queue_adapter = :inline
-
-    # Serve static frontend build (React)
-=======
     # CORS
     config.middleware.insert_before 0, Rack::Cors do
       allow do
@@ -50,8 +44,7 @@ module BackendSouthcoastwebmain
     # Background jobs
     config.active_job.queue_adapter = :inline
 
-    # ✅ Serve static frontend build (React)
->>>>>>> 2364cf9 (fixture)
+    # Serve static frontend build (React)
     config.public_file_server.enabled = true
     config.public_file_server.index_name = 'index.html'
   end

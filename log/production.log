@@ -2748,3 +2748,212 @@ Information for cause: NameError (uninitialized constant Api::V1::Rails):
 [e8bdc97f-7972-4f53-a435-a48305ff6bf0] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 10:58:06 +0000
 [e8bdc97f-7972-4f53-a435-a48305ff6bf0] Processing by Api::V1::RoomTypesController#index as */*
 [e8bdc97f-7972-4f53-a435-a48305ff6bf0] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[87bde759-8a52-4fad-adbe-a3c2703059e1] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 12:15:29 +0000
+[87bde759-8a52-4fad-adbe-a3c2703059e1] Processing by Api::V1::NationalitiesController#index as HTML
+[87bde759-8a52-4fad-adbe-a3c2703059e1] Completed 200 OK in 145ms (Views: 1.0ms | ActiveRecord: 47.5ms (1 query, 0 cached) | GC: 1.2ms)
+[c5e2236b-2cac-4077-a875-352ce3e80978] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 12:15:38 +0000
+[c5e2236b-2cac-4077-a875-352ce3e80978] Processing by Api::V1::NationalitiesController#index as */*
+[b405baa1-be68-459e-811a-d3ae5450b489] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 12:15:38 +0000
+[b405baa1-be68-459e-811a-d3ae5450b489] Processing by Api::V1::RoomTypesController#index as */*
+[b405baa1-be68-459e-811a-d3ae5450b489] Completed 200 OK in 27ms (Views: 1.7ms | ActiveRecord: 14.1ms (1 query, 0 cached) | GC: 0.9ms)
+[c5e2236b-2cac-4077-a875-352ce3e80978] Completed 200 OK in 65ms (Views: 0.7ms | ActiveRecord: 8.6ms (1 query, 0 cached) | GC: 0.9ms)
+[c38db54f-493a-40d6-a18c-d1a30a6a1850] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 12:15:39 +0000
+[c38db54f-493a-40d6-a18c-d1a30a6a1850] Processing by Api::V1::RoomTypesController#index as */*
+[5aecabd2-b83c-4e7c-9707-7aa94b92f927] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 12:15:39 +0000
+[5aecabd2-b83c-4e7c-9707-7aa94b92f927] Processing by Api::V1::NationalitiesController#index as */*
+[c38db54f-493a-40d6-a18c-d1a30a6a1850] Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 6.7ms (1 query, 0 cached) | GC: 1.2ms)
+[5aecabd2-b83c-4e7c-9707-7aa94b92f927] Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+[944e86d0-54bf-42b9-9991-38ebc26fd6bc] Started POST "/api/v1/user/login" for 41.81.51.216 at 2025-12-05 12:16:05 +0000
+[944e86d0-54bf-42b9-9991-38ebc26fd6bc] Processing by Api::V1::SessionsController#login_user as */*
+[944e86d0-54bf-42b9-9991-38ebc26fd6bc]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[944e86d0-54bf-42b9-9991-38ebc26fd6bc] Completed 401 Unauthorized in 7ms (Views: 0.2ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+[ee707020-2d00-4caf-8468-acb778961430] Started POST "/api/v1/users" for 41.81.51.216 at 2025-12-05 12:16:45 +0000
+[ee707020-2d00-4caf-8468-acb778961430] Processing by Api::V1::UsersController#create as */*
+[ee707020-2d00-4caf-8468-acb778961430]   Parameters: {"user" => {"name" => "online", "email" => "[FILTERED]", "phone" => "0769103222", "password" => "[FILTERED]"}}
+[ee707020-2d00-4caf-8468-acb778961430] Completed 201 Created in 235ms (Views: 0.6ms | ActiveRecord: 14.3ms (2 queries, 0 cached) | GC: 0.0ms)
+[88c59570-8fb3-4fd1-9033-faf4d3c4ded1] Started POST "/api/v1/user/login" for 41.81.51.216 at 2025-12-05 12:16:50 +0000
+[88c59570-8fb3-4fd1-9033-faf4d3c4ded1] Processing by Api::V1::SessionsController#login_user as */*
+[88c59570-8fb3-4fd1-9033-faf4d3c4ded1]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[88c59570-8fb3-4fd1-9033-faf4d3c4ded1] Completed 200 OK in 212ms (Views: 0.2ms | ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.0ms)
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] Started POST "/api/v1/bookings" for 41.81.51.216 at 2025-12-05 12:17:05 +0000
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] Processing by Api::V1::BookingsController#create as */*
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3]   Parameters: {"booking" => {"nationality" => "Afghanistan", "room_type" => "2 Bedroom Apartment - Living + Kitchen + 2 Ensuite", "check_in" => "2025-12-05", "check_out" => "2025-12-16", "adults" => 1, "children" => 0}}
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] [ActiveJob] [ActionMailer::MailDeliveryJob] [0d8e2f2a-a30b-4263-b797-eace4265b5c3] Performing ActionMailer::MailDeliveryJob (Job ID: 0d8e2f2a-a30b-4263-b797-eace4265b5c3) from Inline(default) enqueued at 2025-12-05T12:17:05.306443908Z with arguments: "BookingMailer", "new_booking_notification", "deliver_now", {params: {booking: #<GlobalID:0x000071cbbc35c178 @uri=#<URI::GID gid://backend-southcoastwebmain/Booking/2>>}, args: []}
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] [ActiveJob] [ActionMailer::MailDeliveryJob] [0d8e2f2a-a30b-4263-b797-eace4265b5c3]   Rendered layout layouts/mailer.html.erb (Duration: 1.2ms | GC: 0.0ms)
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] [ActiveJob] [ActionMailer::MailDeliveryJob] [0d8e2f2a-a30b-4263-b797-eace4265b5c3] Error performing ActionMailer::MailDeliveryJob (Job ID: 0d8e2f2a-a30b-4263-b797-eace4265b5c3) from Inline(default) in 16.15ms: ArgumentError (SMTP-AUTH requested but missing secret phrase):
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb:23:in 'Net::SMTP::Authenticator.check_args'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp.rb:884:in 'Net::SMTP#check_auth_args'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp.rb:669:in 'Net::SMTP#do_start'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp.rb:642:in 'Net::SMTP#start'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/network/delivery_methods/smtp.rb:154:in 'Mail::SMTP#start_smtp_session'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/network/delivery_methods/smtp.rb:108:in 'Mail::SMTP#deliver!'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/message.rb:2148:in 'Mail::Message#do_delivery'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/message.rb:253:in 'block in Mail::Message#deliver'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/base.rb:595:in 'block in ActionMailer::Base.deliver_mail'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/base.rb:593:in 'ActionMailer::Base.deliver_mail'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/message.rb:253:in 'Mail::Message#deliver'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:126:in 'block (2 levels) in ActionMailer::MessageDelivery#deliver_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:125:in 'block in ActionMailer::MessageDelivery#deliver_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/rescuable.rb:21:in 'ActionMailer::Rescuable#handle_exceptions'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:124:in 'ActionMailer::MessageDelivery#deliver_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/mail_delivery_job.rb:28:in 'ActionMailer::MailDeliveryJob#perform'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:68:in 'block in ActiveJob::Execution#_perform_job'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/i18n-1.14.7/lib/i18n.rb:353:in 'I18n::Base#with_locale'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/translation.rb:9:in 'block (2 levels) in <module:Translation>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/core_ext/time/zones.rb:65:in 'Time.use_zone'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/timezones.rb:9:in 'block (2 levels) in <module:Timezones>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:67:in 'ActiveJob::Execution#_perform_job'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:32:in 'ActiveJob::Instrumentation#_perform_job'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:51:in 'ActiveJob::Execution#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:26:in 'block in ActiveJob::Instrumentation#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:13:in 'block in ActiveRecord::Railties::JobRuntime#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:40:in 'block in ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:39:in 'ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:11:in 'ActiveRecord::Railties::JobRuntime#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:26:in 'ActiveJob::Instrumentation#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:32:in 'block in ActiveJob::Logging#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'block in ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:38:in 'ActiveSupport::TaggedLogging::Formatter#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/broadcast_logger.rb:228:in 'ActiveSupport::BroadcastLogger#method_missing'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:39:in 'ActiveJob::Logging#tag_logger'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:32:in 'ActiveJob::Logging#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:29:in 'block in ActiveJob::Execution::ClassMethods#execute'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/railtie.rb:95:in 'block (4 levels) in <class:Railtie>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/reloader.rb:77:in 'block in ActiveSupport::Reloader.wrap'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/execution_wrapper.rb:87:in 'ActiveSupport::ExecutionWrapper.wrap'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/reloader.rb:74:in 'ActiveSupport::Reloader.wrap'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/railtie.rb:94:in 'block (3 levels) in <class:Railtie>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:27:in 'ActiveJob::Execution::ClassMethods#execute'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/queue_adapters/inline_adapter.rb:15:in 'ActiveJob::QueueAdapters::InlineAdapter#enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueuing.rb:132:in 'ActiveJob::Enqueuing#raw_enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueue_after_transaction_commit.rb:40:in 'ActiveJob::EnqueueAfterTransactionCommit#raw_enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueuing.rb:117:in 'block in ActiveJob::Enqueuing#enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:40:in 'block in ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:39:in 'ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:18:in 'ActiveRecord::Railties::JobRuntime#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:21:in 'block (2 levels) in <module:Instrumentation>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'block in ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:38:in 'ActiveSupport::TaggedLogging::Formatter#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/broadcast_logger.rb:228:in 'ActiveSupport::BroadcastLogger#method_missing'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:39:in 'ActiveJob::Logging#tag_logger'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:28:in 'block (2 levels) in <module:Logging>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueuing.rb:116:in 'ActiveJob::Enqueuing#enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/configured_job.rb:15:in 'ActiveJob::ConfiguredJob#perform_later'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/parameterized.rb:148:in 'ActionMailer::Parameterized::MessageDelivery#enqueue_delivery'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:103:in 'ActionMailer::MessageDelivery#deliver_later'
+/var/www/southcoastwebmain/app/controllers/api/v1/bookings_controller.rb:74:in 'Api::V1::BookingsController#send_emails'
+/var/www/southcoastwebmain/app/controllers/api/v1/bookings_controller.rb:24:in 'Api::V1::BookingsController#create'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in 'ActionController::BasicImplicitRender#send_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in 'AbstractController::Base#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in 'ActionController::Rendering#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in 'block in AbstractController::Callbacks#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in 'AbstractController::Callbacks#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in 'ActionController::Rescue#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in 'block in ActionController::Instrumentation#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in 'ActionController::Instrumentation#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in 'ActionController::ParamsWrapper#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in 'ActiveRecord::Railties::ControllerRuntime#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in 'AbstractController::Base#process'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/etag.rb:29:in 'Rack::ETag#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/conditional_get.rb:44:in 'Rack::ConditionalGet#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/head.rb:15:in 'Rack::Head#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-cors-3.0.0/lib/rack/cors.rb:102:in 'Rack::Cors#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-cors-3.0.0/lib/rack/cors.rb:102:in 'Rack::Cors#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in 'Rails::Engine#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/server.rb:506:in 'Puma::Server#process_client'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/server.rb:265:in 'block in Puma::Server#run'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] [ActiveJob] Failed enqueuing ActionMailer::MailDeliveryJob to Inline(default): ArgumentError (SMTP-AUTH requested but missing secret phrase)
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] ❌ Failed to enqueue BookingMailer notifications: SMTP-AUTH requested but missing secret phrase
+[3fee10a1-eab4-4c90-9069-7e0d044de7e3] Completed 201 Created in 45ms (Views: 0.3ms | ActiveRecord: 8.9ms (4 queries, 0 cached) | GC: 0.0ms)
+[67b918fd-f0df-4ecb-ab35-be1d88512f6f] Started GET "/api/v1/bookings" for 41.81.51.216 at 2025-12-05 12:17:09 +0000
+[67b918fd-f0df-4ecb-ab35-be1d88512f6f] Processing by Api::V1::BookingsController#index as */*
+[67b918fd-f0df-4ecb-ab35-be1d88512f6f]   Parameters: {"booking" => {}}
+[67b918fd-f0df-4ecb-ab35-be1d88512f6f] Completed 200 OK in 14ms (Views: 7.5ms | ActiveRecord: 4.7ms (2 queries, 0 cached) | GC: 0.0ms)
+[2fc5bca8-3b3f-4197-91f7-25a120a67451] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 12:17:09 +0000
+[2fc5bca8-3b3f-4197-91f7-25a120a67451] Processing by Api::V1::RoomTypesController#index as */*
+[2fc5bca8-3b3f-4197-91f7-25a120a67451] Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[3a1beddc-1ed1-4edc-b3e0-fb26b7f52425] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 12:21:16 +0000
+[3a1beddc-1ed1-4edc-b3e0-fb26b7f52425] Processing by Api::V1::RoomTypesController#index as */*
+[3a1beddc-1ed1-4edc-b3e0-fb26b7f52425] Completed 200 OK in 44ms (Views: 0.5ms | ActiveRecord: 7.5ms (1 query, 0 cached) | GC: 0.6ms)
+[81eca55c-969a-42bb-a355-71812d71adfa] Started GET "/api/v1/bookings" for 41.81.51.216 at 2025-12-05 12:21:16 +0000
+[81eca55c-969a-42bb-a355-71812d71adfa] Processing by Api::V1::BookingsController#index as */*
+[81eca55c-969a-42bb-a355-71812d71adfa]   Parameters: {"booking" => {}}
+[81eca55c-969a-42bb-a355-71812d71adfa] Completed 200 OK in 35ms (Views: 11.3ms | ActiveRecord: 45.7ms (2 queries, 0 cached) | GC: 1.6ms)
+[c5185bc6-6ea4-4721-be52-8d49b015da05] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 12:21:19 +0000
+[6e9dc994-cbc9-43b0-a2f0-923881e39779] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 12:21:19 +0000
+[c5185bc6-6ea4-4721-be52-8d49b015da05] Processing by Api::V1::NationalitiesController#index as */*
+[6e9dc994-cbc9-43b0-a2f0-923881e39779] Processing by Api::V1::RoomTypesController#index as */*
+[6e9dc994-cbc9-43b0-a2f0-923881e39779] Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 5.0ms (1 query, 0 cached) | GC: 0.0ms)
+[c5185bc6-6ea4-4721-be52-8d49b015da05] Completed 200 OK in 17ms (Views: 0.5ms | ActiveRecord: 6.1ms (1 query, 0 cached) | GC: 1.1ms)

@@ -257,3 +257,5 @@ Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached
 [ActionDispatch::HostAuthorization::DefaultResponseApp] Blocked hosts: southcoastoutdoors.cloud
 ⚠️ Rack::Attack not loaded — skipping rate limiting.
 ✅ ResendDeliveryMethod registered successfully.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
