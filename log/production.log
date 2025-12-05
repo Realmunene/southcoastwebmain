@@ -2315,3 +2315,436 @@ Information for cause: NameError (uninitialized constant Api::V1::Rails):
 [68b4adbf-9d06-4cda-aad1-c8ac637391d9] Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
 [a469ee19-73b4-4e44-bba1-6d99249b236d] Completed 200 OK in 28ms (Views: 1.8ms | ActiveRecord: 12.1ms (1 query, 0 cached) | GC: 0.0ms)
 [b0ac0260-b280-46ee-bbed-372e6b5d4073] Completed 200 OK in 49ms (Views: 0.8ms | ActiveRecord: 48.6ms (2 queries, 0 cached) | GC: 0.0ms)
+[bfe3c157-c556-4d13-859b-77e60c911b7c] Started GET "/api/v1/admin/profile" for 105.161.233.178 at 2025-12-04 22:57:47 +0000
+[bfe3c157-c556-4d13-859b-77e60c911b7c] Processing by Api::V1::SessionsController#admin_profile as JSON
+[bfe3c157-c556-4d13-859b-77e60c911b7c]   Parameters: {"session" => {}}
+[bfe3c157-c556-4d13-859b-77e60c911b7c] Completed 200 OK in 36ms (Views: 0.2ms | ActiveRecord: 38.5ms (1 query, 0 cached) | GC: 3.5ms)
+[eb9789ef-0544-4131-8052-5addc08c7ddb] Started GET "/api/v1/admin/stats" for 105.161.233.178 at 2025-12-04 22:57:47 +0000
+[eb9789ef-0544-4131-8052-5addc08c7ddb] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[eb9789ef-0544-4131-8052-5addc08c7ddb]   Parameters: {"dashboard" => {}}
+[eb9789ef-0544-4131-8052-5addc08c7ddb] Completed 200 OK in 37ms (Views: 0.5ms | ActiveRecord: 35.0ms (5 queries, 0 cached) | GC: 0.0ms)
+[f175caae-6028-47b6-bb35-ec6d5cfc8f0c] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 22:57:48 +0000
+[f175caae-6028-47b6-bb35-ec6d5cfc8f0c] Processing by Api::V1::NationalitiesController#index as */*
+[e3d81c48-eb5d-4d0e-ab8d-9781405e4fc4] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 22:57:48 +0000
+[01573318-0b68-4337-ba7b-52500db678cf] Started GET "/api/v1/admin/bookings" for 105.161.233.178 at 2025-12-04 22:57:48 +0000
+[01573318-0b68-4337-ba7b-52500db678cf] Processing by Api::V1::Admin::BookingsController#index as JSON
+[01573318-0b68-4337-ba7b-52500db678cf]   Parameters: {"booking" => {}}
+[e3d81c48-eb5d-4d0e-ab8d-9781405e4fc4] Processing by Api::V1::RoomTypesController#index as */*
+[e3d81c48-eb5d-4d0e-ab8d-9781405e4fc4] Completed 200 OK in 7ms (Views: 0.9ms | ActiveRecord: 2.2ms (1 query, 0 cached) | GC: 0.0ms)
+[f175caae-6028-47b6-bb35-ec6d5cfc8f0c] Completed 200 OK in 21ms (Views: 0.4ms | ActiveRecord: 4.5ms (1 query, 0 cached) | GC: 3.3ms)
+[01573318-0b68-4337-ba7b-52500db678cf] Completed 200 OK in 53ms (Views: 2.8ms | ActiveRecord: 40.8ms (2 queries, 0 cached) | GC: 6.1ms)
+[d318aa8e-d428-4649-a654-22e01bb10a23] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 22:57:53 +0000
+[d318aa8e-d428-4649-a654-22e01bb10a23] Processing by Api::V1::NationalitiesController#index as */*
+[137b798e-a958-4179-bf8d-a0c3d61bae33] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 22:57:53 +0000
+[137b798e-a958-4179-bf8d-a0c3d61bae33] Processing by Api::V1::RoomTypesController#index as */*
+[137b798e-a958-4179-bf8d-a0c3d61bae33] Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+[d318aa8e-d428-4649-a654-22e01bb10a23] Completed 200 OK in 185ms (Views: 0.5ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 48.7ms)
+[fbff82a8-1376-4a4e-b557-2a0bba7b75c2] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 22:59:29 +0000
+[fbff82a8-1376-4a4e-b557-2a0bba7b75c2] Processing by Api::V1::NationalitiesController#index as */*
+[fbff82a8-1376-4a4e-b557-2a0bba7b75c2] Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+[f23a3e7b-eab8-43ad-855c-18533475df01] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 22:59:30 +0000
+[f23a3e7b-eab8-43ad-855c-18533475df01] Processing by Api::V1::RoomTypesController#index as */*
+[f23a3e7b-eab8-43ad-855c-18533475df01] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[13c13e5c-6e9c-47ce-a53b-6915d9454667] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 23:03:05 +0000
+[13c13e5c-6e9c-47ce-a53b-6915d9454667] Processing by Api::V1::NationalitiesController#index as */*
+[13c13e5c-6e9c-47ce-a53b-6915d9454667] Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 0.0ms)
+[e9bc83ad-fda9-42f7-90f4-4d2ee7fac8cf] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:03:06 +0000
+[e9bc83ad-fda9-42f7-90f4-4d2ee7fac8cf] Processing by Api::V1::RoomTypesController#index as */*
+[e9bc83ad-fda9-42f7-90f4-4d2ee7fac8cf] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[2774abb4-e115-4534-8acc-00c191e50982] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:10:22 +0000
+[2774abb4-e115-4534-8acc-00c191e50982] Processing by Api::V1::RoomTypesController#index as */*
+[acac2a4c-5709-4404-9ec0-428285e99363] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 23:10:22 +0000
+[acac2a4c-5709-4404-9ec0-428285e99363] Processing by Api::V1::NationalitiesController#index as */*
+[2774abb4-e115-4534-8acc-00c191e50982] Completed 200 OK in 77ms (Views: 0.2ms | ActiveRecord: 86.4ms (1 query, 0 cached) | GC: 4.6ms)
+[acac2a4c-5709-4404-9ec0-428285e99363] Completed 200 OK in 87ms (Views: 0.3ms | ActiveRecord: 88.6ms (1 query, 0 cached) | GC: 5.3ms)
+[522718b8-ad5d-4b0b-acb9-a73267279624] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:10:22 +0000
+[522718b8-ad5d-4b0b-acb9-a73267279624] Processing by Api::V1::RoomTypesController#index as */*
+[522718b8-ad5d-4b0b-acb9-a73267279624] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[b7b07241-3814-419c-badd-57375ebc1798] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 23:10:22 +0000
+[b7b07241-3814-419c-badd-57375ebc1798] Processing by Api::V1::NationalitiesController#index as */*
+[b7b07241-3814-419c-badd-57375ebc1798] Completed 200 OK in 17ms (Views: 0.8ms | ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 4.1ms)
+[472f986f-9401-4e8d-9a93-c7a4dcaf89d6] Started GET "/api/v1/admin/profile" for 105.161.233.178 at 2025-12-04 23:10:25 +0000
+[34ef5bc1-6e21-484a-a60e-2aefa583c9ec] Started GET "/api/v1/admin/stats" for 105.161.233.178 at 2025-12-04 23:10:25 +0000
+[472f986f-9401-4e8d-9a93-c7a4dcaf89d6] Processing by Api::V1::SessionsController#admin_profile as JSON
+[472f986f-9401-4e8d-9a93-c7a4dcaf89d6]   Parameters: {"session" => {}}
+[472f986f-9401-4e8d-9a93-c7a4dcaf89d6] Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 0.0ms)
+[34ef5bc1-6e21-484a-a60e-2aefa583c9ec] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[34ef5bc1-6e21-484a-a60e-2aefa583c9ec]   Parameters: {"dashboard" => {}}
+[34ef5bc1-6e21-484a-a60e-2aefa583c9ec] Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 5.0ms (5 queries, 0 cached) | GC: 0.0ms)
+[489c2e9c-c983-46fb-b778-dedae728529e] Started GET "/api/v1/admin/bookings" for 105.161.233.178 at 2025-12-04 23:10:25 +0000
+[489c2e9c-c983-46fb-b778-dedae728529e] Processing by Api::V1::Admin::BookingsController#index as JSON
+[489c2e9c-c983-46fb-b778-dedae728529e]   Parameters: {"booking" => {}}
+[dd8ad094-a333-42ed-9fba-d78e2020716b] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 23:10:25 +0000
+[dd8ad094-a333-42ed-9fba-d78e2020716b] Processing by Api::V1::NationalitiesController#index as */*
+[489c2e9c-c983-46fb-b778-dedae728529e] Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 4.8ms (2 queries, 0 cached) | GC: 0.0ms)
+[dd8ad094-a333-42ed-9fba-d78e2020716b] Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 3.0ms)
+[54face66-a0eb-4df5-8a0b-4ddbd1132e14] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:10:25 +0000
+[54face66-a0eb-4df5-8a0b-4ddbd1132e14] Processing by Api::V1::RoomTypesController#index as */*
+[54face66-a0eb-4df5-8a0b-4ddbd1132e14] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[8c5333dd-2b9c-436c-a5d0-929d73b63862] Started POST "/api/v1/users" for 105.161.233.178 at 2025-12-04 23:15:52 +0000
+[8c5333dd-2b9c-436c-a5d0-929d73b63862] Processing by Api::V1::UsersController#create as */*
+[8c5333dd-2b9c-436c-a5d0-929d73b63862]   Parameters: {"user" => {"name" => "t", "email" => "[FILTERED]", "phone" => "+254712396732", "password" => "[FILTERED]"}}
+[8c5333dd-2b9c-436c-a5d0-929d73b63862] Completed 201 Created in 347ms (Views: 1.6ms | ActiveRecord: 49.2ms (2 queries, 0 cached) | GC: 3.5ms)
+[d4d1f6f2-b04f-45e1-bcef-eec3b67fce92] Started POST "/api/v1/user/login" for 105.161.233.178 at 2025-12-04 23:15:58 +0000
+[d4d1f6f2-b04f-45e1-bcef-eec3b67fce92] Processing by Api::V1::SessionsController#login_user as */*
+[d4d1f6f2-b04f-45e1-bcef-eec3b67fce92]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[d4d1f6f2-b04f-45e1-bcef-eec3b67fce92] Completed 200 OK in 217ms (Views: 0.2ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+[9f08a613-99af-4c51-9062-4569542a25cb] Started POST "/api/v1/bookings" for 105.161.233.178 at 2025-12-04 23:16:25 +0000
+[9f08a613-99af-4c51-9062-4569542a25cb] Processing by Api::V1::BookingsController#create as */*
+[9f08a613-99af-4c51-9062-4569542a25cb]   Parameters: {"booking" => {"nationality" => "Kenya", "room_type" => "2 Bedroom Apartment - Living + Kitchen + 2 Ensuite", "check_in" => "2025-12-04", "check_out" => "2025-12-23", "adults" => 2, "children" => 0}}
+[9f08a613-99af-4c51-9062-4569542a25cb] [ActiveJob] [ActionMailer::MailDeliveryJob] [b6e82930-20f1-4e7d-882d-6a4840f92f99] Performing ActionMailer::MailDeliveryJob (Job ID: b6e82930-20f1-4e7d-882d-6a4840f92f99) from Inline(default) enqueued at 2025-12-04T23:16:26.091397131Z with arguments: "BookingMailer", "new_booking_notification", "deliver_now", {params: {booking: #<GlobalID:0x00007ba6c3214130 @uri=#<URI::GID gid://backend-southcoastwebmain/Booking/1>>}, args: []}
+[9f08a613-99af-4c51-9062-4569542a25cb] [ActiveJob] [ActionMailer::MailDeliveryJob] [b6e82930-20f1-4e7d-882d-6a4840f92f99]   Rendered layout layouts/mailer.html.erb (Duration: 12.9ms | GC: 0.0ms)
+[9f08a613-99af-4c51-9062-4569542a25cb] [ActiveJob] [ActionMailer::MailDeliveryJob] [b6e82930-20f1-4e7d-882d-6a4840f92f99] Error performing ActionMailer::MailDeliveryJob (Job ID: b6e82930-20f1-4e7d-882d-6a4840f92f99) from Inline(default) in 185.45ms: ArgumentError (SMTP-AUTH requested but missing secret phrase):
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp/authenticator.rb:23:in 'Net::SMTP::Authenticator.check_args'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp.rb:884:in 'Net::SMTP#check_auth_args'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp.rb:669:in 'Net::SMTP#do_start'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/net-smtp-0.5.1/lib/net/smtp.rb:642:in 'Net::SMTP#start'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/network/delivery_methods/smtp.rb:154:in 'Mail::SMTP#start_smtp_session'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/network/delivery_methods/smtp.rb:108:in 'Mail::SMTP#deliver!'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/message.rb:2148:in 'Mail::Message#do_delivery'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/message.rb:253:in 'block in Mail::Message#deliver'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/base.rb:595:in 'block in ActionMailer::Base.deliver_mail'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/base.rb:593:in 'ActionMailer::Base.deliver_mail'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/mail-2.9.0/lib/mail/message.rb:253:in 'Mail::Message#deliver'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:126:in 'block (2 levels) in ActionMailer::MessageDelivery#deliver_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:125:in 'block in ActionMailer::MessageDelivery#deliver_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/rescuable.rb:21:in 'ActionMailer::Rescuable#handle_exceptions'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:124:in 'ActionMailer::MessageDelivery#deliver_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/mail_delivery_job.rb:28:in 'ActionMailer::MailDeliveryJob#perform'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:68:in 'block in ActiveJob::Execution#_perform_job'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/i18n-1.14.7/lib/i18n.rb:353:in 'I18n::Base#with_locale'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/translation.rb:9:in 'block (2 levels) in <module:Translation>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/core_ext/time/zones.rb:65:in 'Time.use_zone'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/timezones.rb:9:in 'block (2 levels) in <module:Timezones>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:67:in 'ActiveJob::Execution#_perform_job'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:32:in 'ActiveJob::Instrumentation#_perform_job'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:51:in 'ActiveJob::Execution#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:26:in 'block in ActiveJob::Instrumentation#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:13:in 'block in ActiveRecord::Railties::JobRuntime#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:40:in 'block in ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:39:in 'ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:11:in 'ActiveRecord::Railties::JobRuntime#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:26:in 'ActiveJob::Instrumentation#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:32:in 'block in ActiveJob::Logging#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'block in ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:38:in 'ActiveSupport::TaggedLogging::Formatter#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/broadcast_logger.rb:228:in 'ActiveSupport::BroadcastLogger#method_missing'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:39:in 'ActiveJob::Logging#tag_logger'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:32:in 'ActiveJob::Logging#perform_now'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:29:in 'block in ActiveJob::Execution::ClassMethods#execute'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/railtie.rb:95:in 'block (4 levels) in <class:Railtie>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/reloader.rb:77:in 'block in ActiveSupport::Reloader.wrap'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/execution_wrapper.rb:87:in 'ActiveSupport::ExecutionWrapper.wrap'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/reloader.rb:74:in 'ActiveSupport::Reloader.wrap'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/railtie.rb:94:in 'block (3 levels) in <class:Railtie>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/execution.rb:27:in 'ActiveJob::Execution::ClassMethods#execute'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/queue_adapters/inline_adapter.rb:15:in 'ActiveJob::QueueAdapters::InlineAdapter#enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueuing.rb:132:in 'ActiveJob::Enqueuing#raw_enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueue_after_transaction_commit.rb:40:in 'ActiveJob::EnqueueAfterTransactionCommit#raw_enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueuing.rb:117:in 'block in ActiveJob::Enqueuing#enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:120:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:40:in 'block in ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:39:in 'ActiveJob::Instrumentation#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/job_runtime.rb:18:in 'ActiveRecord::Railties::JobRuntime#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/instrumentation.rb:21:in 'block (2 levels) in <module:Instrumentation>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'block in ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:38:in 'ActiveSupport::TaggedLogging::Formatter#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/tagged_logging.rb:143:in 'ActiveSupport::TaggedLogging#tagged'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/broadcast_logger.rb:228:in 'ActiveSupport::BroadcastLogger#method_missing'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:39:in 'ActiveJob::Logging#tag_logger'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/logging.rb:28:in 'block (2 levels) in <module:Logging>'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/enqueuing.rb:116:in 'ActiveJob::Enqueuing#enqueue'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activejob-8.0.4/lib/active_job/configured_job.rb:15:in 'ActiveJob::ConfiguredJob#perform_later'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/parameterized.rb:148:in 'ActionMailer::Parameterized::MessageDelivery#enqueue_delivery'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionmailer-8.0.4/lib/action_mailer/message_delivery.rb:103:in 'ActionMailer::MessageDelivery#deliver_later'
+/var/www/southcoastwebmain/app/controllers/api/v1/bookings_controller.rb:74:in 'Api::V1::BookingsController#send_emails'
+/var/www/southcoastwebmain/app/controllers/api/v1/bookings_controller.rb:24:in 'Api::V1::BookingsController#create'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/basic_implicit_render.rb:8:in 'ActionController::BasicImplicitRender#send_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:215:in 'AbstractController::Base#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/rendering.rb:193:in 'ActionController::Rendering#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:261:in 'block in AbstractController::Callbacks#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:109:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/callbacks.rb:260:in 'AbstractController::Callbacks#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/rescue.rb:27:in 'ActionController::Rescue#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:76:in 'block in ActionController::Instrumentation#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/instrumentation.rb:75:in 'ActionController::Instrumentation#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal/params_wrapper.rb:259:in 'ActionController::ParamsWrapper#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activerecord-8.0.4/lib/active_record/railties/controller_runtime.rb:39:in 'ActiveRecord::Railties::ControllerRuntime#process_action'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/abstract_controller/base.rb:152:in 'AbstractController::Base#process'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-session-2.1.1/lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/etag.rb:29:in 'Rack::ETag#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/conditional_get.rb:44:in 'Rack::ConditionalGet#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/head.rb:15:in 'Rack::Head#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/activesupport-8.0.4/lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/railties-8.0.4/lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/actionpack-8.0.4/lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-3.2.3/lib/rack/sendfile.rb:131:in 'Rack::Sendfile#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-cors-3.0.0/lib/rack/cors.rb:102:in 'Rack::Cors#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/rack-cors-3.0.0/lib/rack/cors.rb:102:in 'Rack::Cors#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/railties-8.0.4/lib/rails/engine.rb:535:in 'Rails::Engine#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/server.rb:506:in 'Puma::Server#process_client'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/server.rb:265:in 'block in Puma::Server#run'
+/root/.rbenv/versions/3.4.7/lib/ruby/gems/3.4.0/gems/puma-7.0.4/lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+[9f08a613-99af-4c51-9062-4569542a25cb] [ActiveJob] Failed enqueuing ActionMailer::MailDeliveryJob to Inline(default): ArgumentError (SMTP-AUTH requested but missing secret phrase)
+[9f08a613-99af-4c51-9062-4569542a25cb] ❌ Failed to enqueue BookingMailer notifications: SMTP-AUTH requested but missing secret phrase
+[9f08a613-99af-4c51-9062-4569542a25cb] Completed 201 Created in 434ms (Views: 1.0ms | ActiveRecord: 10.8ms (4 queries, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[febba1da-a0cf-43ae-b403-c9c4b5623b17] Started GET "/api/v1/bookings" for 105.161.233.178 at 2025-12-04 23:38:39 +0000
+[c6b7d11a-8f3e-4a6c-a264-cf78c0c7f650] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:38:39 +0000
+[c6b7d11a-8f3e-4a6c-a264-cf78c0c7f650] Processing by Api::V1::RoomTypesController#index as */*
+[febba1da-a0cf-43ae-b403-c9c4b5623b17] Processing by Api::V1::BookingsController#index as */*
+[febba1da-a0cf-43ae-b403-c9c4b5623b17]   Parameters: {"booking" => {}}
+[c6b7d11a-8f3e-4a6c-a264-cf78c0c7f650] Completed 200 OK in 123ms (Views: 0.5ms | ActiveRecord: 49.3ms (1 query, 0 cached) | GC: 0.0ms)
+[febba1da-a0cf-43ae-b403-c9c4b5623b17] Completed 200 OK in 43ms (Views: 6.8ms | ActiveRecord: 105.1ms (2 queries, 0 cached) | GC: 0.0ms)
+[d9200a80-dafa-482f-b610-1693954d1d14] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 23:39:06 +0000
+[47c7cbb8-93d8-40fa-80f3-367c4e0ef1c9] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:39:06 +0000
+[d9200a80-dafa-482f-b610-1693954d1d14] Processing by Api::V1::NationalitiesController#index as */*
+[47c7cbb8-93d8-40fa-80f3-367c4e0ef1c9] Processing by Api::V1::RoomTypesController#index as */*
+[47c7cbb8-93d8-40fa-80f3-367c4e0ef1c9] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[d9200a80-dafa-482f-b610-1693954d1d14] Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 4.9ms (1 query, 0 cached) | GC: 0.0ms)
+[08eca9f5-6748-43ef-9eb5-f32472260e7c] Started GET "/api/v1/admin/profile" for 105.161.233.178 at 2025-12-04 23:41:02 +0000
+[08eca9f5-6748-43ef-9eb5-f32472260e7c] Processing by Api::V1::SessionsController#admin_profile as JSON
+[08eca9f5-6748-43ef-9eb5-f32472260e7c]   Parameters: {"session" => {}}
+[08eca9f5-6748-43ef-9eb5-f32472260e7c] Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 3.5ms (1 query, 0 cached) | GC: 0.0ms)
+[30066cd1-5cae-49fd-86bc-3fb0f45bc9b8] Started GET "/api/v1/admin/stats" for 105.161.233.178 at 2025-12-04 23:41:02 +0000
+[30066cd1-5cae-49fd-86bc-3fb0f45bc9b8] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[30066cd1-5cae-49fd-86bc-3fb0f45bc9b8]   Parameters: {"dashboard" => {}}
+[30066cd1-5cae-49fd-86bc-3fb0f45bc9b8] Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.8ms (5 queries, 0 cached) | GC: 0.0ms)
+[fb165b87-5fb0-4e78-a749-6d5d36b8e2ab] Started GET "/api/v1/admin/bookings" for 105.161.233.178 at 2025-12-04 23:41:03 +0000
+[fb165b87-5fb0-4e78-a749-6d5d36b8e2ab] Processing by Api::V1::Admin::BookingsController#index as JSON
+[fb165b87-5fb0-4e78-a749-6d5d36b8e2ab]   Parameters: {"booking" => {}}
+[aa40139f-3974-450e-980f-5378cd08bf04] Started GET "/api/v1/nationalities" for 105.161.233.178 at 2025-12-04 23:41:03 +0000
+[aa40139f-3974-450e-980f-5378cd08bf04] Processing by Api::V1::NationalitiesController#index as */*
+[fb165b87-5fb0-4e78-a749-6d5d36b8e2ab] Completed 200 OK in 19ms (Views: 14.8ms | ActiveRecord: 3.5ms (2 queries, 0 cached) | GC: 0.0ms)
+[aa40139f-3974-450e-980f-5378cd08bf04] Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 19.0ms)
+[a8056a28-2f2e-4201-b2eb-8488b61d55dc] Started GET "/api/v1/room_types" for 105.161.233.178 at 2025-12-04 23:41:03 +0000
+[a8056a28-2f2e-4201-b2eb-8488b61d55dc] Processing by Api::V1::RoomTypesController#index as */*
+[a8056a28-2f2e-4201-b2eb-8488b61d55dc] Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[c443c538-19b3-4048-8195-a45527337bb8] Started GET "/" for 162.142.125.223 at 2025-12-05 02:54:43 +0000
+[c443c538-19b3-4048-8195-a45527337bb8] Processing by StaticController#index as */*
+[c443c538-19b3-4048-8195-a45527337bb8] Sent file /var/www/southcoastwebmain/public/index.html (26.0ms)
+[c443c538-19b3-4048-8195-a45527337bb8] Completed 200 OK in 57ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[1d232e6d-e45f-4c0d-89e6-c4be6226b270] Started GET "/favicon.ico" for 162.142.125.223 at 2025-12-05 02:54:49 +0000
+[1d232e6d-e45f-4c0d-89e6-c4be6226b270]   
+[1d232e6d-e45f-4c0d-89e6-c4be6226b270] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[1d232e6d-e45f-4c0d-89e6-c4be6226b270]   
+[82e53088-f3ba-4c26-ac11-1c85990e3fcc] Started GET "/sitemap.xml" for 162.142.125.223 at 2025-12-05 02:57:39 +0000
+[82e53088-f3ba-4c26-ac11-1c85990e3fcc]   
+[82e53088-f3ba-4c26-ac11-1c85990e3fcc] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[82e53088-f3ba-4c26-ac11-1c85990e3fcc]   
+[a51149f0-1723-48a3-8b38-b5a8351c9a23] Started GET "/api/v1/nationalities" for 40.77.177.89 at 2025-12-05 02:58:44 +0000
+[a51149f0-1723-48a3-8b38-b5a8351c9a23] Processing by Api::V1::NationalitiesController#index as */*
+[63143aab-575f-4c05-818e-8d4b403ad0e1] Started GET "/api/v1/room_types" for 40.77.177.89 at 2025-12-05 02:58:44 +0000
+[63143aab-575f-4c05-818e-8d4b403ad0e1] Processing by Api::V1::RoomTypesController#index as */*
+[63143aab-575f-4c05-818e-8d4b403ad0e1] Completed 200 OK in 576ms (Views: 5.6ms | ActiveRecord: 58.1ms (1 query, 0 cached) | GC: 9.2ms)
+[a51149f0-1723-48a3-8b38-b5a8351c9a23] Completed 200 OK in 584ms (Views: 9.7ms | ActiveRecord: 113.0ms (1 query, 0 cached) | GC: 20.5ms)
+[5afe13f5-58c0-4e88-a457-d4dd1d4907c4] Started GET "/api/v1/room_types" for 105.161.236.64 at 2025-12-05 06:48:56 +0000
+[5afe13f5-58c0-4e88-a457-d4dd1d4907c4] Processing by Api::V1::RoomTypesController#index as */*
+[8f3ce7ed-5e71-45a6-ba0f-7cb0390ec6ba] Started GET "/api/v1/nationalities" for 105.161.236.64 at 2025-12-05 06:48:56 +0000
+[8f3ce7ed-5e71-45a6-ba0f-7cb0390ec6ba] Processing by Api::V1::NationalitiesController#index as */*
+[5afe13f5-58c0-4e88-a457-d4dd1d4907c4] Completed 200 OK in 333ms (Views: 8.3ms | ActiveRecord: 289.0ms (1 query, 0 cached) | GC: 6.9ms)
+[8f3ce7ed-5e71-45a6-ba0f-7cb0390ec6ba] Completed 200 OK in 339ms (Views: 10.4ms | ActiveRecord: 95.5ms (1 query, 0 cached) | GC: 26.7ms)
+[9d18fce9-6d3d-415b-bdff-296711c577df] Started GET "/api/v1/nationalities" for 105.161.236.64 at 2025-12-05 06:51:13 +0000
+[9d18fce9-6d3d-415b-bdff-296711c577df] Processing by Api::V1::NationalitiesController#index as */*
+[0e89f86f-b0eb-4139-b654-9be083692858] Started GET "/api/v1/room_types" for 105.161.236.64 at 2025-12-05 06:51:13 +0000
+[0e89f86f-b0eb-4139-b654-9be083692858] Processing by Api::V1::RoomTypesController#index as */*
+[0e89f86f-b0eb-4139-b654-9be083692858] Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[9d18fce9-6d3d-415b-bdff-296711c577df] Completed 200 OK in 21ms (Views: 2.1ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 0.0ms)
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+⚠️ Rack::Attack not loaded — skipping rate limiting.
+✅ ResendDeliveryMethod registered successfully.
+⚠️ Missing RESEND_API_KEY — emails will not be sent.
+[81c2b740-d87e-4ee6-bde0-514381d8eba4] Started GET "/api/v1/room_types" for 105.161.236.64 at 2025-12-05 07:11:24 +0000
+[81c2b740-d87e-4ee6-bde0-514381d8eba4] Processing by Api::V1::RoomTypesController#index as */*
+[6b070305-5144-43ae-bf19-90e43159dc84] Started GET "/api/v1/nationalities" for 105.161.236.64 at 2025-12-05 07:11:24 +0000
+[6b070305-5144-43ae-bf19-90e43159dc84] Processing by Api::V1::NationalitiesController#index as */*
+[81c2b740-d87e-4ee6-bde0-514381d8eba4] Completed 200 OK in 139ms (Views: 1.6ms | ActiveRecord: 59.4ms (1 query, 0 cached) | GC: 0.6ms)
+[6b070305-5144-43ae-bf19-90e43159dc84] Completed 200 OK in 116ms (Views: 0.7ms | ActiveRecord: 35.0ms (1 query, 0 cached) | GC: 0.8ms)
+[742fe818-5f91-4bcf-99fd-3a71234808e3] Started GET "/api/v1/nationalities" for 105.161.236.64 at 2025-12-05 07:12:36 +0000
+[742fe818-5f91-4bcf-99fd-3a71234808e3] Processing by Api::V1::NationalitiesController#index as HTML
+[742fe818-5f91-4bcf-99fd-3a71234808e3] Completed 200 OK in 12ms (Views: 2.2ms | ActiveRecord: 3.0ms (1 query, 0 cached) | GC: 1.5ms)
+[a85a7259-11fa-4a00-b5f4-2d7078834629] Started GET "/api/v1/nationalities" for 105.161.236.64 at 2025-12-05 07:13:06 +0000
+[a85a7259-11fa-4a00-b5f4-2d7078834629] Processing by Api::V1::NationalitiesController#index as */*
+[97a62fc3-9c44-492a-b5eb-1a1ce8ed158d] Started GET "/api/v1/room_types" for 105.161.236.64 at 2025-12-05 07:13:06 +0000
+[97a62fc3-9c44-492a-b5eb-1a1ce8ed158d] Processing by Api::V1::RoomTypesController#index as */*
+[97a62fc3-9c44-492a-b5eb-1a1ce8ed158d] Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.0ms)
+[a85a7259-11fa-4a00-b5f4-2d7078834629] Completed 200 OK in 12ms (Views: 2.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 1.6ms)
+[574bc7ca-31e0-4d5e-88f4-19528c54db2d] Started GET "/api/v1/room_types" for 105.161.236.64 at 2025-12-05 07:14:25 +0000
+[574bc7ca-31e0-4d5e-88f4-19528c54db2d] Processing by Api::V1::RoomTypesController#index as HTML
+[574bc7ca-31e0-4d5e-88f4-19528c54db2d] Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 2.9ms (1 query, 0 cached) | GC: 0.0ms)
+[436db231-70af-4099-84c6-edb76fca5f73] Started GET "/api/v1/nationalities" for 196.96.203.106 at 2025-12-05 09:33:20 +0000
+[78895468-0cff-4abe-81a2-8f575898f5f2] Started GET "/api/v1/room_types" for 196.96.203.106 at 2025-12-05 09:33:20 +0000
+[436db231-70af-4099-84c6-edb76fca5f73] Processing by Api::V1::NationalitiesController#index as */*
+[78895468-0cff-4abe-81a2-8f575898f5f2] Processing by Api::V1::RoomTypesController#index as */*
+[78895468-0cff-4abe-81a2-8f575898f5f2] Completed 200 OK in 440ms (Views: 14.6ms | ActiveRecord: 300.1ms (1 query, 0 cached) | GC: 0.0ms)
+[436db231-70af-4099-84c6-edb76fca5f73] Completed 200 OK in 440ms (Views: 14.7ms | ActiveRecord: 302.7ms (1 query, 0 cached) | GC: 0.0ms)
+[2c529dac-c660-4107-bbf3-15f1d0d7e644] Started POST "/api/v1/admin/login" for 196.96.203.106 at 2025-12-05 09:34:56 +0000
+[2c529dac-c660-4107-bbf3-15f1d0d7e644] Processing by Api::V1::SessionsController#login_admin as */*
+[2c529dac-c660-4107-bbf3-15f1d0d7e644]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[2c529dac-c660-4107-bbf3-15f1d0d7e644] Completed 200 OK in 1408ms (Views: 0.8ms | ActiveRecord: 47.4ms (1 query, 0 cached) | GC: 285.5ms)
+[059cad67-bc93-4e61-abdf-debae0fdab21] Started GET "/api/v1/admin/stats" for 196.96.203.106 at 2025-12-05 09:35:46 +0000
+[3b6c1f50-0350-44f0-8e47-e13a4aa5146e] Started GET "/api/v1/admin/profile" for 196.96.203.106 at 2025-12-05 09:35:46 +0000
+[3b6c1f50-0350-44f0-8e47-e13a4aa5146e] Processing by Api::V1::SessionsController#admin_profile as JSON
+[3b6c1f50-0350-44f0-8e47-e13a4aa5146e]   Parameters: {"session" => {}}
+[059cad67-bc93-4e61-abdf-debae0fdab21] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[059cad67-bc93-4e61-abdf-debae0fdab21]   Parameters: {"dashboard" => {}}
+[059cad67-bc93-4e61-abdf-debae0fdab21] Completed 200 OK in 38ms (Views: 0.3ms | ActiveRecord: 12.1ms (5 queries, 0 cached) | GC: 0.0ms)
+[3b6c1f50-0350-44f0-8e47-e13a4aa5146e] Completed 200 OK in 274ms (Views: 0.4ms | ActiveRecord: 10.0ms (1 query, 0 cached) | GC: 57.1ms)
+[468c2421-5ed5-4015-bc43-d1fd5bfb8339] Started GET "/api/v1/admin/bookings" for 196.96.203.106 at 2025-12-05 09:35:47 +0000
+[468c2421-5ed5-4015-bc43-d1fd5bfb8339] Processing by Api::V1::Admin::BookingsController#index as JSON
+[468c2421-5ed5-4015-bc43-d1fd5bfb8339]   Parameters: {"booking" => {}}
+[468c2421-5ed5-4015-bc43-d1fd5bfb8339] Completed 200 OK in 64ms (Views: 55.6ms | ActiveRecord: 5.3ms (2 queries, 0 cached) | GC: 10.2ms)
+[16998e85-69f3-4abe-9fda-64ab17974ea9] Started GET "/api/v1/nationalities" for 196.96.203.106 at 2025-12-05 09:35:47 +0000
+[16998e85-69f3-4abe-9fda-64ab17974ea9] Processing by Api::V1::NationalitiesController#index as */*
+[16998e85-69f3-4abe-9fda-64ab17974ea9] Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+[23184847-8752-4dd0-b1d5-5458910a2572] Started GET "/api/v1/room_types" for 196.96.203.106 at 2025-12-05 09:35:47 +0000
+[23184847-8752-4dd0-b1d5-5458910a2572] Processing by Api::V1::RoomTypesController#index as */*
+[23184847-8752-4dd0-b1d5-5458910a2572] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[a1a6319f-9712-4348-b16f-a3d90fa9a5e0] Started GET "/api/v1/admin/users" for 196.96.203.106 at 2025-12-05 09:35:54 +0000
+[a1a6319f-9712-4348-b16f-a3d90fa9a5e0] Processing by Api::V1::Admin::UsersController#index as */*
+[a1a6319f-9712-4348-b16f-a3d90fa9a5e0] Completed 200 OK in 31ms (Views: 22.1ms | ActiveRecord: 3.8ms (2 queries, 0 cached) | GC: 6.1ms)
+[51b9b2ab-715d-4b1c-8234-1ad242291f36] Started GET "/api/v1/admin/profile" for 196.96.203.106 at 2025-12-05 10:07:56 +0000
+[51b9b2ab-715d-4b1c-8234-1ad242291f36] Processing by Api::V1::SessionsController#admin_profile as JSON
+[51b9b2ab-715d-4b1c-8234-1ad242291f36]   Parameters: {"session" => {}}
+[4e2c430f-0e70-4056-81d3-69738ed26ab6] Started GET "/api/v1/admin/stats" for 196.96.203.106 at 2025-12-05 10:07:56 +0000
+[4e2c430f-0e70-4056-81d3-69738ed26ab6] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[4e2c430f-0e70-4056-81d3-69738ed26ab6]   Parameters: {"dashboard" => {}}
+[51b9b2ab-715d-4b1c-8234-1ad242291f36] Completed 200 OK in 59ms (Views: 0.2ms | ActiveRecord: 56.9ms (1 query, 0 cached) | GC: 4.0ms)
+[4e2c430f-0e70-4056-81d3-69738ed26ab6] Completed 200 OK in 77ms (Views: 0.2ms | ActiveRecord: 81.1ms (5 queries, 0 cached) | GC: 13.6ms)
+[9691a8ec-7c02-4623-8f22-677c165f66ae] Started GET "/api/v1/admin/bookings" for 196.96.203.106 at 2025-12-05 10:07:56 +0000
+[9691a8ec-7c02-4623-8f22-677c165f66ae] Processing by Api::V1::Admin::BookingsController#index as JSON
+[9691a8ec-7c02-4623-8f22-677c165f66ae]   Parameters: {"booking" => {}}
+[9691a8ec-7c02-4623-8f22-677c165f66ae] Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 1.5ms (2 queries, 0 cached) | GC: 0.0ms)
+[08464588-ac4f-4914-a8df-f1c89d1474cc] Started GET "/api/v1/nationalities" for 196.96.203.106 at 2025-12-05 10:07:57 +0000
+[08464588-ac4f-4914-a8df-f1c89d1474cc] Processing by Api::V1::NationalitiesController#index as */*
+[08464588-ac4f-4914-a8df-f1c89d1474cc] Completed 200 OK in 19ms (Views: 0.7ms | ActiveRecord: 1.8ms (1 query, 0 cached) | GC: 6.6ms)
+[518c6057-b0d0-4cbb-9131-66d8496a011b] Started GET "/api/v1/room_types" for 196.96.203.106 at 2025-12-05 10:07:57 +0000
+[518c6057-b0d0-4cbb-9131-66d8496a011b] Processing by Api::V1::RoomTypesController#index as */*
+[518c6057-b0d0-4cbb-9131-66d8496a011b] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[2a316b98-935e-4cff-9f92-057920f41d57] Started GET "/api/v1/admin/profile" for 41.81.51.216 at 2025-12-05 10:51:17 +0000
+[709330a9-d060-460c-8672-6e6693e051c4] Started GET "/api/v1/admin/stats" for 41.81.51.216 at 2025-12-05 10:51:17 +0000
+[2a316b98-935e-4cff-9f92-057920f41d57] Processing by Api::V1::SessionsController#admin_profile as JSON
+[2a316b98-935e-4cff-9f92-057920f41d57]   Parameters: {"session" => {}}
+[709330a9-d060-460c-8672-6e6693e051c4] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[709330a9-d060-460c-8672-6e6693e051c4]   Parameters: {"dashboard" => {}}
+[2a316b98-935e-4cff-9f92-057920f41d57] Completed 200 OK in 123ms (Views: 2.4ms | ActiveRecord: 98.6ms (1 query, 0 cached) | GC: 4.8ms)
+[709330a9-d060-460c-8672-6e6693e051c4] Completed 200 OK in 142ms (Views: 1.9ms | ActiveRecord: 112.9ms (5 queries, 0 cached) | GC: 8.5ms)
+[b6b6e465-d841-444c-b51c-821a07605462] Started GET "/api/v1/admin/bookings" for 41.81.51.216 at 2025-12-05 10:51:18 +0000
+[b6b6e465-d841-444c-b51c-821a07605462] Processing by Api::V1::Admin::BookingsController#index as JSON
+[b6b6e465-d841-444c-b51c-821a07605462]   Parameters: {"booking" => {}}
+[a273e059-6202-48dc-8ba9-27cbb5a64b06] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 10:51:18 +0000
+[a273e059-6202-48dc-8ba9-27cbb5a64b06] Processing by Api::V1::NationalitiesController#index as */*
+[a273e059-6202-48dc-8ba9-27cbb5a64b06] Completed 200 OK in 18ms (Views: 2.0ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+[e0270b6a-83b3-47ce-8497-69e3c55a342c] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 10:51:18 +0000
+[e0270b6a-83b3-47ce-8497-69e3c55a342c] Processing by Api::V1::RoomTypesController#index as */*
+[e0270b6a-83b3-47ce-8497-69e3c55a342c] Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+[b6b6e465-d841-444c-b51c-821a07605462] Completed 200 OK in 234ms (Views: 157.8ms | ActiveRecord: 20.2ms (2 queries, 0 cached) | GC: 24.6ms)
+[cb651b72-34b9-404d-8c04-642784bfbad0] Started GET "/api/v1/admin/profile" for 41.81.51.216 at 2025-12-05 10:53:14 +0000
+[cb651b72-34b9-404d-8c04-642784bfbad0] Processing by Api::V1::SessionsController#admin_profile as JSON
+[cb651b72-34b9-404d-8c04-642784bfbad0]   Parameters: {"session" => {}}
+[cb651b72-34b9-404d-8c04-642784bfbad0] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+[0605a563-a366-41ff-be2d-cbce914cd7e9] Started GET "/api/v1/admin/stats" for 41.81.51.216 at 2025-12-05 10:53:14 +0000
+[0605a563-a366-41ff-be2d-cbce914cd7e9] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[0605a563-a366-41ff-be2d-cbce914cd7e9]   Parameters: {"dashboard" => {}}
+[0605a563-a366-41ff-be2d-cbce914cd7e9] Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.4ms (5 queries, 0 cached) | GC: 0.0ms)
+[904a6721-938b-4d14-a8aa-3e69a90be8e9] Started GET "/api/v1/admin/bookings" for 41.81.51.216 at 2025-12-05 10:53:15 +0000
+[904a6721-938b-4d14-a8aa-3e69a90be8e9] Processing by Api::V1::Admin::BookingsController#index as JSON
+[904a6721-938b-4d14-a8aa-3e69a90be8e9]   Parameters: {"booking" => {}}
+[904a6721-938b-4d14-a8aa-3e69a90be8e9] Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+[25f29a75-b5d9-4312-be94-2f1b39690b8a] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 10:53:15 +0000
+[25f29a75-b5d9-4312-be94-2f1b39690b8a] Processing by Api::V1::NationalitiesController#index as */*
+[25f29a75-b5d9-4312-be94-2f1b39690b8a] Completed 200 OK in 13ms (Views: 1.6ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+[97679173-5dc4-4828-babf-6ec6c2b94de8] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 10:53:15 +0000
+[97679173-5dc4-4828-babf-6ec6c2b94de8] Processing by Api::V1::RoomTypesController#index as */*
+[97679173-5dc4-4828-babf-6ec6c2b94de8] Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+[b7912f3e-7f58-4347-8149-57e182deaf3c] Started GET "/api/v1/admin/stats" for 41.81.51.216 at 2025-12-05 10:58:05 +0000
+[b7912f3e-7f58-4347-8149-57e182deaf3c] Processing by Api::V1::Admin::DashboardController#stats as JSON
+[b7912f3e-7f58-4347-8149-57e182deaf3c]   Parameters: {"dashboard" => {}}
+[d18f5981-64fd-459b-b93b-57a0a632ce3e] Started GET "/api/v1/admin/profile" for 41.81.51.216 at 2025-12-05 10:58:05 +0000
+[d18f5981-64fd-459b-b93b-57a0a632ce3e] Processing by Api::V1::SessionsController#admin_profile as JSON
+[d18f5981-64fd-459b-b93b-57a0a632ce3e]   Parameters: {"session" => {}}
+[d18f5981-64fd-459b-b93b-57a0a632ce3e] Completed 200 OK in 6ms (Views: 1.1ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[b7912f3e-7f58-4347-8149-57e182deaf3c] Completed 200 OK in 43ms (Views: 0.4ms | ActiveRecord: 6.1ms (5 queries, 0 cached) | GC: 0.0ms)
+[cadd32b9-0718-4357-b7f3-d504737a77d2] Started GET "/api/v1/admin/bookings" for 41.81.51.216 at 2025-12-05 10:58:06 +0000
+[cadd32b9-0718-4357-b7f3-d504737a77d2] Processing by Api::V1::Admin::BookingsController#index as JSON
+[cadd32b9-0718-4357-b7f3-d504737a77d2]   Parameters: {"booking" => {}}
+[cadd32b9-0718-4357-b7f3-d504737a77d2] Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+[39095980-e082-4910-8f2b-67c1d271a2d7] Started GET "/api/v1/nationalities" for 41.81.51.216 at 2025-12-05 10:58:06 +0000
+[39095980-e082-4910-8f2b-67c1d271a2d7] Processing by Api::V1::NationalitiesController#index as */*
+[39095980-e082-4910-8f2b-67c1d271a2d7] Completed 200 OK in 10ms (Views: 1.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[e8bdc97f-7972-4f53-a435-a48305ff6bf0] Started GET "/api/v1/room_types" for 41.81.51.216 at 2025-12-05 10:58:06 +0000
+[e8bdc97f-7972-4f53-a435-a48305ff6bf0] Processing by Api::V1::RoomTypesController#index as */*
+[e8bdc97f-7972-4f53-a435-a48305ff6bf0] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
