@@ -29,22 +29,10 @@ module BackendSouthcoastwebmain
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
 
-    # CORS
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins 'http://localhost:3001'
-        resource '*',
-                 headers: :any,
-                 methods: %i[get post put patch delete options head],
-                 expose: ['Authorization'],
-                 credentials: false
-      end
-    end
-
     # Background jobs
     config.active_job.queue_adapter = :inline
 
-    # ✅ Serve static frontend build (React)
+    # Serve static frontend build (React)
     config.public_file_server.enabled = true
     config.public_file_server.index_name = 'index.html'
   end
