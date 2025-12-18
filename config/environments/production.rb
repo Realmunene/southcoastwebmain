@@ -21,7 +21,7 @@ Rails.application.configure do
   # ✅ Action Mailer Configuration (Resend)
   # -----------------------------------------------
   config.action_mailer.default_url_options = {
-    host: ENV.fetch("APP_HOST", "backend-southcoastwebmain-1.onrender.com"),
+    host: "southcoastoutdoors.cloud",
     protocol: "https"
   }
 
@@ -36,12 +36,12 @@ Rails.application.configure do
     port: 587,
     user_name: "resend",
     password: ENV["RESEND_API_KEY"],
-    authentication: :plain,
+    authentication: :login,
     enable_starttls_auto: true
   }
 
   config.action_mailer.default_options = {
-    from: 'Acme <onboarding@resend.dev>'
+    from: 'South Coast Outdoors <no-reply@southcoastoutdoors.cloud>'
   }
 
   # ✅ Mailer logging

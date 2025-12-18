@@ -1,8 +1,9 @@
 # db/seeds.rb
-
 require 'countries'
 
-# ---- Seed Nationalities (all countries in the world) ----
+# --------------------
+# Seed Nationalities
+# --------------------
 puts "🌍 Seeding nationalities..."
 Nationality.destroy_all
 
@@ -15,8 +16,11 @@ ISO3166::Country.all
 
 puts "✅ Seeded #{Nationality.count} nationalities."
 
-# ---- Seed Room Types (with prices) ----
+# --------------------
+# Seed Room Types (with prices)
+# --------------------
 puts "🏨 Seeding room types..."
+
 room_options = [
   { name: "1-Executive Room - 2Pax-X3", price: 65 },
   { name: "2-Connected Room - 4Pax-X3", price: 100 },
@@ -36,61 +40,44 @@ end
 
 puts "✅ Seeded #{RoomType.count} unique room types with prices."
 
-# ---- Seed Admin Accounts ----
+# --------------------
+# Seed Admin Users
+# --------------------
 puts "👑 Seeding admin users..."
 
-# Define roles as integers
-SUPER_ADMIN = 0
-ADMIN = 1
-
-# Super admins we want created
+# Super admin configuration
 super_admins = [
-  {
-    email: "southcoastoutdoors25@gmail.com",
-    name: "Super Admin (Main)"
-  }
+  { email: "southcoastoutdoors25@gmail.com", name: "Super Admin (Main)" }
 ]
 
-# Loop through and create super admins
-# Update this part in your seeds.rb
 super_admins.each do |sa|
-  begin
-    admin = Admin.find_or_initialize_by(email: sa[:email])
-    
-    if admin.new_record?
-      admin.assign_attributes(
-        password: "Admin@123",
-        password_confirmation: "Admin@123",
-        role: SUPER_ADMIN,
-        name: sa[:name]
-      )
-      admin.save!
-      puts "✅ Super Admin created: #{sa[:email]}"
-    else
-      # Update existing admin to ensure they have super admin role
-      admin.update!(role: SUPER_ADMIN, name: sa[:name])
-      puts "✅ Super Admin updated: #{sa[:email]}"
-    end
-  rescue => e
-    puts "⚠️ Issue with creating/updating #{sa[:email]}: #{e.message}"
-    puts "   Error details: #{e.backtrace.first}"
+  admin = Admin.find_or_initialize_by(email: sa[:email])
+  admin.name = sa[:name]
+  admin.role = :super_admin
+  admin.password = "Admin@123"
+  admin.password_confirmation = "Admin@123"
+
+  if admin.save
+    puts "✅ Super Admin active: #{sa[:email]}"
+  else
+    puts "⚠️ Issue creating Super Admin #{sa[:email]}: #{admin.errors.full_messages.join(', ')}"
   end
 end
 
+# Backup admin (create only if no admin exists)
+if Admin.admin.none?
+  backup_admin = Admin.new(
+    email: "admin@example.com",
+    name: "System Administrator",
+    role: :admin,
+    password: "Admin123!",
+    password_confirmation: "Admin123!"
+  )
 
-# Create backup admin only if no role=1 admins exist
-if Admin.where(role: ADMIN).none?
-  begin
-    Admin.create!(
-      email: "onlinemunene@gmail.com",
-      password: "Admin123!",
-      password_confirmation: "Admin123!",
-      name: "System Administrator",
-      role: ADMIN
-    )
+  if backup_admin.save
     puts "✅ Backup Admin user created: admin@example.com"
-  rescue => e
-    puts "⚠️ Backup admin creation issue: #{e.message}"
+  else
+    puts "⚠️ Backup admin creation issue: #{backup_admin.errors.full_messages.join(', ')}"
   end
 else
   puts "ℹ️ Additional admin(s) already exist. No backup admin created."

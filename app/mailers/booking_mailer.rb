@@ -1,6 +1,6 @@
 # app/mailers/booking_mailer.rb
 class BookingMailer < ApplicationMailer
-  default from: 'no-reply@southcoastoutdoors.cloud'
+  default from: 'no-reply@no-reply.southcoastoutdoors.cloud'
 
   # Sent to the user who made the booking
   def new_booking_notification

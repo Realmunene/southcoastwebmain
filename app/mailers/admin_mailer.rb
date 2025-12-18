@@ -1,5 +1,5 @@
 class AdminMailer < ApplicationMailer
-  default from: 'admin@southcoastoutdoors.cloud'
+  default from: 'admin@no-reply.southcoastoutdoors.cloud'
   
   def password_reset(admin)
     @admin = admin

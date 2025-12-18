@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@southcoastoutdoors.cloud'
+  default from: 'noreply@no-reply.southcoastoutdoors.cloud'
   layout 'mailer'
 end
 

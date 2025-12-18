@@ -19,7 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_232647) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role"
+    t.integer "role", default: 0
     t.string "name"
     t.datetime "last_login_at"
     t.string "reset_password_token"
@@ -40,7 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_232647) do
     t.integer "children", default: 0, null: false
     t.string "payment_status"
     t.string "mpesa_phone"
-    t.decimal "payment_amount"
+    t.decimal "payment_amount", precision: 10, scale: 2
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
@@ -74,16 +74,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_232647) do
     t.index ["reset_password_token"], name: "index_partners_on_reset_password_token", unique: true
   end
 
-  create_table "payments", force: :cascade do |t|
-    t.bigint "booking_id", null: false
-    t.string "status"
-    t.decimal "amount"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["booking_id"], name: "index_payments_on_booking_id"
-  end
-
   create_table "revoked_tokens", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "expires_at"
@@ -100,13 +90,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_232647) do
     t.decimal "price"
   end
 
-  create_table "support_messages", force: :cascade do |t|
-    t.string "email"
-    t.text "massage"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -121,5 +104,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_232647) do
   end
 
   add_foreign_key "bookings", "users"
-  add_foreign_key "payments", "bookings"
 end

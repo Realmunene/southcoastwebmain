@@ -1,5 +1,5 @@
 class PartnerMailer < ApplicationMailer
-  default from: 'partners@southcoastoutdoors.cloud'
+  default from: 'no-reply.southcoastoutdoors.cloud'
   
   def password_reset(partner)
     @partner = partner
