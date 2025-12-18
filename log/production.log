@@ -6192,3 +6192,745 @@ Information for cause: NameError (uninitialized constant Api::V1::Rails):
 [9ae9bc49-7a44-495e-be32-0a7bbb877139] Processing by StaticController#index as */*
 [9ae9bc49-7a44-495e-be32-0a7bbb877139] Sent file /var/www/southcoastwebmain/public/index.html (14.5ms)
 [9ae9bc49-7a44-495e-be32-0a7bbb877139] Completed 200 OK in 40ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[aa12d1d7-e19a-4e6e-928b-9cfdf1f40869] Started GET "/api/v1/room_types" for 41.90.40.240 at 2025-12-08 15:41:23 +0000
+[aa12d1d7-e19a-4e6e-928b-9cfdf1f40869] Processing by Api::V1::RoomTypesController#index as */*
+[adf3b5df-7e78-4eb4-bb90-adafe4b9adfb] Started GET "/api/v1/nationalities" for 41.90.40.240 at 2025-12-08 15:41:23 +0000
+[adf3b5df-7e78-4eb4-bb90-adafe4b9adfb] Processing by Api::V1::NationalitiesController#index as */*
+[aa12d1d7-e19a-4e6e-928b-9cfdf1f40869] Completed 200 OK in 385ms (Views: 6.9ms | ActiveRecord: 287.3ms (1 query, 0 cached) | GC: 3.9ms)
+[adf3b5df-7e78-4eb4-bb90-adafe4b9adfb] Completed 200 OK in 270ms (Views: 10.6ms | ActiveRecord: 201.0ms (1 query, 0 cached) | GC: 6.3ms)
+[e08d3a2e-47a6-44df-bdf0-ba5e130afdf2] Started GET "/api/v1/nationalities" for 41.90.40.240 at 2025-12-08 16:39:07 +0000
+[16ac0d58-3582-476b-b455-6a9d769e60a9] Started GET "/api/v1/room_types" for 41.90.40.240 at 2025-12-08 16:39:07 +0000
+[16ac0d58-3582-476b-b455-6a9d769e60a9] Processing by Api::V1::RoomTypesController#index as */*
+[e08d3a2e-47a6-44df-bdf0-ba5e130afdf2] Processing by Api::V1::NationalitiesController#index as */*
+[16ac0d58-3582-476b-b455-6a9d769e60a9] Completed 200 OK in 93ms (Views: 3.5ms | ActiveRecord: 67.3ms (1 query, 0 cached) | GC: 0.0ms)
+[e08d3a2e-47a6-44df-bdf0-ba5e130afdf2] Completed 200 OK in 106ms (Views: 5.3ms | ActiveRecord: 73.8ms (1 query, 0 cached) | GC: 0.0ms)
+[f88f6975-eac1-47ec-a58e-8741c9c1d94c] Started GET "/" for 46.101.92.0 at 2025-12-08 18:12:12 +0000
+[f88f6975-eac1-47ec-a58e-8741c9c1d94c] Processing by StaticController#index as HTML
+[f88f6975-eac1-47ec-a58e-8741c9c1d94c] Sent file /var/www/southcoastwebmain/public/index.html (12.1ms)
+[f88f6975-eac1-47ec-a58e-8741c9c1d94c] Completed 200 OK in 35ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[c3f2a07a-8e14-4aa0-9cd7-8f952ccc3ec6] Started GET "/api/v1/room_types" for 116.91.213.215 at 2025-12-08 18:35:02 +0000
+[c3f2a07a-8e14-4aa0-9cd7-8f952ccc3ec6] Processing by Api::V1::RoomTypesController#index as */*
+[9f9858f9-7283-40e3-8321-1b157ebbb190] Started GET "/api/v1/nationalities" for 116.91.213.215 at 2025-12-08 18:35:02 +0000
+[9f9858f9-7283-40e3-8321-1b157ebbb190] Processing by Api::V1::NationalitiesController#index as */*
+[c3f2a07a-8e14-4aa0-9cd7-8f952ccc3ec6] Completed 200 OK in 442ms (Views: 8.8ms | ActiveRecord: 337.0ms (1 query, 0 cached) | GC: 5.5ms)
+[9f9858f9-7283-40e3-8321-1b157ebbb190] Completed 200 OK in 238ms (Views: 6.4ms | ActiveRecord: 138.0ms (1 query, 0 cached) | GC: 6.1ms)
+[3359a589-d4ce-4f8f-bcbc-fedb4807cbde] Started GET "/" for 198.235.24.247 at 2025-12-08 19:53:02 +0000
+[3359a589-d4ce-4f8f-bcbc-fedb4807cbde] Processing by StaticController#index as */*
+[3359a589-d4ce-4f8f-bcbc-fedb4807cbde] Sent file /var/www/southcoastwebmain/public/index.html (11.3ms)
+[3359a589-d4ce-4f8f-bcbc-fedb4807cbde] Completed 200 OK in 27ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[04472e6c-7d1e-4273-9ce5-6d08fc1f733a] Started GET "/api/v1/room_types" for 95.177.163.4 at 2025-12-09 01:30:28 +0000
+[a5bb898e-9caa-463d-8a78-4b72183985a0] Started GET "/api/v1/nationalities" for 95.177.163.4 at 2025-12-09 01:30:28 +0000
+[a5bb898e-9caa-463d-8a78-4b72183985a0] Processing by Api::V1::NationalitiesController#index as */*
+[04472e6c-7d1e-4273-9ce5-6d08fc1f733a] Processing by Api::V1::RoomTypesController#index as */*
+[04472e6c-7d1e-4273-9ce5-6d08fc1f733a] Completed 200 OK in 445ms (Views: 15.9ms | ActiveRecord: 338.2ms (1 query, 0 cached) | GC: 0.0ms)
+[a5bb898e-9caa-463d-8a78-4b72183985a0] Completed 200 OK in 446ms (Views: 10.1ms | ActiveRecord: 341.9ms (1 query, 0 cached) | GC: 0.0ms)
+[b3e48a62-1b76-4730-878f-bee8a358c929] Started GET "/" for 205.210.31.184 at 2025-12-09 06:15:27 +0000
+[b3e48a62-1b76-4730-878f-bee8a358c929] Processing by StaticController#index as HTML
+[b3e48a62-1b76-4730-878f-bee8a358c929] Sent file /var/www/southcoastwebmain/public/index.html (15.5ms)
+[b3e48a62-1b76-4730-878f-bee8a358c929] Completed 200 OK in 41ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[ea1d1243-8b0d-4171-8ae7-4abae521a556] Started GET "/" for 167.94.138.190 at 2025-12-09 06:57:35 +0000
+[ea1d1243-8b0d-4171-8ae7-4abae521a556] Processing by StaticController#index as */*
+[ea1d1243-8b0d-4171-8ae7-4abae521a556] Sent file /var/www/southcoastwebmain/public/index.html (0.6ms)
+[ea1d1243-8b0d-4171-8ae7-4abae521a556] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[97a8e8c8-785f-480c-b995-fc49f58808b5] Started GET "/wiki" for 167.94.138.190 at 2025-12-09 06:58:08 +0000
+[97a8e8c8-785f-480c-b995-fc49f58808b5]   
+[97a8e8c8-785f-480c-b995-fc49f58808b5] ActionController::RoutingError (No route matches [GET] "/wiki"):
+[97a8e8c8-785f-480c-b995-fc49f58808b5]   
+[39b1f696-34f8-45f2-be82-d10694384c38] Started GET "/" for 198.235.24.58 at 2025-12-09 09:01:32 +0000
+[39b1f696-34f8-45f2-be82-d10694384c38] Processing by StaticController#index as HTML
+[39b1f696-34f8-45f2-be82-d10694384c38] Sent file /var/www/southcoastwebmain/public/index.html (19.7ms)
+[39b1f696-34f8-45f2-be82-d10694384c38] Completed 200 OK in 46ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[a17f15e3-05b7-4000-9d8f-4131521132d8] Started GET "/" for 54.39.28.147 at 2025-12-09 12:07:49 +0000
+[a17f15e3-05b7-4000-9d8f-4131521132d8] Processing by StaticController#index as HTML
+[a17f15e3-05b7-4000-9d8f-4131521132d8] Sent file /var/www/southcoastwebmain/public/index.html (12.3ms)
+[a17f15e3-05b7-4000-9d8f-4131521132d8] Completed 200 OK in 32ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[3e3b1e8e-4713-4c71-b749-0a26167e4890] Started POST "/" for 54.39.28.147 at 2025-12-09 12:07:49 +0000
+[3e3b1e8e-4713-4c71-b749-0a26167e4890]   
+[3e3b1e8e-4713-4c71-b749-0a26167e4890] ActionController::RoutingError (No route matches [POST] "/"):
+[3e3b1e8e-4713-4c71-b749-0a26167e4890]   
+[262379c2-3fb7-42f4-aa92-405dfc78a39e] Started GET "/" for 198.235.24.58 at 2025-12-09 12:34:46 +0000
+[262379c2-3fb7-42f4-aa92-405dfc78a39e] Processing by StaticController#index as HTML
+[262379c2-3fb7-42f4-aa92-405dfc78a39e] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[262379c2-3fb7-42f4-aa92-405dfc78a39e] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[a301d64e-f6e4-4efc-a3f8-42f2e04867bd] Started GET "/api/v1/room_types" for 23.27.145.190 at 2025-12-09 14:49:50 +0000
+[eab3d601-d9e4-4847-a8c6-18832ab679ae] Started GET "/api/v1/nationalities" for 23.27.145.190 at 2025-12-09 14:49:50 +0000
+[a301d64e-f6e4-4efc-a3f8-42f2e04867bd] Processing by Api::V1::RoomTypesController#index as */*
+[eab3d601-d9e4-4847-a8c6-18832ab679ae] Processing by Api::V1::NationalitiesController#index as */*
+[a301d64e-f6e4-4efc-a3f8-42f2e04867bd] Completed 200 OK in 411ms (Views: 14.2ms | ActiveRecord: 281.5ms (1 query, 0 cached) | GC: 0.0ms)
+[eab3d601-d9e4-4847-a8c6-18832ab679ae] Completed 200 OK in 412ms (Views: 10.8ms | ActiveRecord: 283.5ms (1 query, 0 cached) | GC: 0.0ms)
+[95046ec5-a428-4cbd-b06b-5617b304f5e8] Started GET "/api/v1/room_types" for 41.90.34.105 at 2025-12-09 15:12:38 +0000
+[95046ec5-a428-4cbd-b06b-5617b304f5e8] Processing by Api::V1::RoomTypesController#index as */*
+[6c3ebcc2-5fd7-4484-a7a0-8469a4db6a12] Started GET "/api/v1/nationalities" for 41.90.34.105 at 2025-12-09 15:12:38 +0000
+[6c3ebcc2-5fd7-4484-a7a0-8469a4db6a12] Processing by Api::V1::NationalitiesController#index as */*
+[95046ec5-a428-4cbd-b06b-5617b304f5e8] Completed 200 OK in 62ms (Views: 0.6ms | ActiveRecord: 67.3ms (1 query, 0 cached) | GC: 0.0ms)
+[6c3ebcc2-5fd7-4484-a7a0-8469a4db6a12] Completed 200 OK in 94ms (Views: 6.2ms | ActiveRecord: 62.9ms (1 query, 0 cached) | GC: 0.0ms)
+[7deabba0-772c-489e-b753-50cc08a70ee2] Started DELETE "/api/v1/logout" for 41.90.34.105 at 2025-12-09 15:40:52 +0000
+[7deabba0-772c-489e-b753-50cc08a70ee2] Processing by Api::V1::SessionsController#destroy as */*
+[7deabba0-772c-489e-b753-50cc08a70ee2]   Parameters: {"session" => {}}
+[7deabba0-772c-489e-b753-50cc08a70ee2] Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[f18182b1-c813-4e18-b3b2-98861ae45256] Started GET "/api/v1/nationalities" for 129.222.187.35 at 2025-12-09 16:45:51 +0000
+[abffc1c6-c0a2-4d65-aa2f-358d43266b69] Started GET "/api/v1/room_types" for 129.222.187.35 at 2025-12-09 16:45:51 +0000
+[f18182b1-c813-4e18-b3b2-98861ae45256] Processing by Api::V1::NationalitiesController#index as */*
+[abffc1c6-c0a2-4d65-aa2f-358d43266b69] Processing by Api::V1::RoomTypesController#index as */*
+[f18182b1-c813-4e18-b3b2-98861ae45256] Completed 200 OK in 490ms (Views: 14.0ms | ActiveRecord: 395.5ms (1 query, 0 cached) | GC: 9.4ms)
+[abffc1c6-c0a2-4d65-aa2f-358d43266b69] Completed 200 OK in 395ms (Views: 12.7ms | ActiveRecord: 277.8ms (1 query, 0 cached) | GC: 6.5ms)
+[a1d8148c-8fb0-4f70-8b26-3b256424aa74] Started GET "/api/v1/nationalities" for 129.222.187.35 at 2025-12-09 17:21:38 +0000
+[a1d8148c-8fb0-4f70-8b26-3b256424aa74] Processing by Api::V1::NationalitiesController#index as */*
+[a1d8148c-8fb0-4f70-8b26-3b256424aa74] Completed 200 OK in 81ms (Views: 2.0ms | ActiveRecord: 42.5ms (1 query, 0 cached) | GC: 7.4ms)
+[4e1fe864-489e-4dd2-833e-b388faea6059] Started GET "/api/v1/room_types" for 129.222.187.35 at 2025-12-09 17:21:39 +0000
+[4e1fe864-489e-4dd2-833e-b388faea6059] Processing by Api::V1::RoomTypesController#index as */*
+[4e1fe864-489e-4dd2-833e-b388faea6059] Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 0.0ms)
+[b565627f-ff76-4aed-bef4-05b18ec9d0b7] Started GET "/" for 207.154.192.31 at 2025-12-09 19:35:18 +0000
+[b565627f-ff76-4aed-bef4-05b18ec9d0b7] Processing by StaticController#index as HTML
+[b565627f-ff76-4aed-bef4-05b18ec9d0b7] Sent file /var/www/southcoastwebmain/public/index.html (18.3ms)
+[b565627f-ff76-4aed-bef4-05b18ec9d0b7] Completed 200 OK in 46ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[45558b15-4365-49e0-bb2c-c822fc1cb723] Started GET "/api/v1/nationalities" for 204.101.161.15 at 2025-12-09 19:58:02 +0000
+[45558b15-4365-49e0-bb2c-c822fc1cb723] Processing by Api::V1::NationalitiesController#index as */*
+[73dd64f0-1796-4534-8d31-e46772cd68b2] Started GET "/api/v1/room_types" for 204.101.161.15 at 2025-12-09 19:58:02 +0000
+[73dd64f0-1796-4534-8d31-e46772cd68b2] Processing by Api::V1::RoomTypesController#index as */*
+[73dd64f0-1796-4534-8d31-e46772cd68b2] Completed 200 OK in 405ms (Views: 15.3ms | ActiveRecord: 287.5ms (1 query, 0 cached) | GC: 34.3ms)
+[45558b15-4365-49e0-bb2c-c822fc1cb723] Completed 200 OK in 631ms (Views: 10.2ms | ActiveRecord: 479.8ms (1 query, 0 cached) | GC: 0.0ms)
+[d79c098e-29b9-4556-850c-4eabc76463e0] Started POST "/" for 84.32.64.17 at 2025-12-10 02:15:21 +0000
+[d79c098e-29b9-4556-850c-4eabc76463e0]   
+[d79c098e-29b9-4556-850c-4eabc76463e0] ActionController::RoutingError (No route matches [POST] "/"):
+[d79c098e-29b9-4556-850c-4eabc76463e0]   
+[95155b8e-4a1d-4144-a571-a56d9355b976] Started POST "/" for 84.32.64.17 at 2025-12-10 03:03:11 +0000
+[95155b8e-4a1d-4144-a571-a56d9355b976]   
+[95155b8e-4a1d-4144-a571-a56d9355b976] ActionController::RoutingError (No route matches [POST] "/"):
+[95155b8e-4a1d-4144-a571-a56d9355b976]   
+[e4d208d2-3c61-48f2-9a4c-845e50f52e86] Started GET "/" for 198.235.24.244 at 2025-12-10 03:13:55 +0000
+[e4d208d2-3c61-48f2-9a4c-845e50f52e86] Processing by StaticController#index as HTML
+[e4d208d2-3c61-48f2-9a4c-845e50f52e86] Sent file /var/www/southcoastwebmain/public/index.html (14.2ms)
+[e4d208d2-3c61-48f2-9a4c-845e50f52e86] Completed 200 OK in 37ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[2bb7e394-a1c6-42f0-ab57-617a8db679b7] Started GET "/" for 20.163.16.165 at 2025-12-10 03:45:28 +0000
+[2bb7e394-a1c6-42f0-ab57-617a8db679b7] Processing by StaticController#index as */*
+[2bb7e394-a1c6-42f0-ab57-617a8db679b7] Sent file /var/www/southcoastwebmain/public/index.html (0.6ms)
+[2bb7e394-a1c6-42f0-ab57-617a8db679b7] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[299add8c-1609-4ed2-9cc9-887b4e6aa97b] Started POST "/api/graphql" for 165.227.39.235 at 2025-12-10 04:26:34 +0000
+[299add8c-1609-4ed2-9cc9-887b4e6aa97b]   
+[299add8c-1609-4ed2-9cc9-887b4e6aa97b] ActionController::RoutingError (No route matches [POST] "/api/graphql"):
+[299add8c-1609-4ed2-9cc9-887b4e6aa97b]   
+[7f8e6836-9e1c-4cfb-8429-54a1c6b7a816] Started POST "/api/gql" for 165.227.39.235 at 2025-12-10 04:26:35 +0000
+[7f8e6836-9e1c-4cfb-8429-54a1c6b7a816]   
+[7f8e6836-9e1c-4cfb-8429-54a1c6b7a816] ActionController::RoutingError (No route matches [POST] "/api/gql"):
+[7f8e6836-9e1c-4cfb-8429-54a1c6b7a816]   
+[6237d722-6207-467b-aa8d-22e9972a5493] Started GET "/api/swagger.json" for 165.227.39.235 at 2025-12-10 04:26:45 +0000
+[6237d722-6207-467b-aa8d-22e9972a5493]   
+[6237d722-6207-467b-aa8d-22e9972a5493] ActionController::RoutingError (No route matches [GET] "/api/swagger.json"):
+[6237d722-6207-467b-aa8d-22e9972a5493]   
+[4a97ba17-4e3c-4295-b3c9-9966ad1411c8] Started POST "/" for 84.32.64.79 at 2025-12-10 06:41:01 +0000
+[4a97ba17-4e3c-4295-b3c9-9966ad1411c8]   
+[4a97ba17-4e3c-4295-b3c9-9966ad1411c8] ActionController::RoutingError (No route matches [POST] "/"):
+[4a97ba17-4e3c-4295-b3c9-9966ad1411c8]   
+[2328c563-8dd2-43fb-9152-3e1599bb8300] Started GET "/" for 167.94.138.205 at 2025-12-10 07:58:13 +0000
+[2328c563-8dd2-43fb-9152-3e1599bb8300] Processing by StaticController#index as */*
+[2328c563-8dd2-43fb-9152-3e1599bb8300] Sent file /var/www/southcoastwebmain/public/index.html (16.8ms)
+[2328c563-8dd2-43fb-9152-3e1599bb8300] Completed 200 OK in 44ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[a43b58ec-f340-4342-870d-77f5f69a13af] Started GET "/sitemap.xml" for 167.94.138.205 at 2025-12-10 07:58:53 +0000
+[a43b58ec-f340-4342-870d-77f5f69a13af]   
+[a43b58ec-f340-4342-870d-77f5f69a13af] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[a43b58ec-f340-4342-870d-77f5f69a13af]   
+[ec0ba5f0-d90c-481f-9de9-d5c04e8d4320] Started GET "/api/v1/nationalities" for 41.209.3.187 at 2025-12-10 09:02:25 +0000
+[ec0ba5f0-d90c-481f-9de9-d5c04e8d4320] Processing by Api::V1::NationalitiesController#index as */*
+[51b2a759-47b9-4038-9ea6-aa1695b08812] Started GET "/api/v1/room_types" for 41.209.3.187 at 2025-12-10 09:02:26 +0000
+[51b2a759-47b9-4038-9ea6-aa1695b08812] Processing by Api::V1::RoomTypesController#index as */*
+[ec0ba5f0-d90c-481f-9de9-d5c04e8d4320] Completed 200 OK in 647ms (Views: 22.0ms | ActiveRecord: 461.5ms (1 query, 0 cached) | GC: 0.0ms)
+[51b2a759-47b9-4038-9ea6-aa1695b08812] Completed 200 OK in 415ms (Views: 10.2ms | ActiveRecord: 223.8ms (1 query, 0 cached) | GC: 0.0ms)
+[d12a20c2-44f4-4e6d-9f27-ada5f6211299] Started POST "/api/v1/user/login" for 41.209.3.187 at 2025-12-10 09:03:27 +0000
+[d12a20c2-44f4-4e6d-9f27-ada5f6211299] Processing by Api::V1::SessionsController#login_user as */*
+[d12a20c2-44f4-4e6d-9f27-ada5f6211299]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[d12a20c2-44f4-4e6d-9f27-ada5f6211299] Completed 401 Unauthorized in 27ms (Views: 0.3ms | ActiveRecord: 7.8ms (1 query, 0 cached) | GC: 0.0ms)
+[e1fce01f-5e9d-4fd9-97b1-8c4ff6e8984d] Started GET "/api/v1/nationalities" for 197.136.0.4 at 2025-12-10 09:03:41 +0000
+[e1fce01f-5e9d-4fd9-97b1-8c4ff6e8984d] Processing by Api::V1::NationalitiesController#index as */*
+[e1fce01f-5e9d-4fd9-97b1-8c4ff6e8984d] Completed 200 OK in 26ms (Views: 2.5ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+[6c82b485-4aee-48fe-a285-9c10cb3a9297] Started GET "/api/v1/room_types" for 197.136.0.4 at 2025-12-10 09:03:41 +0000
+[6c82b485-4aee-48fe-a285-9c10cb3a9297] Processing by Api::V1::RoomTypesController#index as */*
+[6c82b485-4aee-48fe-a285-9c10cb3a9297] Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[b1a0b229-40d7-46b8-babd-68fda85dd8da] Started POST "/api/v1/user/login" for 41.209.3.187 at 2025-12-10 09:03:43 +0000
+[b1a0b229-40d7-46b8-babd-68fda85dd8da] Processing by Api::V1::SessionsController#login_user as */*
+[b1a0b229-40d7-46b8-babd-68fda85dd8da]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[b1a0b229-40d7-46b8-babd-68fda85dd8da] Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[e8f1ca56-b08a-4c2d-856e-63fe904dc069] Started GET "/api/v1/room_types" for 41.209.3.187 at 2025-12-10 09:07:55 +0000
+[e8f1ca56-b08a-4c2d-856e-63fe904dc069] Processing by Api::V1::RoomTypesController#index as */*
+[e8f1ca56-b08a-4c2d-856e-63fe904dc069] Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+[83406037-57f5-4014-86a9-00de80570e4f] Started GET "/api/v1/nationalities" for 41.209.3.187 at 2025-12-10 09:07:55 +0000
+[83406037-57f5-4014-86a9-00de80570e4f] Processing by Api::V1::NationalitiesController#index as */*
+[83406037-57f5-4014-86a9-00de80570e4f] Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[0ef0fc7e-20a5-4fe6-8cd0-12293f4ab424] Started POST "/api/v1/user/login" for 41.209.3.187 at 2025-12-10 09:11:37 +0000
+[0ef0fc7e-20a5-4fe6-8cd0-12293f4ab424] Processing by Api::V1::SessionsController#login_user as */*
+[0ef0fc7e-20a5-4fe6-8cd0-12293f4ab424]   Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "session" => {"email" => "[FILTERED]", "password" => "[FILTERED]"}}
+[0ef0fc7e-20a5-4fe6-8cd0-12293f4ab424] Completed 401 Unauthorized in 27ms (Views: 1.2ms | ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.0ms)
+[dabc1fc6-6505-4ec5-ad01-cfaf7b353b9a] Started POST "/" for 51.158.202.174 at 2025-12-10 10:06:14 +0000
+[dabc1fc6-6505-4ec5-ad01-cfaf7b353b9a]   
+[dabc1fc6-6505-4ec5-ad01-cfaf7b353b9a] ActionController::RoutingError (No route matches [POST] "/"):
+[dabc1fc6-6505-4ec5-ad01-cfaf7b353b9a]   
+[c523581a-014d-45e9-aba0-30c6c21617a0] Started GET "/api/v1/nationalities" for 105.160.105.28 at 2025-12-10 13:01:39 +0000
+[bf09de6d-97be-459a-9967-b4f6cad9b7bc] Started GET "/api/v1/room_types" for 105.160.105.28 at 2025-12-10 13:01:39 +0000
+[c523581a-014d-45e9-aba0-30c6c21617a0] Processing by Api::V1::NationalitiesController#index as */*
+[bf09de6d-97be-459a-9967-b4f6cad9b7bc] Processing by Api::V1::RoomTypesController#index as */*
+[c523581a-014d-45e9-aba0-30c6c21617a0] Completed 200 OK in 423ms (Views: 11.7ms | ActiveRecord: 290.4ms (1 query, 0 cached) | GC: 0.0ms)
+[bf09de6d-97be-459a-9967-b4f6cad9b7bc] Completed 200 OK in 423ms (Views: 16.7ms | ActiveRecord: 289.5ms (1 query, 0 cached) | GC: 0.0ms)
+[8ff6fc0d-b3a7-4eca-b56b-25f204552395] Started GET "/" for 167.94.138.195 at 2025-12-10 15:13:38 +0000
+[8ff6fc0d-b3a7-4eca-b56b-25f204552395] Processing by StaticController#index as HTML
+[8ff6fc0d-b3a7-4eca-b56b-25f204552395] Sent file /var/www/southcoastwebmain/public/index.html (15.6ms)
+[8ff6fc0d-b3a7-4eca-b56b-25f204552395] Completed 200 OK in 40ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[335ba597-49b7-4c5e-bb76-c7017677c1d5] Started GET "/" for 167.94.138.195 at 2025-12-10 15:13:42 +0000
+[335ba597-49b7-4c5e-bb76-c7017677c1d5] Processing by StaticController#index as */*
+[335ba597-49b7-4c5e-bb76-c7017677c1d5] Sent file /var/www/southcoastwebmain/public/index.html (0.6ms)
+[335ba597-49b7-4c5e-bb76-c7017677c1d5] Completed 200 OK in 27ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 6.8ms)
+[dc5eeb33-6e61-4be9-a78e-38963967733c] Started GET "/wiki" for 167.94.138.195 at 2025-12-10 15:13:46 +0000
+[dc5eeb33-6e61-4be9-a78e-38963967733c]   
+[dc5eeb33-6e61-4be9-a78e-38963967733c] ActionController::RoutingError (No route matches [GET] "/wiki"):
+[dc5eeb33-6e61-4be9-a78e-38963967733c]   
+[c449bfa0-3e82-49a8-a0af-e7787b3c5793] Started GET "/api/v1/nationalities" for 41.209.53.138 at 2025-12-10 16:20:59 +0000
+[b9de5a9d-2606-45f5-87fe-e7dee6faa1fb] Started GET "/api/v1/room_types" for 41.209.53.138 at 2025-12-10 16:20:59 +0000
+[b9de5a9d-2606-45f5-87fe-e7dee6faa1fb] Processing by Api::V1::RoomTypesController#index as */*
+[c449bfa0-3e82-49a8-a0af-e7787b3c5793] Processing by Api::V1::NationalitiesController#index as */*
+[b9de5a9d-2606-45f5-87fe-e7dee6faa1fb] Completed 200 OK in 448ms (Views: 15.1ms | ActiveRecord: 303.6ms (1 query, 0 cached) | GC: 0.0ms)
+[c449bfa0-3e82-49a8-a0af-e7787b3c5793] Completed 200 OK in 451ms (Views: 9.1ms | ActiveRecord: 311.1ms (1 query, 0 cached) | GC: 4.9ms)
+[b6481afa-3be5-4cfc-a4f5-3b6c4afebeb8] Started GET "/" for 192.3.138.26 at 2025-12-10 17:35:35 +0000
+[b6481afa-3be5-4cfc-a4f5-3b6c4afebeb8] Processing by StaticController#index as */*
+[b6481afa-3be5-4cfc-a4f5-3b6c4afebeb8] Sent file /var/www/southcoastwebmain/public/index.html (15.9ms)
+[b6481afa-3be5-4cfc-a4f5-3b6c4afebeb8] Completed 200 OK in 44ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[3104cda9-635a-4865-9e21-629642ae4f43] Started GET "/" for 74.48.49.243 at 2025-12-10 18:00:41 +0000
+[3104cda9-635a-4865-9e21-629642ae4f43] Processing by StaticController#index as */*
+[3104cda9-635a-4865-9e21-629642ae4f43] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[3104cda9-635a-4865-9e21-629642ae4f43] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[f3a7c233-b4ab-4091-80c3-7907443ef6f6] Started POST "/" for 179.43.184.242 at 2025-12-10 23:00:20 +0000
+[f3a7c233-b4ab-4091-80c3-7907443ef6f6]   
+[f3a7c233-b4ab-4091-80c3-7907443ef6f6] ActionController::RoutingError (No route matches [POST] "/"):
+[f3a7c233-b4ab-4091-80c3-7907443ef6f6]   
+[ff31a238-4fb1-4476-8c8d-4a780803adc3] Started POST "/" for 74.48.49.243 at 2025-12-11 01:07:31 +0000
+[ff31a238-4fb1-4476-8c8d-4a780803adc3]   
+[ff31a238-4fb1-4476-8c8d-4a780803adc3] ActionController::RoutingError (No route matches [POST] "/"):
+[ff31a238-4fb1-4476-8c8d-4a780803adc3]   
+[51cc265c-d514-44f0-9a4f-5721c052b2d0] Started POST "/" for 74.48.49.243 at 2025-12-11 01:07:31 +0000
+[51cc265c-d514-44f0-9a4f-5721c052b2d0]   
+[51cc265c-d514-44f0-9a4f-5721c052b2d0] ActionController::RoutingError (No route matches [POST] "/"):
+[51cc265c-d514-44f0-9a4f-5721c052b2d0]   
+[c46e15a8-5cb1-46b4-b6a5-6c2b46d56704] Started POST "/5vgkwl" for 74.48.49.243 at 2025-12-11 01:07:32 +0000
+[c46e15a8-5cb1-46b4-b6a5-6c2b46d56704]   
+[c46e15a8-5cb1-46b4-b6a5-6c2b46d56704] ActionController::RoutingError (No route matches [POST] "/5vgkwl"):
+[c46e15a8-5cb1-46b4-b6a5-6c2b46d56704]   
+[78be7e70-3a44-4389-92a7-b6cf3368e7d0] Started POST "/5vgkwl" for 74.48.49.243 at 2025-12-11 01:07:32 +0000
+[78be7e70-3a44-4389-92a7-b6cf3368e7d0]   
+[78be7e70-3a44-4389-92a7-b6cf3368e7d0] ActionController::RoutingError (No route matches [POST] "/5vgkwl"):
+[78be7e70-3a44-4389-92a7-b6cf3368e7d0]   
+[e22f25ae-ff68-4074-8824-7ddd0d55c101] Started GET "/" for 205.210.31.201 at 2025-12-11 02:48:05 +0000
+[e22f25ae-ff68-4074-8824-7ddd0d55c101] Processing by StaticController#index as */*
+[e22f25ae-ff68-4074-8824-7ddd0d55c101] Sent file /var/www/southcoastwebmain/public/index.html (14.4ms)
+[e22f25ae-ff68-4074-8824-7ddd0d55c101] Completed 200 OK in 40ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[6b05eccf-0db8-4061-88e1-efca805e75e3] Started GET "/" for 205.210.31.76 at 2025-12-11 04:05:58 +0000
+[6b05eccf-0db8-4061-88e1-efca805e75e3] Processing by StaticController#index as HTML
+[6b05eccf-0db8-4061-88e1-efca805e75e3] Sent file /var/www/southcoastwebmain/public/index.html (8.4ms)
+[6b05eccf-0db8-4061-88e1-efca805e75e3] Completed 200 OK in 24ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[0e608b8d-05a8-4668-a043-396464854838] Started GET "/" for 102.37.219.137 at 2025-12-11 06:30:17 +0000
+[0e608b8d-05a8-4668-a043-396464854838] Processing by StaticController#index as HTML
+[0e608b8d-05a8-4668-a043-396464854838] Sent file /var/www/southcoastwebmain/public/index.html (19.6ms)
+[0e608b8d-05a8-4668-a043-396464854838] Completed 200 OK in 52ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[1e421b10-a715-4037-8a47-07ee338649b0] Started GET "/" for 66.132.153.115 at 2025-12-11 15:56:04 +0000
+[1e421b10-a715-4037-8a47-07ee338649b0] Processing by StaticController#index as */*
+[1e421b10-a715-4037-8a47-07ee338649b0] Sent file /var/www/southcoastwebmain/public/index.html (17.0ms)
+[1e421b10-a715-4037-8a47-07ee338649b0] Completed 200 OK in 45ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[c51d1479-ee7d-4890-bc18-5a8d4657b991] Started GET "/login" for 66.132.153.115 at 2025-12-11 16:01:46 +0000
+[c51d1479-ee7d-4890-bc18-5a8d4657b991]   
+[c51d1479-ee7d-4890-bc18-5a8d4657b991] ActionController::RoutingError (No route matches [GET] "/login"):
+[c51d1479-ee7d-4890-bc18-5a8d4657b991]   
+[0736c22c-f8f2-4b89-a79c-2aeb6f1ec1b5] Started GET "/api/v1/room_types" for 185.126.82.201 at 2025-12-11 17:24:19 +0000
+[0736c22c-f8f2-4b89-a79c-2aeb6f1ec1b5] Processing by Api::V1::RoomTypesController#index as */*
+[0736c22c-f8f2-4b89-a79c-2aeb6f1ec1b5] Completed 200 OK in 395ms (Views: 10.8ms | ActiveRecord: 281.6ms (1 query, 0 cached) | GC: 3.7ms)
+[f961ed0a-4d2e-451d-b75a-e5b40b9e5b8e] Started GET "/" for 185.126.82.201 at 2025-12-11 17:58:42 +0000
+[f961ed0a-4d2e-451d-b75a-e5b40b9e5b8e] Processing by StaticController#index as HTML
+[f961ed0a-4d2e-451d-b75a-e5b40b9e5b8e] Sent file /var/www/southcoastwebmain/public/index.html (5.2ms)
+[f961ed0a-4d2e-451d-b75a-e5b40b9e5b8e] Completed 200 OK in 12ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[cfcf119a-94c4-489c-8bdb-9bee7b46ce15] Started GET "/" for 185.126.82.201 at 2025-12-11 17:58:44 +0000
+[cfcf119a-94c4-489c-8bdb-9bee7b46ce15] Processing by StaticController#index as HTML
+[cfcf119a-94c4-489c-8bdb-9bee7b46ce15] Sent file /var/www/southcoastwebmain/public/index.html (0.6ms)
+[cfcf119a-94c4-489c-8bdb-9bee7b46ce15] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[3d46f04d-5679-4d40-8229-53597c867a91] Started GET "/api/v1/room_types" for 185.126.82.201 at 2025-12-11 17:58:49 +0000
+[3d46f04d-5679-4d40-8229-53597c867a91] Processing by Api::V1::RoomTypesController#index as */*
+[3d46f04d-5679-4d40-8229-53597c867a91] Completed 200 OK in 37ms (Views: 0.5ms | ActiveRecord: 40.3ms (1 query, 0 cached) | GC: 0.0ms)
+[ad30dd2a-37d5-4ec9-b84c-ebb65bfcf583] Started GET "/api/v1/nationalities" for 185.126.82.201 at 2025-12-11 17:58:49 +0000
+[ad30dd2a-37d5-4ec9-b84c-ebb65bfcf583] Processing by Api::V1::NationalitiesController#index as */*
+[ad30dd2a-37d5-4ec9-b84c-ebb65bfcf583] Completed 200 OK in 282ms (Views: 8.7ms | ActiveRecord: 145.0ms (1 query, 0 cached) | GC: 10.3ms)
+[757e6469-4897-4f38-a322-8c3f2273bf7b] Started GET "/" for 139.59.22.9 at 2025-12-11 21:20:02 +0000
+[757e6469-4897-4f38-a322-8c3f2273bf7b] Processing by StaticController#index as HTML
+[757e6469-4897-4f38-a322-8c3f2273bf7b] Sent file /var/www/southcoastwebmain/public/index.html (19.2ms)
+[757e6469-4897-4f38-a322-8c3f2273bf7b] Completed 200 OK in 50ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[306fe9c9-aece-4633-bf31-91c240746e25] Started GET "/" for 198.235.24.233 at 2025-12-12 00:49:48 +0000
+[306fe9c9-aece-4633-bf31-91c240746e25] Processing by StaticController#index as */*
+[306fe9c9-aece-4633-bf31-91c240746e25] Sent file /var/www/southcoastwebmain/public/index.html (16.0ms)
+[306fe9c9-aece-4633-bf31-91c240746e25] Completed 200 OK in 48ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[7c641490-8f30-4863-9fc0-2f56207800c5] Started GET "/" for 35.88.211.170 at 2025-12-12 04:08:08 +0000
+[7c641490-8f30-4863-9fc0-2f56207800c5] Processing by StaticController#index as HTML
+[7c641490-8f30-4863-9fc0-2f56207800c5] Sent file /var/www/southcoastwebmain/public/index.html (17.0ms)
+[7c641490-8f30-4863-9fc0-2f56207800c5] Completed 200 OK in 45ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[b214b348-7390-4cbf-a7c6-16fc00f71a11] Started POST "/" for 121.240.127.170 at 2025-12-12 11:01:27 +0000
+[b214b348-7390-4cbf-a7c6-16fc00f71a11]   
+[b214b348-7390-4cbf-a7c6-16fc00f71a11] ActionController::RoutingError (No route matches [POST] "/"):
+[b214b348-7390-4cbf-a7c6-16fc00f71a11]   
+[4fe96ff4-c64b-4bc0-a50b-5bf6be6096ce] Started GET "/" for 147.185.132.12 at 2025-12-12 14:38:10 +0000
+[4fe96ff4-c64b-4bc0-a50b-5bf6be6096ce] Processing by StaticController#index as HTML
+[4fe96ff4-c64b-4bc0-a50b-5bf6be6096ce] Sent file /var/www/southcoastwebmain/public/index.html (12.8ms)
+[4fe96ff4-c64b-4bc0-a50b-5bf6be6096ce] Completed 200 OK in 34ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[81c9d07f-7f03-47ae-8db2-68941bfc4dba] Started GET "/api/v1/nationalities" for 66.249.76.32 at 2025-12-12 15:21:42 +0000
+[81c9d07f-7f03-47ae-8db2-68941bfc4dba] Processing by Api::V1::NationalitiesController#index as */*
+[81c9d07f-7f03-47ae-8db2-68941bfc4dba] Completed 200 OK in 471ms (Views: 8.0ms | ActiveRecord: 353.5ms (1 query, 0 cached) | GC: 27.1ms)
+[9884e8bf-5ee2-494b-ab66-4e6568feb040] Started GET "/api/v1/room_types" for 66.249.66.164 at 2025-12-12 15:21:43 +0000
+[9884e8bf-5ee2-494b-ab66-4e6568feb040] Processing by Api::V1::RoomTypesController#index as */*
+[9884e8bf-5ee2-494b-ab66-4e6568feb040] Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 3.3ms (1 query, 0 cached) | GC: 0.0ms)
+[5f474acc-45ca-40dc-88ca-1f4c110f4a84] Started GET "/api/v1/nationalities" for 66.249.66.15 at 2025-12-12 15:21:46 +0000
+[5f474acc-45ca-40dc-88ca-1f4c110f4a84] Processing by Api::V1::NationalitiesController#index as */*
+[5f474acc-45ca-40dc-88ca-1f4c110f4a84] Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+[7b34c2d9-6097-4725-8f6e-d8771b5261d7] Started GET "/api/v1/room_types" for 66.249.76.45 at 2025-12-12 15:21:47 +0000
+[7b34c2d9-6097-4725-8f6e-d8771b5261d7] Processing by Api::V1::RoomTypesController#index as */*
+[7b34c2d9-6097-4725-8f6e-d8771b5261d7] Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+[0430d16f-c759-4e4b-a57b-f0c1deddf519] Started GET "/" for 167.94.138.185 at 2025-12-12 16:59:45 +0000
+[0430d16f-c759-4e4b-a57b-f0c1deddf519] Processing by StaticController#index as */*
+[0430d16f-c759-4e4b-a57b-f0c1deddf519] Sent file /var/www/southcoastwebmain/public/index.html (16.0ms)
+[0430d16f-c759-4e4b-a57b-f0c1deddf519] Completed 200 OK in 45ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[c10bbbc1-0bc1-488e-af2e-5f05f3695505] Started GET "/sitemap.xml" for 167.94.138.185 at 2025-12-12 17:00:08 +0000
+[c10bbbc1-0bc1-488e-af2e-5f05f3695505]   
+[c10bbbc1-0bc1-488e-af2e-5f05f3695505] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[c10bbbc1-0bc1-488e-af2e-5f05f3695505]   
+[bbd0e482-78ca-4295-85c2-277b3085fb53] Started GET "/" for 167.99.53.35 at 2025-12-12 17:06:25 +0000
+[bbd0e482-78ca-4295-85c2-277b3085fb53] Processing by StaticController#index as HTML
+[bbd0e482-78ca-4295-85c2-277b3085fb53] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[bbd0e482-78ca-4295-85c2-277b3085fb53] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[adcd39b3-fa60-4f87-b2a1-25abc21ea7c5] Started GET "/api/v1/room_types" for 66.249.66.201 at 2025-12-13 02:43:20 +0000
+[adcd39b3-fa60-4f87-b2a1-25abc21ea7c5] Processing by Api::V1::RoomTypesController#index as */*
+[ba7aea03-16bb-4fcd-a5a9-de47f2664eb7] Started GET "/api/v1/nationalities" for 66.249.76.32 at 2025-12-13 02:43:21 +0000
+[ba7aea03-16bb-4fcd-a5a9-de47f2664eb7] Processing by Api::V1::NationalitiesController#index as */*
+[adcd39b3-fa60-4f87-b2a1-25abc21ea7c5] Completed 200 OK in 480ms (Views: 18.2ms | ActiveRecord: 334.0ms (1 query, 0 cached) | GC: 0.0ms)
+[ba7aea03-16bb-4fcd-a5a9-de47f2664eb7] Completed 200 OK in 291ms (Views: 9.7ms | ActiveRecord: 134.1ms (1 query, 0 cached) | GC: 0.0ms)
+[f9a2d63f-eddd-478f-bb36-f2f3418105b9] Started GET "/api/v1/room_types" for 66.249.76.45 at 2025-12-13 02:43:21 +0000
+[f9a2d63f-eddd-478f-bb36-f2f3418105b9] Processing by Api::V1::RoomTypesController#index as */*
+[f9a2d63f-eddd-478f-bb36-f2f3418105b9] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+[3a62f9bb-8ed1-4abe-a37e-8b66d183da21] Started GET "/api/v1/nationalities" for 66.249.76.32 at 2025-12-13 02:43:23 +0000
+[3a62f9bb-8ed1-4abe-a37e-8b66d183da21] Processing by Api::V1::NationalitiesController#index as */*
+[3a62f9bb-8ed1-4abe-a37e-8b66d183da21] Completed 200 OK in 23ms (Views: 2.3ms | ActiveRecord: 4.1ms (1 query, 0 cached) | GC: 0.0ms)
+[8d277a2c-77df-49f5-8441-156310ec3aa3] Started POST "/" for 179.43.184.242 at 2025-12-13 03:12:20 +0000
+[8d277a2c-77df-49f5-8441-156310ec3aa3]   
+[8d277a2c-77df-49f5-8441-156310ec3aa3] ActionController::RoutingError (No route matches [POST] "/"):
+[8d277a2c-77df-49f5-8441-156310ec3aa3]   
+[6c21dc4e-4fb4-426e-b35a-b3d4c5926862] Started GET "/api/v1/room_types" for 66.249.76.45 at 2025-12-13 03:21:34 +0000
+[6c21dc4e-4fb4-426e-b35a-b3d4c5926862] Processing by Api::V1::RoomTypesController#index as */*
+[6c21dc4e-4fb4-426e-b35a-b3d4c5926862] Completed 200 OK in 44ms (Views: 1.2ms | ActiveRecord: 35.3ms (1 query, 0 cached) | GC: 0.0ms)
+[59cf0d1d-8272-4d97-8315-4058b20d5ce8] Started GET "/api/v1/nationalities" for 66.249.76.44 at 2025-12-13 03:21:35 +0000
+[59cf0d1d-8272-4d97-8315-4058b20d5ce8] Processing by Api::V1::NationalitiesController#index as */*
+[59cf0d1d-8272-4d97-8315-4058b20d5ce8] Completed 200 OK in 29ms (Views: 4.4ms | ActiveRecord: 2.7ms (1 query, 0 cached) | GC: 0.0ms)
+[b863de50-82c7-452e-90b9-280b9bb2ab8f] Started GET "/api/v1/nationalities" for 66.249.66.44 at 2025-12-13 03:21:39 +0000
+[b863de50-82c7-452e-90b9-280b9bb2ab8f] Processing by Api::V1::NationalitiesController#index as */*
+[b863de50-82c7-452e-90b9-280b9bb2ab8f] Completed 200 OK in 24ms (Views: 3.0ms | ActiveRecord: 3.4ms (1 query, 0 cached) | GC: 0.0ms)
+[cf1989c4-4412-4d15-95d3-1ca573a546d4] Started GET "/api/v1/room_types" for 66.249.76.45 at 2025-12-13 03:25:50 +0000
+[cf1989c4-4412-4d15-95d3-1ca573a546d4] Processing by Api::V1::RoomTypesController#index as */*
+[cf1989c4-4412-4d15-95d3-1ca573a546d4] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[f8b6b310-307b-4fe1-9368-461628d94e43] Started GET "/api/v1/nationalities" for 66.249.76.44 at 2025-12-13 03:25:51 +0000
+[f8b6b310-307b-4fe1-9368-461628d94e43] Processing by Api::V1::NationalitiesController#index as */*
+[f8b6b310-307b-4fe1-9368-461628d94e43] Completed 200 OK in 79ms (Views: 3.2ms | ActiveRecord: 43.7ms (1 query, 0 cached) | GC: 0.0ms)
+[fbc202f1-0c40-4e99-8e17-d2a88f374419] Started GET "/api/v1/nationalities" for 66.249.76.45 at 2025-12-13 03:25:51 +0000
+[fbc202f1-0c40-4e99-8e17-d2a88f374419] Processing by Api::V1::NationalitiesController#index as */*
+[fbc202f1-0c40-4e99-8e17-d2a88f374419] Completed 200 OK in 258ms (Views: 0.9ms | ActiveRecord: 2.9ms (1 query, 0 cached) | GC: 66.1ms)
+[060288cb-ebe9-4bad-809e-f9a189847199] Started GET "/api/v1/room_types" for 66.249.76.44 at 2025-12-13 03:25:52 +0000
+[060288cb-ebe9-4bad-809e-f9a189847199] Processing by Api::V1::RoomTypesController#index as */*
+[060288cb-ebe9-4bad-809e-f9a189847199] Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[29fa297d-54de-40df-a877-17d0286181b1] Started GET "/" for 20.15.163.174 at 2025-12-13 06:38:40 +0000
+[29fa297d-54de-40df-a877-17d0286181b1] Processing by StaticController#index as */*
+[29fa297d-54de-40df-a877-17d0286181b1] Sent file /var/www/southcoastwebmain/public/index.html (13.1ms)
+[29fa297d-54de-40df-a877-17d0286181b1] Completed 200 OK in 34ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[03c305c8-c656-4d8a-b540-eb6741fb5a88] Started POST "/" for 139.5.70.227 at 2025-12-13 08:04:28 +0000
+[03c305c8-c656-4d8a-b540-eb6741fb5a88]   
+[03c305c8-c656-4d8a-b540-eb6741fb5a88] ActionController::RoutingError (No route matches [POST] "/"):
+[03c305c8-c656-4d8a-b540-eb6741fb5a88]   
+[6402f60f-1fc0-481b-97b3-4580db38237f] Started GET "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php" for 173.212.203.116 at 2025-12-13 08:49:54 +0000
+[6402f60f-1fc0-481b-97b3-4580db38237f]   
+[6402f60f-1fc0-481b-97b3-4580db38237f] ActionController::RoutingError (No route matches [GET] "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php"):
+[6402f60f-1fc0-481b-97b3-4580db38237f]   
+[954a5f01-422a-4969-9ad4-8ca24d622bde] Started GET "/api/v1/nationalities" for 172.236.122.62 at 2025-12-13 12:45:27 +0000
+[05175fab-1b51-4035-8a68-e42a1aa40971] Started GET "/api/v1/room_types" for 172.236.122.62 at 2025-12-13 12:45:27 +0000
+[954a5f01-422a-4969-9ad4-8ca24d622bde] Processing by Api::V1::NationalitiesController#index as */*
+[05175fab-1b51-4035-8a68-e42a1aa40971] Processing by Api::V1::RoomTypesController#index as */*
+[05175fab-1b51-4035-8a68-e42a1aa40971] Completed 200 OK in 425ms (Views: 9.2ms | ActiveRecord: 288.1ms (1 query, 0 cached) | GC: 19.5ms)
+[954a5f01-422a-4969-9ad4-8ca24d622bde] Completed 200 OK in 435ms (Views: 9.3ms | ActiveRecord: 328.4ms (1 query, 0 cached) | GC: 7.1ms)
+[7228ca61-5999-4d73-8d90-a884161e38a0] Started GET "/api/v1/room_types" for 172.236.122.62 at 2025-12-13 12:52:29 +0000
+[7228ca61-5999-4d73-8d90-a884161e38a0] Processing by Api::V1::RoomTypesController#index as */*
+[14dd871c-80a6-4c3a-a5b0-e4b8ae511899] Started GET "/api/v1/nationalities" for 172.236.122.62 at 2025-12-13 12:52:29 +0000
+[14dd871c-80a6-4c3a-a5b0-e4b8ae511899] Processing by Api::V1::NationalitiesController#index as */*
+[7228ca61-5999-4d73-8d90-a884161e38a0] Completed 200 OK in 88ms (Views: 0.3ms | ActiveRecord: 92.8ms (1 query, 0 cached) | GC: 5.9ms)
+[14dd871c-80a6-4c3a-a5b0-e4b8ae511899] Completed 200 OK in 72ms (Views: 0.6ms | ActiveRecord: 72.4ms (1 query, 0 cached) | GC: 3.8ms)
+[7f1b5365-b3cf-4ddc-9978-76be363df514] Started GET "/api/v1/room_types" for 116.91.221.193 at 2025-12-13 13:42:55 +0000
+[7f1b5365-b3cf-4ddc-9978-76be363df514] Processing by Api::V1::RoomTypesController#index as */*
+[7f1b5365-b3cf-4ddc-9978-76be363df514] Completed 200 OK in 64ms (Views: 0.9ms | ActiveRecord: 60.2ms (1 query, 0 cached) | GC: 4.7ms)
+[87cac153-ad47-4a1b-99ef-1c188ff026b2] Started GET "/api/v1/nationalities" for 116.91.221.193 at 2025-12-13 13:42:56 +0000
+[87cac153-ad47-4a1b-99ef-1c188ff026b2] Processing by Api::V1::NationalitiesController#index as */*
+[87cac153-ad47-4a1b-99ef-1c188ff026b2] Completed 200 OK in 16ms (Views: 2.2ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 0.0ms)
+[3231f9d4-96fb-4b64-990a-24fa314f237c] Started GET "/api/v1/room_types" for 34.71.162.136 at 2025-12-13 16:47:44 +0000
+[3f265b29-cb95-44fb-93ae-74e9764dbdb4] Started GET "/api/v1/nationalities" for 34.71.162.136 at 2025-12-13 16:47:44 +0000
+[3f265b29-cb95-44fb-93ae-74e9764dbdb4] Processing by Api::V1::NationalitiesController#index as */*
+[3231f9d4-96fb-4b64-990a-24fa314f237c] Processing by Api::V1::RoomTypesController#index as */*
+[3f265b29-cb95-44fb-93ae-74e9764dbdb4] Completed 200 OK in 373ms (Views: 7.2ms | ActiveRecord: 289.6ms (1 query, 0 cached) | GC: 8.0ms)
+[3231f9d4-96fb-4b64-990a-24fa314f237c] Completed 200 OK in 373ms (Views: 15.8ms | ActiveRecord: 256.6ms (1 query, 0 cached) | GC: 0.0ms)
+[90649364-7976-4269-8128-0d2ccd19e29d] Started GET "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php" for 128.14.167.117 at 2025-12-13 21:03:17 +0000
+[90649364-7976-4269-8128-0d2ccd19e29d]   
+[90649364-7976-4269-8128-0d2ccd19e29d] ActionController::RoutingError (No route matches [GET] "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php"):
+[90649364-7976-4269-8128-0d2ccd19e29d]   
+[08877c3a-fa86-4a66-8e37-e6ea8b3be525] Started GET "/" for 198.235.24.209 at 2025-12-13 21:21:23 +0000
+[08877c3a-fa86-4a66-8e37-e6ea8b3be525] Processing by StaticController#index as */*
+[08877c3a-fa86-4a66-8e37-e6ea8b3be525] Sent file /var/www/southcoastwebmain/public/index.html (10.7ms)
+[08877c3a-fa86-4a66-8e37-e6ea8b3be525] Completed 200 OK in 31ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[d629f71f-cb97-4298-b481-204522356e79] Started GET "/" for 167.94.138.167 at 2025-12-13 22:12:31 +0000
+[d629f71f-cb97-4298-b481-204522356e79] Processing by StaticController#index as */*
+[d629f71f-cb97-4298-b481-204522356e79] Sent file /var/www/southcoastwebmain/public/index.html (9.3ms)
+[d629f71f-cb97-4298-b481-204522356e79] Completed 200 OK in 25ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[a30882a1-660b-4136-a69e-2a1d9f865d1d] Started POST "/" for 46.62.232.17 at 2025-12-14 08:40:53 +0000
+[a30882a1-660b-4136-a69e-2a1d9f865d1d]   
+[a30882a1-660b-4136-a69e-2a1d9f865d1d] ActionController::RoutingError (No route matches [POST] "/"):
+[a30882a1-660b-4136-a69e-2a1d9f865d1d]   
+[909718ee-a66a-4f22-b09d-38cafb4a8be2] Started GET "/.well-known/security.txt" for 205.210.31.105 at 2025-12-14 09:26:16 +0000
+[909718ee-a66a-4f22-b09d-38cafb4a8be2]   
+[909718ee-a66a-4f22-b09d-38cafb4a8be2] ActionController::RoutingError (No route matches [GET] "/.well-known/security.txt"):
+[909718ee-a66a-4f22-b09d-38cafb4a8be2]   
+[25bdbc7c-ceec-487e-932d-e2b8876b835a] Started POST "/" for 207.180.238.155 at 2025-12-14 09:37:36 +0000
+[25bdbc7c-ceec-487e-932d-e2b8876b835a]   
+[25bdbc7c-ceec-487e-932d-e2b8876b835a] ActionController::RoutingError (No route matches [POST] "/"):
+[25bdbc7c-ceec-487e-932d-e2b8876b835a]   
+[53a3ff25-9b96-4ccf-ba6d-4bea3d8adef2] Started POST "/" for 207.180.238.155 at 2025-12-14 09:39:32 +0000
+[53a3ff25-9b96-4ccf-ba6d-4bea3d8adef2]   
+[53a3ff25-9b96-4ccf-ba6d-4bea3d8adef2] ActionController::RoutingError (No route matches [POST] "/"):
+[53a3ff25-9b96-4ccf-ba6d-4bea3d8adef2]   
+[c6900606-601f-406f-b6fa-afc3b1a486af] Started POST "/" for 207.180.238.155 at 2025-12-14 09:40:43 +0000
+[c6900606-601f-406f-b6fa-afc3b1a486af]   
+[c6900606-601f-406f-b6fa-afc3b1a486af] ActionController::RoutingError (No route matches [POST] "/"):
+[c6900606-601f-406f-b6fa-afc3b1a486af]   
+[2c90e604-9f09-4b8f-afec-26297368f718] Started POST "/" for 62.60.176.167 at 2025-12-14 10:28:53 +0000
+[2c90e604-9f09-4b8f-afec-26297368f718]   
+[2c90e604-9f09-4b8f-afec-26297368f718] ActionController::RoutingError (No route matches [POST] "/"):
+[2c90e604-9f09-4b8f-afec-26297368f718]   
+[2f6ef7ec-3178-46ab-923c-6c8bcd4e1d53] Started GET "/" for 128.203.202.236 at 2025-12-14 11:03:28 +0000
+[2f6ef7ec-3178-46ab-923c-6c8bcd4e1d53] Processing by StaticController#index as */*
+[2f6ef7ec-3178-46ab-923c-6c8bcd4e1d53] Sent file /var/www/southcoastwebmain/public/index.html (10.9ms)
+[2f6ef7ec-3178-46ab-923c-6c8bcd4e1d53] Completed 200 OK in 30ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[d2b2831f-96a4-4507-ac10-daf2cb184195] Started POST "/" for 72.61.174.243 at 2025-12-14 11:50:53 +0000
+[d2b2831f-96a4-4507-ac10-daf2cb184195]   
+[d2b2831f-96a4-4507-ac10-daf2cb184195] ActionController::RoutingError (No route matches [POST] "/"):
+[d2b2831f-96a4-4507-ac10-daf2cb184195]   
+[107d9797-1924-4b26-8603-37141342eacb] Started GET "/" for 167.71.236.117 at 2025-12-14 12:41:33 +0000
+[107d9797-1924-4b26-8603-37141342eacb] Processing by StaticController#index as HTML
+[107d9797-1924-4b26-8603-37141342eacb] Sent file /var/www/southcoastwebmain/public/index.html (5.1ms)
+[107d9797-1924-4b26-8603-37141342eacb] Completed 200 OK in 16ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[842a883a-e8a7-4f53-acd2-e548b73d19b5] Started GET "/api/v1/nationalities" for 18.212.27.114 at 2025-12-14 13:24:23 +0000
+[842a883a-e8a7-4f53-acd2-e548b73d19b5] Processing by Api::V1::NationalitiesController#index as */*
+[c409026f-cf2a-428d-b667-259fea6e1690] Started GET "/api/v1/room_types" for 3.83.40.218 at 2025-12-14 13:24:23 +0000
+[c409026f-cf2a-428d-b667-259fea6e1690] Processing by Api::V1::RoomTypesController#index as */*
+[842a883a-e8a7-4f53-acd2-e548b73d19b5] Completed 200 OK in 442ms (Views: 12.2ms | ActiveRecord: 305.5ms (1 query, 0 cached) | GC: 2.2ms)
+[c409026f-cf2a-428d-b667-259fea6e1690] Completed 200 OK in 306ms (Views: 9.8ms | ActiveRecord: 190.9ms (1 query, 0 cached) | GC: 0.0ms)
+[d45c364b-2032-4b92-a9bc-b94930a1ef23] Started GET "/api/v1/nationalities" for 116.91.221.193 at 2025-12-14 13:29:21 +0000
+[d45c364b-2032-4b92-a9bc-b94930a1ef23] Processing by Api::V1::NationalitiesController#index as */*
+[d45c364b-2032-4b92-a9bc-b94930a1ef23] Completed 200 OK in 19ms (Views: 4.3ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+[6f10dff5-3609-49f5-bf4a-ac66aa52dc98] Started GET "/api/v1/room_types" for 116.91.221.193 at 2025-12-14 13:29:21 +0000
+[6f10dff5-3609-49f5-bf4a-ac66aa52dc98] Processing by Api::V1::RoomTypesController#index as */*
+[6f10dff5-3609-49f5-bf4a-ac66aa52dc98] Completed 200 OK in 10ms (Views: 1.3ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+[b107e664-54d9-4c06-adcf-08cebcc00b6b] Started GET "/" for 170.64.178.22 at 2025-12-14 17:30:29 +0000
+[b107e664-54d9-4c06-adcf-08cebcc00b6b] Processing by StaticController#index as HTML
+[b107e664-54d9-4c06-adcf-08cebcc00b6b] Sent file /var/www/southcoastwebmain/public/index.html (16.2ms)
+[b107e664-54d9-4c06-adcf-08cebcc00b6b] Completed 200 OK in 41ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[731119c1-82ab-44c4-a05c-9495aa8b9ad3] Started POST "/" for 170.64.178.22 at 2025-12-14 17:30:30 +0000
+[731119c1-82ab-44c4-a05c-9495aa8b9ad3]   
+[731119c1-82ab-44c4-a05c-9495aa8b9ad3] ActionController::RoutingError (No route matches [POST] "/"):
+[731119c1-82ab-44c4-a05c-9495aa8b9ad3]   
+[3e35c4d9-f643-416f-a295-18f9662ddc72] Started POST "/" for 31.220.85.179 at 2025-12-14 20:48:54 +0000
+[3e35c4d9-f643-416f-a295-18f9662ddc72]   
+[3e35c4d9-f643-416f-a295-18f9662ddc72] ActionController::RoutingError (No route matches [POST] "/"):
+[3e35c4d9-f643-416f-a295-18f9662ddc72]   
+[7ede7704-50ee-41f2-bd59-9f1455d1d96b] Started GET "/" for 167.94.138.59 at 2025-12-14 23:00:42 +0000
+[7ede7704-50ee-41f2-bd59-9f1455d1d96b] Processing by StaticController#index as */*
+[7ede7704-50ee-41f2-bd59-9f1455d1d96b] Sent file /var/www/southcoastwebmain/public/index.html (17.9ms)
+[7ede7704-50ee-41f2-bd59-9f1455d1d96b] Completed 200 OK in 50ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[6490f018-eb6f-48f9-ab5e-0cdae90c8ae1] Started GET "/sitemap.xml" for 167.94.138.59 at 2025-12-14 23:02:46 +0000
+[6490f018-eb6f-48f9-ab5e-0cdae90c8ae1]   
+[6490f018-eb6f-48f9-ab5e-0cdae90c8ae1] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[6490f018-eb6f-48f9-ab5e-0cdae90c8ae1]   
+[e6002eee-b171-4eed-8992-4d8359bc4eb9] Started GET "/" for 147.185.132.67 at 2025-12-14 23:04:57 +0000
+[e6002eee-b171-4eed-8992-4d8359bc4eb9] Processing by StaticController#index as */*
+[e6002eee-b171-4eed-8992-4d8359bc4eb9] Sent file /var/www/southcoastwebmain/public/index.html (0.3ms)
+[e6002eee-b171-4eed-8992-4d8359bc4eb9] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[00be4cdc-7e45-4155-bc2a-dcba1ceff28e] Started GET "/" for 198.235.24.199 at 2025-12-14 23:51:05 +0000
+[00be4cdc-7e45-4155-bc2a-dcba1ceff28e] Processing by StaticController#index as HTML
+[00be4cdc-7e45-4155-bc2a-dcba1ceff28e] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[00be4cdc-7e45-4155-bc2a-dcba1ceff28e] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[3f5f86a8-b74e-4d59-9b1b-60e06b4597b3] Started GET "/api/v1/room_types" for 5.246.152.231 at 2025-12-15 06:39:58 +0000
+[80afd453-525e-4f9b-b3b6-3336bef71c74] Started GET "/api/v1/nationalities" for 5.246.152.231 at 2025-12-15 06:39:58 +0000
+[3f5f86a8-b74e-4d59-9b1b-60e06b4597b3] Processing by Api::V1::RoomTypesController#index as */*
+[80afd453-525e-4f9b-b3b6-3336bef71c74] Processing by Api::V1::NationalitiesController#index as */*
+[80afd453-525e-4f9b-b3b6-3336bef71c74] Completed 200 OK in 499ms (Views: 11.6ms | ActiveRecord: 382.0ms (1 query, 0 cached) | GC: 0.0ms)
+[3f5f86a8-b74e-4d59-9b1b-60e06b4597b3] Completed 200 OK in 499ms (Views: 13.3ms | ActiveRecord: 390.1ms (1 query, 0 cached) | GC: 4.3ms)
+[046f77e6-ebbc-430b-b58e-58fb588fb933] Started GET "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php" for 94.141.161.6 at 2025-12-15 11:15:14 +0000
+[046f77e6-ebbc-430b-b58e-58fb588fb933]   
+[046f77e6-ebbc-430b-b58e-58fb588fb933] ActionController::RoutingError (No route matches [GET] "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php"):
+[046f77e6-ebbc-430b-b58e-58fb588fb933]   
+[bad6d8e7-4d21-4a7a-98aa-883b7efa6e06] Started GET "/" for 46.151.178.49 at 2025-12-15 16:00:30 +0000
+[bad6d8e7-4d21-4a7a-98aa-883b7efa6e06] Processing by StaticController#index as HTML
+[bad6d8e7-4d21-4a7a-98aa-883b7efa6e06] Sent file /var/www/southcoastwebmain/public/index.html (14.6ms)
+[bad6d8e7-4d21-4a7a-98aa-883b7efa6e06] Completed 200 OK in 43ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[348b1ea8-baa3-491f-92ef-2772582fe163] Started GET "/" for 170.64.226.123 at 2025-12-15 16:10:13 +0000
+[348b1ea8-baa3-491f-92ef-2772582fe163] Processing by StaticController#index as HTML
+[348b1ea8-baa3-491f-92ef-2772582fe163] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[348b1ea8-baa3-491f-92ef-2772582fe163] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[9163cfb6-4df6-48d4-ab20-80e3ea61f867] Started POST "/" for 170.64.226.123 at 2025-12-15 16:10:14 +0000
+[9163cfb6-4df6-48d4-ab20-80e3ea61f867]   
+[9163cfb6-4df6-48d4-ab20-80e3ea61f867] ActionController::RoutingError (No route matches [POST] "/"):
+[9163cfb6-4df6-48d4-ab20-80e3ea61f867]   
+[53194295-9e4e-4a08-acac-e2402b84aab9] Started GET "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php" for 146.190.128.235 at 2025-12-15 16:36:59 +0000
+[53194295-9e4e-4a08-acac-e2402b84aab9]   
+[53194295-9e4e-4a08-acac-e2402b84aab9] ActionController::RoutingError (No route matches [GET] "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php"):
+[53194295-9e4e-4a08-acac-e2402b84aab9]   
+[26714db4-54b7-44fe-8415-1d730b774d46] Started GET "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php" for 8.222.225.103 at 2025-12-15 17:32:37 +0000
+[26714db4-54b7-44fe-8415-1d730b774d46]   
+[26714db4-54b7-44fe-8415-1d730b774d46] ActionController::RoutingError (No route matches [GET] "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php"):
+[26714db4-54b7-44fe-8415-1d730b774d46]   
+[920f7234-c3a2-41e6-9a9f-d10cbb49aee2] Started GET "/" for 170.64.183.109 at 2025-12-15 20:03:37 +0000
+[920f7234-c3a2-41e6-9a9f-d10cbb49aee2] Processing by StaticController#index as HTML
+[920f7234-c3a2-41e6-9a9f-d10cbb49aee2] Sent file /var/www/southcoastwebmain/public/index.html (16.3ms)
+[920f7234-c3a2-41e6-9a9f-d10cbb49aee2] Completed 200 OK in 44ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[f38a9f75-520d-4814-804f-77f2414df30c] Started POST "/" for 170.64.183.109 at 2025-12-15 20:03:38 +0000
+[f38a9f75-520d-4814-804f-77f2414df30c]   
+[f38a9f75-520d-4814-804f-77f2414df30c] ActionController::RoutingError (No route matches [POST] "/"):
+[f38a9f75-520d-4814-804f-77f2414df30c]   
+[587c56c0-e6a6-47d8-8472-4e37e1a827e4] Started GET "/" for 205.210.31.193 at 2025-12-15 20:34:14 +0000
+[587c56c0-e6a6-47d8-8472-4e37e1a827e4] Processing by StaticController#index as HTML
+[587c56c0-e6a6-47d8-8472-4e37e1a827e4] Sent file /var/www/southcoastwebmain/public/index.html (11.7ms)
+[587c56c0-e6a6-47d8-8472-4e37e1a827e4] Completed 200 OK in 35ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[325538c4-2362-4e2e-861c-cb464bcb9064] Started GET "/" for 170.64.173.70 at 2025-12-15 20:38:45 +0000
+[325538c4-2362-4e2e-861c-cb464bcb9064] Processing by StaticController#index as HTML
+[325538c4-2362-4e2e-861c-cb464bcb9064] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[325538c4-2362-4e2e-861c-cb464bcb9064] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[27637b09-9658-405e-a6bb-35296b5ee826] Started POST "/" for 170.64.173.70 at 2025-12-15 20:38:45 +0000
+[27637b09-9658-405e-a6bb-35296b5ee826]   
+[27637b09-9658-405e-a6bb-35296b5ee826] ActionController::RoutingError (No route matches [POST] "/"):
+[27637b09-9658-405e-a6bb-35296b5ee826]   
+[61896603-66c2-463f-9aea-4ba0d7bc277c] Started GET "/" for 152.115.47.190 at 2025-12-15 22:33:53 +0000
+[61896603-66c2-463f-9aea-4ba0d7bc277c] Processing by StaticController#index as HTML
+[61896603-66c2-463f-9aea-4ba0d7bc277c] Sent file /var/www/southcoastwebmain/public/index.html (11.9ms)
+[61896603-66c2-463f-9aea-4ba0d7bc277c] Completed 200 OK in 33ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[c2595281-7e3b-462d-9347-01bbc95d1c9e] Started GET "/" for 198.235.24.251 at 2025-12-15 23:57:46 +0000
+[c2595281-7e3b-462d-9347-01bbc95d1c9e] Processing by StaticController#index as */*
+[c2595281-7e3b-462d-9347-01bbc95d1c9e] Sent file /var/www/southcoastwebmain/public/index.html (8.6ms)
+[c2595281-7e3b-462d-9347-01bbc95d1c9e] Completed 200 OK in 23ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[c91680f8-dd65-4868-a2be-980f2acb28e4] Started GET "/" for 167.94.138.120 at 2025-12-16 00:00:35 +0000
+[c91680f8-dd65-4868-a2be-980f2acb28e4] Processing by StaticController#index as */*
+[c91680f8-dd65-4868-a2be-980f2acb28e4] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[c91680f8-dd65-4868-a2be-980f2acb28e4] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[7a943f46-193c-49f0-9fed-9b9b646d8687] Started GET "/sitemap.xml" for 167.94.138.120 at 2025-12-16 00:02:13 +0000
+[7a943f46-193c-49f0-9fed-9b9b646d8687]   
+[7a943f46-193c-49f0-9fed-9b9b646d8687] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[7a943f46-193c-49f0-9fed-9b9b646d8687]   
+[fb425131-3a4c-4377-a0b4-aeb5e46d749c] Started POST "/" for 84.32.103.189 at 2025-12-16 02:52:53 +0000
+[fb425131-3a4c-4377-a0b4-aeb5e46d749c]   
+[fb425131-3a4c-4377-a0b4-aeb5e46d749c] ActionController::RoutingError (No route matches [POST] "/"):
+[fb425131-3a4c-4377-a0b4-aeb5e46d749c]   
+[2e5387f7-0cb2-4bb2-bc85-56c271b1e633] Started GET "/" for 205.210.31.162 at 2025-12-16 04:05:53 +0000
+[2e5387f7-0cb2-4bb2-bc85-56c271b1e633] Processing by StaticController#index as HTML
+[2e5387f7-0cb2-4bb2-bc85-56c271b1e633] Sent file /var/www/southcoastwebmain/public/index.html (11.8ms)
+[2e5387f7-0cb2-4bb2-bc85-56c271b1e633] Completed 200 OK in 31ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[3a030192-b975-497c-9a50-c821e6bfe76e] Started POST "/" for 84.32.103.189 at 2025-12-16 04:36:15 +0000
+[3a030192-b975-497c-9a50-c821e6bfe76e]   
+[3a030192-b975-497c-9a50-c821e6bfe76e] ActionController::RoutingError (No route matches [POST] "/"):
+[3a030192-b975-497c-9a50-c821e6bfe76e]   
+[da740ae6-1e17-4692-8567-f132d410586f] Started POST "/" for 84.32.103.189 at 2025-12-16 05:34:54 +0000
+[da740ae6-1e17-4692-8567-f132d410586f]   
+[da740ae6-1e17-4692-8567-f132d410586f] ActionController::RoutingError (No route matches [POST] "/"):
+[da740ae6-1e17-4692-8567-f132d410586f]   
+[d05873e4-44d5-4999-a287-997b9081a477] Started POST "/" for 84.32.103.189 at 2025-12-16 05:36:47 +0000
+[d05873e4-44d5-4999-a287-997b9081a477]   
+[d05873e4-44d5-4999-a287-997b9081a477] ActionController::RoutingError (No route matches [POST] "/"):
+[d05873e4-44d5-4999-a287-997b9081a477]   
+[3733d811-02b6-43bd-aa68-b7640fc92e00] Started POST "/" for 62.60.247.120 at 2025-12-16 07:18:23 +0000
+[3733d811-02b6-43bd-aa68-b7640fc92e00]   
+[3733d811-02b6-43bd-aa68-b7640fc92e00] ActionController::RoutingError (No route matches [POST] "/"):
+[3733d811-02b6-43bd-aa68-b7640fc92e00]   
+[cb2082ce-93fa-41ea-8e1c-b7735d107851] Started GET "/" for 209.38.28.227 at 2025-12-16 07:34:43 +0000
+[cb2082ce-93fa-41ea-8e1c-b7735d107851] Processing by StaticController#index as HTML
+[cb2082ce-93fa-41ea-8e1c-b7735d107851] Sent file /var/www/southcoastwebmain/public/index.html (12.0ms)
+[cb2082ce-93fa-41ea-8e1c-b7735d107851] Completed 200 OK in 33ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[99d4f363-7267-48aa-a81e-22018619ccea] Started POST "/" for 209.38.28.227 at 2025-12-16 07:34:43 +0000
+[99d4f363-7267-48aa-a81e-22018619ccea]   
+[99d4f363-7267-48aa-a81e-22018619ccea] ActionController::RoutingError (No route matches [POST] "/"):
+[99d4f363-7267-48aa-a81e-22018619ccea]   
+[96279875-316b-4a97-98fd-3834aa91b2f4] Started POST "/" for 92.246.136.154 at 2025-12-16 07:41:03 +0000
+[96279875-316b-4a97-98fd-3834aa91b2f4]   
+[96279875-316b-4a97-98fd-3834aa91b2f4] ActionController::RoutingError (No route matches [POST] "/"):
+[96279875-316b-4a97-98fd-3834aa91b2f4]   
+[3b2df2d0-cca2-4d60-97c1-6590328d6aed] Started POST "/" for 62.60.247.120 at 2025-12-16 07:42:34 +0000
+[3b2df2d0-cca2-4d60-97c1-6590328d6aed]   
+[3b2df2d0-cca2-4d60-97c1-6590328d6aed] ActionController::RoutingError (No route matches [POST] "/"):
+[3b2df2d0-cca2-4d60-97c1-6590328d6aed]   
+[80aec711-9216-4823-96e5-219b91da9cc4] Started POST "/" for 92.246.136.154 at 2025-12-16 08:12:13 +0000
+[80aec711-9216-4823-96e5-219b91da9cc4]   
+[80aec711-9216-4823-96e5-219b91da9cc4] ActionController::RoutingError (No route matches [POST] "/"):
+[80aec711-9216-4823-96e5-219b91da9cc4]   
+[937ace05-97c8-4d51-8778-754a0841dbe9] Started GET "/" for 209.38.88.92 at 2025-12-16 08:25:01 +0000
+[937ace05-97c8-4d51-8778-754a0841dbe9] Processing by StaticController#index as HTML
+[937ace05-97c8-4d51-8778-754a0841dbe9] Sent file /var/www/southcoastwebmain/public/index.html (0.2ms)
+[937ace05-97c8-4d51-8778-754a0841dbe9] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[465626b4-9808-4d52-8974-3132167903cb] Started POST "/" for 209.38.88.92 at 2025-12-16 08:25:02 +0000
+[465626b4-9808-4d52-8974-3132167903cb]   
+[465626b4-9808-4d52-8974-3132167903cb] ActionController::RoutingError (No route matches [POST] "/"):
+[465626b4-9808-4d52-8974-3132167903cb]   
+[88464d3b-1ff8-4028-af5c-462eb6a4b156] Started GET "/" for 209.38.88.92 at 2025-12-16 08:30:12 +0000
+[88464d3b-1ff8-4028-af5c-462eb6a4b156] Processing by StaticController#index as HTML
+[88464d3b-1ff8-4028-af5c-462eb6a4b156] Sent file /var/www/southcoastwebmain/public/index.html (0.1ms)
+[88464d3b-1ff8-4028-af5c-462eb6a4b156] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[103ddbae-08f4-45e4-8e9f-4b714d5842a2] Started POST "/" for 209.38.88.92 at 2025-12-16 08:30:13 +0000
+[103ddbae-08f4-45e4-8e9f-4b714d5842a2]   
+[103ddbae-08f4-45e4-8e9f-4b714d5842a2] ActionController::RoutingError (No route matches [POST] "/"):
+[103ddbae-08f4-45e4-8e9f-4b714d5842a2]   
+[a13ced55-3695-469e-b05c-90148eaff2b2] Started POST "/" for 77.73.131.25 at 2025-12-16 13:30:55 +0000
+[a13ced55-3695-469e-b05c-90148eaff2b2]   
+[a13ced55-3695-469e-b05c-90148eaff2b2] ActionController::RoutingError (No route matches [POST] "/"):
+[a13ced55-3695-469e-b05c-90148eaff2b2]   
+[396e3b69-c14a-4058-b122-25b305f73ed2] Started POST "/" for 77.73.131.25 at 2025-12-16 14:56:18 +0000
+[396e3b69-c14a-4058-b122-25b305f73ed2]   
+[396e3b69-c14a-4058-b122-25b305f73ed2] ActionController::RoutingError (No route matches [POST] "/"):
+[396e3b69-c14a-4058-b122-25b305f73ed2]   
+[d06c85fc-477a-4920-b5db-6c34aad02532] Started GET "/api/v1/nationalities" for 23.27.145.125 at 2025-12-16 16:08:48 +0000
+[e3a1ab3f-5e87-48e0-9f33-301402a503b0] Started GET "/api/v1/room_types" for 23.27.145.125 at 2025-12-16 16:08:48 +0000
+[d06c85fc-477a-4920-b5db-6c34aad02532] Processing by Api::V1::NationalitiesController#index as */*
+[e3a1ab3f-5e87-48e0-9f33-301402a503b0] Processing by Api::V1::RoomTypesController#index as */*
+[e3a1ab3f-5e87-48e0-9f33-301402a503b0] Completed 200 OK in 423ms (Views: 19.5ms | ActiveRecord: 352.4ms (1 query, 0 cached) | GC: 3.3ms)
+[d06c85fc-477a-4920-b5db-6c34aad02532] Completed 200 OK in 468ms (Views: 5.3ms | ActiveRecord: 390.0ms (1 query, 0 cached) | GC: 16.5ms)
+[753d0f13-c18f-4a26-a0a7-61590d2c873c] Started GET "/" for 167.71.44.122 at 2025-12-16 18:10:02 +0000
+[753d0f13-c18f-4a26-a0a7-61590d2c873c] Processing by StaticController#index as HTML
+[753d0f13-c18f-4a26-a0a7-61590d2c873c] Sent file /var/www/southcoastwebmain/public/index.html (21.5ms)
+[753d0f13-c18f-4a26-a0a7-61590d2c873c] Completed 200 OK in 55ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[993998d7-b6ef-4f4d-8203-aa1564521c93] Started POST "/" for 164.90.139.102 at 2025-12-16 18:15:21 +0000
+[993998d7-b6ef-4f4d-8203-aa1564521c93]   
+[993998d7-b6ef-4f4d-8203-aa1564521c93] ActionController::RoutingError (No route matches [POST] "/"):
+[993998d7-b6ef-4f4d-8203-aa1564521c93]   
+[e666f0da-ed87-4353-ad2b-4042251e50bb] Started GET "/" for 147.185.132.18 at 2025-12-16 19:05:53 +0000
+[e666f0da-ed87-4353-ad2b-4042251e50bb] Processing by StaticController#index as HTML
+[e666f0da-ed87-4353-ad2b-4042251e50bb] Sent file /var/www/southcoastwebmain/public/index.html (0.8ms)
+[e666f0da-ed87-4353-ad2b-4042251e50bb] Completed 200 OK in 2ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[d908e556-f702-460e-a6c1-62563247b203] Started GET "/" for 172.212.224.44 at 2025-12-16 19:07:52 +0000
+[d908e556-f702-460e-a6c1-62563247b203] Processing by StaticController#index as */*
+[d908e556-f702-460e-a6c1-62563247b203] Sent file /var/www/southcoastwebmain/public/index.html (0.5ms)
+[d908e556-f702-460e-a6c1-62563247b203] Completed 200 OK in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[0e96d102-2104-47e2-9875-67db5117bfad] Started GET "/api/v1/nationalities" for 196.98.20.199 at 2025-12-16 20:33:48 +0000
+[0e96d102-2104-47e2-9875-67db5117bfad] Processing by Api::V1::NationalitiesController#index as */*
+[0e96d102-2104-47e2-9875-67db5117bfad] Completed 200 OK in 461ms (Views: 6.2ms | ActiveRecord: 344.2ms (1 query, 0 cached) | GC: 33.1ms)
+[0bbc0992-d099-4332-80c9-af34eefc5d82] Started GET "/api/v1/nationalities" for 3.89.109.181 at 2025-12-16 20:56:10 +0000
+[0bbc0992-d099-4332-80c9-af34eefc5d82] Processing by Api::V1::NationalitiesController#index as */*
+[0bbc0992-d099-4332-80c9-af34eefc5d82] Completed 200 OK in 89ms (Views: 0.9ms | ActiveRecord: 65.5ms (1 query, 0 cached) | GC: 8.6ms)
+[ef72be12-3eb0-44b9-99c3-e8b7e2f03b68] Started GET "/api/v1/room_types" for 3.89.109.181 at 2025-12-16 20:56:10 +0000
+[ef72be12-3eb0-44b9-99c3-e8b7e2f03b68] Processing by Api::V1::RoomTypesController#index as */*
+[ef72be12-3eb0-44b9-99c3-e8b7e2f03b68] Completed 200 OK in 208ms (Views: 6.3ms | ActiveRecord: 119.0ms (1 query, 0 cached) | GC: 5.7ms)
+[7e7a9b3e-c93b-43ad-976f-6885f20ff6f7] Started POST "/" for 85.11.167.3 at 2025-12-16 21:07:39 +0000
+[7e7a9b3e-c93b-43ad-976f-6885f20ff6f7]   
+[7e7a9b3e-c93b-43ad-976f-6885f20ff6f7] ActionController::RoutingError (No route matches [POST] "/"):
+[7e7a9b3e-c93b-43ad-976f-6885f20ff6f7]   
+[2333069e-dbb1-497e-8f00-0f1d2097c529] Started GET "/api/v1/nationalities" for 3.88.174.244 at 2025-12-16 21:09:04 +0000
+[2333069e-dbb1-497e-8f00-0f1d2097c529] Processing by Api::V1::NationalitiesController#index as */*
+[b0965752-1863-4685-b6c4-28a1d49a6084] Started GET "/api/v1/room_types" for 13.220.126.183 at 2025-12-16 21:09:04 +0000
+[b0965752-1863-4685-b6c4-28a1d49a6084] Processing by Api::V1::RoomTypesController#index as */*
+[2333069e-dbb1-497e-8f00-0f1d2097c529] Completed 200 OK in 102ms (Views: 1.2ms | ActiveRecord: 101.1ms (1 query, 0 cached) | GC: 3.5ms)
+[b0965752-1863-4685-b6c4-28a1d49a6084] Completed 200 OK in 85ms (Views: 0.3ms | ActiveRecord: 96.8ms (1 query, 0 cached) | GC: 3.7ms)
+[1092940e-c5a4-44bd-9363-938e6bbfa94a] Started POST "/_next/flight" for 85.11.167.3 at 2025-12-16 21:14:51 +0000
+[1092940e-c5a4-44bd-9363-938e6bbfa94a]   
+[1092940e-c5a4-44bd-9363-938e6bbfa94a] ActionController::RoutingError (No route matches [POST] "/_next/flight"):
+[1092940e-c5a4-44bd-9363-938e6bbfa94a]   
+[657c790a-3618-4471-91bb-e3fa487a3dd4] Started POST "/_react/flight" for 85.11.167.3 at 2025-12-16 21:24:14 +0000
+[657c790a-3618-4471-91bb-e3fa487a3dd4]   
+[657c790a-3618-4471-91bb-e3fa487a3dd4] ActionController::RoutingError (No route matches [POST] "/_react/flight"):
+[657c790a-3618-4471-91bb-e3fa487a3dd4]   
+[c0c16fce-0a6c-41b4-aa2c-2c3e17281d12] Started POST "/_next/server-actions" for 85.11.167.3 at 2025-12-16 21:34:03 +0000
+[c0c16fce-0a6c-41b4-aa2c-2c3e17281d12]   
+[c0c16fce-0a6c-41b4-aa2c-2c3e17281d12] ActionController::RoutingError (No route matches [POST] "/_next/server-actions"):
+[c0c16fce-0a6c-41b4-aa2c-2c3e17281d12]   
+[0191e5cb-7948-46bf-ad4a-c6dce3e429d6] Started POST "/_next/webpack-hmr" for 85.11.167.3 at 2025-12-16 21:43:11 +0000
+[0191e5cb-7948-46bf-ad4a-c6dce3e429d6]   
+[0191e5cb-7948-46bf-ad4a-c6dce3e429d6] ActionController::RoutingError (No route matches [POST] "/_next/webpack-hmr"):
+[0191e5cb-7948-46bf-ad4a-c6dce3e429d6]   
+[9f67f7ac-d7e6-455a-a605-ca670c9e762e] Started POST "/" for 78.153.130.48 at 2025-12-17 00:43:33 +0000
+[9f67f7ac-d7e6-455a-a605-ca670c9e762e]   
+[9f67f7ac-d7e6-455a-a605-ca670c9e762e] ActionController::RoutingError (No route matches [POST] "/"):
+[9f67f7ac-d7e6-455a-a605-ca670c9e762e]   
+[ca5aa9bd-a714-4ad5-9b5e-862c6582c6d9] Started GET "/" for 167.94.138.162 at 2025-12-17 01:00:58 +0000
+[ca5aa9bd-a714-4ad5-9b5e-862c6582c6d9] Processing by StaticController#index as */*
+[ca5aa9bd-a714-4ad5-9b5e-862c6582c6d9] Sent file /var/www/southcoastwebmain/public/index.html (10.8ms)
+[ca5aa9bd-a714-4ad5-9b5e-862c6582c6d9] Completed 200 OK in 32ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[b487cf4e-79be-4c52-b826-45a444cc35c5] Started POST "/" for 78.153.130.48 at 2025-12-17 01:22:58 +0000
+[b487cf4e-79be-4c52-b826-45a444cc35c5]   
+[b487cf4e-79be-4c52-b826-45a444cc35c5] ActionController::RoutingError (No route matches [POST] "/"):
+[b487cf4e-79be-4c52-b826-45a444cc35c5]   
+[84cb4cc0-39e1-47fa-bf33-b59201a19781] Started GET "/api/v1/nationalities" for 69.160.160.55 at 2025-12-17 02:01:44 +0000
+[54841e6f-8aa2-4c70-bee0-388740d9a1a9] Started GET "/api/v1/room_types" for 69.160.160.55 at 2025-12-17 02:01:44 +0000
+[84cb4cc0-39e1-47fa-bf33-b59201a19781] Processing by Api::V1::NationalitiesController#index as */*
+[54841e6f-8aa2-4c70-bee0-388740d9a1a9] Processing by Api::V1::RoomTypesController#index as */*
+[54841e6f-8aa2-4c70-bee0-388740d9a1a9] Completed 200 OK in 455ms (Views: 14.4ms | ActiveRecord: 354.4ms (1 query, 0 cached) | GC: 10.1ms)
+[84cb4cc0-39e1-47fa-bf33-b59201a19781] Completed 200 OK in 501ms (Views: 8.8ms | ActiveRecord: 355.4ms (1 query, 0 cached) | GC: 15.2ms)
+[dbea0a7c-e04d-46fc-8a3a-5d1ad3a48ee9] Started GET "/api/v1/nationalities" for 66.249.66.164 at 2025-12-17 03:34:23 +0000
+[dbea0a7c-e04d-46fc-8a3a-5d1ad3a48ee9] Processing by Api::V1::NationalitiesController#index as */*
+[dbea0a7c-e04d-46fc-8a3a-5d1ad3a48ee9] Completed 200 OK in 429ms (Views: 15.9ms | ActiveRecord: 295.8ms (1 query, 0 cached) | GC: 0.0ms)
+[a82d46f6-171d-4e60-9850-bb6dd2b8c17a] Started GET "/api/v1/room_types" for 66.249.66.45 at 2025-12-17 03:34:24 +0000
+[a82d46f6-171d-4e60-9850-bb6dd2b8c17a] Processing by Api::V1::RoomTypesController#index as */*
+[a82d46f6-171d-4e60-9850-bb6dd2b8c17a] Completed 200 OK in 16ms (Views: 1.8ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+[52aa9585-f2c4-48ed-9be9-6f4817307cad] Started GET "/" for 205.210.31.85 at 2025-12-17 06:04:58 +0000
+[52aa9585-f2c4-48ed-9be9-6f4817307cad] Processing by StaticController#index as HTML
+[52aa9585-f2c4-48ed-9be9-6f4817307cad] Sent file /var/www/southcoastwebmain/public/index.html (16.3ms)
+[52aa9585-f2c4-48ed-9be9-6f4817307cad] Completed 200 OK in 62ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 6.3ms)
+[9924c287-5100-4a92-ad5f-ca78f6097873] Started GET "/" for 161.35.120.55 at 2025-12-17 14:03:39 +0000
+[9924c287-5100-4a92-ad5f-ca78f6097873] Processing by StaticController#index as */*
+[9924c287-5100-4a92-ad5f-ca78f6097873] Sent file /var/www/southcoastwebmain/public/index.html (13.2ms)
+[9924c287-5100-4a92-ad5f-ca78f6097873] Completed 200 OK in 34ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[2bce7706-9d60-40d9-9b00-b7784e8bab23] Started GET "/api/v1/room_types" for 66.249.66.15 at 2025-12-17 14:35:28 +0000
+[2bce7706-9d60-40d9-9b00-b7784e8bab23] Processing by Api::V1::RoomTypesController#index as */*
+[2bce7706-9d60-40d9-9b00-b7784e8bab23] Completed 200 OK in 389ms (Views: 7.4ms | ActiveRecord: 307.8ms (1 query, 0 cached) | GC: 6.9ms)
+[ee79d8eb-920b-492e-b863-8e47094f1a63] Started GET "/api/v1/nationalities" for 35.193.17.74 at 2025-12-17 16:37:48 +0000
+[a02deefa-3b1d-47ff-ac90-d46609163fed] Started GET "/api/v1/room_types" for 35.193.17.74 at 2025-12-17 16:37:48 +0000
+[ee79d8eb-920b-492e-b863-8e47094f1a63] Processing by Api::V1::NationalitiesController#index as */*
+[a02deefa-3b1d-47ff-ac90-d46609163fed] Processing by Api::V1::RoomTypesController#index as */*
+[a02deefa-3b1d-47ff-ac90-d46609163fed] Completed 200 OK in 492ms (Views: 23.7ms | ActiveRecord: 363.9ms (1 query, 0 cached) | GC: 0.0ms)
+[ee79d8eb-920b-492e-b863-8e47094f1a63] Completed 200 OK in 496ms (Views: 10.9ms | ActiveRecord: 360.7ms (1 query, 0 cached) | GC: 0.8ms)
+[b1149f1f-d01c-44b2-bdc2-ef1f0692749c] Started GET "/api/v1/room_types" for 66.249.66.32 at 2025-12-17 18:20:32 +0000
+[b1149f1f-d01c-44b2-bdc2-ef1f0692749c] Processing by Api::V1::RoomTypesController#index as */*
+[b1149f1f-d01c-44b2-bdc2-ef1f0692749c] Completed 200 OK in 345ms (Views: 8.5ms | ActiveRecord: 287.8ms (1 query, 0 cached) | GC: 17.2ms)
+[47c9aeba-6a48-4551-8f5f-836952b75b91] Started GET "/api/v1/nationalities" for 66.249.66.164 at 2025-12-17 18:20:33 +0000
+[47c9aeba-6a48-4551-8f5f-836952b75b91] Processing by Api::V1::NationalitiesController#index as */*
+[47c9aeba-6a48-4551-8f5f-836952b75b91] Completed 200 OK in 61ms (Views: 0.3ms | ActiveRecord: 6.5ms (1 query, 0 cached) | GC: 15.0ms)
+[772a3203-67fa-4cdf-a9f8-563934ca54e8] Started GET "/" for 205.210.31.87 at 2025-12-17 20:40:41 +0000
+[772a3203-67fa-4cdf-a9f8-563934ca54e8] Processing by StaticController#index as HTML
+[772a3203-67fa-4cdf-a9f8-563934ca54e8] Sent file /var/www/southcoastwebmain/public/index.html (18.8ms)
+[772a3203-67fa-4cdf-a9f8-563934ca54e8] Completed 200 OK in 47ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[406a0da8-a685-49bc-82e1-a009d7e951a5] Started GET "/" for 198.235.24.199 at 2025-12-17 23:58:07 +0000
+[406a0da8-a685-49bc-82e1-a009d7e951a5] Processing by StaticController#index as */*
+[406a0da8-a685-49bc-82e1-a009d7e951a5] Sent file /var/www/southcoastwebmain/public/index.html (4.1ms)
+[406a0da8-a685-49bc-82e1-a009d7e951a5] Completed 200 OK in 13ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[fcda2b7f-bfca-48e9-8ab3-2dd4185b2edf] Started GET "/api/v1/nationalities" for 146.112.163.47 at 2025-12-18 03:38:09 +0000
+[fcda2b7f-bfca-48e9-8ab3-2dd4185b2edf] Processing by Api::V1::NationalitiesController#index as */*
+[13f02887-9d30-40ee-8c07-1737a9b15a7f] Started GET "/api/v1/room_types" for 146.112.163.47 at 2025-12-18 03:38:09 +0000
+[13f02887-9d30-40ee-8c07-1737a9b15a7f] Processing by Api::V1::RoomTypesController#index as */*
+[fcda2b7f-bfca-48e9-8ab3-2dd4185b2edf] Completed 200 OK in 445ms (Views: 12.5ms | ActiveRecord: 355.4ms (1 query, 0 cached) | GC: 5.3ms)
+[13f02887-9d30-40ee-8c07-1737a9b15a7f] Completed 200 OK in 269ms (Views: 9.6ms | ActiveRecord: 135.2ms (1 query, 0 cached) | GC: 7.3ms)
+[29fa5d30-a219-4682-bc15-05645d31b4b7] Started GET "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php" for 157.180.86.243 at 2025-12-18 04:13:50 +0000
+[29fa5d30-a219-4682-bc15-05645d31b4b7]   
+[29fa5d30-a219-4682-bc15-05645d31b4b7] ActionController::RoutingError (No route matches [GET] "/api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php"):
+[29fa5d30-a219-4682-bc15-05645d31b4b7]   
+[189084cd-4d7c-4c57-926c-929216da19f1] Started GET "/" for 162.142.125.45 at 2025-12-18 06:19:58 +0000
+[189084cd-4d7c-4c57-926c-929216da19f1] Processing by StaticController#index as */*
+[189084cd-4d7c-4c57-926c-929216da19f1] Sent file /var/www/southcoastwebmain/public/index.html (18.1ms)
+[189084cd-4d7c-4c57-926c-929216da19f1] Completed 200 OK in 46ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+[fda4a854-0ed7-4250-85df-0a52a6e7a8a2] Started GET "/sitemap.xml" for 162.142.125.45 at 2025-12-18 06:20:11 +0000
+[fda4a854-0ed7-4250-85df-0a52a6e7a8a2]   
+[fda4a854-0ed7-4250-85df-0a52a6e7a8a2] ActionController::RoutingError (No route matches [GET] "/sitemap.xml"):
+[fda4a854-0ed7-4250-85df-0a52a6e7a8a2]   
+[2837485e-0c38-4c28-be8d-de7a5bec5b4f] Started GET "/api/v1/room_types" for 202.8.40.176 at 2025-12-18 06:40:12 +0000
+[26632358-da8f-46d0-893b-ff231dbf3098] Started GET "/api/v1/nationalities" for 202.8.40.176 at 2025-12-18 06:40:12 +0000
+[2837485e-0c38-4c28-be8d-de7a5bec5b4f] Processing by Api::V1::RoomTypesController#index as */*
+[26632358-da8f-46d0-893b-ff231dbf3098] Processing by Api::V1::NationalitiesController#index as */*
+[2837485e-0c38-4c28-be8d-de7a5bec5b4f] Completed 200 OK in 399ms (Views: 10.2ms | ActiveRecord: 299.9ms (1 query, 0 cached) | GC: 0.0ms)
+[26632358-da8f-46d0-893b-ff231dbf3098] Completed 200 OK in 412ms (Views: 4.7ms | ActiveRecord: 360.2ms (1 query, 0 cached) | GC: 15.8ms)
+[5be320da-2546-4392-b9b5-67a7407b6ee6] Started GET "/api/v1/nationalities" for 105.160.119.70 at 2025-12-18 10:04:32 +0000
+[48f25ad8-1803-4d0a-b0f5-ffb6ae566e8f] Started GET "/api/v1/room_types" for 105.160.119.70 at 2025-12-18 10:04:32 +0000
+[48f25ad8-1803-4d0a-b0f5-ffb6ae566e8f] Processing by Api::V1::RoomTypesController#index as */*
+[5be320da-2546-4392-b9b5-67a7407b6ee6] Processing by Api::V1::NationalitiesController#index as */*
+[48f25ad8-1803-4d0a-b0f5-ffb6ae566e8f] Completed 200 OK in 429ms (Views: 21.4ms | ActiveRecord: 290.1ms (1 query, 0 cached) | GC: 0.0ms)
+[5be320da-2546-4392-b9b5-67a7407b6ee6] Completed 200 OK in 434ms (Views: 9.8ms | ActiveRecord: 290.7ms (1 query, 0 cached) | GC: 2.6ms)
