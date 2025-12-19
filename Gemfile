@@ -43,7 +43,7 @@ end
 
 # --- Development-only gems ---
 group :development do
-  gem "debug", "~> 1.9"
+  gem "debug", "~> 1.11"
 end
 
 # --- Development & Test shared tools ---
