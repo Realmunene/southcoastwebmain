@@ -16,7 +16,7 @@ gem "mail", "~> 2.9.0"
 gem "actionmailer", "~> 8.0.3"
 
 # --- Authentication & Utilities ---
-gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.21"
 gem "jwt"
 gem "countries"
 
