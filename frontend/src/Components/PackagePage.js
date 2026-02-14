@@ -168,8 +168,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   useEffect(() => {
     const fetchNationalities = async () => {
       try {
-        const response = await fetch('https://southcoastoutdoors.cloud/api/v1/nationalities');
-        
+        const response = await fetch('https://southcoastoutdoors.cloud/api/v1/nationalities')
         // First get response as text to check if it's valid JSON
         const responseText = await response.text();
         let data;

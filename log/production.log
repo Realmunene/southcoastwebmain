@@ -5214,3 +5214,71 @@
 ✅ Resend mailer configured successfully.
 ✅ ResendDeliveryMethod registered successfully.
 ✅ Resend mailer configured successfully.
+✅ ResendDeliveryMethod registered successfully.
+✅ Resend mailer configured successfully.
+[38d93544-3d82-4784-8679-4c346df74b8b] Started GET "//api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:48:13 +0000
+[38d93544-3d82-4784-8679-4c346df74b8b] Processing by Api::V1::NationalitiesController#index as HTML
+[38d93544-3d82-4784-8679-4c346df74b8b] Completed 200 OK in 148ms (Views: 1.2ms | ActiveRecord: 84.5ms (1 query, 0 cached) | GC: 0.9ms)
+[5995217b-871b-4ed7-9da8-74066e7f14f4] Started GET "//api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:48:17 +0000
+[5995217b-871b-4ed7-9da8-74066e7f14f4] Processing by Api::V1::RoomTypesController#index as HTML
+[5995217b-871b-4ed7-9da8-74066e7f14f4] Completed 200 OK in 53ms (Views: 0.7ms | ActiveRecord: 10.8ms (1 query, 0 cached) | GC: 0.6ms)
+[07c2bc03-cfe6-4435-8dff-ec73ba4c05d0] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:48:41 +0000
+[0d1d9655-ab0f-4cd7-8fef-0cab155c247a] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:48:41 +0000
+[07c2bc03-cfe6-4435-8dff-ec73ba4c05d0] Processing by Api::V1::NationalitiesController#index as */*
+[0d1d9655-ab0f-4cd7-8fef-0cab155c247a] Processing by Api::V1::RoomTypesController#index as */*
+[0d1d9655-ab0f-4cd7-8fef-0cab155c247a] Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+[07c2bc03-cfe6-4435-8dff-ec73ba4c05d0] Completed 200 OK in 8ms (Views: 0.5ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+[3192c02f-2b7f-4900-a3ab-f882fbfbcb64] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:48:42 +0000
+[8b268743-ccc2-4de6-8a61-5b492d90f43e] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:48:42 +0000
+[3192c02f-2b7f-4900-a3ab-f882fbfbcb64] Processing by Api::V1::NationalitiesController#index as */*
+[8b268743-ccc2-4de6-8a61-5b492d90f43e] Processing by Api::V1::RoomTypesController#index as */*
+[8b268743-ccc2-4de6-8a61-5b492d90f43e] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+[3192c02f-2b7f-4900-a3ab-f882fbfbcb64] Completed 200 OK in 7ms (Views: 0.4ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+[ebc45f2d-cb70-4bf3-bdf9-c7858c10a28f] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:48:49 +0000
+[6181ee6e-676d-4f62-a7b8-53ec36e9d6b5] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:48:49 +0000
+[ebc45f2d-cb70-4bf3-bdf9-c7858c10a28f] Processing by Api::V1::NationalitiesController#index as */*
+[6181ee6e-676d-4f62-a7b8-53ec36e9d6b5] Processing by Api::V1::RoomTypesController#index as */*
+[6181ee6e-676d-4f62-a7b8-53ec36e9d6b5] Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+[ebc45f2d-cb70-4bf3-bdf9-c7858c10a28f] Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+[0b12d092-73fd-4f1d-b5a5-e8fa48fa5d7f] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:48:49 +0000
+[158bc0a1-7527-4677-ac20-7d2e6fd5c3b5] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:48:49 +0000
+[0b12d092-73fd-4f1d-b5a5-e8fa48fa5d7f] Processing by Api::V1::RoomTypesController#index as */*
+[158bc0a1-7527-4677-ac20-7d2e6fd5c3b5] Processing by Api::V1::NationalitiesController#index as */*
+[158bc0a1-7527-4677-ac20-7d2e6fd5c3b5] Completed 200 OK in 20ms (Views: 0.5ms | ActiveRecord: 6.3ms (1 query, 0 cached) | GC: 0.0ms)
+[0b12d092-73fd-4f1d-b5a5-e8fa48fa5d7f] Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 7.8ms (1 query, 0 cached) | GC: 0.0ms)
+[280682c5-b518-4dbb-aac1-9c5f7f03d2cd] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:49:03 +0000
+[280682c5-b518-4dbb-aac1-9c5f7f03d2cd] Processing by Api::V1::NationalitiesController#index as */*
+[280682c5-b518-4dbb-aac1-9c5f7f03d2cd] Completed 200 OK in 19ms (Views: 0.5ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 15.2ms)
+[c70bda93-b89f-4fe2-9385-217b06e7eb81] Started GET "//api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:49:30 +0000
+[c70bda93-b89f-4fe2-9385-217b06e7eb81] Processing by Api::V1::RoomTypesController#index as HTML
+[c70bda93-b89f-4fe2-9385-217b06e7eb81] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[f54d82a4-77c3-4a7e-8a2d-72d7702ae5a6] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:50:08 +0000
+[f54d82a4-77c3-4a7e-8a2d-72d7702ae5a6] Processing by Api::V1::NationalitiesController#index as */*
+[f54d82a4-77c3-4a7e-8a2d-72d7702ae5a6] Completed 200 OK in 12ms (Views: 0.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 7.5ms)
+[dd369ff0-0db6-478e-abba-48d1edae1d5d] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:50:08 +0000
+[dd369ff0-0db6-478e-abba-48d1edae1d5d] Processing by Api::V1::RoomTypesController#index as */*
+[dd369ff0-0db6-478e-abba-48d1edae1d5d] Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+[c44722ae-8237-4e08-991a-1ab36b877134] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:50:14 +0000
+[c44722ae-8237-4e08-991a-1ab36b877134] Processing by Api::V1::NationalitiesController#index as */*
+[c44722ae-8237-4e08-991a-1ab36b877134] Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+[4ac31937-bd46-4343-83f1-83d82a319d40] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:53:19 +0000
+[33eb5f07-b0ef-4af4-a42d-104cdb55613c] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:53:19 +0000
+[4ac31937-bd46-4343-83f1-83d82a319d40] Processing by Api::V1::NationalitiesController#index as */*
+[33eb5f07-b0ef-4af4-a42d-104cdb55613c] Processing by Api::V1::RoomTypesController#index as */*
+[4ac31937-bd46-4343-83f1-83d82a319d40] Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+[33eb5f07-b0ef-4af4-a42d-104cdb55613c] Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+[44a0d8a9-1c78-47af-9a45-50ae2c815042] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:53:43 +0000
+[0420f3cf-a6ae-4bad-8ba7-a9f674c559eb] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:53:43 +0000
+[44a0d8a9-1c78-47af-9a45-50ae2c815042] Processing by Api::V1::NationalitiesController#index as */*
+[0420f3cf-a6ae-4bad-8ba7-a9f674c559eb] Processing by Api::V1::RoomTypesController#index as */*
+[0420f3cf-a6ae-4bad-8ba7-a9f674c559eb] Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+[44a0d8a9-1c78-47af-9a45-50ae2c815042] Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+[a3e9c35f-6b69-46c3-a9d3-f68e03d84271] Started GET "/api/v1/room_types" for 102.208.190.30 at 2026-02-14 21:53:43 +0000
+[a3e9c35f-6b69-46c3-a9d3-f68e03d84271] Processing by Api::V1::RoomTypesController#index as */*
+[a3e9c35f-6b69-46c3-a9d3-f68e03d84271] Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+[de008819-d2cb-49f7-abed-f59264d73de4] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:53:43 +0000
+[de008819-d2cb-49f7-abed-f59264d73de4] Processing by Api::V1::NationalitiesController#index as */*
+[de008819-d2cb-49f7-abed-f59264d73de4] Completed 200 OK in 16ms (Views: 1.5ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 12.1ms)
+[abbde83d-84ed-4616-b5d8-82fcb71557a8] Started GET "/api/v1/nationalities" for 102.208.190.30 at 2026-02-14 21:54:19 +0000
+[abbde83d-84ed-4616-b5d8-82fcb71557a8] Processing by Api::V1::NationalitiesController#index as */*
+[abbde83d-84ed-4616-b5d8-82fcb71557a8] Completed 200 OK in 16ms (Views: 2.9ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 12.5ms)
