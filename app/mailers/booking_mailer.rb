@@ -14,11 +14,11 @@ class BookingMailer < ApplicationMailer
   end
 
   # Sent to the admin when a new booking is created
-  def admin_booking_notification
+def admin_booking_notification
     @booking = params[:booking]
 
     mail(
-      to: "joseph.m.munene690@gmail.com",
+      to: admin_emails,  # Use the helper method from ApplicationMailer
       subject: "New Booking Received - #{@booking.room_type}"
     )
   end
@@ -47,9 +47,10 @@ class BookingMailer < ApplicationMailer
   def admin_cancellation_notification
     @booking_details = params[:booking_details]
 
-    mail(
-      to: "joseph.m.munene690@gmail.com",
+mail(
+      to: admin_emails,  # Use the helper method from ApplicationMailer
       subject: "Booking Cancelled (##{@booking_details[:id]}) - #{@booking_details[:room_type]}"
     )
   end
 end
+

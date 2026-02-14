@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
@@ -11,7 +11,9 @@ import {
   faArrowLeft,
   faShield,
   faKey,
-  faCheckCircle
+  faCheckCircle,
+  faChevronLeft,
+  faChevronRight
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "./images/IMG-20251008-WA0008logo0.png";
 import { jwtDecode } from "jwt-decode";
@@ -23,6 +25,10 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
   const [forgotEmail, setForgotEmail] = useState("");
   const [forgotLoading, setForgotLoading] = useState(false);
   const [forgotSent, setForgotSent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const [swipeDirection, setSwipeDirection] = useState(null);
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -36,6 +42,59 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     password: "",
   });
 
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Swipe handlers
+  const handleTouchStart = (e) => {
+    if (!isMobile) return;
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isMobile) return;
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isMobile || !touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && isLogin) {
+      // Swipe left on login screen to show register
+      setIsLogin(false);
+      setSwipeDirection('left');
+      setTimeout(() => setSwipeDirection(null), 300);
+    } else if (isRightSwipe && !isLogin) {
+      // Swipe right on register screen to show login
+      setIsLogin(true);
+      setLoginView("login");
+      setSwipeDirection('right');
+      setTimeout(() => setSwipeDirection(null), 300);
+    }
+    
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  // Reset swipe on view change
+  useEffect(() => {
+    setTouchStart(null);
+    setTouchEnd(null);
+  }, [isLogin, loginView]);
+
   // ======================== HANDLERS ========================
 
   const handleLoginChange = (e) => {
@@ -44,7 +103,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
 
   const performLogin = async (email, password) => {
     if (!onLoginSuccess) {
-      // Only log to console in development
       if (process.env.NODE_ENV === 'development') {
         console.error("onLoginSuccess function is not provided to LoginPopup!");
       }
@@ -61,14 +119,12 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         }),
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
       try {
         data = JSON.parse(responseText);
       } catch (parseError) {
-        // Log error only in development
         if (process.env.NODE_ENV === 'development') {
           console.error("JSON Parse Error:", parseError);
         }
@@ -76,48 +132,37 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
       }
 
       if (response.ok && data.token) {
-        // ✅ Decode the token to get user information
         let decodedToken;
         try {
           decodedToken = jwtDecode(data.token);
-          // REMOVED: Sensitive token logging
         } catch (decodeError) {
-          // Log error only in development
           if (process.env.NODE_ENV === 'development') {
             console.error("Error decoding token:", decodeError);
           }
         }
 
-        // ✅ Save user data to localStorage in the format expected by BookingSearch
         const userData = {
           token: data.token,
           email: data.email || email,
           name: data.name || data.first_name || registerData.name,
           id: data.user_id || data.id || decodedToken?.user_id || decodedToken?.id,
-          ...data // Include any other data from response
+          ...data
         };
 
-        // Store in localStorage (format that BookingSearch expects)
         localStorage.setItem("user", JSON.stringify(userData));
-        localStorage.setItem("authToken", data.token); // Backup for compatibility
+        localStorage.setItem("authToken", data.token);
 
-        // ✅ Update app state and close popup
         onLoginSuccess(userData);
 
-        // ✅ CRITICAL: Dispatch custom event to notify all components
         window.dispatchEvent(new CustomEvent('userLoggedIn', { 
           detail: userData 
         }));
 
-        // ✅ Also trigger storage event for cross-tab compatibility
         window.dispatchEvent(new StorageEvent('storage', {
           key: 'user',
           newValue: JSON.stringify(userData)
         }));
 
-        // REMOVED: Sensitive user data logging
-        
-        // Close popup after successful login
         setTimeout(() => {
           if (onClose) onClose();
         }, 1000);
@@ -127,7 +172,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         throw new Error(data.error || data.message || "Invalid email or password");
       }
     } catch (error) {
-      // Log error only in development
       if (process.env.NODE_ENV === 'development') {
         console.error("Login error:", error);
       }
@@ -142,7 +186,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     try {
       await performLogin(loginData.email, loginData.password);
     } catch (error) {
-      // More specific error messages
       if (error.message.includes("Failed to fetch")) {
         alert("❌ Cannot connect to server. Please check your internet connection.");
       } else if (error.message.includes("Server returned an invalid response")) {
@@ -170,7 +213,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     setForgotLoading(true);
 
     try {
-      // Real API call for user password recovery
       const response = await fetch("https://southcoastoutdoors.cloud/api/v1/user/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -185,7 +227,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         alert(data.message || "Failed to send recovery email. Please try again.");
       }
     } catch (error) {
-      // Log error only in development
       if (process.env.NODE_ENV === 'development') {
         console.error("Forgot password error:", error);
       }
@@ -209,14 +250,12 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         body: JSON.stringify({ user: registerData }),
       });
 
-      // First get response as text to check if it's valid JSON
       const responseText = await response.text();
       let data;
 
       try {
         data = JSON.parse(responseText);
       } catch (parseError) {
-        // Log error only in development
         if (process.env.NODE_ENV === 'development') {
           console.error("JSON Parse Error:", parseError);
         }
@@ -226,22 +265,18 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
       if (response.ok) {
         alert("✅ Account created successfully! Logging you in...");
         
-        // ✅ AUTO-LOGIN: Automatically log the user in after successful registration
         try {
           await performLogin(registerData.email, registerData.password);
         } catch (loginError) {
-          // If auto-login fails, just show success message and switch to login
           alert("✅ Account created! Please log in with your credentials.");
           setIsLogin(true);
           setLoginView("login");
-          // Auto-fill login form with registered email
           setLoginData(prev => ({
             ...prev,
             email: registerData.email
           }));
         }
         
-        // Clear register form
         setRegisterData({
           name: "",
           email: "",
@@ -252,7 +287,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         alert(`❌ ${data.errors?.join(", ") || data.error || "Registration failed"}`);
       }
     } catch (error) {
-      // Log error only in development
       if (process.env.NODE_ENV === 'development') {
         console.error("Registration error:", error);
       }
@@ -269,10 +303,62 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
     }
   };
 
+  // Mobile navigation buttons
+  const renderMobileNavButtons = () => {
+    if (!isMobile) return null;
+
+    return (
+      <div className="flex justify-center items-center gap-4 mt-6 mb-2">
+        {isLogin ? (
+          <>
+            <button
+              onClick={() => setIsLogin(false)}
+              className="flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-medium text-sm"
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+              <span>Create Account</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => {
+                setIsLogin(true);
+                setLoginView("login");
+              }}
+              className="flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-medium text-sm"
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+              <span>Back to Login</span>
+            </button>
+          </>
+        )}
+      </div>
+    );
+  };
+
+  // Mobile swipe indicators
+  const renderSwipeIndicators = () => {
+    if (!isMobile) return null;
+
+    return (
+      <div className="flex justify-center items-center gap-2 mt-2 mb-4">
+        <div className={`w-2 h-2 rounded-full ${isLogin ? 'bg-cyan-600' : 'bg-gray-300'}`}></div>
+        <div className={`w-2 h-2 rounded-full ${!isLogin ? 'bg-cyan-600' : 'bg-gray-300'}`}></div>
+      </div>
+    );
+  };
+
   // ======================== RENDER FUNCTIONS ========================
 
   const renderLoginForm = () => (
     <>
+      {isMobile && (
+        <div className="text-center mb-4">
+          <img src={logo} alt="SCoast Logo" className="h-12 w-auto mx-auto mb-4" />
+        </div>
+      )}
+      
       <div className="text-center mb-8">
         <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <FontAwesomeIcon icon={faShield} className="text-cyan-600 text-2xl" />
@@ -284,7 +370,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
       </div>
 
       <form onSubmit={handleLoginSubmit} className="space-y-6">
-        {/* Email Input */}
         <div className="space-y-2">
           <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
             <FontAwesomeIcon icon={faEnvelope} className="text-cyan-600 text-sm" />
@@ -307,7 +392,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           </div>
         </div>
 
-        {/* Password Input */}
         <div className="space-y-2">
           <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
             <FontAwesomeIcon icon={faLock} className="text-cyan-600 text-sm" />
@@ -330,7 +414,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           </div>
         </div>
 
-        {/* Forgot Password */}
         <div className="text-right">
           <button 
             type="button" 
@@ -342,7 +425,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           </button>
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
@@ -381,7 +463,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
       </div>
 
       {forgotSent ? (
-        // SUCCESS VIEW - Check your email
         <div className="text-center space-y-6">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <FontAwesomeIcon icon={faCheckCircle} className="text-green-600 text-3xl" />
@@ -411,9 +492,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
           </button>
         </div>
       ) : (
-        // FORGOT PASSWORD FORM VIEW
         <form onSubmit={handleForgotSubmit} className="space-y-6">
-          {/* Email Input */}
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
               <FontAwesomeIcon icon={faEnvelope} className="text-cyan-600 text-sm" />
@@ -438,7 +517,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
             </p>
           </div>
 
-          {/* Buttons */}
           <div className="flex gap-3">
             <button
               type="button"
@@ -475,7 +553,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         </form>
       )}
 
-      {/* Security Notice for Recovery */}
       <div className="mt-6 p-4 bg-cyan-50 rounded-xl border border-cyan-200">
         <div className="flex items-start gap-3">
           <FontAwesomeIcon icon={faShield} className="text-cyan-600 mt-0.5" />
@@ -500,7 +577,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
         className="relative w-full max-w-5xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-200"
       >
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-6 right-6 w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:text-gray-800 transition-all duration-300 z-20 hover:scale-110"
@@ -510,17 +586,24 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
 
         <AnimatePresence mode="wait">
           {isLogin ? (
-            // ====================== LOGIN PANEL ======================
             <motion.div
               key="login"
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: swipeDirection === 'right' ? -50 : 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.4 }}
               className="flex w-full min-h-[600px]"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-              {/* Login Form Side */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-12">
+              {isMobile && (
+                <div className="absolute top-4 left-4 text-sm text-gray-500">
+                  Swipe left for sign up →
+                </div>
+              )}
+
+              <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 lg:p-12">
                 <div className="w-full max-w-md">
                   <AnimatePresence mode="wait">
                     {loginView === "login" ? (
@@ -545,71 +628,87 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                  
+                  {renderMobileNavButtons()}
+                  {renderSwipeIndicators()}
                 </div>
               </div>
 
-              {/* Welcome Side (Unchanged) */}
-              <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-cyan-600 to-cyan-800 text-white flex-col justify-center items-center p-12 relative">
-                <div className="text-center">
-                  <img src={logo} alt="SCoast Logo" className="h-16 w-auto mx-auto mb-6 drop-shadow-lg" />
-                  <h3 className="text-4xl font-bold mb-4">New Here?</h3>
-                  <p className="text-cyan-100 text-lg mb-8 max-w-md">
-                    Create an account to unlock exclusive features and start your journey with SouthCoast!
-                  </p>
-                  <button
-                    onClick={() => setIsLogin(false)}
-                    className="px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white hover:text-cyan-700 transition-all duration-300 font-semibold flex items-center gap-3 group"
-                  >
-                    <span>Create Account</span>
-                    <FontAwesomeIcon icon={faArrowRight} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
+              {!isMobile && (
+                <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-cyan-600 to-cyan-800 text-white flex-col justify-center items-center p-12 relative">
+                  <div className="text-center">
+                    <img src={logo} alt="SCoast Logo" className="h-16 w-auto mx-auto mb-6 drop-shadow-lg" />
+                    <h3 className="text-4xl font-bold mb-4">New Here?</h3>
+                    <p className="text-cyan-100 text-lg mb-8 max-w-md">
+                      Create an account to unlock exclusive features and start your journey with SouthCoast!
+                    </p>
+                    <button
+                      onClick={() => setIsLogin(false)}
+                      className="px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white hover:text-cyan-700 transition-all duration-300 font-semibold flex items-center gap-3 group"
+                    >
+                      <span>Create Account</span>
+                      <FontAwesomeIcon icon={faArrowRight} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                  
+                  <div className="absolute bottom-8 left-8 text-cyan-200 text-sm">
+                    Secure & Encrypted
+                  </div>
                 </div>
-                
-                {/* Decorative Elements */}
-                <div className="absolute bottom-8 left-8 text-cyan-200 text-sm">
-                  Secure & Encrypted
-                </div>
-              </div>
+              )}
             </motion.div>
           ) : (
-            // ====================== REGISTER PANEL (Unchanged) ======================
             <motion.div
               key="register"
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: swipeDirection === 'left' ? 50 : -50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.4 }}
               className="flex w-full min-h-[600px]"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-              {/* Welcome Side */}
-              <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-cyan-600 to-cyan-800 text-white flex-col justify-center items-center p-12 relative">
-                <div className="text-center">
-                  <img src={logo} alt="SCoast Logo" className="h-16 w-auto mx-auto mb-6 drop-shadow-lg" />
-                  <h3 className="text-4xl font-bold mb-4">Welcome Back!</h3>
-                  <p className="text-cyan-100 text-lg mb-8 max-w-md">
-                    Already have an account? Sign in to continue your journey with SouthCoast.
-                  </p>
-                  <button
-                    onClick={() => {
-                      setIsLogin(true);
-                      setLoginView("login");
-                    }}
-                    className="px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white hover:text-cyan-700 transition-all duration-300 font-semibold flex items-center gap-3 group"
-                  >
-                    <FontAwesomeIcon icon={faArrowLeft} className="group-hover:-translate-x-1 transition-transform" />
-                    <span>Sign In</span>
-                  </button>
+              {isMobile && (
+                <div className="absolute top-4 right-4 text-sm text-gray-500">
+                  ← Swipe right for login
                 </div>
-                
-                {/* Decorative Elements */}
-                <div className="absolute bottom-8 left-8 text-cyan-200 text-sm">
-                  Join Our Community
-                </div>
-              </div>
+              )}
 
-              {/* Register Form Side */}
-              <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-12">
+              {!isMobile && (
+                <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-cyan-600 to-cyan-800 text-white flex-col justify-center items-center p-12 relative">
+                  <div className="text-center">
+                    <img src={logo} alt="SCoast Logo" className="h-16 w-auto mx-auto mb-6 drop-shadow-lg" />
+                    <h3 className="text-4xl font-bold mb-4">Welcome Back!</h3>
+                    <p className="text-cyan-100 text-lg mb-8 max-w-md">
+                      Already have an account? Sign in to continue your journey with SouthCoast.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setIsLogin(true);
+                        setLoginView("login");
+                      }}
+                      className="px-8 py-4 border-2 border-white text-white rounded-xl hover:bg-white hover:text-cyan-700 transition-all duration-300 font-semibold flex items-center gap-3 group"
+                    >
+                      <FontAwesomeIcon icon={faArrowLeft} className="group-hover:-translate-x-1 transition-transform" />
+                      <span>Sign In</span>
+                    </button>
+                  </div>
+                  
+                  <div className="absolute bottom-8 left-8 text-cyan-200 text-sm">
+                    Join Our Community
+                  </div>
+                </div>
+              )}
+
+              <div className="w-full lg:w-1/2 flex flex-col justify-center items-center p-6 lg:p-12">
                 <div className="w-full max-w-md">
+                  {isMobile && (
+                    <div className="text-center mb-4">
+                      <img src={logo} alt="SCoast Logo" className="h-12 w-auto mx-auto mb-4" />
+                    </div>
+                  )}
+
                   <div className="text-center mb-8">
                     <div className="w-16 h-16 bg-cyan-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                       <FontAwesomeIcon icon={faUser} className="text-cyan-600 text-2xl" />
@@ -621,7 +720,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                   </div>
 
                   <form onSubmit={handleRegisterSubmit} className="space-y-5">
-                    {/* Name Input */}
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
                         <FontAwesomeIcon icon={faUser} className="text-cyan-600 text-sm" />
@@ -644,7 +742,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                       </div>
                     </div>
 
-                    {/* Email Input */}
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
                         <FontAwesomeIcon icon={faEnvelope} className="text-cyan-600 text-sm" />
@@ -667,7 +764,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                       </div>
                     </div>
 
-                    {/* Phone Input */}
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
                         <FontAwesomeIcon icon={faPhone} className="text-cyan-600 text-sm" />
@@ -690,7 +786,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                       </div>
                     </div>
 
-                    {/* Password Input */}
                     <div className="space-y-2">
                       <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
                         <FontAwesomeIcon icon={faLock} className="text-cyan-600 text-sm" />
@@ -713,7 +808,6 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                       </div>
                     </div>
 
-                    {/* Submit Button */}
                     <button
                       type="submit"
                       disabled={loading}
@@ -725,7 +819,7 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                     >
                       {loading ? (
                         <>
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                           <span>Creating Account...</span>
                         </>
                       ) : (
@@ -736,6 +830,9 @@ const LoginPopup = ({ onClose, onLoginSuccess }) => {
                       )}
                     </button>
                   </form>
+                  
+                  {renderMobileNavButtons()}
+                  {renderSwipeIndicators()}
                 </div>
               </div>
             </motion.div>

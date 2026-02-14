@@ -14,8 +14,8 @@ threads min_threads_count, max_threads_count
 # Port Render provides
 port ENV.fetch("PORT") { 3000 }
 
-# Environment
-environment ENV.fetch("RAILS_ENV") { "development" }
+# Environment - FIXED: use production as default for server
+environment ENV.fetch("RAILS_ENV") { "production" }
 
 # PID file
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
@@ -24,16 +24,21 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 if ENV["RAILS_ENV"] == "production"
   workers ENV.fetch("WEB_CONCURRENCY") { 2 } # 2 workers is ideal for Render Starter
   preload_app!  # Preload app before forking
+  
+  # FIXED: Use correct hook names for Puma 7.x
+  before_worker_boot do
+    puts "🚀 Puma worker booted! (PID: #{Process.pid})"
+  end
+
+  before_worker_shutdown do
+    puts "🛑 Puma worker shutting down... (PID: #{Process.pid})"
+  end
 end
 
 # Allow restart from `rails restart`
 plugin :tmp_restart
 
-# Optional: helpful startup log
-on_worker_boot do
-  puts "🚀 Puma worker booted! (PID: #{Process.pid})"
-end
-
-on_worker_shutdown do
-  puts "🛑 Puma worker shutting down... (PID: #{Process.pid})"
+# Single mode hook (if you want logging in single mode)
+on_booted do
+  puts "✅ Puma server started in #{ENV['RAILS_ENV']} mode"
 end

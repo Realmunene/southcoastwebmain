@@ -22,6 +22,7 @@ gem "countries"
 
 # --- Middleware & Performance ---
 gem "rack-cors", require: "rack/cors"
+gem "rack-attack"
 gem "bootsnap", require: false
 gem "thruster", require: false
 gem 'redis', '~> 4.0'

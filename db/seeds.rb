@@ -18,12 +18,12 @@ puts "✅ Seeded #{Nationality.count} nationalities."
 # ---- Seed Room Types (with prices) ----
 puts "🏨 Seeding room types..."
 room_options = [
-  { name: "1-Executive Room - 2Pax-X3", price: 65 },
-  { name: "2-Connected Room - 4Pax-X3", price: 100 },
-  { name: "2 Bedroom Apartment with Living + Kitchen + Balcony - 4Pax-X2", price: 110 },
-  { name: "3-BedRoom Apartment with Kitchen and Balcony - 6Pax-X1", price: 125 },
-  { name: "2-Connected Room, I-Ensuite - 4Pax-X2", price: 110 },
-  { name: "2-BedRoom Apartment with Kitchen, 1-Ensuite", price: 125 },
+  { name: "1-Executive Room - 2Pax-X3", price: 45 },
+  { name: "2-Connected Room - 4Pax-X3", price: 60 },
+  { name: "2 Bedroom Apartment with Living + Kitchen + Balcony - 4Pax-X2", price: 65 },
+  { name: "3-BedRoom Apartment with Kitchen and Balcony - 6Pax-X1", price: 75 },
+  { name: "2-Connected Room, I-Ensuite - 4Pax-X2", price: 60 },
+  { name: "2-BedRoom Apartment with Kitchen, 1-Ensuite", price: 65 },
   { name: "Larger Apartment with Kitchen + Balcony + Living - 4Pax-X1", price: 140 }
 ]
 

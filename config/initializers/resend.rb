@@ -1,7 +1,7 @@
 # config/initializers/resend.rb
 require "resend"
 
-Resend.api_key = ENV.fetch("RESEND_API_KEY", nil)
+Resend.api_key = ENV["RESEND_API_KEY"].presence
 
 class ResendDeliveryMethod
   def initialize(_settings = {}); end
@@ -22,4 +22,10 @@ end
 
 # Register the delivery method so ActionMailer recognizes :resend
 ActionMailer::Base.add_delivery_method :resend, ResendDeliveryMethod
-Rails.logger.info "✅ ResendDeliveryMethod registered successfully."
+
+# ✅ Log based on actual presence of API key
+if Resend.api_key.present?
+  Rails.logger.info "✅ ResendDeliveryMethod registered successfully."
+else
+  Rails.logger.warn "⚠️ Missing RESEND_API_KEY — emails will not be sent."
+end

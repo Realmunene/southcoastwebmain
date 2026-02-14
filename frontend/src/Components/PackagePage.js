@@ -1,17 +1,33 @@
 // PackagePage.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import Package from "./Package"; 
 import { Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDay, faCalendarCheck, faUsers, faGlobe, faBed, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { 
+  faCalendarDay, 
+  faCalendarCheck, 
+  faUsers, 
+  faGlobe, 
+  faBed, 
+  faCheckCircle, 
+  faWifi, 
+  faShoppingCart, 
+  faUtensils,
+  faTimes // Add close icon for mobile
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function PackagePage({ onLoginClick, user, onLogout }) {
   const { roomTitle } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
   const room = location.state?.room;
+  
+  // Refs for scroll detection
+  const ctaSectionRef = useRef(null);
+  const [showFloatingDiv, setShowFloatingDiv] = useState(true);
+  const [showMobileAmenities, setShowMobileAmenities] = useState(false); // For mobile toggle
 
   // Get today's date in YYYY-MM-DD format
   const getTodayDate = () => {
@@ -42,6 +58,35 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [errors, setErrors] = useState({});
+
+  // Scroll handler to hide/show floating div - ONLY for desktop
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ctaSectionRef.current || window.innerWidth < 1024) return; // Only for desktop
+
+      const ctaSection = ctaSectionRef.current;
+      const ctaRect = ctaSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // If CTA section enters the viewport (top is above bottom of viewport), hide floating div
+      if (ctaRect.top < viewportHeight) {
+        setShowFloatingDiv(false);
+      } else {
+        setShowFloatingDiv(true);
+      }
+    };
+
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial check
+    handleScroll();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // Enhanced authentication check
   const checkUserAuth = () => {
@@ -406,6 +451,11 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
       ? "w-full border-2 border-red-400 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors bg-white/90"
       : "w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors bg-white/90";
 
+  // Mobile toggle for amenities
+  const toggleMobileAmenities = () => {
+    setShowMobileAmenities(!showMobileAmenities);
+  };
+
   // If user comes directly without state (refresh or direct URL)
   if (!room) {
     return (
@@ -424,7 +474,121 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
   }
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 relative">
+      {/* ========== FLOATING AMENITIES SECTION - RESPONSIVE ========== */}
+      
+      {/* Desktop Version (lg and above) */}
+      <div className={`fixed left-4 top-1/2 transform -translate-y-1/2 z-20 
+                      hidden lg:block transition-all duration-300 ease-in-out
+                      ${showFloatingDiv ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl border border-gray-200/50 
+                       p-4 flex flex-col items-center gap-4
+                       transition-all duration-300 hover:shadow-2xl">
+          
+          {/* WiFi Icon & Info */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
+              <FontAwesomeIcon icon={faWifi} className="text-cyan-600 text-base" />
+            </div>
+            <div className="text-center">
+              <p className="font-semibold text-gray-900 text-xs">Available</p>
+              <p className="text-gray-600 text-[10px]">High-speed WiFi</p>
+            </div>
+          </div>
+          
+          {/* Shopping Icon & Info */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+              <FontAwesomeIcon icon={faShoppingCart} className="text-amber-600 text-base" />
+            </div>
+            <div className="text-center">
+              <p className="font-semibold text-gray-900 text-xs">60 m away</p>
+              <p className="text-gray-600 text-[10px]">Shopping centres</p>
+            </div>
+          </div>
+          
+          {/* Dining Icon & Info */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <FontAwesomeIcon icon={faUtensils} className="text-green-600 text-base" />
+            </div>
+            <div className="text-center">
+              <p className="font-semibold text-gray-900 text-xs">100 m away</p>
+              <p className="text-gray-600 text-[10px]">Dine out options</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {/* Mobile Toggle Button (sm and md) - Always visible on mobile */}
+      <div className="fixed bottom-20 right-4 z-30 lg:hidden">
+        <button
+          onClick={toggleMobileAmenities}
+          className="bg-cyan-600 hover:bg-cyan-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+          aria-label="Toggle amenities"
+        >
+          <FontAwesomeIcon icon={faWifi} className="text-lg" />
+        </button>
+      </div>
+
+      {/* Mobile Amenities Panel */}
+      <div className={`fixed inset-x-0 bottom-0 z-40 lg:hidden transform transition-transform duration-300 ease-in-out ${
+        showMobileAmenities ? 'translate-y-0' : 'translate-y-full'
+      }`}>
+        <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200/50 rounded-t-2xl shadow-2xl p-6">
+          {/* Close Button */}
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-bold text-gray-900">Amenities Nearby</h3>
+            <button
+              onClick={toggleMobileAmenities}
+              className="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100"
+              aria-label="Close amenities"
+            >
+              <FontAwesomeIcon icon={faTimes} className="text-xl" />
+            </button>
+          </div>
+
+          {/* Amenities Grid for Mobile */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* WiFi */}
+            <div className="flex flex-col items-center gap-3 p-3 bg-cyan-50 rounded-xl">
+              <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center">
+                <FontAwesomeIcon icon={faWifi} className="text-cyan-600 text-lg" />
+              </div>
+              <div className="text-center">
+                <p className="font-bold text-gray-900 text-sm">Available</p>
+                <p className="text-gray-600 text-xs">High-speed WiFi</p>
+              </div>
+            </div>
+
+            {/* Shopping */}
+            <div className="flex flex-col items-center gap-3 p-3 bg-amber-50 rounded-xl">
+              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center">
+                <FontAwesomeIcon icon={faShoppingCart} className="text-amber-600 text-lg" />
+              </div>
+              <div className="text-center">
+                <p className="font-bold text-gray-900 text-sm">60 m away</p>
+                <p className="text-gray-600 text-xs">Shopping centres</p>
+              </div>
+            </div>
+
+            {/* Dining */}
+            <div className="flex flex-col items-center gap-3 p-3 bg-green-50 rounded-xl">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                <FontAwesomeIcon icon={faUtensils} className="text-green-600 text-lg" />
+              </div>
+              <div className="text-center">
+                <p className="font-bold text-gray-900 text-sm">100 m away</p>
+                <p className="text-gray-600 text-xs">Dine out options</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ========== REST OF THE COMPONENT ========== */}
+
       {/* Hero Section */}
       <div
         className="relative h-96 flex items-center justify-center text-white"
@@ -621,7 +785,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
                     maxLength="2"
                   />
                   {errors.children && (
-                    <p className="text-red-500 text-xs mt-2 font-medium">{errors.children}</p>
+                    <p className="text-red500 text-xs mt-2 font-medium">{errors.children}</p>
                   )}
                 </div>
               </div>
@@ -701,7 +865,7 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
                   user 
                     ? "bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg hover:shadow-xl" 
                     : "bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg hover:shadow-xl"
-                }`}
+        }`}
               >
                 {user ? "Book This Room" : "Login to Book"}
               </button>
@@ -715,8 +879,8 @@ export default function PackagePage({ onLoginClick, user, onLogout }) {
         <Package />
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-r from-cyan-600 to-cyan-700 py-16">
+      {/* CTA Section - Ref added for scroll detection */}
+      <div ref={ctaSectionRef} className="bg-gradient-to-r from-cyan-600 to-cyan-700 py-16">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Section - Join Us */}
