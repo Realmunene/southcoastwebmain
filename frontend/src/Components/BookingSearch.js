@@ -96,8 +96,8 @@ export default function BookingSearch({ onLoginClick }) {
     const fetchData = async () => {
       try {
         const [natRes, roomRes] = await Promise.all([
-          fetch("https://southcoastoutdoors.cloud/api/v1/nationalities"),
-          fetch("https://southcoastoutdoors.cloud/api/v1/room_types"),
+          fetch("/api/v1/nationalities"),
+          fetch("/api/v1/room_types"),
         ]);
 
         if (!natRes.ok) throw new Error("Failed to fetch nationalities");
@@ -194,7 +194,7 @@ export default function BookingSearch({ onLoginClick }) {
         },
       };
 
-      const response = await fetch("https://southcoastoutdoors.cloud/api/v1/bookings", {
+      const response = await fetch("/api/v1/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
